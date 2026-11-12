@@ -1,0 +1,84 @@
+{
+  "application_id_source": "app/build.gradle.kts",
+  "version": "1.2.1",
+  "device": "PHY110",
+  "rom": "PHY110_17.0.0.100(CN01)",
+  "android_sdk": 37,
+  "reference_module": {
+    "version": "16.14.1912",
+    "version_code": 1455,
+    "sha256": "da9d84b4898e88ccb1670127364cd4dd12d31257e361687936dcf55e4d4df926"
+  },
+  "public_reference": {
+    "url": "NOTICE",
+    "tag": "v16.14.1912(1455)",
+    "commit": "e870b90dc01bc021e7bc749a69ddfd59eb484c78",
+    "matches_installed_implementation": false
+  },
+  "system_jars": {
+    "oplus-framework.jar": "ed5ca42a0b339a24cb5fde7492907e913e6a05e3f3a444bb2920676bfd274a34",
+    "oplus-services.jar": "5a3613f87b766bc5923e4d9d75a0e3b79aa2c22f92d43a984d3cb0823f9e5a90",
+    "services.jar": "78be31cdbfda61fdbfd84013c2c0b31812468bec8ffc4a0aa56ab4f4e0937e44"
+  },
+  "apk_sha256": "6fc5275c1e505be47951aa9395d70a83493b06e9e28039ac7f6e69c46bbe9fc6",
+  "license": "AGPL-3.0-or-later",
+  "final_enabled": [
+    "unlock_flexible",
+    "unlock_split",
+    "capture"
+  ],
+  "final_window_limit": 3,
+  "optional_features_not_exhaustively_tested": true,
+  "oem_cast_apks": {
+    "HeyCast.apk": "2249716ffc2df561e8dec287d4e59bf02da4dafb19b18fb76c6981ff625cc3a0",
+    "OPSynergy.apk": "a94af8ff5c0425095fbbf921d10afe1608197c0538b12e246f3a2a3a92db05c3",
+    "ShareScreen.apk": "83912117bb5906a2e86a6870e05f41e6bde34a8a878b8d3c05688c81bef8e070"
+  },
+  "added_scope": "com.oplus.cast",
+  "validation": "docs/evidence/branding-1.2.1/validation.json",
+  "final_cast": {
+    "width": 1440,
+    "height": 3168,
+    "density_dpi": 560,
+    "virtual_refresh_hz": 60.0,
+    "stream_min_kbps": 12000,
+    "stream_max_kbps": 16000,
+    "requested_fps": 60,
+    "custom_bitrate": false
+  },
+  "version_code": 4,
+  "app_name": "ColorOS 增强",
+  "aod_source": {
+    "repository": "NOTICE",
+    "tag": "v1.11.0",
+    "commit": "238b2a5633b98041d5942938b41ce282aa4f3c06",
+    "license": "MIT"
+  },
+  "scopes": [
+    "com.android.systemui",
+    "com.oplus.aod",
+    "com.oplus.cast",
+    "system"
+  ],
+  "licenses": {
+    "combined": "AGPL-3.0-or-later",
+    "aod_original": "MIT"
+  },
+  "aod_configuration_migrated": true,
+  "prior_validation": [
+    "docs/DEVICE_VALIDATION.md",
+    "docs/OPPO_CONNECT_CAST.md",
+    "docs/evidence/cast-1.1.0/validation.json"
+  ],
+  "historical_confirmed_tests": [
+    "Three settings entrances and AOD subpages",
+    "12 AOD preferences migrated; pre-existing core preferences unchanged",
+    "Both AOD hosts report loaded version 1.2.0",
+    "System brightness bypass",
+    "One-minute AOD deadline and wake cancellation",
+    "Post-reboot OPPO mirroring 1440x3168 / DPI 560",
+    "50 AOD unit tests and 17 cast policy checks"
+  ],
+  "device_tested_this_release": false,
+  "changes": "Product text and document cleanup; functional policies and installation compatibility retained."
+}

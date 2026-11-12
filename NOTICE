@@ -1,0 +1,27 @@
+ColorOS Enhance / ColorOS 增强
+
+Research and adaptation reference:
+  OShin by suqi8 and contributors
+  https://github.com/suqi8/OShin
+  GNU Affero General Public License v3.0
+
+The installed OShin 16.14.1912 (1455) APK and this device's OEM frameworks
+were inspected to identify behavior and method signatures. The standalone
+implementation adapts that behavior to PHY110 / Android 17, uses a different
+package and settings group, and includes the complete buildable source.
+
+This project is provided under AGPL-3.0-or-later; see LICENSE.
+It does not redistribute the original OShin APK, OEM system JARs, user
+framework databases, or signing keys.
+
+Build dependencies include io.github.libxposed:api:102.0.0 (compile only)
+and io.github.libxposed:service:102.0.0. Their respective upstream notices
+and licenses remain applicable.
+
+AOD source:
+  Ayc-Gh/ColorOS-AOD v1.11.0
+  https://github.com/Ayc-Gh/ColorOS-AOD
+  commit 238b2a5633b98041d5942938b41ce282aa4f3c06
+  Derived from Qjj7679/ColorOS_Aod_Enhance, MIT License.
+  Original copyright and license: third_party/coloros-aod/LICENSE.
+  Integration changes are documented in third_party/coloros-aod/UPSTREAM.md.

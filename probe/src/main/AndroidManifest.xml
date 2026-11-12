@@ -1,0 +1,12 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+ <application android:label="窗口截图测试" android:allowBackup="false" android:theme="@android:style/Theme.Material.Light.NoActionBar">
+  <activity android:name=".Probe1" android:exported="true" android:resizeableActivity="false" android:taskAffinity="io.github.oshin.windowcapture.probe.one">
+   <intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter>
+  </activity>
+  <activity android:name=".Probe2" android:exported="true" android:resizeableActivity="true" android:taskAffinity="io.github.oshin.windowcapture.probe.two" />
+  <activity android:name=".Probe3" android:exported="true" android:resizeableActivity="true" android:taskAffinity="io.github.oshin.windowcapture.probe.three" />
+  <activity android:name=".Probe4" android:exported="true" android:resizeableActivity="true" android:taskAffinity="io.github.oshin.windowcapture.probe.four" />
+  <activity android:name=".Probe5" android:exported="true" android:resizeableActivity="true" android:taskAffinity="io.github.oshin.windowcapture.probe.five" />
+ </application>
+</manifest>
+

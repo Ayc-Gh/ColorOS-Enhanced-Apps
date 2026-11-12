@@ -1,0 +1,29 @@
+{
+  "version": "1.2.1",
+  "version_code": 4,
+  "app_name": "ColorOS 增强",
+  "date": "2026-11-12",
+  "apk_sha256": "6fc5275c1e505be47951aa9395d70a83493b06e9e28039ac7f6e69c46bbe9fc6",
+  "checks": {
+    "ordinary_documents_clean": true,
+    "ui_literals_clean": true,
+    "license_notices_unchanged": true,
+    "functional_source_files_unchanged": 35,
+    "release_build": "passed",
+    "lint_errors": 0,
+    "lint_warnings": 26,
+    "apk_v2_signature": "passed",
+    "same_signing_certificate_as_previous_release": true,
+    "compiled_display_text_clean": true,
+    "internal_identifiers_preserved": true,
+    "application_id_unchanged": true,
+    "scope_unchanged": true
+  },
+  "device_installation": "not_attempted_device_unavailable",
+  "device_tested": false,
+  "scope": "Display text and product documents only; original records archived without alteration.",
+  "prior_runtime_evidence": [
+    "docs/evidence/merge-1.2.0/validation.json",
+    "docs/evidence/cast-1.1.0/validation.json"
+  ]
+}

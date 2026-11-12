@@ -1,0 +1,93 @@
+{
+  "version": "1.2.0",
+  "version_code": 3,
+  "app_name": "ColorOS 增强",
+  "date": "2026-11-12",
+  "device": "OPPO Find X7 Ultra / PHY110",
+  "rom": "PHY110_17.0.0.100(CN01)",
+  "android_api": 37,
+  "apk_sha256": "afe1e1bbf03fcc96d15596f2763d0cf337dea76492d83bcdc23106fc3da2c9d9",
+  "installed_apk_matches": true,
+  "aod_source": {
+    "repository": "NOTICE",
+    "tag": "v1.11.0",
+    "commit": "238b2a5633b98041d5942938b41ce282aa4f3c06",
+    "license": "MIT"
+  },
+  "home_entries": [
+    "分屏与小窗",
+    "OPPO 互联",
+    "AOD"
+  ],
+  "capture_settings_location": "OPPO 互联 / 截图与录屏",
+  "ui_pages_opened": [
+    "home",
+    "window settings",
+    "OPPO Connect including enabled capture",
+    "AOD home",
+    "AOD brightness (system defaults retained)",
+    "AOD features (1 minute retained)",
+    "AOD runtime status"
+  ],
+  "runtime": {
+    "both_hosts_report_version": "1.2.0",
+    "runtime_package_identity": "combined module",
+    "system_brightness_preserved": true,
+    "six_systemui_features_loaded": true,
+    "aod_settings_all_day_loaded": true,
+    "real_single_tap_not_yet_triggered": true
+  },
+  "cast_regression": {
+    "display": [
+      1440,
+      3168
+    ],
+    "dpi": 560,
+    "projection_owner": "com.oplus.cast",
+    "rebooted_combined_apk": true
+  },
+  "native_aod": {
+    "one_minute_deadline_completed": true,
+    "deadline_events": [
+      {
+        "session": 3,
+        "deadline_elapsed_ms": 60024
+      }
+    ],
+    "native_timeout_or_ui_hide_replayed": true,
+    "replay_path": "native_ui_hide",
+    "screen_state_after_deadline": "OFF",
+    "session_ended_ms": 60033,
+    "wake_cancellation_observed_ms": 4462
+  },
+  "checks": {
+    "aod_unit_tests_passed": 50,
+    "cast_policy_checks_passed": 17,
+    "lint_errors": 0,
+    "lint_warnings": 26,
+    "release_build": "passed",
+    "apk_v2_signature": "passed",
+    "abi": "arm64-v8a",
+    "built_source_matches_workspace": true
+  },
+  "audit": {
+    "scopes": [
+      "com.android.systemui",
+      "com.oplus.aod",
+      "com.oplus.cast",
+      "system"
+    ],
+    "all_previous_window_and_cast_settings_unchanged": true,
+    "aod_preferences_migrated": 12,
+    "old_aod_module_disabled": true,
+    "old_aod_configuration_retained": true,
+    "other_modules_unchanged": true,
+    "developer_mode": false,
+    "hook_debug": false
+  },
+  "limits": [
+    "Full split/window/capture tests from 1.0 and bitrate profiles from 1.1 were not all repeated; core sources are byte-identical.",
+    "Physical single/double tap combinations, long low-light sessions, overnight power consumption, other ROM versions and actual panel scan frequency are not newly validated.",
+    "No 90/120 FPS promise."
+  ]
+}

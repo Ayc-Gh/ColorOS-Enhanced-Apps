@@ -1,0 +1,21 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <queries><intent><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent></queries>
+    <application android:name=".ModuleApplication" android:allowBackup="false"
+        android:icon="@drawable/ic_module" android:label="@string/app_name"
+        android:description="@string/module_description" android:supportsRtl="true"
+        android:theme="@android:style/Theme.Material.Light.NoActionBar">
+        <activity android:name=".MainActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="de.robv.android.xposed.category.MODULE_SETTINGS" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".CastSettingsActivity" android:exported="false" />
+        <activity android:name=".WindowSettingsActivity" android:exported="false" />
+        <activity android:name="com.op.aod.enhance.ui.MainActivity" android:exported="false" android:theme="@style/AodTheme" android:configChanges="orientation|screenSize|screenLayout" />
+        <activity android:name="com.op.aod.enhance.ui.BrightnessActivity" android:exported="false" android:theme="@style/AodTheme" android:configChanges="orientation|screenSize|screenLayout" />
+        <activity android:name="com.op.aod.enhance.ui.FeaturesActivity" android:exported="false" android:theme="@style/AodTheme" android:configChanges="orientation|screenSize|screenLayout" />
+        <activity android:name="com.op.aod.enhance.ui.RuntimeStatusActivity" android:exported="false" android:theme="@style/AodTheme" />
+    </application>
+</manifest>

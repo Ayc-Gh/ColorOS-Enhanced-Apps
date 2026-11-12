@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-12",
+  "device": "OPPO Find X7 Ultra / PHY110",
+  "rom": "PHY110_17.0.0.100(CN01)",
+  "android_api": 37,
+  "apk_sha256": "48d46eea3db35030ed7e6ec49b6459de80d23c6ecac8f3a5745bc104da1a0898",
+  "installed_apk_matches": true,
+  "module_version": "1.1.0",
+  "chain": [
+    "Windows O+Connect / phoneCast.exe",
+    "com.oplus.linker / PcCastEngineService / CastCoreService",
+    "com.oplus.cast / CastService",
+    "MediaProjection display 0 -> virtual display",
+    "Qualcomm H.264 / Windows phone view"
+  ],
+  "independent_sharescreen_included": false,
+  "connection_or_authentication_modified": false,
+  "custom_18_mbps_1080": {
+    "width": 1080,
+    "height": 2376,
+    "density_dpi": 560,
+    "virtual_refresh_hz": 60.0,
+    "stream_min_kbps": 18000,
+    "stream_max_kbps": 18000
+  },
+  "master_off_same_process_after_reconnect": {
+    "width": 1440,
+    "height": 3168,
+    "density_dpi": 640,
+    "virtual_refresh_hz": 60.0,
+    "stream_min_kbps": 12000,
+    "stream_max_kbps": 12000
+  },
+  "final_recommended_signed_apk": {
+    "width": 1440,
+    "height": 3168,
+    "density_dpi": 560,
+    "virtual_refresh_hz": 60.0,
+    "stream_min_kbps": 12000,
+    "stream_max_kbps": 16000,
+    "requested_fps": 60,
+    "custom_bitrate": false
+  },
+  "settings_audit": {
+    "previous_core_settings_unchanged": true,
+    "other_modules_unchanged": true,
+    "only_added_scope": "com.oplus.cast",
+    "final_scopes": [
+      "system",
+      "com.oplus.cast"
+    ],
+    "window_count": 3,
+    "logging": false,
+    "developer_mode": false,
+    "hook_debug": false
+  },
+  "checks": {
+    "policy_cases_passed": 17,
+    "release_build": "passed",
+    "lint_errors": 0,
+    "lint_warnings": 9,
+    "apk_v2_signature": "passed",
+    "cast_hooks_installed": 11
+  },
+  "limits": [
+    "Virtual display refresh and requested FPS do not promise fixed send FPS on static content.",
+    "90/120 FPS, advanced hardware/game combinations, other ROM versions, and a complete landscape session are not fully device-validated.",
+    "No hardware DRM bypass added."
+  ]
+}
