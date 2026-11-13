@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-// Behavior researched from installed OShin 16.14.1912; independently adapted to PHY110.
+// Behavior independently adapted to PHY110 from the installed ColorOS implementation.
 package io.github.oshin.windowcapture;
 
 import android.app.ActivityOptions;
@@ -33,9 +33,15 @@ public final class MainHook extends XposedModule {
     private final Set<String> reported=ConcurrentHashMap.newKeySet();
     private final Map<View,Integer> hiddenViews=Collections.synchronizedMap(new WeakHashMap<>());
     private final Map<Integer,Object> parked=new ConcurrentHashMap<>();
+    private final EdgeCountPolicy edgeCountPolicy=new EdgeCountPolicy();
     private final ThreadLocal<Integer> minimizing=ThreadLocal.withInitial(()->0);
-    private final ThreadLocal<ArrayDeque<Object[]>> launchContext=ThreadLocal.withInitial(ArrayDeque::new);
+    private final ThreadLocal<ArrayDeque<LaunchContext>> launchContext=ThreadLocal.withInitial(ArrayDeque::new);
+    private String registeringFeature="Window.Framework";
+    private final java.util.concurrent.atomic.AtomicInteger pendingLaunchChecks=new java.util.concurrent.atomic.AtomicInteger();
+    private record LaunchContext(Object controller,Object target,Object source,Object task,Object existingTask,
+                                 Context context,Object edge,LaunchPolicy.Kind kind) {}
     private final SharedPreferences.OnSharedPreferenceChangeListener listener=(p,k)->{
+        WindowDiagnostics.configurationChanged(k);
         if(k==null||Config.HIDE_BOTTOM.equals(k)||Config.HIDE_TOP.equals(k))restoreViews();
         // Restore parked task surfaces before returning to the normal exit path.
         if((k==null||Config.FOREGROUND.equals(k))&&!bool(Config.FOREGROUND)) {
@@ -49,7 +55,10 @@ public final class MainHook extends XposedModule {
         loader=param.getClassLoader();
         try {prefs=getRemotePreferences(Config.PREFS);prefs.registerOnSharedPreferenceChangeListener(listener);}
         catch(Throwable t){log(Log.ERROR,TAG,"Cannot read configuration; all features stay disabled",t);return;}
-        installCapture();installWindows();installSplit();installLaunch();installCaption();installEdge();
+        installFeature("Window.Capture",this::installCapture);installFeature("Window.Layout",this::installWindows);
+        installFeature("Window.Split",this::installSplit);installFeature("Window.Launch",this::installLaunch);
+        installFeature("Window.Caption",this::installCaption);installFeature("Window.Edge",this::installEdge);
+        installDiagnostics();
         log(Log.INFO,TAG,"Installed "+hooks+" hooks; device="+android.os.Build.MODEL+" API="+android.os.Build.VERSION.SDK_INT);
     }
     @Override public void onPackageReady(XposedModuleInterface.PackageReadyParam param) {
@@ -59,13 +68,14 @@ public final class MainHook extends XposedModule {
     }
     private Class<?> cls(String name){try{return Class.forName(name,false,loader);}catch(Throwable t){return null;}}
     private interface Installer { XposedInterface.Hooker create(Method m); }
+    private void installFeature(String feature,Runnable installer){registeringFeature=feature;installer.run();}
     private void hook(String className,String name,java.util.function.Predicate<Method> shape,Installer factory) {
-        Class<?> c=cls(className);int found=0;
+        Class<?> c=cls(className);int found=0;String feature=registeringFeature,path=className+"#"+name;
         if(c!=null)for(Method m:c.getDeclaredMethods())if(m.getName().equals(name)&&shape.test(m)) {
-            try {m.setAccessible(true);hook(m).intercept(factory.create(m));hooks++;found++;info("hook "+m);}
+            try {m.setAccessible(true);XposedInterface.Hooker delegate=factory.create(m);hook(m).intercept(chain->{WindowDiagnostics.trigger(feature);return delegate.intercept(chain);});hooks++;found++;WindowDiagnostics.register(feature,path,true);info("hook "+m);}
             catch(Throwable t){log(Log.WARN,TAG,"Hook failed "+m,t);}
         }
-        if(found==0)info("Unavailable: "+className+"#"+name);
+        if(found==0){WindowDiagnostics.register(feature,path,false);info("Unavailable: "+path);}
     }
     private void hook(String c,String n,Installer f){hook(c,n,m->true,f);}
     private boolean bool(String k){try{return prefs!=null&&prefs.getBoolean(k,false);}catch(Throwable t){return false;}}
@@ -78,7 +88,7 @@ public final class MainHook extends XposedModule {
         hook(c,n,m->m.getReturnType()==boolean.class,m->chain->{if(!bool(key))return chain.proceed();hit(n);return value;});
     }
     private void installCapture() {
-        // Original OShin's live hook dump confirms WindowState#isSecureLocked().
+        // The live hook dump confirms WindowState#isSecureLocked().
         flag(WM+"WindowState","isSecureLocked",Config.CAPTURE,false);
         // OEM capture clients also inspect LayoutParams directly. Work on a private copy,
         // preserving all other window attributes and the caller's FLAG_SECURE request.
@@ -108,7 +118,7 @@ public final class MainHook extends XposedModule {
         hook(u,"getUnSupportRatiosInFlexibleTask",m->m.getReturnType()==String.class,m->chain->{if(!bool(Config.UNLOCK))return chain.proceed();return "";});
         flag(u,"isFlexibleTaskInSupportFreeRatiosList",Config.FREE,true);
         hook(u,"getUnSupportRatiosSetInFlexibleTask",m->Set.class.isAssignableFrom(m.getReturnType()),m->chain->{if(!bool(Config.FREE))return chain.proceed();return new HashSet<Float>();});
-        for(String n:List.of("isSupportMultiMode","isPsPlusEnable"))hook(u,n,m->m.getReturnType()==boolean.class,m->chain->{
+        for(String n:List.of("isSupportMultiMode"))hook(u,n,m->m.getReturnType()==boolean.class,m->chain->{
             if(bool(Config.MULTI)&&flexibleCaller()){hit(n);return true;}return chain.proceed();
         });
         hook(WM+"FlexibleTaskInfo","getRatio",m->m.getReturnType()==float.class&&m.getParameterCount()==0,m->chain->{
@@ -176,45 +186,146 @@ public final class MainHook extends XposedModule {
     private void installLaunch() {
         String controller=WM+"FlexibleTaskController";
         hook(controller,"adjustOptionsForSmartMultiWindow",m->m.getParameterCount()==6,m->chain->{
-            if(!bool(Config.JUMP)&&!bool(Config.NOTIFICATION)&&!bool(Config.LAUNCHER))return chain.proceed();
-            Object target=chain.getArg(0),source=chain.getArg(3);Object task=source==null?null:Reflect.call(source,"getTask");
-            ArrayDeque<Object[]> stack=launchContext.get();stack.push(new Object[]{target,source,task,Reflect.field(chain.getThisObject(),"mContext")});
+            if(!bool(Config.JUMP)&&!bool(Config.NOTIFICATION)&&!bool(Config.LAUNCHER)&&!bool(Config.REMEMBER))return chain.proceed();
+            Object owner=chain.getThisObject(),target=chain.getArg(0),source=chain.getArg(3),request=chain.getArg(5);
+            Object task=source==null?Reflect.call(owner,"getLaunchFromTask",target,source,request):Reflect.call(source,"getTask");
+            Object value=Reflect.field(owner,"mContext");Context context=value instanceof Context c?c:null;
+            String targetPackage=(String)Reflect.field(target,"packageName"),caller=launchCaller(owner,request,source);
+            String sourcePackage=(String)Reflect.field(source,"packageName");
+            if(source==null&&targetPackage!=null&&targetPackage.equals(caller))sourcePackage=(String)Reflect.call(task,"getBasePackageName");
+            Object edge=null;
+            if(bool(Config.REMEMBER)&&targetPackage!=null){
+                Object handle=Reflect.call(cls(WM+"FloatHandleController"),"getInstance");
+                edge=Reflect.call(handle,"getFloatInfoByPkgAndUid",targetPackage,Reflect.integer(target,"mUserId",0));
+            }
+            boolean home=Integer.valueOf(2).equals(Reflect.call(task,"getActivityType"));
+            LaunchPolicy.Kind kind=targetPackage!=null&&context!=null&&allowPackage(targetPackage,context)?
+                    LaunchPolicy.choose(bool(Config.JUMP),bool(Config.NOTIFICATION),bool(Config.LAUNCHER),bool(Config.REMEMBER),
+                        new LaunchPolicy.Origin(caller,home,standard(task),source!=null,LaunchPolicy.sameAppNavigation(targetPackage,sourcePackage,caller,home),edge!=null)):
+                    LaunchPolicy.Kind.NATIVE;
+            LaunchContext current=new LaunchContext(owner,target,source,task,chain.getArg(4),context,edge,kind);
+            ArrayDeque<LaunchContext> stack=launchContext.get();stack.push(current);
             try {
                 Object result=chain.proceed();
-                if(!(result instanceof ActivityOptions options))return result;
-                Object request=chain.getArg(5);String caller=(String)Reflect.field(request,"callingPackage");
-                String targetPackage=(String)Reflect.field(target,"packageName");
-                String sourcePackage=task==null?null:(String)Reflect.call(task,"getBasePackageName");
-                boolean isHome=task!=null&&!standard(task);
-                if(targetPackage!=null&&targetPackage.equals(sourcePackage)&&!isHome)return chain.getArg(1);
-                boolean launch=bool(Config.LAUNCHER)&&(isHome||Set.of("com.android.launcher","com.android.launcher3","com.oplus.launcher").contains(caller==null?"":caller));
-                boolean notification=bool(Config.NOTIFICATION)&&source==null&&"com.android.systemui".equals(caller);
-                if(Integer.valueOf(100).equals(Reflect.call(options,"getLaunchWindowingMode"))&&(launch||notification)&&qualifiesLaunch(stack.peek())) {
-                    Object ext=Reflect.field(options,"mActivityOptionsExt");
-                    Reflect.call(ext,"setZoomLaunchFlags",launch?24:5);
-                    Object extra=Reflect.call(options,"getExtraBundle");if(launch&&extra instanceof Bundle b)b.putBoolean("key_flexible_smart_across_task_jump",true);
-                    hit(launch?"launcher floating":"notification floating");
+                if(kind==LaunchPolicy.Kind.NATIVE)return result;
+                ActivityOptions options=result instanceof ActivityOptions o?o:null;
+                boolean alreadyFloating=Integer.valueOf(100).equals(Reflect.call(options,"getLaunchWindowingMode"));
+                // The native smart-open path can return before its source-task check.
+                // Only repair the requested desktop/edge path, preserving native locks.
+                if(!alreadyFloating){
+                    if(kind!=LaunchPolicy.Kind.LAUNCHER&&kind!=LaunchPolicy.Kind.REMEMBER)return result;
+                    Object mode=Reflect.call(options,"getLaunchWindowingMode");
+                    if(mode instanceof Integer n&&n!=0&&n!=1)return result;
+                    if(!mayRepairLaunch(current,targetPackage))return result;
+                    if(options==null)options=ActivityOptions.makeBasic();
+                    Reflect.call(options,"setLaunchWindowingMode",100);
+                    if(!Integer.valueOf(100).equals(Reflect.call(options,"getLaunchWindowingMode")))return result;
                 }
-                return result;
+                Object extra=Reflect.call(options,"getExtraBundle");Bundle bundle=extra instanceof Bundle b?b:new Bundle();
+                if(!(extra instanceof Bundle))Reflect.call(options,"setExtraBundle",bundle);
+                bundle.putInt("androidx.activity.LaunchScenario",1);bundle.putBoolean("androidx.activity.HasCaption",true);
+                boolean across=kind==LaunchPolicy.Kind.JUMP||kind==LaunchPolicy.Kind.NOTIFICATION;
+                bundle.putBoolean("key_flexible_smart_across_task_jump",across);
+                if(!across)bundle.putBoolean("key_flexible_smart_inner_task_jump",false);
+                Reflect.call(Reflect.field(options,"mActivityOptionsExt"),"setZoomLaunchFlags",kind==LaunchPolicy.Kind.NOTIFICATION?5:24);
+                if(kind==LaunchPolicy.Kind.REMEMBER)options=restoreEdgeOptions(current,options);
+                hit(kind.name().toLowerCase(java.util.Locale.ROOT)+" floating");observeLaunch(current);
+                return options;
             } finally {stack.pop();if(stack.isEmpty())launchContext.remove();}
         });
         hook(WM+"OplusSplitScreenAppReader","isSupportLightOpen",m->m.getReturnType()==boolean.class&&m.getParameterCount()==2,m->chain->{
-            ArrayDeque<Object[]> stack=launchContext.get();
+            ArrayDeque<LaunchContext> stack=launchContext.get();
             if(stack.isEmpty()||!qualifiesLaunch(stack.peek()))return chain.proceed();
-            String pkg=chain.getArg(1) instanceof String s?s:null;Context context=chain.getArg(0) instanceof Context c?c:null;
-            if(pkg==null||context==null||!allowPackage(pkg,context))return chain.proceed();hit("light open "+pkg);return true;
+            // The argument is the SOURCE package (often the desktop), not the target.
+            hit("light open target policy");return true;
         });
-        hook(WM+"OplusSplitScreenAppReader","inInnerTaskJumpList",m->m.getReturnType()==boolean.class,m->chain->{if(!bool(Config.JUMP))return chain.proceed();return false;});
+        hook(WM+"OplusSplitScreenAppReader","inInnerTaskJumpList",m->m.getReturnType()==boolean.class,m->chain->{ArrayDeque<LaunchContext> stack=launchContext.get();if(stack.isEmpty()||stack.peek().kind()!=LaunchPolicy.Kind.JUMP)return chain.proceed();return false;});
         hook(controller,"isFlexibleAcrossTaskJump",m->m.getReturnType()==boolean.class,m->chain->{
-            Object result=chain.proceed();ArrayDeque<Object[]> stack=launchContext.get();
+            Object result=chain.proceed();ArrayDeque<LaunchContext> stack=launchContext.get();
             if(!stack.isEmpty()&&qualifiesLaunch(stack.peek()))return true;return result;
         });
+        hook(controller,"getReusableOptionsForFreeForm",m->m.getReturnType()==ActivityOptions.class&&m.getParameterCount()==7,m->chain->{
+            Object target=chain.getArg(0),task=chain.getArg(3),owner=chain.getThisObject();int id=Reflect.integer(task,"mTaskId",-1);
+            if(bool(Config.REMEMBER)&&parked.containsKey(id)&&chain.getArg(2) instanceof ActivityOptions options){
+                Object extra=Reflect.call(options,"getExtraBundle");
+                if(extra instanceof Bundle bundle&&id==bundle.getInt("key_start_float_handle_view_task_id",-1)&&"coloros-enhance-reopen".equals(bundle.getString("key_start_float_handle_view_reason"))){
+                    Object value=Reflect.field(owner,"mContext");String pkg=(String)Reflect.field(target,"packageName");
+                    Object handle=Reflect.call(cls(WM+"FloatHandleController"),"getInstance"),edge=Reflect.call(handle,"getFloatHandleInfo",id);
+                    if(value instanceof Context context&&edge!=null&&pkg!=null&&pkg.equals(Reflect.call(task,"getBasePackageName"))&&allowPackage(pkg,context)){
+                        LaunchContext current=new LaunchContext(owner,target,null,null,task,context,edge,LaunchPolicy.Kind.REMEMBER);
+                        if(mayRepairLaunch(current,pkg)){
+                            // Parking retains the mini task. Restore the native saved
+                            // state as well as bounds/scale before options are reused.
+                            Object saved=Reflect.field(edge,"flexibleTaskInfo"),state=Reflect.call(saved,"getFlexibleState");
+                            if(state instanceof Integer n&&(n==1||n==2))Reflect.call(Reflect.call(owner,"getFlexibleInfoManager",task),"setTaskState",n);
+                            hit("keep parked window on reopen");return restoreEdgeOptions(current,options);
+                        }
+                    }
+                }
+            }
+            return chain.proceed();
+        });
     }
-    private boolean qualifiesLaunch(Object[] context){
-        String pkg=(String)Reflect.field(context[0],"packageName");
-        if(!(context[3] instanceof Context c)||pkg==null||!allowPackage(pkg,c))return false;
-        if(bool(Config.JUMP))return true;Object source=context[1],task=context[2];
-        return bool(Config.NOTIFICATION)&&source==null||bool(Config.LAUNCHER)&&task!=null&&!standard(task);
+    private boolean qualifiesLaunch(LaunchContext context){return context.kind()!=LaunchPolicy.Kind.NATIVE;}
+    private String launchCaller(Object owner,Object request,Object source){
+        String caller=(String)Reflect.field(request,"callingPackage");
+        if(source==null){
+            // A PendingIntent keeps its creator as callingPackage. Its actual
+            // sender identifies a notification click or a desktop shortcut.
+            try{Object atms=Reflect.field(owner,"mAtms"),process=Reflect.call(atms,"getProcessController",Reflect.integer(request,"realCallingPid",-1),Reflect.integer(request,"realCallingUid",-1));
+                Object value=Reflect.field(process,"mInfo");if(value instanceof ApplicationInfo info&&(LaunchPolicy.isLauncher(info.packageName)||"com.android.systemui".equals(info.packageName)))return info.packageName;
+            }catch(Throwable ignored){/* Keep the native caller when its process is unavailable. */}
+        }
+        return caller;
+    }
+    private boolean mayRepairLaunch(LaunchContext context,String pkg){
+        try{
+            if(Boolean.TRUE.equals(Reflect.call(context.controller(),"isKeyGuardShowing")))return false;
+            Object locked=Reflect.call(cls(WM+"FlexibleWindowUtils"),"isActivityLock",context.target());
+            Object encrypted=Reflect.call(cls(WM+"FlexibleWindowUtils"),"isEncryptPkg",pkg,Reflect.integer(context.target(),"mUserId",0));
+            return Boolean.FALSE.equals(locked)&&Boolean.FALSE.equals(encrypted);
+        }catch(Throwable t){info("Keep native launch: "+t.getClass().getSimpleName());return false;}
+    }
+    private ActivityOptions restoreEdgeOptions(LaunchContext context,ActivityOptions options){
+        try{
+        Object saved=Reflect.field(context.edge(),"flexibleTaskInfo");
+        // Use the OEM's float-open metadata, including MaintainTaskState. A task
+        // retained in the foreground must not be mistaken for a fullscreen start.
+        Object prepared=Reflect.call(cls(WM+"FlexibleWindowUtils"),"setFlexibleTaskOptions",options,saved);
+        if(prepared instanceof ActivityOptions value)options=value;
+        Object extra=Reflect.call(options,"getExtraBundle");Bundle bundle=extra instanceof Bundle b?b:new Bundle();
+        if(!(extra instanceof Bundle))Reflect.call(options,"setExtraBundle",bundle);
+        Reflect.call(Reflect.field(options,"mActivityOptionsExt"),"setZoomLaunchFlags",4);
+        bundle.putBoolean("key_flexible_smart_across_task_jump",false);bundle.putBoolean("key_flexible_smart_inner_task_jump",false);
+        bundle.putString("key_start_float_handle_view_reason","coloros-enhance-reopen");
+        Object bounds=Reflect.call(saved,"getLaunchBounds");
+        int id=Reflect.integer(context.edge(),"taskId",-1);if(id>=0)bundle.putInt("key_start_float_handle_view_task_id",id);
+        if(bounds instanceof Rect rect&&!rect.isEmpty()){
+            Rect copy=new Rect(rect);Reflect.call(options,"setLaunchBounds",copy);
+            Object scale=Reflect.field(saved,"mScale");if(scale instanceof Float f&&Float.isFinite(f)&&f>0)bundle.putFloat("androidx.activity.LaunchScale",f);
+            Object handle=Reflect.call(cls(WM+"FloatHandleController"),"getInstance");Reflect.call(handle,"fillFloatPositionRect",context.edge(),copy);
+        }
+        }catch(Throwable t){log(Log.WARN,TAG,"Saved edge position unavailable",t);}
+        return options;
+    }
+    private void observeLaunch(LaunchContext context){
+        if(pendingLaunchChecks.incrementAndGet()>8){pendingLaunchChecks.decrementAndGet();return;}
+        long generation=WindowDiagnostics.generation();WindowDiagnostics.launch(context.kind().name(),"requested",generation);
+        new Handler(Looper.getMainLooper()).postDelayed(()->{
+            try{Object atms=Reflect.field(context.controller(),"mAtms"),lock=Reflect.field(atms,"mGlobalLock");
+                if(lock==null){WindowDiagnostics.launch(context.kind().name(),"unknown",generation);return;}
+                synchronized(lock){Object task=Reflect.call(context.target(),"getTask");if(task==null)task=context.existingTask();
+                    Object visible=Reflect.call(task,"isVisible"),floating=Reflect.call(context.controller(),"isFlexibleTaskAndHasCaption",task);
+                    Object handle=Reflect.call(cls(WM+"FloatHandleController"),"getInstance"),edge=Reflect.call(handle,"isInFloatingList",Reflect.integer(task,"mTaskId",-1));
+                    WindowDiagnostics.launch(context.kind().name(),Boolean.TRUE.equals(visible)?(Boolean.TRUE.equals(floating)&&Boolean.FALSE.equals(edge)?"floating":"not_observed"):"unknown",generation);
+                }
+            }catch(Throwable t){WindowDiagnostics.launch(context.kind().name(),"unknown",generation);}
+            finally{pendingLaunchChecks.decrementAndGet();}
+        },1200);
+    }
+    private void installDiagnostics(){
+        registeringFeature="Window.Status";
+        hook(WM+"WindowManagerService","systemReady",m->m.getParameterCount()==0,m->chain->{Object result=chain.proceed();try{Object value=Reflect.field(chain.getThisObject(),"mContext");if(value instanceof Context context)WindowDiagnostics.attach(context,prefs,getRemotePreferences("aod_runtime_status"));}catch(Throwable t){log(Log.WARN,TAG,"Runtime status receiver unavailable",t);}return result;});
     }
     private boolean allowPackage(String pkg,Context context){
         if(Set.of("android","com.android.systemui","com.android.launcher","com.android.settings",getModuleApplicationInfo().packageName).contains(pkg))return false;
@@ -235,8 +346,18 @@ public final class MainHook extends XposedModule {
     private void restoreViews(){synchronized(hiddenViews){hiddenViews.forEach((view,visibility)->view.post(()->view.setVisibility(visibility)));hiddenViews.clear();}}
     private void installEdge(){
         String handle=WM+"FloatHandleController",controller=WM+"FlexibleTaskController";
-        // OShin's spelling includes the historical OEM typo "Alloaw".
-        hook(handle,"isAlloawLockFloatPhone",m->m.getReturnType()==boolean.class,m->chain->{if(bool(Config.FOREGROUND))return true;return chain.proceed();});
+        hook(handle,"getLimitMaxFloatNum",m->m.getReturnType()==int.class&&m.getParameterCount()==0,m->chain->{
+            int nativeLimit=(Integer)chain.proceed(),value=number(Config.EDGE_COUNT);
+            if(!edgeCountPolicy.needsSize(value))return nativeLimit;
+            Object size=Reflect.call(chain.getThisObject(),"getFloatInfoSize");
+            if(!(size instanceof Integer currentSize))return nativeLimit;
+            int limit=edgeCountPolicy.limit(value,nativeLimit,currentSize);
+            if(limit!=nativeLimit)hit("edge count "+limit);
+            return limit;
+        });
+        deopt(handle,"updateInfoMapForAdd");
+        // PHY110 already grants the native floating-lock permission. Keep its
+        // permission result; foreground retention is handled by task parking.
         hook(handle,"shouldForceLaunchIfTaskInFloatHandle",m->m.getReturnType()==boolean.class,m->chain->{
             Object nativeResult=chain.proceed();if(!bool(Config.REMEMBER)&&!bool(Config.FOREGROUND))return nativeResult;
             if(bool(Config.REMEMBER)){hit("remember edge");return false;}

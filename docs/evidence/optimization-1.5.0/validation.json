@@ -1,0 +1,200 @@
+{
+  "date": "2026-11-13",
+  "device": "PHY110",
+  "rom": "PHY110_17.0.0.100(CN01)",
+  "version": "1.5.0",
+  "code": 9,
+  "apk_sha256": "5657166690cea89ca9c6526bc944561f9b668ec4245b80a10d6a47af4d628138",
+  "certificate_sha256": "ac8dd32294627c740e436288919805d7d9403592add3436c1f006df58ab16f37",
+  "source_files_identical": 74,
+  "unit_tests": {
+    "tests": 85,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lint": {
+    "Error": 0,
+    "Fatal": 0,
+    "Warning": 21
+  },
+  "installed_apk_matches": true,
+  "module_enabled": true,
+  "scopes_preserved": true,
+  "configuration_restored_to_pretest": true,
+  "native_aod_and_timeout_restored": true,
+  "other_modules_restored": true,
+  "temporary_apps_removed": 7,
+  "launch": {
+    "desktop-off": {
+      "floating": false,
+      "task": 243
+    },
+    "desktop-cold-on": {
+      "floating": true,
+      "task": 244
+    },
+    "desktop-hot-on": {
+      "floating": true,
+      "task": 245
+    },
+    "edge-off": {
+      "floating": false,
+      "task": 246
+    },
+    "edge-on": {
+      "floating": true,
+      "task": 247
+    },
+    "edge-both": {
+      "floating": true,
+      "task": 248
+    },
+    "desktop-filtered": {
+      "floating": false,
+      "task": 249
+    }
+  },
+  "foreground_with_remember": {
+    "same_task_preserved": true,
+    "saved_bounds_and_scale_restored": true,
+    "full_floating_state_restored": true
+  },
+  "window_regression": {
+    "capture-off": {
+      "screenshot": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "recording": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    "capture-on": {
+      "screenshot": [
+        [
+          0,
+          200,
+          122
+        ],
+        [
+          255,
+          90,
+          66
+        ]
+      ],
+      "recording": [
+        [
+          0,
+          198,
+          120
+        ],
+        [
+          254,
+          88,
+          65
+        ]
+      ]
+    },
+    "capture-restored": {
+      "screenshot": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "recording": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    "window-count-none": 2,
+    "window-count-5": 5,
+    "edge-count-None": [
+      "io.github.colorosenhance.abprobe2",
+      "io.github.colorosenhance.abprobe3"
+    ],
+    "edge-count-5": [
+      "io.github.colorosenhance.abprobe1",
+      "io.github.colorosenhance.abprobe2",
+      "io.github.colorosenhance.abprobe3",
+      "io.github.colorosenhance.abprobe4",
+      "io.github.colorosenhance.abprobe5"
+    ],
+    "split-regression-false": "Rect(0, 0 - 1080, 2041)",
+    "split-regression-true": "Rect(0, 0 - 1080, 1116)",
+    "ratio-2": "Rect(104, 210 - 1184, 2370)",
+    "foreground-False": {
+      "package": "io.github.colorosenhance.abprobe1",
+      "task": 300,
+      "ticks": 10,
+      "resumed": false,
+      "secure": false
+    },
+    "foreground-True": {
+      "package": "io.github.colorosenhance.abprobe1",
+      "task": 301,
+      "ticks": 16,
+      "resumed": true,
+      "secure": false
+    }
+  },
+  "aod": {
+    "systemui_pid": "5384",
+    "same_pid_throughout": true,
+    "ui_main_toggle": true,
+    "ui_advanced_entry_preserved": true,
+    "ui_reset_native_defaults": true,
+    "fresh_initialisation_native_defaults": true,
+    "repeat_toggle_count": 4,
+    "duration30_verified": true
+  },
+  "ui": {
+    "four_entrances": true,
+    "ratio_wording_height_divided_by_width": true,
+    "window_runtime_loaded_version": "1.5.0",
+    "saved_and_loaded_separate": true,
+    "visible_text_clean": true,
+    "final_apk_ui_smoke": true
+  },
+  "physical_feature_evidence_apk_sha256": "8ec2b34de9991f3549c3923bfe87d53154c437501bdc695f434e0888b31e2855",
+  "ui_evidence_apk_sha256": "5657166690cea89ca9c6526bc944561f9b668ec4245b80a10d6a47af4d628138",
+  "limits": [
+    "Single device, ROM, user and portrait configuration.",
+    "No whole-day AOD, power consumption or long-term stress measurements.",
+    "No complete application, application-lock, multi-user or rotation matrix.",
+    "PC casting stream negotiation and physical air gestures were not re-tested in this UI release.",
+    "Configuration failure fallback validated by code and unit tests; no deliberate LSPosed service outage on the phone."
+  ]
+}

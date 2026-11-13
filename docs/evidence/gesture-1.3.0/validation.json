@@ -1,0 +1,69 @@
+{
+  "version": "1.3.0",
+  "version_code": 5,
+  "date": "2026-11-12",
+  "device": {
+    "installed_version": "1.3.0",
+    "installed_apk_sha256": "11ef955d6caf30cf6be511e1859459b8a8fea3e918272a6a68ef9b4dadfe7076",
+    "module_enabled": true,
+    "scope": [
+      "com.android.systemui",
+      "com.oplus.aod",
+      "com.oplus.cast",
+      "com.oplus.gesture",
+      "system"
+    ],
+    "previous_module_disabled": true,
+    "opening_after_restart": [
+      "隔空接听或静音",
+      "隔空滑动",
+      "隔空暂停或播放视频"
+    ],
+    "disable_restores_stock_menu": true,
+    "enable_restores_extra_entries": true,
+    "root_restart_button_passed": true,
+    "native_sensorhub_engine_preserved": true,
+    "no_module_hooks_in_aon_service": true,
+    "native_gesture_settings_preserved": {
+      "oplus_customize_aon_gesture_answer_phone_state": "0",
+      "oplus_customize_aon_gesture_swip_screen_state": "0",
+      "oplus_customize_aon_gesture_pause_or_play_state": "1"
+    },
+    "diagnostic_logging_restored": true,
+    "course_tests": {
+      "answer_call": "user_confirmed_success",
+      "slide": "user_confirmed_success",
+      "pause_play": "user_confirmed_success"
+    },
+    "real_incoming_call_tested": false,
+    "third_party_app_control_tested": false,
+    "developer_mode_restored": true
+  },
+  "rom": "PHY110_17.0.0.100(CN01)",
+  "build": {
+    "apk_sha256": "11ef955d6caf30cf6be511e1859459b8a8fea3e918272a6a68ef9b4dadfe7076",
+    "certificate_sha256": "ac8dd32294627c740e436288919805d7d9403592add3436c1f006df58ab16f37",
+    "same_certificate_as_1_2_1": true,
+    "lint_errors": 0,
+    "lint_warnings": 26,
+    "unit_tests": {
+      "tests": 56,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "old_function_sources_unchanged": 41
+  },
+  "comparison": {
+    "original_enabled_reproduced": true,
+    "original_enabled_engine_selection": "all engines skipped when explorer and sensorhub are both forced",
+    "original_disabled_aon_only_restart": "native sensorhub_engine created",
+    "original_disabled_course_user_report": "recognition succeeded",
+    "user_final_choice": "integrated module all five scopes; original module disabled; original configuration retained"
+  },
+  "limitations": [
+    "Learning-course recognition and real app control are distinct.",
+    "No physical incoming-call test.",
+    "No battery or other-ROM compatibility claim."
+  ]
+}

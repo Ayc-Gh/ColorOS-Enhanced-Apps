@@ -1,6 +1,6 @@
 {
   "application_id_source": "app/build.gradle.kts",
-  "version": "1.2.1",
+  "version": "1.5.0",
   "device": "PHY110",
   "rom": "PHY110_17.0.0.100(CN01)",
   "android_sdk": 37,
@@ -20,14 +20,8 @@
     "oplus-services.jar": "5a3613f87b766bc5923e4d9d75a0e3b79aa2c22f92d43a984d3cb0823f9e5a90",
     "services.jar": "78be31cdbfda61fdbfd84013c2c0b31812468bec8ffc4a0aa56ab4f4e0937e44"
   },
-  "apk_sha256": "6fc5275c1e505be47951aa9395d70a83493b06e9e28039ac7f6e69c46bbe9fc6",
+  "apk_sha256": "5657166690cea89ca9c6526bc944561f9b668ec4245b80a10d6a47af4d628138",
   "license": "AGPL-3.0-or-later",
-  "final_enabled": [
-    "unlock_flexible",
-    "unlock_split",
-    "capture"
-  ],
-  "final_window_limit": 3,
   "optional_features_not_exhaustively_tested": true,
   "oem_cast_apks": {
     "HeyCast.apk": "2249716ffc2df561e8dec287d4e59bf02da4dafb19b18fb76c6981ff625cc3a0",
@@ -35,7 +29,7 @@
     "ShareScreen.apk": "83912117bb5906a2e86a6870e05f41e6bde34a8a878b8d3c05688c81bef8e070"
   },
   "added_scope": "com.oplus.cast",
-  "validation": "docs/evidence/branding-1.2.1/validation.json",
+  "validation": "docs/evidence/optimization-1.5.0/validation.json",
   "final_cast": {
     "width": 1440,
     "height": 3168,
@@ -46,7 +40,7 @@
     "requested_fps": 60,
     "custom_bitrate": false
   },
-  "version_code": 4,
+  "version_code": 9,
   "app_name": "ColorOS 增强",
   "aod_source": {
     "repository": "NOTICE",
@@ -58,6 +52,7 @@
     "com.android.systemui",
     "com.oplus.aod",
     "com.oplus.cast",
+    "com.oplus.gesture",
     "system"
   ],
   "licenses": {
@@ -68,7 +63,10 @@
   "prior_validation": [
     "docs/DEVICE_VALIDATION.md",
     "docs/OPPO_CONNECT_CAST.md",
-    "docs/evidence/cast-1.1.0/validation.json"
+    "docs/evidence/cast-1.1.0/validation.json",
+    "docs/evidence/release-1.4.1/validation.json",
+    "docs/evidence/edge-count-1.4.2/validation.json",
+    "docs/evidence/optimization-1.5.0/validation.json"
   ],
   "historical_confirmed_tests": [
     "Three settings entrances and AOD subpages",
@@ -79,6 +77,34 @@
     "Post-reboot OPPO mirroring 1440x3168 / DPI 560",
     "50 AOD unit tests and 17 cast policy checks"
   ],
-  "device_tested_this_release": false,
-  "changes": "Product text and document cleanup; functional policies and installation compatibility retained."
+  "device_tested_this_release": true,
+  "changes": "Repair desktop/remembered-edge launches, safe native AOD defaults, reversible live all-day capability, consolidated entry and truthful runtime diagnostics.",
+  "historical_final_enabled": [
+    "unlock_flexible",
+    "unlock_split",
+    "capture"
+  ],
+  "historical_final_window_limit": 3,
+  "system_apks": {
+    "com.aiunit.aon": {
+      "sha256": "1e4f2c91dbf7b9fd11b289b01f46e1bd312f5c5736940cc7c9c8b1372a4a144d",
+      "versionName": "15.0.73",
+      "versionCode": "15000073"
+    },
+    "com.oplus.gesture": {
+      "sha256": "95b5434da60582a3ae4a53103bc19c4ddf9810420335abdd0d5ce9efe780ade3",
+      "versionName": "8.6.0",
+      "versionCode": "8600"
+    }
+  },
+  "certificate_sha256": "ac8dd32294627c740e436288919805d7d9403592add3436c1f006df58ab16f37",
+  "independent_edge_count": {
+    "preference": "window_capture/edge_count",
+    "minimum": 1,
+    "maximum": 5,
+    "default": "native (unset)",
+    "native_phone_limit": 2,
+    "device_validated_maximum": 5,
+    "final_preference": "unset"
+  }
 }

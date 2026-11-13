@@ -17,6 +17,8 @@ internal object HostDiagnostics {
     val registry = HookStatusRegistry()
     data class BrightnessSample(val original: Float, val target: Float, val normalized: Boolean, val initial: Boolean, val system: Boolean)
     @Volatile var brightness: BrightnessSample? = null
+    data class PanoramicSample(val native:Boolean,val effective:Boolean,val enhanced:Boolean)
+    @Volatile var panoramic:PanoramicSample? = null
     private var prefs: SharedPreferences? = null
     private var host = ""
     private var registered = false
@@ -40,6 +42,8 @@ internal object HostDiagnostics {
                         .put("hits", s.hits.size).put("failures", JSONArray(s.failures.toList())).put("skipped", JSONArray(s.skipped.toList())))
                 }
                 data.put("features", features)
+                data.put("configurationRead",AodConfigReader.readState)
+                panoramic?.let { p->data.put("panoramic",JSONObject().put("native",p.native).put("effective",p.effective).put("enhanced",p.enhanced)) }
                 brightness?.let { b ->
                     data.put("brightness", JSONObject().put("original", b.original.takeIf { it.isFinite() } ?: JSONObject.NULL)
                         .put("target", b.target.takeIf { it.isFinite() } ?: JSONObject.NULL).put("normalized", b.normalized)

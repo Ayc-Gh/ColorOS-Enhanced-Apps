@@ -1,0 +1,2061 @@
+{
+  "date": "2026-11-13",
+  "device": "PHY110",
+  "rom": "PHY110_17.0.0.100(CN01)",
+  "module_version": "1.4.2",
+  "apk_sha256": "0f6abd88637c64b48ed10a52c52ea865a84fa056dd73eeba5faee615f9e553db",
+  "cases": {
+    "native-five-flex": {
+      "tasks": [
+        {
+          "package": "io.github.colorosenhance.abprobe5",
+          "task": 103,
+          "windowing_mode": 1,
+          "bounds": "Rect(104, 562 - 1184, 2482)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        },
+        {
+          "package": "io.github.colorosenhance.abprobe4",
+          "task": 102,
+          "windowing_mode": 1,
+          "bounds": "Rect(176, 490 - 1256, 2410)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        },
+        {
+          "package": "io.github.colorosenhance.abprobe3",
+          "task": 101,
+          "windowing_mode": 1,
+          "bounds": "Rect(104, 418 - 1184, 2338)",
+          "isVisible": false,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        },
+        {
+          "package": "io.github.colorosenhance.abprobe2",
+          "task": 100,
+          "windowing_mode": 1,
+          "bounds": "Rect(176, 346 - 1256, 2266)",
+          "isVisible": false,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        },
+        {
+          "package": "io.github.colorosenhance.abprobe1",
+          "task": 98,
+          "windowing_mode": 1,
+          "bounds": "Rect(0, 0 - 1080, 2376)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        },
+        {
+          "package": "io.github.colorosenhance.abprobe1",
+          "task": 99,
+          "windowing_mode": 1,
+          "bounds": "Rect(0, 0 - 1080, 2376)",
+          "isVisible": false,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        }
+      ],
+      "active_flexible_tasks": [
+        102,
+        103
+      ],
+      "zoom_rect": null,
+      "zoom_shown": false,
+      "parked_test_packages": []
+    },
+    "on-count-4": {
+      "tasks": [
+        {
+          "package": "io.github.colorosenhance.abprobe5",
+          "task": 74,
+          "windowing_mode": 1,
+          "bounds": "Rect(104, 658 - 1184, 2578)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        },
+        {
+          "package": "io.github.colorosenhance.abprobe4",
+          "task": 73,
+          "windowing_mode": 1,
+          "bounds": "Rect(176, 562 - 1256, 2482)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        },
+        {
+          "package": "io.github.colorosenhance.abprobe3",
+          "task": 72,
+          "windowing_mode": 1,
+          "bounds": "Rect(104, 466 - 1184, 2386)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        },
+        {
+          "package": "io.github.colorosenhance.abprobe2",
+          "task": 71,
+          "windowing_mode": 1,
+          "bounds": "Rect(176, 370 - 1256, 2290)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        },
+        {
+          "package": "io.github.colorosenhance.abprobe1",
+          "task": 70,
+          "windowing_mode": 1,
+          "bounds": "Rect(104, 274 - 1184, 2194)",
+          "isVisible": false,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        }
+      ],
+      "active_flexible_tasks": [
+        71,
+        72,
+        73,
+        74
+      ],
+      "zoom_rect": "104, 658 - 977, 2210",
+      "zoom_shown": true,
+      "parked_test_packages": []
+    },
+    "on-count-5": {
+      "tasks": [
+        {
+          "package": "io.github.colorosenhance.abprobe5",
+          "task": 79,
+          "windowing_mode": 1,
+          "bounds": "Rect(104, 658 - 1184, 2578)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        },
+        {
+          "package": "io.github.colorosenhance.abprobe4",
+          "task": 78,
+          "windowing_mode": 1,
+          "bounds": "Rect(176, 562 - 1256, 2482)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        },
+        {
+          "package": "io.github.colorosenhance.abprobe3",
+          "task": 77,
+          "windowing_mode": 1,
+          "bounds": "Rect(104, 466 - 1184, 2386)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        },
+        {
+          "package": "io.github.colorosenhance.abprobe2",
+          "task": 76,
+          "windowing_mode": 1,
+          "bounds": "Rect(176, 370 - 1256, 2290)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        },
+        {
+          "package": "io.github.colorosenhance.abprobe1",
+          "task": 75,
+          "windowing_mode": 1,
+          "bounds": "Rect(104, 274 - 1184, 2194)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        }
+      ],
+      "active_flexible_tasks": [
+        75,
+        76,
+        77,
+        78,
+        79
+      ],
+      "zoom_rect": "104, 658 - 977, 2210",
+      "zoom_shown": true,
+      "parked_test_packages": []
+    },
+    "on-multi-only": {
+      "tasks": [
+        {
+          "package": "io.github.colorosenhance.abprobe5",
+          "task": 84,
+          "windowing_mode": 1,
+          "bounds": "Rect(104, 562 - 1184, 2482)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        },
+        {
+          "package": "io.github.colorosenhance.abprobe4",
+          "task": 83,
+          "windowing_mode": 1,
+          "bounds": "Rect(176, 490 - 1256, 2410)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        },
+        {
+          "package": "io.github.colorosenhance.abprobe3",
+          "task": 82,
+          "windowing_mode": 1,
+          "bounds": "Rect(104, 418 - 1184, 2338)",
+          "isVisible": false,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        },
+        {
+          "package": "io.github.colorosenhance.abprobe2",
+          "task": 81,
+          "windowing_mode": 1,
+          "bounds": "Rect(176, 346 - 1256, 2266)",
+          "isVisible": false,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        },
+        {
+          "package": "io.github.colorosenhance.abprobe1",
+          "task": 80,
+          "windowing_mode": 1,
+          "bounds": "Rect(0, 0 - 1080, 2376)",
+          "isVisible": false,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        }
+      ],
+      "active_flexible_tasks": [
+        83,
+        84
+      ],
+      "zoom_rect": "104, 562 - 977, 2114",
+      "zoom_shown": true,
+      "parked_test_packages": []
+    },
+    "split-focused-off": {
+      "tasks": [
+        {
+          "package": "io.github.colorosenhance.abprobe1",
+          "task": 141,
+          "windowing_mode": 1,
+          "bounds": "Rect(0, 0 - 1080, 1116)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        },
+        {
+          "package": "io.github.colorosenhance.abprobe6",
+          "task": 139,
+          "windowing_mode": 1,
+          "bounds": "Rect(0, 0 - 1080, 2041)",
+          "isVisible": true,
+          "supportsMultiWindow": false,
+          "supportsSplitScreenMultiWindow": false,
+          "resizeMode": 0
+        }
+      ],
+      "active_flexible_tasks": [],
+      "zoom_rect": null,
+      "zoom_shown": false,
+      "parked_test_packages": []
+    },
+    "split-focused-on": {
+      "tasks": [
+        {
+          "package": "io.github.colorosenhance.abprobe1",
+          "task": 145,
+          "windowing_mode": 1,
+          "bounds": "Rect(0, 0 - 1080, 1116)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        },
+        {
+          "package": "io.github.colorosenhance.abprobe6",
+          "task": 143,
+          "windowing_mode": 1,
+          "bounds": "Rect(0, 0 - 1080, 1116)",
+          "isVisible": true,
+          "supportsMultiWindow": false,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 0
+        }
+      ],
+      "active_flexible_tasks": [],
+      "zoom_rect": null,
+      "zoom_shown": false,
+      "parked_test_packages": []
+    },
+    "native-notification-launch": {
+      "tasks": [
+        {
+          "package": "io.github.colorosenhance.abprobe2",
+          "task": 106,
+          "windowing_mode": 1,
+          "bounds": "Rect(0, 0 - 1080, 2376)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        },
+        {
+          "package": "io.github.colorosenhance.abprobe1",
+          "task": 105,
+          "windowing_mode": 1,
+          "bounds": "Rect(0, 0 - 1080, 2376)",
+          "isVisible": false,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        }
+      ],
+      "active_flexible_tasks": [],
+      "zoom_rect": null,
+      "zoom_shown": false,
+      "parked_test_packages": []
+    },
+    "on-notification": {
+      "tasks": [
+        {
+          "package": "io.github.colorosenhance.abprobe2",
+          "task": 87,
+          "windowing_mode": 1,
+          "bounds": "Rect(104, 274 - 1184, 2194)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        },
+        {
+          "package": "io.github.colorosenhance.abprobe1",
+          "task": 86,
+          "windowing_mode": 1,
+          "bounds": "Rect(0, 0 - 1080, 2376)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        }
+      ],
+      "active_flexible_tasks": [
+        87
+      ],
+      "zoom_rect": "104, 274 - 977, 1826",
+      "zoom_shown": true,
+      "parked_test_packages": []
+    },
+    "edge-recheck-off": {
+      "tasks": [
+        {
+          "package": "io.github.colorosenhance.abprobe1",
+          "task": 98,
+          "windowing_mode": 1,
+          "bounds": "Rect(635, 532 - 1715, 2452)",
+          "isVisible": false,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        }
+      ],
+      "active_flexible_tasks": [],
+      "zoom_rect": null,
+      "zoom_shown": false,
+      "parked_test_packages": []
+    },
+    "edge-recheck-foreground": {
+      "tasks": [
+        {
+          "package": "io.github.colorosenhance.abprobe1",
+          "task": 100,
+          "windowing_mode": 1,
+          "bounds": "Rect(638, 533 - 1718, 2453)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        }
+      ],
+      "active_flexible_tasks": [
+        100
+      ],
+      "zoom_rect": "638, 533 - 1511, 2085",
+      "zoom_shown": false,
+      "parked_test_packages": []
+    },
+    "edge-recheck-remember-relaunch": {
+      "tasks": [
+        {
+          "package": "io.github.colorosenhance.abprobe1",
+          "task": 99,
+          "windowing_mode": 1,
+          "bounds": "Rect(0, 0 - 1080, 2376)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        }
+      ],
+      "active_flexible_tasks": [],
+      "zoom_rect": null,
+      "zoom_shown": false,
+      "parked_test_packages": []
+    },
+    "edge-recheck-off-relaunch": {
+      "tasks": [
+        {
+          "package": "io.github.colorosenhance.abprobe1",
+          "task": 98,
+          "windowing_mode": 1,
+          "bounds": "Rect(0, 0 - 1080, 2376)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        }
+      ],
+      "active_flexible_tasks": [],
+      "zoom_rect": null,
+      "zoom_shown": false,
+      "parked_test_packages": []
+    },
+    "launcher-cold-off": {
+      "tasks": [
+        {
+          "package": "io.github.colorosenhance.abprobe1",
+          "task": 156,
+          "windowing_mode": 1,
+          "bounds": "Rect(0, 0 - 1080, 2376)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        }
+      ],
+      "active_flexible_tasks": [],
+      "zoom_rect": null,
+      "zoom_shown": false,
+      "parked_test_packages": []
+    },
+    "launcher-cold-on": {
+      "tasks": [
+        {
+          "package": "io.github.colorosenhance.abprobe1",
+          "task": 157,
+          "windowing_mode": 1,
+          "bounds": "Rect(0, 0 - 1080, 2376)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        }
+      ],
+      "active_flexible_tasks": [],
+      "zoom_rect": null,
+      "zoom_shown": false,
+      "parked_test_packages": []
+    },
+    "jump-granted-off": {
+      "tasks": [
+        {
+          "package": "io.github.colorosenhance.abprobe2",
+          "task": 178,
+          "windowing_mode": 1,
+          "bounds": "Rect(0, 0 - 1080, 2376)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        },
+        {
+          "package": "io.github.colorosenhance.abprobe1",
+          "task": 177,
+          "windowing_mode": 1,
+          "bounds": "Rect(0, 0 - 1080, 2376)",
+          "isVisible": false,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        }
+      ],
+      "active_flexible_tasks": [],
+      "zoom_rect": null,
+      "zoom_shown": false,
+      "parked_test_packages": []
+    },
+    "jump-granted-on": {
+      "tasks": [
+        {
+          "package": "io.github.colorosenhance.abprobe2",
+          "task": 180,
+          "windowing_mode": 1,
+          "bounds": "Rect(104, 274 - 1184, 2194)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        },
+        {
+          "package": "io.github.colorosenhance.abprobe1",
+          "task": 179,
+          "windowing_mode": 1,
+          "bounds": "Rect(0, 0 - 1080, 2376)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        }
+      ],
+      "active_flexible_tasks": [
+        180
+      ],
+      "zoom_rect": "104, 274 - 977, 1826",
+      "zoom_shown": true,
+      "parked_test_packages": []
+    },
+    "native-free": {
+      "tasks": [
+        {
+          "package": "io.github.colorosenhance.abprobe1",
+          "task": 161,
+          "windowing_mode": 1,
+          "bounds": "Rect(104, 274 - 1184, 2194)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        }
+      ],
+      "active_flexible_tasks": [
+        161
+      ],
+      "zoom_rect": "104, 274 - 977, 1826",
+      "zoom_shown": true,
+      "parked_test_packages": []
+    },
+    "native-free-resized": {
+      "tasks": [
+        {
+          "package": "io.github.colorosenhance.abprobe1",
+          "task": 161,
+          "windowing_mode": 1,
+          "bounds": "Rect(104, 274 - 1184, 2194)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        }
+      ],
+      "active_flexible_tasks": [
+        161
+      ],
+      "zoom_rect": "104, 274 - 933, 1748",
+      "zoom_shown": true,
+      "parked_test_packages": []
+    },
+    "on-free": {
+      "tasks": [
+        {
+          "package": "io.github.colorosenhance.abprobe1",
+          "task": 162,
+          "windowing_mode": 1,
+          "bounds": "Rect(104, 274 - 1184, 2194)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        }
+      ],
+      "active_flexible_tasks": [
+        162
+      ],
+      "zoom_rect": "104, 274 - 977, 1826",
+      "zoom_shown": true,
+      "parked_test_packages": []
+    },
+    "on-free-resized": {
+      "tasks": [
+        {
+          "package": "io.github.colorosenhance.abprobe1",
+          "task": 162,
+          "windowing_mode": 1,
+          "bounds": "Rect(104, 274 - 870, 2104)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        }
+      ],
+      "active_flexible_tasks": [
+        162
+      ],
+      "zoom_rect": "104, 274 - 717, 1738",
+      "zoom_shown": true,
+      "parked_test_packages": []
+    },
+    "native-unlock": {
+      "tasks": [
+        {
+          "package": "io.github.colorosenhance.abprobe6",
+          "task": 163,
+          "windowing_mode": 1,
+          "bounds": "Rect(104, 274 - 1184, 2194)",
+          "isVisible": true,
+          "supportsMultiWindow": false,
+          "supportsSplitScreenMultiWindow": false,
+          "resizeMode": 0
+        }
+      ],
+      "active_flexible_tasks": [
+        163
+      ],
+      "zoom_rect": "104, 274 - 977, 1826",
+      "zoom_shown": true,
+      "parked_test_packages": []
+    },
+    "on-unlock": {
+      "tasks": [
+        {
+          "package": "io.github.colorosenhance.abprobe6",
+          "task": 164,
+          "windowing_mode": 1,
+          "bounds": "Rect(104, 274 - 1184, 2194)",
+          "isVisible": true,
+          "supportsMultiWindow": false,
+          "supportsSplitScreenMultiWindow": false,
+          "resizeMode": 0
+        }
+      ],
+      "active_flexible_tasks": [
+        164
+      ],
+      "zoom_rect": "104, 274 - 977, 1826",
+      "zoom_shown": true,
+      "parked_test_packages": []
+    },
+    "on-ratio2": {
+      "tasks": [
+        {
+          "package": "io.github.colorosenhance.abprobe1",
+          "task": 165,
+          "windowing_mode": 1,
+          "bounds": "Rect(104, 210 - 1184, 2370)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        }
+      ],
+      "active_flexible_tasks": [
+        165
+      ],
+      "zoom_rect": "104, 210 - 977, 1956",
+      "zoom_shown": true,
+      "parked_test_packages": []
+    },
+    "on-caption": {
+      "tasks": [
+        {
+          "package": "io.github.colorosenhance.abprobe1",
+          "task": 166,
+          "windowing_mode": 1,
+          "bounds": "Rect(104, 274 - 1184, 2194)",
+          "isVisible": true,
+          "supportsMultiWindow": true,
+          "supportsSplitScreenMultiWindow": true,
+          "resizeMode": 2
+        }
+      ],
+      "active_flexible_tasks": [
+        166
+      ],
+      "zoom_rect": "104, 274 - 977, 1826",
+      "zoom_shown": true,
+      "parked_test_packages": []
+    }
+  },
+  "capture_native": {
+    "native-normal": {
+      "width": 1080,
+      "height": 2376,
+      "left_rgb": [
+        0,
+        200,
+        122
+      ],
+      "right_rgb": [
+        255,
+        90,
+        66
+      ]
+    },
+    "native-secure": {
+      "width": 1080,
+      "height": 2376,
+      "left_rgb": [
+        0,
+        0,
+        0
+      ],
+      "right_rgb": [
+        0,
+        0,
+        0
+      ]
+    },
+    "native-normal-frame": {
+      "width": 720,
+      "height": 1584,
+      "left_rgb": [
+        0,
+        198,
+        120
+      ],
+      "right_rgb": [
+        254,
+        88,
+        65
+      ]
+    },
+    "native-secure-frame": {
+      "width": 720,
+      "height": 1584,
+      "left_rgb": [
+        0,
+        0,
+        0
+      ],
+      "right_rgb": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "capture_switch": {
+    "on-secure": {
+      "width": 1080,
+      "height": 2376,
+      "left_rgb": [
+        0,
+        200,
+        122
+      ],
+      "right_rgb": [
+        255,
+        90,
+        66
+      ]
+    },
+    "on-secure-frame": {
+      "width": 720,
+      "height": 1584,
+      "left_rgb": [
+        0,
+        198,
+        120
+      ],
+      "right_rgb": [
+        254,
+        88,
+        65
+      ]
+    },
+    "on-capture-restored": {
+      "width": 1080,
+      "height": 2376,
+      "left_rgb": [
+        0,
+        0,
+        0
+      ],
+      "right_rgb": [
+        0,
+        0,
+        0
+      ]
+    },
+    "on-capture-restored-frame": {
+      "width": 720,
+      "height": 1584,
+      "left_rgb": [
+        0,
+        0,
+        0
+      ],
+      "right_rgb": [
+        0,
+        0,
+        2
+      ]
+    }
+  },
+  "edge_activity": {
+    "off": {
+      "package": "io.github.colorosenhance.abprobe1",
+      "task": 98,
+      "ticks": 7,
+      "resumed": false,
+      "secure": false
+    },
+    "foreground": {
+      "package": "io.github.colorosenhance.abprobe1",
+      "task": 100,
+      "ticks": 10,
+      "resumed": true,
+      "secure": false
+    },
+    "remember": {
+      "package": "io.github.colorosenhance.abprobe1",
+      "task": 99,
+      "ticks": 6,
+      "resumed": false,
+      "secure": false
+    }
+  },
+  "aod": {
+    "native-always-panoramic": {
+      "states": [
+        {
+          "elapsed_s": 0.26,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "ON"
+          ],
+          "brightness": [
+            "2987.0"
+          ]
+        },
+        {
+          "elapsed_s": 2.42,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 4.62,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 6.82,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 9.02,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 11.21,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 13.44,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 15.69,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 17.92,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 20.13,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 22.37,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 24.58,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 26.78,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 29.02,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 31.27,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 33.47,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 35.66,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 37.85,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 40.04,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 42.23,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 44.42,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 46.62,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 48.83,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 51.03,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 53.23,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 55.42,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 57.62,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 59.8,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 61.99,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 64.19,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 66.39,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 68.59,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 70.79,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 73.02,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        }
+      ],
+      "events": [
+        "11-13 09:37:14.069  4851  4851 I SystemUi--Aod: PanoramicAodController-->onDreamingStarted, aod type:2, show wallpaper in aod:false",
+        "11-13 09:37:14.069  4851  4851 I SystemUi--Aod: PanoramicAodController-->onDreamingStarted, Show all day",
+        "11-13 09:37:20.810  4851  4851 I SystemUi--Aod: PanoramicAodController-->onEnergySavingNotifyHide",
+        "11-13 09:37:20.811  4851  4851 I SystemUi--Aod: PanoramicAodController-->hideClock, hideReason: 3",
+        "11-13 09:37:20.818  4851  4851 I SystemUi--Aod: PanoramicAodController-->onEnergySavingNotifyHide"
+      ]
+    },
+    "on-aod-neutral": {
+      "states": [
+        {
+          "elapsed_s": 0.22,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "ON"
+          ],
+          "brightness": [
+            "2689.0"
+          ]
+        },
+        {
+          "elapsed_s": 2.41,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 4.61,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 6.77,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 8.94,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 11.13,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 13.31,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 15.51,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 17.7,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        }
+      ],
+      "events": [
+        "11-13 13:57:51.652 28214 28214 I AOD_Enhance: AOD_SESSION_START: session=1 mode=system targetMs=null",
+        "11-13 13:57:51.673 28214 28214 I SystemUi--Aod: PanoramicAodController-->onDreamingStarted, aod type:2, show wallpaper in aod:false",
+        "11-13 13:57:51.673 28214 28214 I SystemUi--Aod: PanoramicAodController-->onDreamingStarted, Show all day",
+        "11-13 13:57:57.241 28214 28214 I AOD_Enhance: HOOK_HIT: id=aod.duration.panoramic-energy-hide method=com.oplus.systemui.aod.controller.PanoramicAodController#onEnergySavingNotifyHide",
+        "11-13 13:57:57.243 28214 28214 I AOD_Enhance: AOD_SESSION_END: session=1 elapsedMs=5591 reason=native UI hide allowed",
+        "11-13 13:57:57.245 28214 28214 I SystemUi--Aod: PanoramicAodController-->onEnergySavingNotifyHide",
+        "11-13 13:57:57.247 28214 28214 I SystemUi--Aod: PanoramicAodController-->hideClock, hideReason: 3",
+        "11-13 13:57:57.253 28214 28214 I SystemUi--Aod: PanoramicAodController-->onEnergySavingNotifyHide"
+      ]
+    },
+    "aod-recheck-settings-only": {
+      "states": [
+        {
+          "elapsed_s": 0.24,
+          "wakefulness": [
+            "Awake"
+          ],
+          "screen_state": [
+            "ON"
+          ],
+          "brightness": [
+            "2759.0"
+          ]
+        },
+        {
+          "elapsed_s": 2.4,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 4.6,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 6.79,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 8.98,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 11.17,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 13.46,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 15.68,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 17.97,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        }
+      ],
+      "events": [
+        "11-13 14:06:42.127  5414  5414 I AOD_Enhance: AOD_SESSION_START: session=2 mode=system targetMs=null",
+        "11-13 14:06:42.138  5414  5414 I SystemUi--Aod: PanoramicAodController-->onDreamingStarted, aod type:2, show wallpaper in aod:false",
+        "11-13 14:06:42.138  5414  5414 I SystemUi--Aod: PanoramicAodController-->onDreamingStarted, Show all day",
+        "11-13 14:06:48.775  5414  5414 I AOD_Enhance: AOD_SESSION_END: session=2 elapsedMs=6648 reason=native UI hide allowed",
+        "11-13 14:06:48.776  5414  5414 I SystemUi--Aod: PanoramicAodController-->onEnergySavingNotifyHide",
+        "11-13 14:06:48.776  5414  5414 I SystemUi--Aod: PanoramicAodController-->hideClock, hideReason: 3",
+        "11-13 14:06:48.781  5414  5414 I SystemUi--Aod: PanoramicAodController-->onEnergySavingNotifyHide"
+      ]
+    },
+    "aod-recheck-duration30": {
+      "states": [
+        {
+          "elapsed_s": 0.22,
+          "wakefulness": [
+            "Awake"
+          ],
+          "screen_state": [
+            "ON"
+          ],
+          "brightness": [
+            "2544.0"
+          ]
+        },
+        {
+          "elapsed_s": 2.4,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 4.59,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 6.8,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 9.01,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 11.22,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 13.46,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 15.63,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 17.87,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 20.1,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 22.37,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 24.59,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 26.83,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 29.06,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 31.21,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 33.46,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 35.66,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 37.9,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "OFF"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        }
+      ],
+      "events": [
+        "11-13 14:07:12.203  5414  5414 I AOD_Enhance: AOD_SESSION_START: session=3 mode=30s targetMs=30000",
+        "11-13 14:07:12.215  5414  5414 I SystemUi--Aod: PanoramicAodController-->onDreamingStarted, aod type:2, show wallpaper in aod:false",
+        "11-13 14:07:12.215  5414  5414 I SystemUi--Aod: PanoramicAodController-->onDreamingStarted, Show all day",
+        "11-13 14:07:12.219  5414  5414 I AOD_Enhance: AOD_DEADLINE_SCHEDULE: session=3 source=idle-allowed-alarm remainingMs=29987 triggerElapsed=269397",
+        "11-13 14:07:18.717  5414  5414 I AOD_Enhance: AOD_UI_HIDE_DEFER: session=3 elapsedMs=6515 targetMs=30000 mode=30s",
+        "11-13 14:07:18.719  5414  5414 I AOD_Enhance: AOD_UI_HIDE_DEFER: session=3 elapsedMs=6517 targetMs=30000 mode=30s",
+        "11-13 14:07:42.223  5414  5414 I AOD_Enhance: AOD_DEADLINE_REACHED: session=3 elapsedMs=30021 source=idle-allowed-alarm",
+        "11-13 14:07:42.225  5414  5414 I AOD_Enhance: AOD_UI_HIDE_REPLAY: session=3 elapsedMs=30021",
+        "11-13 14:07:42.235  5414  5414 I AOD_Enhance: AOD_SESSION_END: session=3 elapsedMs=30033 reason=native UI hide allowed",
+        "11-13 14:07:42.236  5414  5414 I SystemUi--Aod: PanoramicAodController-->hideClock, hideReason: 3"
+      ]
+    },
+    "aod-recheck-backend-only": {
+      "states": [
+        {
+          "elapsed_s": 0.22,
+          "wakefulness": [
+            "Awake"
+          ],
+          "screen_state": [
+            "ON"
+          ],
+          "brightness": [
+            "2550.0"
+          ]
+        },
+        {
+          "elapsed_s": 2.39,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 4.56,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 6.78,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 8.99,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 11.21,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 13.44,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 15.7,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 18.01,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 20.23,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        },
+        {
+          "elapsed_s": 22.46,
+          "wakefulness": [
+            "Dozing"
+          ],
+          "screen_state": [
+            "DOZE_SUSPEND"
+          ],
+          "brightness": [
+            "1870.0"
+          ]
+        }
+      ],
+      "events": [
+        "11-13 14:08:10.929 21029 21029 I AOD_Enhance: AOD_SESSION_START: session=1 mode=system targetMs=null",
+        "11-13 14:08:10.942 21029 21029 I SystemUi--Aod: PanoramicAodController-->onDreamingStarted, aod type:2, show wallpaper in aod:false",
+        "11-13 14:08:10.942 21029 21029 I SystemUi--Aod: PanoramicAodController-->onDreamingStarted, Show all day",
+        "11-13 14:08:17.457 21029 21029 I AOD_Enhance: HOOK_HIT: id=aod.duration.panoramic-energy-hide method=com.oplus.systemui.aod.controller.PanoramicAodController#onEnergySavingNotifyHide",
+        "11-13 14:08:17.459 21029 21029 I AOD_Enhance: AOD_SESSION_END: session=1 elapsedMs=6531 reason=native UI hide allowed",
+        "11-13 14:08:17.460 21029 21029 I SystemUi--Aod: PanoramicAodController-->onEnergySavingNotifyHide: energySaving mode is closed"
+      ]
+    }
+  },
+  "aod_entries": {
+    "aod-recheck-duration30": [
+      "息屏",
+      "息屏显示",
+      "开启",
+      "全景息屏",
+      "局部息屏",
+      "为了延长设备续航，全景息屏持续一段时间后将消失。电量不足 10% 且未连接电源时将不显示息屏内容。"
+    ],
+    "aod-recheck-settings-only": [
+      "息屏",
+      "息屏显示",
+      "开启",
+      "全景息屏",
+      "局部息屏",
+      "显示设置"
+    ],
+    "aod-recheck-backend-ui": [
+      "息屏",
+      "息屏显示",
+      "开启",
+      "全景息屏",
+      "局部息屏",
+      "显示设置"
+    ],
+    "aod-recheck-both-ui": [
+      "息屏",
+      "息屏显示",
+      "开启",
+      "全景息屏",
+      "局部息屏",
+      "显示设置"
+    ]
+  },
+  "gesture": {
+    "off": {
+      "source": "morning framework-disabled native-gesture-menu.xml",
+      "labels": [
+        "隔空手势",
+        "隔空接听来电",
+        "手背朝向屏幕，指尖向下，在前置摄像头正前方 20-40 厘米处保持不动，待屏幕顶部出现提示后，向上挥手，即可接听来电。",
+        "隔空接听或静音",
+        "未开启"
+      ]
+    },
+    "on": {
+      "source": "afternoon module-enabled cold launch",
+      "labels": [
+        "隔空手势",
+        "手掌或手背朝向屏幕，在前置摄像头正前方 20-40 厘米处保持不动，待屏幕顶部出现提示后，通过手势完成相关操作。",
+        "隔空接听或静音",
+        "未开启",
+        "隔空滑动",
+        "未开启",
+        "隔空暂停或播放视频",
+        "未开启"
+      ]
+    }
+  },
+  "edge_count": {
+    "off": [
+      {
+        "added": 1,
+        "parked_test_packages": [
+          "io.github.colorosenhance.abprobe1"
+        ]
+      },
+      {
+        "added": 2,
+        "parked_test_packages": [
+          "io.github.colorosenhance.abprobe1",
+          "io.github.colorosenhance.abprobe2"
+        ]
+      },
+      {
+        "added": 3,
+        "parked_test_packages": [
+          "io.github.colorosenhance.abprobe2",
+          "io.github.colorosenhance.abprobe3"
+        ]
+      }
+    ],
+    "on": [
+      {
+        "added": 1,
+        "parked_test_packages": [
+          "io.github.colorosenhance.abprobe1"
+        ]
+      },
+      {
+        "added": 2,
+        "parked_test_packages": [
+          "io.github.colorosenhance.abprobe1",
+          "io.github.colorosenhance.abprobe2"
+        ]
+      },
+      {
+        "added": 3,
+        "parked_test_packages": [
+          "io.github.colorosenhance.abprobe1",
+          "io.github.colorosenhance.abprobe2",
+          "io.github.colorosenhance.abprobe3"
+        ]
+      },
+      {
+        "added": 4,
+        "parked_test_packages": [
+          "io.github.colorosenhance.abprobe1",
+          "io.github.colorosenhance.abprobe2",
+          "io.github.colorosenhance.abprobe3",
+          "io.github.colorosenhance.abprobe4"
+        ]
+      },
+      {
+        "added": 5,
+        "parked_test_packages": [
+          "io.github.colorosenhance.abprobe1",
+          "io.github.colorosenhance.abprobe2",
+          "io.github.colorosenhance.abprobe3",
+          "io.github.colorosenhance.abprobe4",
+          "io.github.colorosenhance.abprobe5"
+        ]
+      }
+    ]
+  },
+  "limits": [
+    "No 24-hour AOD or power-consumption test.",
+    "No exhaustive application blacklist/compatibility coverage.",
+    "No new PC cast negotiation or effective FPS comparison in this run.",
+    "No new physical gesture recognition or low-light/single/double-tap matrix.",
+    "Failed/obscured driver attempts and the AOD sample made in LSPosed safe mode are excluded."
+  ],
+  "restoration": {
+    "removed_apps_verified": 7,
+    "remote_files_removed_verified": true,
+    "native_aod_preferences": {
+      "panoramic_aod_enable": "0",
+      "full_screen_aod": "1",
+      "Setting_AodState": "1",
+      "Setting_AodUserEnergySavingSet": "2",
+      "Setting_AodEnableImmediate": "0",
+      "oplus_keyguard_panoramic_aod_all_day_support": "0"
+    },
+    "screen_timeout_ms": 30000,
+    "framework_safe_mode": false,
+    "framework_hook_debug": false,
+    "framework_developer_mode_preserved": true,
+    "completed_at": "2026-11-13T14:20:28+0800",
+    "module_enabled": true,
+    "scopes_preserved": true,
+    "apk_unchanged": true,
+    "runtime_sources_checked": 48,
+    "runtime_sources_identical_to_delivered_source_zip": true,
+    "window_capture_configuration_empty": true,
+    "aod_configuration": {
+      "aod_duration_custom_minutes": 5,
+      "aod_duration_mode": 0,
+      "block_low_light_hide": false,
+      "block_single_click": false,
+      "enable_panoramic": false,
+      "enable_settings_support": false,
+      "init_brightness_bright": 160,
+      "init_brightness_dark": 80,
+      "running_brightness_multiplier": 1.600000023841858,
+      "use_system_init_bright": true,
+      "use_system_init_dark": true,
+      "use_system_running_multiplier": true
+    },
+    "other_enabled_modules_restored_count": 4,
+    "native_aod_restored_to_resumed_pretest": true,
+    "native_cast_live_session_restored": "not verified; package availability restored"
+  }
+}

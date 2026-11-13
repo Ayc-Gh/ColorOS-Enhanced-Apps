@@ -1,0 +1,12 @@
+11-13 15:51:36.072  5384  5384 I AOD_Enhance: AOD_SESSION_START: session=4 mode=30s targetMs=30000
+11-13 15:51:36.074  5384  5384 I SystemUi--Aod: PanoramicAodController-->onDreamingStarted, aod type:2, show wallpaper in aod:false
+11-13 15:51:36.074  5384  5384 I SystemUi--Aod: PanoramicAodController-->onDreamingStarted, Show all day
+11-13 15:51:36.074  5384  5384 I SystemUi--Aod: PanoramicAodController-->onAodStartShow, byWakeupReceiver :false
+11-13 15:51:36.079  5384  5384 I AOD_Enhance: AOD_DEADLINE_SCHEDULE: session=4 source=idle-allowed-alarm remainingMs=29998 triggerElapsed=399321
+11-13 15:51:36.314  5384  5384 I SystemUi--Keyguard: PictorialMediator-->handleObtainPictorialWallpaper return, Panoramic Aod showing
+11-13 15:51:42.804  5384  5384 I AOD_Enhance: AOD_UI_HIDE_DEFER: session=4 elapsedMs=6733 targetMs=30000 mode=30s
+11-13 15:51:42.807  5384  5384 I AOD_Enhance: AOD_UI_HIDE_DEFER: session=4 elapsedMs=6735 targetMs=30000 mode=30s
+11-13 15:52:06.137  5384  5384 I AOD_Enhance: AOD_DEADLINE_REACHED: session=4 elapsedMs=30065 source=idle-allowed-alarm
+11-13 15:52:06.138  5384  5384 I AOD_Enhance: AOD_UI_HIDE_REPLAY: session=4 elapsedMs=30065
+11-13 15:52:06.141  5384  5384 I AOD_Enhance: AOD_SESSION_END: session=4 elapsedMs=30070 reason=native UI hide allowed
+11-13 15:52:06.142  5384  5384 I SystemUi--Aod: PanoramicAodController-->hideClock, hideReason: 3

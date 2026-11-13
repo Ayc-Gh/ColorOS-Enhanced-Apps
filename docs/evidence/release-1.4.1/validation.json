@@ -1,0 +1,45 @@
+{
+  "version": "1.4.1",
+  "version_code": 7,
+  "date": "2026-11-12",
+  "device": "PHY110",
+  "rom": "PHY110_17.0.0.100(CN01)",
+  "build": {
+    "apk_sha256": "6bba9d7b4a09711438b280867af9c65760a81020b11a0808ff734c01fdc76fb7",
+    "certificate_sha256": "ac8dd32294627c740e436288919805d7d9403592add3436c1f006df58ab16f37",
+    "unit_tests": {
+      "tests": 56,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "lint_errors": 0,
+    "lint_warnings": 26,
+    "declared_scopes": 5,
+    "module_entries": 3
+  },
+  "device_state": {
+    "module_enabled": true,
+    "scope": [
+      "com.android.systemui",
+      "com.oplus.aod",
+      "com.oplus.cast",
+      "com.oplus.gesture",
+      "system"
+    ],
+    "saved_configuration_items": 13,
+    "retired_configuration_items": 0,
+    "developer_mode_off": true,
+    "hook_debug_off": true,
+    "installed_apk_sha256": "6bba9d7b4a09711438b280867af9c65760a81020b11a0808ff734c01fdc76fb7",
+    "installed_release": true
+  },
+  "retained_function_sources": 47,
+  "retained_sources_identical_to_1_3_0": true,
+  "main_entries": [
+    "分屏与小窗",
+    "OPPO 互联",
+    "AOD",
+    "隔空手势"
+  ]
+}

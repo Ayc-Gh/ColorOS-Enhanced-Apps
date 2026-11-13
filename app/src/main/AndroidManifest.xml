@@ -12,6 +12,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".CastSettingsActivity" android:exported="false" />
+        <activity android:name=".GestureSettingsActivity" android:exported="false" />
         <activity android:name=".WindowSettingsActivity" android:exported="false" />
         <activity android:name="com.op.aod.enhance.ui.MainActivity" android:exported="false" android:theme="@style/AodTheme" android:configChanges="orientation|screenSize|screenLayout" />
         <activity android:name="com.op.aod.enhance.ui.BrightnessActivity" android:exported="false" android:theme="@style/AodTheme" android:configChanges="orientation|screenSize|screenLayout" />

@@ -18,7 +18,10 @@ import top.yukonga.miuix.kmp.basic.Card
 import top.yukonga.miuix.kmp.basic.CardDefaults
 import top.yukonga.miuix.kmp.basic.Scaffold
 import top.yukonga.miuix.kmp.basic.SmallTopAppBar
+import top.yukonga.miuix.kmp.basic.Text
+import top.yukonga.miuix.kmp.basic.TextButton
 import com.op.aod.enhance.data.AodConfigStore
+import com.op.aod.enhance.data.AodConfig
 import top.yukonga.miuix.kmp.preference.ArrowPreference
 import top.yukonga.miuix.kmp.theme.MiuixTheme
 
@@ -32,6 +35,9 @@ class MainActivity : ComponentActivity() {
                     onOpenBrightness = { startActivity(Intent(this, BrightnessActivity::class.java)) },
                     onOpenFeatures = { startActivity(Intent(this, FeaturesActivity::class.java)) },
                     onOpenStatus = { startActivity(Intent(this, RuntimeStatusActivity::class.java)) },
+                    onReset = { android.app.AlertDialog.Builder(this).setTitle("恢复 AOD 系统默认")
+                        .setMessage("亮度跟随系统，关闭 AOD 增强并恢复系统显示时长。其他模块设置保留。")
+                        .setNegativeButton("取消",null).setPositiveButton("恢复"){_,_->AodConfigStore.write(this,AodConfig())}.show() },
                 )
             }
         }
@@ -43,6 +49,7 @@ private fun MainScreen(
     onOpenBrightness: () -> Unit,
     onOpenFeatures: () -> Unit,
     onOpenStatus: () -> Unit,
+    onReset: () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -61,6 +68,12 @@ private fun MainScreen(
                 .padding(20.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
+            Card(colors = CardDefaults.defaultColors(color = MiuixTheme.colorScheme.background)) {
+                Column(Modifier.padding(18.dp)) {
+                    Text("AOD")
+                    Text("息屏显示 · 亮度、时长与全天能力分别设置")
+                }
+            }
             ConfigSyncStatusCard()
             Card(colors = CardDefaults.defaultColors(color = MiuixTheme.colorScheme.background)) {
                 ArrowPreference(
@@ -75,6 +88,7 @@ private fun MainScreen(
                 )
                 ArrowPreference(title = "功能运行状态", summary = "检查新版是否加载，以及各功能是否已触发", onClick = onOpenStatus)
             }
+            TextButton(text="恢复 AOD 系统默认",onClick=onReset)
         }
     }
 }

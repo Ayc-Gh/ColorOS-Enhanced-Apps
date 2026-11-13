@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-13",
+  "phone_model": "PHY110",
+  "phone_api": 37,
+  "desktop_version": "17.20.3",
+  "desktop_exe_sha256": "c6e5ce99b7bcf98db69b7439805f8b7e45977afd18c7591033320163c0b1aa9a",
+  "official_module_modified": false,
+  "permanent_desktop_patch_installed": false,
+  "trials": [
+    {
+      "limit": 3,
+      "initial_correct_state_time": "2026-11-13T08:48:08+0800",
+      "initial_distinct_app_count": 3,
+      "user_feedback": "三个内容正确，能同时刷新和操作；三个视频应用复测持续正常，没有自动关闭。",
+      "longest_sampled_three_seconds": 112.4,
+      "later_remote_closures_and_desktop_process_exit_observed": true,
+      "result": "passed_within_observed_session"
+    },
+    {
+      "limit": 4,
+      "user_feedback": "四个视频应用滑动时卡顿并自动关闭；三个视频应用加一个小说应用基本可用，第三视频偶有轻微卡顿。",
+      "result": "load_dependent_not_stable_default"
+    },
+    {
+      "limit": 5,
+      "user_feedback": "起初可打开，随后三个窗口卡顿并自动关闭。",
+      "after_failure_time": "2026-11-13T08:49:48+0800",
+      "after_failure_desktop_active_count": 2,
+      "after_failure_distinct_app_count": 2,
+      "result": "failed"
+    }
+  ],
+  "limitations": [
+    "Sampled activity counts do not measure frame delivery; user feedback supplies visible content and input verification.",
+    "Short-session three-stream success does not prove unlimited-duration stability.",
+    "sig_local_lost and remote_closed do not identify the root resource or transport bottleneck.",
+    "Four/five-stream results are not evidence of a fixed hardware encoder maximum."
+  ],
+  "restoration": {
+    "time": "2026-11-13T09:11:33+0800",
+    "desktop": {
+      "running": false,
+      "memory_patch_removed_by_process_exit": true,
+      "exe_sha256": "c6e5ce99b7bcf98db69b7439805f8b7e45977afd18c7591033320163c0b1aa9a",
+      "disk_file_unchanged": true
+    },
+    "phone_property_restored": true,
+    "temporary_module_removed": true,
+    "relevant_phone_hosts_restarted": true,
+    "desktop_helper_processes_stopped": true,
+    "framework": {
+      "daemonRunning": true,
+      "versionName": "2.2.1",
+      "versionCode": 7912,
+      "apiVersion": 102,
+      "developerMode": false,
+      "safeMode": false,
+      "systemServerRequested": true,
+      "hookDebugEnabled": false,
+      "installedModules": 1,
+      "enabledModuleStates": 1
+    }
+  },
+  "official_module_integrity": {
+    "time": "2026-11-13T09:11:34+0800",
+    "existing_module_configuration_unchanged": true,
+    "existing_module_scope_unchanged": true,
+    "existing_apk_unchanged": true,
+    "existing_apk_sha256": "0f6abd88637c64b48ed10a52c52ea865a84fa056dd73eeba5faee615f9e553db",
+    "existing_source_files_checked": 67,
+    "existing_source_files_unchanged": true,
+    "changed_source_files": []
+  }
+}

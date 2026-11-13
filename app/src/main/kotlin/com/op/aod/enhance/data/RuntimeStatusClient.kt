@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import org.json.JSONObject
 import java.util.UUID
 
-internal class RuntimeStatusClient(context: Context) {
+internal class RuntimeStatusClient(context: Context,private val hosts:List<String> = RuntimeProtocol.hosts) {
     private val app = context.applicationContext
     private val handler = Handler(Looper.getMainLooper())
     private val mutableReports = MutableStateFlow<Map<String, JSONObject>>(emptyMap())
@@ -26,7 +26,7 @@ internal class RuntimeStatusClient(context: Context) {
         override fun onReceive(context: Context, intent: Intent) {
             if (intent.action != RuntimeProtocol.REPLY || nonce == null || intent.getStringExtra(RuntimeProtocol.NONCE) != nonce) return
             val host = intent.getStringExtra("host") ?: return
-            if (host !in RuntimeProtocol.hosts) return
+            if (host !in hosts) return
             if (Build.VERSION.SDK_INT >= 34 && sentFromUid != runCatching { app.packageManager.getPackageUid(host, 0) }.getOrNull()) return
             val data = runCatching { JSONObject(intent.getStringExtra("payload") ?: "") }.getOrNull() ?: return
             if (data.optString("host") != host) return
@@ -52,7 +52,7 @@ internal class RuntimeStatusClient(context: Context) {
             if (!saved) { mutableMessage.value = "检查请求未能保存，请重新连接配置服务"; return }
         }
         nonce = token; mutableMessage.value = "正在检查…"
-        fun query() { RuntimeProtocol.hosts.forEach { RuntimeProtocol.send(app, Intent(RuntimeProtocol.QUERY).setPackage(it).putExtra(RuntimeProtocol.NONCE, token)) } }
+        fun query() { hosts.forEach { RuntimeProtocol.send(app, Intent(RuntimeProtocol.QUERY).setPackage(it).putExtra(RuntimeProtocol.NONCE, token)) } }
         query()
         // Android 13 uses a framework preference capability in place of sender
         // identity. Retry that same request once to allow cache delivery to settle.

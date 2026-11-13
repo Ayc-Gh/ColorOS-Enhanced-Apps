@@ -1,0 +1,5 @@
+11-13 09:37:14.069  4851  4851 I SystemUi--Aod: PanoramicAodController-->onDreamingStarted, aod type:2, show wallpaper in aod:false
+11-13 09:37:14.069  4851  4851 I SystemUi--Aod: PanoramicAodController-->onDreamingStarted, Show all day
+11-13 09:37:20.810  4851  4851 I SystemUi--Aod: PanoramicAodController-->onEnergySavingNotifyHide
+11-13 09:37:20.811  4851  4851 I SystemUi--Aod: PanoramicAodController-->hideClock, hideReason: 3
+11-13 09:37:20.818  4851  4851 I SystemUi--Aod: PanoramicAodController-->onEnergySavingNotifyHide

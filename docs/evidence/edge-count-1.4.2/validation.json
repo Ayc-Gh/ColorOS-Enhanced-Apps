@@ -1,0 +1,67 @@
+{
+  "date": "2026-11-13",
+  "device": "PHY110",
+  "rom": "PHY110_17.0.0.100(CN01)",
+  "version": "1.4.2",
+  "version_code": 8,
+  "apk_sha256": "0f6abd88637c64b48ed10a52c52ea865a84fa056dd73eeba5faee615f9e553db",
+  "certificate_sha256": "ac8dd32294627c740e436288919805d7d9403592add3436c1f006df58ab16f37",
+  "v2_signature": true,
+  "unit_tests": {
+    "tests": 62,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lint_errors": 0,
+  "lint_warnings": 26,
+  "declared_scopes": [
+    "system",
+    "com.oplus.cast",
+    "com.android.systemui",
+    "com.oplus.aod",
+    "com.oplus.gesture"
+  ],
+  "build_sources_match_workspace": true,
+  "installed_apk_matches": true,
+  "module_enabled": true,
+  "scopes_preserved": true,
+  "configuration_restored_to_pretest": true,
+  "final_edge_count": "system default (unset)",
+  "framework_developer_mode": false,
+  "framework_hook_debug": false,
+  "temporary_apps_removed": 5,
+  "temporary_tasks_and_device_files_removed": true,
+  "device_checks": {
+    "default_limit": 2,
+    "selected_limit": 5,
+    "five_distinct_test_apps_parked": true,
+    "five_icons_visually_confirmed": true,
+    "native_list_size_after_lowering_to_3": 5,
+    "oldest_handle_expanded_to_same_task": 41,
+    "lowering_transition": {
+      "saved_limit": 3,
+      "current_count_at_add": 4,
+      "effective_limit_at_add": 4,
+      "native_count_error": false
+    },
+    "default_restoration": {
+      "existing_count_kept": 4,
+      "new_adds_after_test_tasks_closed": {
+        "current_counts": [
+          0,
+          1,
+          2
+        ],
+        "native_limit": 2
+      }
+    },
+    "other_window_features_unset_during_five_handle_test": true
+  },
+  "limits": [
+    "Single user on the listed ROM.",
+    "No long-running stress test or reboot with five parked handles.",
+    "No complete rotation, other application compatibility or foreground-keepalive matrix.",
+    "No PC casting application-count modifications."
+  ]
+}

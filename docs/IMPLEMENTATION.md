@@ -28,6 +28,7 @@
 | 隐藏控件 | `FlexibleTaskCaptionView.initCaptionView()`、`FlexibleCaptionView.updateThreeButtonVisibility(boolean)`；隐藏 `mBottomHandleView`、`mControlView`、`mControlBackgroundView` |
 | 贴边运行 | `exitFlexibleTask(Task,boolean,int,int)` 的原因 16 分支；记录贴边任务，重挂父 Surface 并隐藏；对焦点、展开和删除路径做配套处理 |
 | 贴边状态 | `FloatHandleController.shouldForceLaunchIfTaskInFloatHandle(ActivityInfo)`、`isAlloawLockFloatPhone()`；相关接口有 OEM 历史拼写错误 |
+| 独立贴边数量（1.4.2） | `FloatHandleController.getLimitMaxFloatNum()`；独立配置 1–5，默认透传，降低上限时保留现有任务并逐步恢复；详见 [贴边数量实现](EDGE_COUNT.md) |
 | 优先小窗 | `FlexibleTaskController.adjustOptionsForSmartMultiWindow(...)`、`isFlexibleAcrossTaskJump(...)`、`getLaunchFromTask(...)`；`OplusSplitScreenAppReader.inInnerTaskJumpList(...)`、`isSupportLightOpen(...)` |
 
 通知启动使用 Zoom launch flags 5；桌面启动使用 24，并设置 `key_flexible_smart_across_task_jump`。启动模式值 100 为 OEM 小窗。系统最终任务可能显示 fullscreen，是否为小窗应结合 `FlexibleTaskInfo`、caption 和实际边界判断，不能只看 AOSP windowingMode。

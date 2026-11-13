@@ -12,6 +12,7 @@ internal object RuntimeProtocol {
     const val QUERY = "$APP.QUERY_RUNTIME"
     const val REPLY = "$APP.REPLY_RUNTIME"
     val hosts = listOf("com.android.systemui", "com.oplus.aod")
+    val windowHosts = listOf("android")
     fun send(context: Context, intent: Intent) {
         if (Build.VERSION.SDK_INT >= 34) context.sendBroadcast(intent, null,
             BroadcastOptions.makeBasic().setShareIdentityEnabled(true).toBundle())

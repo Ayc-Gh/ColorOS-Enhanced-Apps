@@ -20,13 +20,13 @@ object AodConfigContract {
     const val DEFAULT_INIT_DARK = 80
     const val DEFAULT_INIT_BRIGHT = 160
     const val DEFAULT_RUNNING_MULTIPLIER = 1.6f
-    const val DEFAULT_USE_SYSTEM_INIT_DARK = false
-    const val DEFAULT_USE_SYSTEM_INIT_BRIGHT = false
-    const val DEFAULT_USE_SYSTEM_RUNNING_MULTIPLIER = false
-    const val DEFAULT_ENABLE_PANORAMIC = true
-    const val DEFAULT_ENABLE_SETTINGS_SUPPORT = true
-    const val DEFAULT_BLOCK_SINGLE_CLICK = true
-    const val DEFAULT_BLOCK_LOW_LIGHT_HIDE = true
+    const val DEFAULT_USE_SYSTEM_INIT_DARK = true
+    const val DEFAULT_USE_SYSTEM_INIT_BRIGHT = true
+    const val DEFAULT_USE_SYSTEM_RUNNING_MULTIPLIER = true
+    const val DEFAULT_ENABLE_PANORAMIC = false
+    const val DEFAULT_ENABLE_SETTINGS_SUPPORT = false
+    const val DEFAULT_BLOCK_SINGLE_CLICK = false
+    const val DEFAULT_BLOCK_LOW_LIGHT_HIDE = false
 
     const val DURATION_MODE_SYSTEM = 0
     const val DURATION_MODE_30_SECONDS = 1

@@ -1,0 +1,143 @@
+{
+  "records": [
+    {
+      "time": "2026-11-13T09:07:57+0800",
+      "distinct_app_count": 3,
+      "app_display_count": 3,
+      "desktop_active_count": 3,
+      "paired_thresholds_match": true,
+      "continuous_three_seconds": 0.0
+    },
+    {
+      "time": "2026-11-13T09:08:08+0800",
+      "distinct_app_count": 3,
+      "app_display_count": 3,
+      "desktop_active_count": 3,
+      "paired_thresholds_match": true,
+      "continuous_three_seconds": 10.2
+    },
+    {
+      "time": "2026-11-13T09:08:18+0800",
+      "distinct_app_count": 3,
+      "app_display_count": 3,
+      "desktop_active_count": 3,
+      "paired_thresholds_match": true,
+      "continuous_three_seconds": 20.4
+    },
+    {
+      "time": "2026-11-13T09:08:28+0800",
+      "distinct_app_count": 3,
+      "app_display_count": 3,
+      "desktop_active_count": 3,
+      "paired_thresholds_match": true,
+      "continuous_three_seconds": 30.6
+    },
+    {
+      "time": "2026-11-13T09:08:38+0800",
+      "distinct_app_count": 3,
+      "app_display_count": 3,
+      "desktop_active_count": 3,
+      "paired_thresholds_match": true,
+      "continuous_three_seconds": 40.9
+    },
+    {
+      "time": "2026-11-13T09:08:49+0800",
+      "distinct_app_count": 3,
+      "app_display_count": 3,
+      "desktop_active_count": 3,
+      "paired_thresholds_match": true,
+      "continuous_three_seconds": 51.1
+    },
+    {
+      "time": "2026-11-13T09:08:59+0800",
+      "distinct_app_count": 3,
+      "app_display_count": 3,
+      "desktop_active_count": 3,
+      "paired_thresholds_match": true,
+      "continuous_three_seconds": 61.3
+    },
+    {
+      "time": "2026-11-13T09:09:09+0800",
+      "distinct_app_count": 3,
+      "app_display_count": 3,
+      "desktop_active_count": 3,
+      "paired_thresholds_match": true,
+      "continuous_three_seconds": 71.6
+    },
+    {
+      "time": "2026-11-13T09:09:19+0800",
+      "distinct_app_count": 3,
+      "app_display_count": 3,
+      "desktop_active_count": 3,
+      "paired_thresholds_match": true,
+      "continuous_three_seconds": 81.8
+    },
+    {
+      "time": "2026-11-13T09:09:29+0800",
+      "distinct_app_count": 3,
+      "app_display_count": 3,
+      "desktop_active_count": 3,
+      "paired_thresholds_match": true,
+      "continuous_three_seconds": 92.0
+    },
+    {
+      "time": "2026-11-13T09:09:40+0800",
+      "distinct_app_count": 3,
+      "app_display_count": 3,
+      "desktop_active_count": 3,
+      "paired_thresholds_match": true,
+      "continuous_three_seconds": 102.2
+    },
+    {
+      "time": "2026-11-13T09:09:50+0800",
+      "distinct_app_count": 3,
+      "app_display_count": 3,
+      "desktop_active_count": 3,
+      "paired_thresholds_match": true,
+      "continuous_three_seconds": 112.4
+    },
+    {
+      "time": "2026-11-13T09:10:00+0800",
+      "distinct_app_count": 0,
+      "app_display_count": 0,
+      "desktop_active_count": 0,
+      "paired_thresholds_match": false,
+      "continuous_three_seconds": 0
+    },
+    {
+      "time": "2026-11-13T09:10:10+0800",
+      "distinct_app_count": 0,
+      "app_display_count": 0,
+      "desktop_active_count": 0,
+      "paired_thresholds_match": false,
+      "continuous_three_seconds": 0
+    },
+    {
+      "time": "2026-11-13T09:10:20+0800",
+      "distinct_app_count": 0,
+      "app_display_count": 0,
+      "desktop_active_count": 0,
+      "paired_thresholds_match": false,
+      "continuous_three_seconds": 0
+    },
+    {
+      "time": "2026-11-13T09:10:31+0800",
+      "distinct_app_count": 0,
+      "app_display_count": 0,
+      "desktop_active_count": 0,
+      "paired_thresholds_match": false,
+      "continuous_three_seconds": 0
+    },
+    {
+      "time": "2026-11-13T09:10:41+0800",
+      "distinct_app_count": 0,
+      "app_display_count": 0,
+      "desktop_active_count": 0,
+      "paired_thresholds_match": false,
+      "continuous_three_seconds": 0
+    }
+  ],
+  "longest_sampled_three_seconds": 112.4,
+  "sampling_interval_seconds": 10,
+  "finished": true
+}

@@ -1,0 +1,245 @@
+{
+  "date": "2026-11-13",
+  "final_read_device_time": "2026-11-13T02:25:39+0800",
+  "device": {
+    "model": "PHY110",
+    "rom": "PHY110_17.0.0.100(CN01)"
+  },
+  "module_version": "1.4.1",
+  "installed_apk_sha256": "6bba9d7b4a09711438b280867af9c65760a81020b11a0808ff734c01fdc76fb7",
+  "package_install_metadata": {
+    "firstInstallTime": "2026-11-13 02:08:03",
+    "lastUpdateTime": "2026-11-13 02:08:03",
+    "installerPackageName": "com.android.packageinstaller",
+    "versionName": "1.4.1"
+  },
+  "initial_configuration": {
+    "aod_config": {
+      "aod_duration_custom_minutes": 5,
+      "aod_duration_mode": 0,
+      "block_low_light_hide": false,
+      "block_single_click": false,
+      "enable_panoramic": false,
+      "enable_settings_support": false,
+      "init_brightness_bright": 160,
+      "init_brightness_dark": 80,
+      "running_brightness_multiplier": 1.600000023841858,
+      "use_system_init_bright": false,
+      "use_system_init_dark": false,
+      "use_system_running_multiplier": false
+    },
+    "window_capture": {
+      "air_gesture_entries": false
+    }
+  },
+  "final_configuration": {
+    "aod_config": {
+      "aod_duration_custom_minutes": 5,
+      "aod_duration_mode": 0,
+      "block_low_light_hide": true,
+      "block_single_click": true,
+      "enable_panoramic": true,
+      "enable_settings_support": true,
+      "init_brightness_bright": 160,
+      "init_brightness_dark": 80,
+      "running_brightness_multiplier": 1.600000023841858,
+      "use_system_init_bright": false,
+      "use_system_init_dark": false,
+      "use_system_running_multiplier": false
+    },
+    "window_capture": {}
+  },
+  "configuration_unchanged": false,
+  "configuration_changes": [
+    {
+      "group": "aod_config",
+      "key": "block_low_light_hide",
+      "before": false,
+      "after": true
+    },
+    {
+      "group": "aod_config",
+      "key": "block_single_click",
+      "before": false,
+      "after": true
+    },
+    {
+      "group": "aod_config",
+      "key": "enable_panoramic",
+      "before": false,
+      "after": true
+    },
+    {
+      "group": "aod_config",
+      "key": "enable_settings_support",
+      "before": false,
+      "after": true
+    },
+    {
+      "group": "window_capture",
+      "key": "air_gesture_entries",
+      "before": false,
+      "after": null
+    }
+  ],
+  "native_gesture_settings_unchanged": true,
+  "native_gesture_settings_final": {
+    "oplus_customize_aon_gesture_answer_phone_state": "0",
+    "oplus_customize_aon_gesture_swip_screen_state": "0",
+    "oplus_customize_aon_gesture_pause_or_play_state": "1"
+  },
+  "secure_aod_settings_final": {
+    "Setting_AodEnable": "0",
+    "Setting_AodSwitchEnable": "0",
+    "oplus_keyguard_panoramic_aod_all_day_support": "1"
+  },
+  "runtime_sources_unchanged": 47,
+  "framework_developer_mode_off": true,
+  "test_application_removed": true,
+  "temporary_device_files_removed": true,
+  "native": {
+    "split_test_apps": {
+      "Probe1": {
+        "manifest_resize_mode": 0,
+        "native_split_state": 1001
+      },
+      "Probe2": {
+        "manifest_resize_mode": 2,
+        "native_split_state": 1001
+      }
+    },
+    "features": {
+      "oplus.hardware.aon_enable": true,
+      "oplus.hardware.type.tablet": false,
+      "oplus.software.aon_explorer_enable": false,
+      "oplus.software.aon_gesture_control_enable": false,
+      "oplus.software.aon_gesture_press": false,
+      "oplus.software.aon_gestureui_enable": false,
+      "oplus.software.aon_gestureui_side_enable": false,
+      "oplus.software.aon_sensorhub_enable": true,
+      "oplus.software.canvas.avoid_display_cutout_in_split": false,
+      "oplus.software.flexible_exchange_animation": true,
+      "oplus.software.fold_remap_display_disabled": false,
+      "oplus.software.pocketstudio.support": true,
+      "oplus.software.support.zoom.multi_mode": false,
+      "oplus.software.support.zoom.multi_mode_brand_flag": false,
+      "oplus.software.unsupport.flexible.indicator": false,
+      "oplus.software.vibrator_lmvibrator": true
+    },
+    "native_calls": {
+      "com.oplus.flexiblewindow.FlexibleWindowManager.isPanoramaWorkBranchEnabled": true,
+      "com.oplus.flexiblewindow.FlexibleWindowManager.isFlexibleTaskEnabled": false,
+      "com.oplus.flexiblewindow.FlexibleWindowManager.isSupportPocketStudio": true
+    },
+    "properties": {
+      "persist.sys.pocket_studio_plus": true,
+      "ro.oplus.cfg_fun_flag": "true"
+    },
+    "cast_pure_parameter_checks": {
+      "test_input_width": 1080,
+      "test_input_density": 480,
+      "portrait_native_dpi_at_full_width": 480,
+      "native_initial_fps_request": 60
+    },
+    "cast_remote_query_error": "java.lang.reflect.InvocationTargetException",
+    "aod_native_all_day_setting": 0,
+    "panel": {
+      "query_status": 0,
+      "feature217": 6,
+      "smooth_transition": false,
+      "panoramic": true,
+      "panoramic_all_day": false
+    }
+  },
+  "capture_pixels": {
+    "true": {
+      "height": 2376,
+      "left": [
+        0,
+        0,
+        0
+      ],
+      "width": 1080,
+      "right": [
+        0,
+        0,
+        0
+      ]
+    },
+    "false": {
+      "height": 2376,
+      "left": [
+        0,
+        200,
+        122
+      ],
+      "width": 1080,
+      "right": [
+        255,
+        90,
+        66
+      ]
+    }
+  },
+  "split_check": {
+    "request": {
+      "tasks": [
+        {
+          "component": ".Probe1",
+          "task_id": 21,
+          "windowing_mode": 1,
+          "supportsSplitScreenMultiWindow": false,
+          "supportsMultiWindow": false,
+          "isVisible": true,
+          "isRunning": true,
+          "resizeMode": 0
+        },
+        {
+          "component": ".Probe2",
+          "task_id": 20,
+          "windowing_mode": 1,
+          "supportsSplitScreenMultiWindow": true,
+          "supportsMultiWindow": true,
+          "isVisible": true,
+          "isRunning": true,
+          "resizeMode": 2
+        }
+      ],
+      "native_split_request": true
+    },
+    "after": {
+      "tasks": [
+        {
+          "component": ".Probe2",
+          "task_id": 20,
+          "windowing_mode": 1,
+          "supportsSplitScreenMultiWindow": true,
+          "supportsMultiWindow": true,
+          "isVisible": false,
+          "isRunning": true,
+          "resizeMode": 2
+        },
+        {
+          "component": ".Probe1",
+          "task_id": 21,
+          "windowing_mode": 1,
+          "supportsSplitScreenMultiWindow": false,
+          "supportsMultiWindow": false,
+          "isVisible": true,
+          "isRunning": true,
+          "resizeMode": 0
+        }
+      ]
+    }
+  },
+  "gesture_menu_after_restart": [
+    "隔空接听或静音"
+  ],
+  "limits": [
+    "The auditor did not enable enhancement switches. A package reinstall was observed at 02:08; final AOD configuration differs from the initial baseline.",
+    "AOD all-day support is a mutable published setting: initial and 02:16 isolated reads were 0, final read is recorded separately. Panel feature 217 is the independent hardware declaration.",
+    "The native four-window limit and the two-window forced-mode interaction are derived from live flags and matching system code, not a four-window stress test.",
+    "Cast cloud capability query failed; no live PC casting session was started.",
+    "No new AOD duration, power consumption or gesture course validation."
+  ]
+}

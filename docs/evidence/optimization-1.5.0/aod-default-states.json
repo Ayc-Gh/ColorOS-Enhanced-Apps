@@ -1,0 +1,86 @@
+[
+  {
+    "elapsed_s": 0.61,
+    "wakefulness": [
+      "Dozing"
+    ],
+    "screen_state": [
+      "ON"
+    ],
+    "brightness": [
+      "2986.0"
+    ]
+  },
+  {
+    "elapsed_s": 2.98,
+    "wakefulness": [
+      "Dozing"
+    ],
+    "screen_state": [
+      "DOZE"
+    ],
+    "brightness": [
+      "1870.0"
+    ]
+  },
+  {
+    "elapsed_s": 6.07,
+    "wakefulness": [
+      "Dozing"
+    ],
+    "screen_state": [
+      "DOZE_SUSPEND"
+    ],
+    "brightness": [
+      "1870.0"
+    ]
+  },
+  {
+    "elapsed_s": 9.09,
+    "wakefulness": [
+      "Dozing"
+    ],
+    "screen_state": [
+      "OFF"
+    ],
+    "brightness": [
+      "1870.0"
+    ]
+  },
+  {
+    "elapsed_s": 11.6,
+    "wakefulness": [
+      "Dozing"
+    ],
+    "screen_state": [
+      "OFF"
+    ],
+    "brightness": [
+      "1870.0"
+    ]
+  },
+  {
+    "elapsed_s": 14.26,
+    "wakefulness": [
+      "Dozing"
+    ],
+    "screen_state": [
+      "OFF"
+    ],
+    "brightness": [
+      "1870.0"
+    ]
+  },
+  {
+    "elapsed_s": 16.72,
+    "wakefulness": [
+      "Dozing"
+    ],
+    "screen_state": [
+      "OFF"
+    ],
+    "brightness": [
+      "1870.0"
+    ]
+  }
+]

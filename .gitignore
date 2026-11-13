@@ -4,4 +4,11 @@
 local.properties
 keystore/
 keystore.properties
-dist/
+dist/*
+
+# Published 1.5.0 release artifacts
+!dist/
+!dist/ColorOSEnhance_PHY110_v1.5.0.apk
+!dist/ColorOSEnhance_PHY110_v1.5.0_source.zip
+!dist/SHA256SUMS-1.5.0.txt
+!dist/SIGNING-1.5.0.txt

@@ -1,0 +1,5 @@
+ColorOS 增强 v1.5.0
+versionCode: 9
+APK SHA-256: 5657166690cea89ca9c6526bc944561f9b668ec4245b80a10d6a47af4d628138
+Certificate SHA-256: ac8dd32294627c740e436288919805d7d9403592add3436c1f006df58ab16f37
+沿用整合版签名，可覆盖安装并保留配置。首次更新重启手机加载代码；本机已完成。源码不含私钥与密码。

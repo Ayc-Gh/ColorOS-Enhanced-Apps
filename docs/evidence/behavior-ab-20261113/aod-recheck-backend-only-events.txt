@@ -1,0 +1,6 @@
+11-13 14:08:10.929 21029 21029 I AOD_Enhance: AOD_SESSION_START: session=1 mode=system targetMs=null
+11-13 14:08:10.942 21029 21029 I SystemUi--Aod: PanoramicAodController-->onDreamingStarted, aod type:2, show wallpaper in aod:false
+11-13 14:08:10.942 21029 21029 I SystemUi--Aod: PanoramicAodController-->onDreamingStarted, Show all day
+11-13 14:08:17.457 21029 21029 I AOD_Enhance: HOOK_HIT: id=aod.duration.panoramic-energy-hide method=com.oplus.systemui.aod.controller.PanoramicAodController#onEnergySavingNotifyHide
+11-13 14:08:17.459 21029 21029 I AOD_Enhance: AOD_SESSION_END: session=1 elapsedMs=6531 reason=native UI hide allowed
+11-13 14:08:17.460 21029 21029 I SystemUi--Aod: PanoramicAodController-->onEnergySavingNotifyHide: energySaving mode is closed

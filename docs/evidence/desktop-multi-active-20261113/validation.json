@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-13",
+  "final_read_time": "2026-11-13T02:59:54+0800",
+  "desktop_version": "17.20.3",
+  "phone_model": "PHY110",
+  "desktop_exe_sha256": "c6e5ce99b7bcf98db69b7439805f8b7e45977afd18c7591033320163c0b1aa9a",
+  "disk_file_unchanged": true,
+  "trial": {
+    "memory_only": true,
+    "candidate_limit": 5,
+    "modified_instruction_rvas": [
+      "0x6956e",
+      "0x76a80",
+      "0x7724b"
+    ],
+    "initial_active_list_size": 2,
+    "peak_observed_list_size": 3,
+    "peak_is_not_proof_of_sustained_streams": true,
+    "user_result": "仍只能两个应用活动；打开第三个时第一个投屏窗口自动关闭。",
+    "passed": false
+  },
+  "phone_code_findings": {
+    "app_initial_rtsp_port": 7237,
+    "app_fallback_rtsp_port": 7238,
+    "both_occupied_behavior": "clearAllPort(), then reuse initial port",
+    "desktop_request_port_used_for": "signalServerPort",
+    "separate_third_app_channel_allocated_by_current_path": false
+  },
+  "restoration": {
+    "instruction_limits": [
+      2,
+      2,
+      2
+    ],
+    "all_trial_instructions_restored": true,
+    "permanent_patch_installed": false,
+    "failed_apply_operation_disabled": true
+  },
+  "conclusion": "Desktop-only trial failed. A paired desktop and phone transport/routing change is required for further validation.",
+  "limits": [
+    "No complete callback trace proving the exact close-event cause was captured.",
+    "No sustained three-to-five-stream success is claimed.",
+    "No phone module runtime code or scope was changed."
+  ]
+}

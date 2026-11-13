@@ -1,37 +1,58 @@
 package com.op.aod.enhance.hook
 
+import android.os.Handler
+import android.os.Looper
+import java.lang.reflect.Method
+
 internal object PanoramicHook {
-    private val FIELD_NAMES=listOf("isSupportPanoramicAllDay","isSupportPanoramicAllDayByPanelFeature","isSupportPanoramicByPanelFeature","isSupportPanoramic")
-    private const val SMOOTH_TRANSITION_CONTROLLER="com.oplus.systemui.aod.display.SmoothTransitionController"
+    // Basic panoramic/panel support is native on PHY110 and is never rewritten.
+    private val state=NativeBooleanOverride(listOf("isSupportPanoramicAllDay","isSupportPanoramicAllDayByPanelFeature"))
+    private const val CONTROLLER="com.oplus.systemui.aod.display.SmoothTransitionController"
+    private val handler=Handler(Looper.getMainLooper())
+    private var publisher:Method?=null
+    private val refresh=Runnable { state.instances().forEach { instance -> reconcile(instance) } }
+
+    private fun supportsPanoramic(instance:Any)=runCatching {
+        instance.javaClass.getDeclaredField("isSupportPanoramic").apply{isAccessible=true}.getBoolean(instance)
+    }.getOrDefault(false)
+    private fun enabled(instance:Any)=AodConfigReader.read(MainHook.hostAppContext).enablePanoramic&&supportsPanoramic(instance)
+    private fun reconcile(instance:Any){
+        runCatching {
+            val effective=state.apply(instance,enabled(instance))?:return
+            publisher?.invoke(instance,effective)
+            val native=state.nativeValue(instance)==true
+            HostDiagnostics.panoramic=HostDiagnostics.PanoramicSample(native,effective,!native&&effective)
+            AodLog.i("PANORAMIC_APPLY","native=$native effective=$effective enhanced=${!native&&effective}")
+        }.onFailure { AodLog.e("PANORAMIC_APPLY","Capability refresh failed",it) }
+    }
 
     fun HookRuntime.hookPanoramicAllDaySupport(){
-        val clazz=runCatching{findClass(SMOOTH_TRANSITION_CONTROLLER)}.getOrElse{failure("全景控制器不可用");AodLog.e("HOOK_REGISTER_DETAIL","Panoramic controller resolve failed",it);return}
-        // ColorOS publishes the capability to Settings during init, before our
-        // after-hook changes the fields. Intercept that publication as well.
-        runCatching {
-            val publish = findMethod(clazz, "setPanoramicSupportAllDayForApplication", Boolean::class.javaPrimitiveType!!)
-            intercept("aod.panoramic.publish-all-day", publish) { chain ->
-                if (!AodConfigReader.read(MainHook.hostAppContext).enablePanoramic) {
-                    return@intercept chain.proceed()
-                }
-                val args = chain.getArgs().toTypedArray()
-                args[0] = true
-                AodLog.i("PANORAMIC_PUBLISH", "allDay=true original=${chain.getArg(0)}")
-                chain.proceed(args)
+        val clazz=runCatching{findClass(CONTROLLER)}.getOrElse{failure("全景控制器不可用");return}
+        publisher=runCatching{findMethod(clazz,"setPanoramicSupportAllDayForApplication",Boolean::class.javaPrimitiveType!!)}
+            .onFailure{failure("全天能力发布入口不可用")}.getOrNull()
+        publisher?.let { publish ->
+            intercept("aod.panoramic.publish-all-day",publish){chain->
+                val instance=chain.getThisObject()
+                if(instance==null||!enabled(instance))return@intercept chain.proceed()
+                val args=chain.getArgs().toTypedArray();args[0]=true;chain.proceed(args)
             }
-        }.onFailure { failure("全天能力发布入口不可用"); AodLog.e("HOOK_REGISTER_DETAIL", "Panoramic capability publication unavailable", it) }
-        fun apply(instance:Any){
-            if(!AodConfigReader.read(MainHook.hostAppContext).enablePanoramic)return
-            var changed=0
-            for(name in FIELD_NAMES)runCatching{instance.javaClass.getDeclaredField(name).apply{isAccessible=true}.setBoolean(instance,true);changed++}
-            if (changed == 0) HostDiagnostics.registry.failed("Panoramic.AllDay", "未找到适用的全景能力字段")
-            AodLog.d("PANORAMIC_HOOK","applied changedFields=$changed class=${instance.javaClass.name}")
         }
         for(name in arrayOf("initSmoothTransitionState","setPanoramicSupportedByRemote")){
-            runCatching{
+            runCatching {
                 val method=findMethod(clazz,name)
-                intercept("aod.panoramic.$name",method){chain->val result=chain.proceed();chain.getThisObject()?.let(::apply);result}
-            }.onSuccess{AodLog.i("HOOK_REGISTER_DETAIL","Panoramic $name registered")}.onFailure{failure("$name 入口不可用");AodLog.e("HOOK_REGISTER_DETAIL","Panoramic $name unavailable",it)}
+                intercept("aod.panoramic.$name",method){chain->
+                    val instance=chain.getThisObject()?:return@intercept chain.proceed()
+                    state.beforeNative(instance)
+                    try{chain.proceed()}finally{
+                        val count=state.afterNative(instance,enabled(instance))
+                        if(count==0)HostDiagnostics.registry.failed("Panoramic.AllDay","未找到适用的全天能力字段")
+                        reconcile(instance)
+                    }
+                }
+            }.onFailure{failure("$name 入口不可用");AodLog.e("HOOK_REGISTER_DETAIL","Panoramic $name unavailable",it)}
+        }
+        AodConfigReader.observe {
+            handler.removeCallbacks(refresh);handler.postDelayed(refresh,150)
         }
     }
 }

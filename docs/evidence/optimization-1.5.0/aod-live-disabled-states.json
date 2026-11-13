@@ -1,0 +1,98 @@
+[
+  {
+    "elapsed_s": 0.27,
+    "wakefulness": [
+      "Dozing"
+    ],
+    "screen_state": [
+      "ON"
+    ],
+    "brightness": [
+      "2965.0"
+    ]
+  },
+  {
+    "elapsed_s": 2.49,
+    "wakefulness": [
+      "Dozing"
+    ],
+    "screen_state": [
+      "DOZE_SUSPEND"
+    ],
+    "brightness": [
+      "1870.0"
+    ]
+  },
+  {
+    "elapsed_s": 4.72,
+    "wakefulness": [
+      "Dozing"
+    ],
+    "screen_state": [
+      "DOZE_SUSPEND"
+    ],
+    "brightness": [
+      "1870.0"
+    ]
+  },
+  {
+    "elapsed_s": 6.96,
+    "wakefulness": [
+      "Dozing"
+    ],
+    "screen_state": [
+      "DOZE_SUSPEND"
+    ],
+    "brightness": [
+      "1870.0"
+    ]
+  },
+  {
+    "elapsed_s": 9.18,
+    "wakefulness": [
+      "Dozing"
+    ],
+    "screen_state": [
+      "OFF"
+    ],
+    "brightness": [
+      "1870.0"
+    ]
+  },
+  {
+    "elapsed_s": 11.41,
+    "wakefulness": [
+      "Dozing"
+    ],
+    "screen_state": [
+      "OFF"
+    ],
+    "brightness": [
+      "1870.0"
+    ]
+  },
+  {
+    "elapsed_s": 13.68,
+    "wakefulness": [
+      "Dozing"
+    ],
+    "screen_state": [
+      "OFF"
+    ],
+    "brightness": [
+      "1870.0"
+    ]
+  },
+  {
+    "elapsed_s": 16.0,
+    "wakefulness": [
+      "Dozing"
+    ],
+    "screen_state": [
+      "OFF"
+    ],
+    "brightness": [
+      "1870.0"
+    ]
+  }
+]
