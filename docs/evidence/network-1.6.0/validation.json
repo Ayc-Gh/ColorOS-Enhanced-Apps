@@ -1,0 +1,284 @@
+{
+  "date": "2026-11-13",
+  "device": "PHY110",
+  "rom": "PHY110_17.0.0.100(CN01)",
+  "android_sdk": 37,
+  "traffic_monitor": {
+    "package": "com.oplus.trafficmonitor",
+    "version": "17.3.5",
+    "version_code": 17003005,
+    "apk_sha256": "600fa5ea5f1882cb2d58e97b796cf05062c145aaa2f90cba2b4015f1ba1dc520"
+  },
+  "version": "1.6.0",
+  "code": 10,
+  "apk_sha256": "af2daa6e107c779e7bc3d6364737f7f6cfcfcd9f81fb45c94ac4ca095ef04770",
+  "certificate_sha256": "ac8dd32294627c740e436288919805d7d9403592add3436c1f006df58ab16f37",
+  "source_files_identical": 79,
+  "unit_tests": {
+    "tests": 91,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lint": {
+    "Error": 0,
+    "Fatal": 0,
+    "Warning": 24
+  },
+  "physical_feature_evidence_apk_sha256": "af2daa6e107c779e7bc3d6364737f7f6cfcfcd9f81fb45c94ac4ca095ef04770",
+  "ui_evidence_apk_sha256": "af2daa6e107c779e7bc3d6364737f7f6cfcfcd9f81fb45c94ac4ca095ef04770",
+  "network": {
+    "off-first-ota": {
+      "mobile": {
+        "visible": true,
+        "enabled": true,
+        "checked": false
+      },
+      "wlan": {
+        "visible": false
+      }
+    },
+    "off-first-downloads": {
+      "mobile": {
+        "visible": false
+      },
+      "wlan": {
+        "visible": false
+      }
+    },
+    "off-first-ordinary": {
+      "mobile": {
+        "visible": true,
+        "enabled": true,
+        "checked": false
+      },
+      "wlan": {
+        "visible": true,
+        "enabled": true,
+        "checked": false
+      }
+    },
+    "off-first-no-internet": {
+      "mobile": {
+        "visible": false
+      },
+      "wlan": {
+        "visible": false
+      }
+    },
+    "off-first-core": {
+      "mobile": {
+        "visible": false
+      },
+      "wlan": {
+        "visible": false
+      }
+    },
+    "on-ota": {
+      "mobile": {
+        "visible": true,
+        "enabled": true,
+        "checked": false
+      },
+      "wlan": {
+        "visible": true,
+        "enabled": true,
+        "checked": false
+      }
+    },
+    "on-downloads": {
+      "mobile": {
+        "visible": true,
+        "enabled": true,
+        "checked": false
+      },
+      "wlan": {
+        "visible": true,
+        "enabled": true,
+        "checked": false
+      }
+    },
+    "on-ordinary": {
+      "mobile": {
+        "visible": true,
+        "enabled": true,
+        "checked": false
+      },
+      "wlan": {
+        "visible": true,
+        "enabled": true,
+        "checked": false
+      }
+    },
+    "on-no-internet": {
+      "mobile": {
+        "visible": false
+      },
+      "wlan": {
+        "visible": false
+      }
+    },
+    "on-core": {
+      "mobile": {
+        "visible": false
+      },
+      "wlan": {
+        "visible": false
+      }
+    },
+    "off-restored-ota": {
+      "mobile": {
+        "visible": true,
+        "enabled": true,
+        "checked": false
+      },
+      "wlan": {
+        "visible": false
+      }
+    },
+    "off-restored-downloads": {
+      "mobile": {
+        "visible": false
+      },
+      "wlan": {
+        "visible": false
+      }
+    },
+    "off-restored-ordinary": {
+      "mobile": {
+        "visible": true,
+        "enabled": true,
+        "checked": false
+      },
+      "wlan": {
+        "visible": true,
+        "enabled": true,
+        "checked": false
+      }
+    },
+    "off-restored-no-internet": {
+      "mobile": {
+        "visible": false
+      },
+      "wlan": {
+        "visible": false
+      }
+    },
+    "off-restored-core": {
+      "mobile": {
+        "visible": false
+      },
+      "wlan": {
+        "visible": false
+      }
+    },
+    "native_uid_policy_steps": [
+      {
+        "policy": 1,
+        "reopened_state": {
+          "mobile": {
+            "visible": true,
+            "enabled": true,
+            "checked": true
+          },
+          "wlan": {
+            "visible": true,
+            "enabled": true,
+            "checked": false
+          }
+        }
+      },
+      {
+        "policy": 4,
+        "reopened_state": {
+          "mobile": {
+            "visible": true,
+            "enabled": true,
+            "checked": true
+          },
+          "wlan": {
+            "visible": true,
+            "enabled": true,
+            "checked": true
+          }
+        }
+      },
+      {
+        "policy": 2,
+        "reopened_state": {
+          "mobile": {
+            "visible": true,
+            "enabled": true,
+            "checked": false
+          },
+          "wlan": {
+            "visible": true,
+            "enabled": true,
+            "checked": true
+          }
+        }
+      },
+      {
+        "policy": 0,
+        "reopened_state": {
+          "mobile": {
+            "visible": true,
+            "enabled": true,
+            "checked": false
+          },
+          "wlan": {
+            "visible": true,
+            "enabled": true,
+            "checked": false
+          }
+        }
+      }
+    ],
+    "other_uid_policies_unchanged": true,
+    "fixture_final_policy": 0
+  },
+  "ui": {
+    "five_entries": true,
+    "all_pages_share_native_components": true,
+    "back_navigation_present": true,
+    "brightness_invalid_not_saved": true,
+    "brightness_save_and_cancel": true,
+    "custom_minutes_validation_and_save": true,
+    "aod_values_restored": true,
+    "search_and_native_detail_shortcut": true
+  },
+  "after_reboot": {
+    "network_live_off_on_off_same_pid": true,
+    "network_runtime_loaded": "1.6.0",
+    "framework_runtime_loaded": "1.6.0",
+    "aod_runtime_loaded": {
+      "com.android.systemui": "1.6.0",
+      "com.oplus.aod": "1.6.0"
+    }
+  },
+  "cleanup": {
+    "installed_apk_matches_final_build": true,
+    "preexisting_configuration_restored": true,
+    "new_network_toggle": false,
+    "scope_change": [
+      "com.oplus.trafficmonitor"
+    ],
+    "other_module_states_preserved": true,
+    "enabled_module_states": 6,
+    "safe_mode": false,
+    "developer_mode_preserved": true,
+    "screen_off_timeout_restored": true,
+    "temporary_apps_removed": 2,
+    "temporary_helper_absent": true,
+    "temporary_device_files_removed": true,
+    "native_uid_policies_restored": true
+  },
+  "baseline_enhancements_disabled": true,
+  "limitations": [
+    "Native option display and original UID policy persistence/reopen/restore were tested; no test network packets were sent.",
+    "A command to contact an isolated LAN test endpoint was rejected by automatic approval review without a specific reason; it was not retried through another path.",
+    "No mobile data traffic, VPN/proxy, cross-user, application compatibility or long-term power-consumption matrix.",
+    "Only normal application UIDs with INTERNET permission are expanded; shared UIDs retain common rules, and core identities / native enterprise restrictions remain native.",
+    "Existing split-window, cast stream and physical air gesture behavior were not re-tested in this UI release. AOD numerical settings and host loading were checked, not timed panel behavior."
+  ]
+}

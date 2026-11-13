@@ -26,9 +26,7 @@ public final class WindowSettingsActivity extends Activity {
         int y=scroll==null?0:scroll.getScrollY();
         scroll=new ScrollView(this);scroll.setFillViewport(true);scroll.setBackgroundColor(UiKit.BG);
         body=new LinearLayout(this);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(dp(20),dp(16),dp(20),dp(30));scroll.addView(body);
-        Button back=UiKit.button(this,"‹  返回主界面",false);back.setOnClickListener(v->finish());body.addView(back);
-        TextView overline=text("WINDOWS",11,true);overline.setTextColor(accent);overline.setPadding(dp(2),dp(20),0,0);body.addView(overline);
-        body.addView(text("分屏与小窗",28,true));TextView sub=text("为 Find X7 Ultra · ColorOS 17 适配",14,false);sub.setTextColor(muted);sub.setPadding(0,dp(7),0,dp(18));body.addView(sub);
+        UiKit.header(this,body,"分屏与小窗","应用分屏、小窗外观与贴边行为");
         body.addView(UiKit.status(this,SettingsBridge.status));
         section("分屏与小窗");
         toggle(Config.UNLOCK,"解除小窗应用限制","放开系统的小窗支持列表与不支持比例限制");

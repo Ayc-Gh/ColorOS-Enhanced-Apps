@@ -1,3 +1,4 @@
 io.github.oshin.windowcapture.MainHook
 com.op.aod.enhance.ModuleEntry
 io.github.oshin.windowcapture.AirGestureEntry
+io.github.oshin.windowcapture.NetworkEntry

@@ -23,9 +23,7 @@ public final class CastSettingsActivity extends Activity {
     private void render(){
         int y=scroll==null?0:scroll.getScrollY();scroll=new ScrollView(this);scroll.setBackgroundColor(UiKit.BG);
         body=new LinearLayout(this);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(dp(20),dp(16),dp(20),dp(28));scroll.addView(body);
-        Button back=UiKit.button(this,"‹  返回主设置",false);back.setOnClickListener(v->finish());body.addView(back);
-        TextView overline=text("OPPO CONNECT",11,true);overline.setTextColor(Color.rgb(0,140,131));overline.setPadding(dp(2),dp(20),0,0);body.addView(overline);
-        body.addView(text("OPPO 互联",25,true));TextView context=text("电脑投屏与截图录屏 · Find X7 Ultra",13,false);context.setTextColor(UiKit.MUTED);context.setPadding(0,dp(7),0,dp(14));body.addView(context);body.addView(UiKit.status(this,SettingsBridge.status));
+        UiKit.header(this,body,"OPPO 互联","电脑投屏与截图录屏");body.addView(UiKit.status(this,SettingsBridge.status));
         section("截图与录屏");
         toggle(Config.CAPTURE,"解除截图录屏限制","用于手机截图、录屏和电脑投屏；移除普通窗口的安全标记限制。独立于下方投屏优化开关，修改后重新打开目标应用。");
         section("电脑投屏");

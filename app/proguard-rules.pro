@@ -1,5 +1,6 @@
 -keep class io.github.oshin.windowcapture.MainHook { *; }
 -keep class io.github.oshin.windowcapture.AirGestureEntry { *; }
+-keep class io.github.oshin.windowcapture.NetworkEntry { *; }
 -keep class io.github.oshin.windowcapture.Config { *; }
 -keep class com.op.aod.enhance.ModuleEntry { *; }
 -dontwarn io.github.libxposed.annotation.**

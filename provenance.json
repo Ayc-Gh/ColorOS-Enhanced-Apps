@@ -1,6 +1,6 @@
 {
   "application_id_source": "app/build.gradle.kts",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "device": "PHY110",
   "rom": "PHY110_17.0.0.100(CN01)",
   "android_sdk": 37,
@@ -20,7 +20,7 @@
     "oplus-services.jar": "5a3613f87b766bc5923e4d9d75a0e3b79aa2c22f92d43a984d3cb0823f9e5a90",
     "services.jar": "78be31cdbfda61fdbfd84013c2c0b31812468bec8ffc4a0aa56ab4f4e0937e44"
   },
-  "apk_sha256": "5657166690cea89ca9c6526bc944561f9b668ec4245b80a10d6a47af4d628138",
+  "apk_sha256": "af2daa6e107c779e7bc3d6364737f7f6cfcfcd9f81fb45c94ac4ca095ef04770",
   "license": "AGPL-3.0-or-later",
   "optional_features_not_exhaustively_tested": true,
   "oem_cast_apks": {
@@ -28,8 +28,8 @@
     "OPSynergy.apk": "a94af8ff5c0425095fbbf921d10afe1608197c0538b12e246f3a2a3a92db05c3",
     "ShareScreen.apk": "83912117bb5906a2e86a6870e05f41e6bde34a8a878b8d3c05688c81bef8e070"
   },
-  "added_scope": "com.oplus.cast",
-  "validation": "docs/evidence/optimization-1.5.0/validation.json",
+  "added_scope": "com.oplus.trafficmonitor",
+  "validation": "docs/evidence/network-1.6.0/validation.json",
   "final_cast": {
     "width": 1440,
     "height": 3168,
@@ -40,7 +40,7 @@
     "requested_fps": 60,
     "custom_bitrate": false
   },
-  "version_code": 9,
+  "version_code": 10,
   "app_name": "ColorOS 增强",
   "aod_source": {
     "repository": "NOTICE",
@@ -53,6 +53,7 @@
     "com.oplus.aod",
     "com.oplus.cast",
     "com.oplus.gesture",
+    "com.oplus.trafficmonitor",
     "system"
   ],
   "licenses": {
@@ -78,7 +79,7 @@
     "50 AOD unit tests and 17 cast policy checks"
   ],
   "device_tested_this_release": true,
-  "changes": "Repair desktop/remembered-edge launches, safe native AOD defaults, reversible live all-day capability, consolidated entry and truthful runtime diagnostics.",
+  "changes": "Unlock missing native WLAN/mobile-data options for manageable system applications, add searchable native details, and unify all five module entries and AOD pages with common native UI controls.",
   "historical_final_enabled": [
     "unlock_flexible",
     "unlock_split",
@@ -95,6 +96,11 @@
       "sha256": "95b5434da60582a3ae4a53103bc19c4ddf9810420335abdd0d5ce9efe780ade3",
       "versionName": "8.6.0",
       "versionCode": "8600"
+    },
+    "com.oplus.trafficmonitor": {
+      "sha256": "600fa5ea5f1882cb2d58e97b796cf05062c145aaa2f90cba2b4015f1ba1dc520",
+      "versionName": "17.3.5",
+      "versionCode": "17003005"
     }
   },
   "certificate_sha256": "ac8dd32294627c740e436288919805d7d9403592add3436c1f006df58ab16f37",

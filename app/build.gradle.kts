@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId = "io.github.oshin.windowcapture"
         minSdk = 33; targetSdk = 37
-        versionCode = 9; versionName = "1.5.0"
+        versionCode = 10; versionName = "1.6.0"
         ndk { abiFilters += "arm64-v8a" }
     }
     if(signingProperties.isNotEmpty()) signingConfigs.create("personal") {

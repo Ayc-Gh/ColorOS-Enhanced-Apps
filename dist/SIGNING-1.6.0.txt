@@ -1,0 +1,5 @@
+ColorOS 增强 v1.6.0
+versionCode: 10
+APK SHA-256: af2daa6e107c779e7bc3d6364737f7f6cfcfcd9f81fb45c94ac4ca095ef04770
+Certificate SHA-256: ac8dd32294627c740e436288919805d7d9403592add3436c1f006df58ab16f37
+沿用整合版签名，可覆盖安装并保留配置。新增流量管理作用域，更新后重启一次；本机已完成。源码不含私钥与密码。
