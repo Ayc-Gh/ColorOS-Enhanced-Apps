@@ -16,10 +16,14 @@ public final class AirGestureEntry extends XposedModule {
     private final AtomicBoolean installed=new AtomicBoolean();
     private final Set<String> reported=ConcurrentHashMap.newKeySet();
     private SharedPreferences prefs;
+    private final AdapterRuntime runtime=new AdapterRuntime(AirGesturePolicy.PACKAGE);
+    private boolean requested(){try{return prefs!=null&&prefs.getBoolean(Config.AIR_GESTURE,false);}catch(Throwable ignored){return false;}}
     private final SharedPreferences.OnSharedPreferenceChangeListener listener=(p,k)->{};
-    private boolean enabled(){try{return prefs!=null&&prefs.getBoolean(Config.AIR_GESTURE,false);}catch(Throwable ignored){return false;}}
+    private boolean enabled(){return runtime.ready()&&requested();}
     @Override public void onPackageReady(XposedModuleInterface.PackageReadyParam param) {
         if(!AirGesturePolicy.PACKAGE.equals(param.getPackageName())||!installed.compareAndSet(false,true))return;
+        runtime.arm(this,this::requested,data->data.put("gesture",new org.json.JSONObject().put("enabled",enabled()).put("nativeEngine",true)));
+        if(!runtime.check(this))return;
         try {
             prefs=getRemotePreferences(Config.PREFS);prefs.registerOnSharedPreferenceChangeListener(listener);
             ClassLoader loader=param.getClassLoader();
@@ -32,7 +36,7 @@ public final class AirGestureEntry extends XposedModule {
                 boolean expose=AirGesturePolicy.expose(enabled(),param.getPackageName(),name);
                 if(name!=null&&name.startsWith("oplus.software.aon_")&&reported.size()<32&&reported.add(name+":"+expose))
                     log(Log.INFO,TAG,"feature="+name+" native="+nativeValue+" expose="+expose);
-                return expose?Boolean.TRUE:nativeValue;
+                if(expose)runtime.hit();return expose?Boolean.TRUE:nativeValue;
             });
             // Cached UI decisions are recomputed by restarting only the OEM components.
             // Deoptimize the verified call sites; do not replace their native implementation.
@@ -45,7 +49,8 @@ public final class AirGestureEntry extends XposedModule {
                     }
                 } catch(Throwable t){log(Log.WARN,TAG,"Optional call-site optimization unavailable: "+owner,t);}
             }
+            runtime.path();runtime.loaded();
             log(Log.INFO,TAG,"Installed UI feature hook v"+BuildConfig.VERSION_NAME+" enabled="+enabled()+"; AONService unchanged");
-        } catch(Throwable t){log(Log.ERROR,TAG,"Gesture controls unavailable; keep native behavior",t);}
+        } catch(Throwable t){runtime.failed("手势入口校验失败，已保留原生识别与设置");log(Log.ERROR,TAG,"Gesture controls unavailable; keep native behavior",t);}
     }
 }

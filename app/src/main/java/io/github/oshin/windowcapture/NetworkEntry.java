@@ -21,11 +21,15 @@ public final class NetworkEntry extends XposedModule {
     private String processName;
     private int registered;
     private volatile int expanded;
-    private boolean enabled(){try{return prefs!=null&&prefs.getBoolean(NetworkPolicy.KEY,false);}catch(Throwable ignored){return false;}}
+    private final AdapterRuntime runtime=new AdapterRuntime(NetworkPolicy.HOST);
+    private boolean requested(){try{return prefs!=null&&prefs.getBoolean(NetworkPolicy.KEY,false);}catch(Throwable ignored){return false;}}
+    private boolean enabled(){return runtime.ready()&&requested();}
     private final SharedPreferences.OnSharedPreferenceChangeListener listener=(p,k)->{if(k==null||NetworkPolicy.KEY.equals(k))expanded=0;};
     @Override public void onModuleLoaded(XposedModuleInterface.ModuleLoadedParam param){processName=param.getProcessName();}
     @Override public void onPackageReady(XposedModuleInterface.PackageReadyParam param){
         if(!NetworkPolicy.HOST.equals(param.getPackageName())||!NetworkPolicy.HOST.equals(processName)||!installed.compareAndSet(false,true))return;
+        runtime.arm(this,this::requested,data->data.put("network",new org.json.JSONObject().put("enabled",enabled()).put("expanded",expanded).put("nativePolicy",true)));
+        if(!runtime.check(this))return;
         try{
             prefs=getRemotePreferences(Config.PREFS);prefs.registerOnSharedPreferenceChangeListener(listener);
             ClassLoader loader=param.getClassLoader();
@@ -54,7 +58,7 @@ public final class NetworkEntry extends XposedModule {
                 Context context=(Context)chain.getArg(0);int uid=(Integer)chain.getArg(1);boolean internet=false;
                 String[] packages=context.getPackageManager().getPackagesForUid(uid);
                 if(packages!=null)for(String pkg:packages)if(context.getPackageManager().checkPermission("android.permission.INTERNET",pkg)==PackageManager.PERMISSION_GRANTED){internet=true;break;}
-                if(NetworkPolicy.eligible(true,uid,internet)){expanded=1;return true;}return nativeValue;
+                if(NetworkPolicy.eligible(true,uid,internet)){expanded=1;runtime.hit();return true;}return nativeValue;
             });
             for(String name:new String[]{"T","U"}){
                 Method method=common.getDeclaredMethod(name,String.class);
@@ -65,13 +69,12 @@ public final class NetworkEntry extends XposedModule {
             Class<?> adapter=Class.forName("com.oplus.trafficmonitor.view.networkcontrol.a",false,loader);
             for(Method method:adapter.getDeclaredMethods())deoptimize(method);
             for(Method method:common.getDeclaredMethods())if(method.getName().equals("V")||method.getName().equals("W"))deoptimize(method);
-            Method appCreate=Class.forName("com.oplus.trafficmonitor.TrafficMonitorApplication",false,loader).getDeclaredMethod("onCreate");
-            hook(appCreate).intercept(chain->{Object result=chain.proceed();NetworkStatus.attach((Application)chain.getThisObject(),this::enabled,()->expanded,getRemotePreferences("aod_runtime_status"));return result;});
+            runtime.loaded();
             log(Log.INFO,"ColorOSEnhance-Network","Installed v"+BuildConfig.VERSION_NAME+"; native networking policies retained");
-        }catch(Throwable error){prefs=null;log(Log.ERROR,"ColorOSEnhance-Network","Adapter unavailable; keep native behavior",error);}
+        }catch(Throwable error){runtime.failed("联网选项接口不完整，已保留原生行为");prefs=null;log(Log.ERROR,"ColorOSEnhance-Network","Adapter unavailable; keep native behavior",error);}
     }
     private void wrap(Method method){
         method.setAccessible(true);deoptimize(method);
-        hook(method).intercept(chain->{int depth=screenDepth.get();screenDepth.set(depth+1);try{return chain.proceed();}finally{if(depth==0)screenDepth.remove();else screenDepth.set(depth);}});registered++;
+        hook(method).intercept(chain->{int depth=screenDepth.get();screenDepth.set(depth+1);try{return chain.proceed();}finally{if(depth==0)screenDepth.remove();else screenDepth.set(depth);}});registered++;runtime.path();
     }
 }

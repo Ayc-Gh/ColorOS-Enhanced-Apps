@@ -39,6 +39,7 @@ public final class GestureSettingsActivity extends Activity {
         toggle.setOnCheckedChangeListener((v,on)->{if(saving)return;saving=true;SettingsBridge.save(e->e.putBoolean(Config.AIR_GESTURE,on),ok->{saving=false;if(!ok)Toast.makeText(this,"保存失败，请检查框架连接。",Toast.LENGTH_SHORT).show();if(!isFinishing()&&!isDestroyed())render();});});
         row.addView(toggle);row.setOnClickListener(v->{if(toggle.isEnabled())toggle.toggle();});body.addView(row,rowParams);
         android.widget.Button system=UiKit.button(this,"打开系统隔空手势设置",!saving);system.setOnClickListener(v->openSystemSettings());body.addView(system);
+        android.widget.Button runtime=UiKit.button(this,"查看功能运行状态",false);runtime.setOnClickListener(v->startActivity(new Intent(this,com.op.aod.enhance.ui.RuntimeStatusActivity.class).putExtra("section","gesture")));body.addView(runtime);
         setContentView(scroll);UiKit.applyBars(this,scroll);ScrollView current=scroll;current.post(()->current.scrollTo(0,y));
     }
 

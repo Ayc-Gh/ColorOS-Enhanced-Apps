@@ -15,7 +15,8 @@ internal object RuntimeProtocol {
     val windowHosts = listOf("android")
     fun send(context: Context, intent: Intent) {
         if (Build.VERSION.SDK_INT >= 34) context.sendBroadcast(intent, null,
-            BroadcastOptions.makeBasic().setShareIdentityEnabled(true).toBundle())
+            BroadcastOptions.makeBasic().setShareIdentityEnabled(true)
+                .setDeferralPolicy(BroadcastOptions.DEFERRAL_POLICY_NONE).toBundle())
         else context.sendBroadcast(intent)
     }
 }

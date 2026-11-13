@@ -13,7 +13,11 @@ class HookStatusRegistryTest {
         r.registered("tap", "normal", "modern path")
         assertEquals("loaded", r.snapshot().single().state)
         r.failed("tap", "present but unsupported")
-        assertEquals("partial", r.snapshot().single().state)
+        assertEquals("failed", r.snapshot().single().state)
+        r.seal("tap");assertFalse(r.ready("tap"))
+    }
+    @Test fun hooksStayNativeUntilFeatureInstallationCompletes(){
+        val r=HookStatusRegistry();r.registered("feature","id","path");assertFalse(r.ready("feature"));r.seal("feature");assertTrue(r.ready("feature"))
     }
     @Test fun snapshotsKeepRegistrationSeparateFromHitsAndDoNotChangeRetroactively() {
         val r = HookStatusRegistry(); r.registered("tap", "normal", "path")

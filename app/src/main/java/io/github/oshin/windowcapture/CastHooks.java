@@ -8,7 +8,6 @@ import android.graphics.Point;
 import android.hardware.display.DisplayManager;
 import android.media.MediaCodec;
 import android.media.MediaCodecInfo;
-import android.media.MediaCodecList;
 import android.media.MediaFormat;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +18,8 @@ import io.github.libxposed.api.XposedInterface;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.lang.ref.WeakReference;
+import org.json.JSONObject;
 
 /** Pinned against the actual HeyCast 17.0.017 APK. All hooks remain process-local. */
 final class CastHooks {
@@ -32,10 +33,17 @@ final class CastHooks {
     private final Set<String> reported=ConcurrentHashMap.newKeySet();
     private volatile boolean game;
     private int count;
+    private boolean incomplete;
+    private final AdapterRuntime runtime=new AdapterRuntime("com.oplus.cast");
+    private volatile long generation;
+    private volatile boolean session;
+    private volatile WeakReference<Object> formats=new WeakReference<>(null);
+    private record Encoder(long generation,String name,String mime,int width,int height,int ceiling,int applied){}
+    private volatile Encoder encoder;
     private final Map<String,Integer> rateCache=new ConcurrentHashMap<>();
     private final Map<Object,int[]> hardwareCaps=Collections.synchronizedMap(new WeakHashMap<>());
     CastHooks(XposedModule module,ClassLoader loader){this.module=module;this.loader=loader;}
-    private boolean enabled(){return bool(Config.CAST);}
+    private boolean enabled(){return runtime.ready()&&bool(Config.CAST);}
     private boolean bool(String key){try{return prefs!=null&&prefs.getBoolean(key,false);}catch(Throwable t){return false;}}
     private int number(String key,int fallback){try{return prefs.getInt(key,fallback);}catch(Throwable t){return fallback;}}
     private void event(String value){if(bool(Config.LOG)&&reported.size()<48&&reported.add(value))module.log(Log.INFO,TAG,value);}
@@ -47,28 +55,35 @@ final class CastHooks {
             try{m.setAccessible(true);XposedInterface.Hooker delegate=installer.make(m);module.hook(m).intercept(chain->{
                 event("Entered "+owner+"#"+name+" enabled="+enabled());
                 return delegate.intercept(chain);
-            });count++;found=true;}
+            });count++;runtime.path();found=true;}
             catch(Throwable t){module.log(Log.WARN,TAG,"Cannot hook "+m,t);}
         }
-        if(!found)module.log(Log.WARN,TAG,"Interface unavailable: "+owner+"#"+name);
+        if(!found){incomplete=true;module.log(Log.WARN,TAG,"Interface unavailable: "+owner+"#"+name);}
     }
     void install(){
+        runtime.arm(module,()->bool(Config.CAST),data->{Encoder e=encoder;JSONObject c=new JSONObject().put("enabled",enabled()).put("requestedFps",number(Config.CAST_FPS,0)).put("session",session);
+            if(e!=null)c.put("codec",e.name()).put("mime",e.mime()).put("width",e.width()).put("height",e.height()).put("validatedFps",e.ceiling()).put("configuredFps",e.applied());data.put("cast",c);});
+        if(!runtime.check(module))return;
+        try{installVerified();if(incomplete){runtime.failed("投屏接口不完整，已保留原生协商");return;}runtime.loaded();}
+        catch(Throwable error){runtime.failed("投屏适配校验失败，已保留原生协商");module.log(Log.ERROR,TAG,"Cast adapter unavailable",error);}
+    }
+    private void installVerified(){
         try{prefs=module.getRemotePreferences(Config.PREFS);prefs.registerOnSharedPreferenceChangeListener(preferenceListener);}catch(Throwable t){module.log(Log.ERROR,TAG,"Preferences unavailable",t);return;}
         // Deoptimize callers before installing hooks, including constructor paths.
         for(String name:new String[]{"k2.g","k2.c0","k2.b0","a3.a",
                 "com.oplus.cast.engine.impl.odmf.a",
                 "com.oplus.cast.engine.impl.odmf.display.castdisplaymanager.CastDisplayManager",
-                "com.oplus.cast.engine.impl.odmf.display.castdisplaymanager.o",
-                "org.webrtc.HardwareVideoEncoder"}) {
+                "com.oplus.cast.engine.impl.odmf.display.castdisplaymanager.o"}) {
             Class<?> c=cls(name);if(c==null)continue;
             for(Method method:c.getDeclaredMethods())try{module.deoptimize(method);}catch(Throwable ignored){}
             for(java.lang.reflect.Constructor<?> constructor:c.getDeclaredConstructors())try{module.deoptimize(constructor);}catch(Throwable ignored){}
         }
         // The settings are read at each call; reconnecting creates fresh negotiated codec state.
         hook("k2.g","Q",boolean.class,2,m->chain->{
+            generation++;encoder=null;formats=new WeakReference<>(null);session=enabled();
             event("start_mirror policy="+enabled());
             if(enabled())game=chain.getArg(1) instanceof Bundle b&&b.getInt("cast_scenario",-1)==1;
-            else game=false;return chain.proceed();
+            else game=false;Object result=chain.proceed();if(Boolean.FALSE.equals(result))session=false;return result;
         });
         hook("k2.c0","e",Pair.class,2,m->chain->{
             Object nativeValue=chain.proceed();
@@ -80,17 +95,19 @@ final class CastHooks {
         });
         hook("k2.c0","n",void.class,3,m->chain->{
             if(!enabled())return chain.proceed();Object[] args=chain.getArgs().toArray();
+            formats=new WeakReference<>(chain.getThisObject());
             if(!(args[0] instanceof Integer w)||!(args[1] instanceof Integer h)||!(args[2] instanceof Integer))return chain.proceed();
             int target=targetFps(w,h);
-            if(target>0)args[2]=Math.max((Integer)args[2],target);
+            if(target>0)args[2]=target;
             event("codec_limit="+w+"x"+h+"@"+args[2]);return chain.proceed(args);
         });
         hook("k2.c0","j",void.class,1,m->chain->{
             if(!enabled())return chain.proceed();
+            formats=new WeakReference<>(chain.getThisObject());
             int[] dims=dimensions(chain.getThisObject());int target=targetFps(dims[0],dims[1]);
             if(target==0){event("fps kept native; hardware check="+dims[0]+"x"+dims[1]);return chain.proceed();}
             // Update this session's local ceiling when the option changes after negotiation.
-            setInt(chain.getThisObject(),"n",Math.max(target,Reflect.integer(chain.getThisObject(),"n",0)));
+            setInt(chain.getThisObject(),"n",target);
             event("requested_fps="+target);return chain.proceed(new Object[]{target});
         });
         hook("k2.c0","i",null,0,m->chain->{
@@ -135,11 +152,22 @@ final class CastHooks {
             Reflect.call(result,"l",cap[0],cap[1],cap[2],cap[3]);Reflect.call(result,"n",cap[4],cap[5],cap[6],cap[7]);
             event("restored enumerated hardware capability");return result;
         });
-        // Log the final encoder request independently of the app's policy-stage values.
+        // Validate the codec selected by this session, including exact orientation.
+        // An unknown or unsuitable encoder leaves the native request untouched.
         hook("android.media.MediaCodec","configure",void.class,4,m->chain->{
-            if(enabled()&&chain.getArg(0) instanceof MediaFormat format&&chain.getArg(3) instanceof Integer flags&&(flags&MediaCodec.CONFIGURE_FLAG_ENCODE)!=0) {
-                try{String mime=format.getString(MediaFormat.KEY_MIME);if(mime!=null&&mime.startsWith("video/"))event("encoder="+mime+" "+integer(format,"width")+"x"+integer(format,"height")+" fps="+integer(format,"frame-rate")+" bitrate_bps="+integer(format,"bitrate"));}catch(Throwable ignored){}
-            }return chain.proceed();
+            if(!enabled()||!session||!(chain.getArg(0) instanceof MediaFormat format)||!(chain.getArg(3) instanceof Integer flags)||(flags&MediaCodec.CONFIGURE_FLAG_ENCODE)==0)return chain.proceed();
+            String mime;try{mime=format.getString(MediaFormat.KEY_MIME);}catch(Exception ignored){return chain.proceed();}
+            if(mime==null||!mime.startsWith("video/"))return chain.proceed();
+            long token=generation;MediaCodecInfo selected;try{selected=((MediaCodec)chain.getThisObject()).getCodecInfo();}catch(Exception ignored){return chain.proceed();}
+            int w=integer(format,"width"),h=integer(format,"height"),ceiling=hardwareRate(selected,mime,w,h);
+            int target=CastPolicy.frameRate(number(Config.CAST_FPS,0),bool(Config.CAST_GAME)&&game,ceiling);
+            Object[] args=chain.getArgs().toArray();MediaFormat request=format;
+            if(target>0){request=new MediaFormat(format);request.setInteger(MediaFormat.KEY_FRAME_RATE,target);args[0]=request;}
+            Object result=chain.proceed(args);
+            if(token!=generation||!enabled())return result;
+            encoder=new Encoder(token,selected.getName(),mime,w,h,ceiling,integer(request,"frame-rate"));runtime.hit();
+            Object owner=formats.get();if(target>0&&owner!=null){int[] dims=dimensions(owner);if(dims[0]==w&&dims[1]==h){setInt(owner,"n",target);Reflect.call(owner,"j",target);}}
+            event("selected_encoder="+selected.getName()+" "+mime+" "+w+"x"+h+" fps="+integer(request,"frame-rate"));return result;
         });
         module.log(Log.INFO,TAG,"Installed "+count+" cast hooks (HeyCast 17.0.017); enabled="+enabled()+" log="+bool(Config.LOG)+" quality="+number(Config.CAST_QUALITY,0));
     }
@@ -148,16 +176,12 @@ final class CastHooks {
     private int value(Object o,String method){Object v=Reflect.call(o,method);return v instanceof Integer n?n:0;}
     private void setInt(Object target,String name,int value){for(Class<?> c=target.getClass();c!=null;c=c.getSuperclass())try{java.lang.reflect.Field f=c.getDeclaredField(name);if(f.getType()!=int.class)return;f.setAccessible(true);f.setInt(target,value);return;}catch(ReflectiveOperationException ignored){}}
     private int[] dimensions(Object formats){try{Object size=Reflect.call(formats,"f");int w=value(size,"c"),h=value(size,"b");if(w>0&&h>0)return new int[]{w,h};}catch(Throwable ignored){}return physicalSize();}
-    private int targetFps(int w,int h){int requested=number(Config.CAST_FPS,0);boolean boost=bool(Config.CAST_GAME)&&game;if(requested==0&&!boost)return 0;return CastPolicy.frameRate(requested,boost,hardwareRate(w,h));}
-    private int hardwareRate(int w,int h){
-        if(w<2||h<2)return 0;String key=w+"x"+h;
-        return rateCache.computeIfAbsent(key,k->{int best=0;try{
-            for(MediaCodecInfo codec:new MediaCodecList(MediaCodecList.REGULAR_CODECS).getCodecInfos())if(codec.isEncoder()&&codec.isHardwareAccelerated())
-                for(String type:codec.getSupportedTypes())if(type.equalsIgnoreCase("video/avc"))try{
-                    MediaCodecInfo.VideoCapabilities caps=codec.getCapabilitiesForType(type).getVideoCapabilities();
-                    for(int fps:new int[]{60,90,120})if(caps.areSizeAndRateSupported(w,h,fps)||caps.areSizeAndRateSupported(h,w,fps))best=Math.max(best,fps);
-                }catch(Throwable ignored){}
-        }catch(Throwable t){event("hardware query failed");}return best;});
+    private int targetFps(int w,int h){Encoder e=encoder;return e!=null&&e.generation()==generation&&e.width()==w&&e.height()==h?CastPolicy.frameRate(number(Config.CAST_FPS,0),bool(Config.CAST_GAME)&&game,e.ceiling()):0;}
+    private int hardwareRate(MediaCodecInfo codec,String mime,int w,int h){
+        if(w<2||h<2||!codec.isEncoder()||!codec.isHardwareAccelerated())return 0;String key=codec.getName()+":"+mime+":"+w+"x"+h;
+        return rateCache.computeIfAbsent(key,k->{try{MediaCodecInfo.VideoCapabilities caps=codec.getCapabilitiesForType(mime).getVideoCapabilities();
+            return CastEncoderPolicy.ceiling(fps->caps.areSizeAndRateSupported(w,h,fps));
+        }catch(Exception ignored){return 0;}});
     }
     private Context context(){try{Class<?> type=Class.forName("android.app.ActivityThread");Object app=type.getMethod("currentApplication").invoke(null);return app instanceof Application a?a:null;}catch(Throwable t){return null;}}
     private int[] physicalSize(){

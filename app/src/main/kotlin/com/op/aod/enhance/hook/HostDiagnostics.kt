@@ -19,6 +19,8 @@ internal object HostDiagnostics {
     @Volatile var brightness: BrightnessSample? = null
     data class PanoramicSample(val native:Boolean,val effective:Boolean,val enhanced:Boolean)
     @Volatile var panoramic:PanoramicSample? = null
+    @Volatile var compatibility="loading"
+    @Volatile var compatibilityReason="正在核对接口"
     private var prefs: SharedPreferences? = null
     private var host = ""
     private var registered = false
@@ -36,6 +38,7 @@ internal object HostDiagnostics {
                     if (sentFromUid != runCatching { ctx.packageManager.getPackageUid(RuntimeProtocol.APP, 0) }.getOrNull()) return
                 } else if (nonce != runCatching { prefs?.getString(RuntimeProtocol.NONCE, null) }.getOrNull()) return
                 val data = JSONObject().put("host", host).put("version", BuildConfig.VERSION_NAME).put("code", BuildConfig.VERSION_CODE)
+                data.put("adapter",JSONObject().put("state",compatibility).put("reason",compatibilityReason))
                 val features = JSONArray()
                 registry.snapshot().filter { it.name != "Context" }.forEach { s ->
                     features.put(JSONObject().put("name", s.name).put("state", s.state).put("paths", JSONArray(s.paths.values.toList()))

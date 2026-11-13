@@ -31,7 +31,7 @@ public final class MainHook extends XposedModule {
     private ClassLoader loader;
     private int hooks;
     private final Set<String> reported=ConcurrentHashMap.newKeySet();
-    private final Map<View,Integer> hiddenViews=Collections.synchronizedMap(new WeakHashMap<>());
+    private final CaptionVisibilityTracker<View> hiddenViews=new CaptionVisibilityTracker<>();
     private final Map<Integer,Object> parked=new ConcurrentHashMap<>();
     private final EdgeCountPolicy edgeCountPolicy=new EdgeCountPolicy();
     private final ThreadLocal<Integer> minimizing=ThreadLocal.withInitial(()->0);
@@ -55,6 +55,8 @@ public final class MainHook extends XposedModule {
         loader=param.getClassLoader();
         try {prefs=getRemotePreferences(Config.PREFS);prefs.registerOnSharedPreferenceChangeListener(listener);}
         catch(Throwable t){log(Log.ERROR,TAG,"Cannot read configuration; all features stay disabled",t);return;}
+        boolean supported=CompatibilityPolicy.rom(android.os.Build.MODEL,android.os.Build.VERSION.SDK_INT,android.os.Build.DISPLAY);WindowDiagnostics.compatibility(supported);
+        if(!supported){installDiagnostics();return;}
         installFeature("Window.Capture",this::installCapture);installFeature("Window.Layout",this::installWindows);
         installFeature("Window.Split",this::installSplit);installFeature("Window.Launch",this::installLaunch);
         installFeature("Window.Caption",this::installCaption);installFeature("Window.Edge",this::installEdge);
@@ -68,11 +70,11 @@ public final class MainHook extends XposedModule {
     }
     private Class<?> cls(String name){try{return Class.forName(name,false,loader);}catch(Throwable t){return null;}}
     private interface Installer { XposedInterface.Hooker create(Method m); }
-    private void installFeature(String feature,Runnable installer){registeringFeature=feature;installer.run();}
+    private void installFeature(String feature,Runnable installer){registeringFeature=feature;try{installer.run();}catch(Throwable error){WindowDiagnostics.fail(feature);log(Log.WARN,TAG,"Feature disabled after incomplete installation: "+feature,error);}finally{WindowDiagnostics.seal(feature);}}
     private void hook(String className,String name,java.util.function.Predicate<Method> shape,Installer factory) {
         Class<?> c=cls(className);int found=0;String feature=registeringFeature,path=className+"#"+name;
         if(c!=null)for(Method m:c.getDeclaredMethods())if(m.getName().equals(name)&&shape.test(m)) {
-            try {m.setAccessible(true);XposedInterface.Hooker delegate=factory.create(m);hook(m).intercept(chain->{WindowDiagnostics.trigger(feature);return delegate.intercept(chain);});hooks++;found++;WindowDiagnostics.register(feature,path,true);info("hook "+m);}
+            try {m.setAccessible(true);XposedInterface.Hooker delegate=factory.create(m);hook(m).intercept(chain->{if(!WindowDiagnostics.ready(feature))return chain.proceed();WindowDiagnostics.trigger(feature);return delegate.intercept(chain);});hooks++;found++;WindowDiagnostics.register(feature,path,true);info("hook "+m);}
             catch(Throwable t){log(Log.WARN,TAG,"Hook failed "+m,t);}
         }
         if(found==0){WindowDiagnostics.register(feature,path,false);info("Unavailable: "+path);}
@@ -326,13 +328,12 @@ public final class MainHook extends XposedModule {
     private void installDiagnostics(){
         registeringFeature="Window.Status";
         hook(WM+"WindowManagerService","systemReady",m->m.getParameterCount()==0,m->chain->{Object result=chain.proceed();try{Object value=Reflect.field(chain.getThisObject(),"mContext");if(value instanceof Context context)WindowDiagnostics.attach(context,prefs,getRemotePreferences("aod_runtime_status"));}catch(Throwable t){log(Log.WARN,TAG,"Runtime status receiver unavailable",t);}return result;});
+        WindowDiagnostics.seal("Window.Status");
     }
     private boolean allowPackage(String pkg,Context context){
         if(Set.of("android","com.android.systemui","com.android.launcher","com.android.settings",getModuleApplicationInfo().packageName).contains(pkg))return false;
         if(bool(Config.EXCLUDE_SYSTEM))try{ApplicationInfo app=context.getPackageManager().getApplicationInfo(pkg,0);if((app.flags&(ApplicationInfo.FLAG_SYSTEM|ApplicationInfo.FLAG_UPDATED_SYSTEM_APP))!=0)return false;}catch(Throwable t){return false;}
-        if(!bool(Config.FILTER))return true;
-        Set<String> selected;try{selected=prefs.getStringSet(Config.APPS,Set.of());}catch(Throwable t){return false;}
-        return bool(Config.BLACKLIST)?!selected.contains(pkg):selected.contains(pkg);
+        return true;
     }
     private void installCaption(){
         for(String[] item:new String[][]{{"FlexibleTaskCaptionView","initCaptionView"},{"FlexibleCaptionView","updateThreeButtonVisibility"}})hook(WM+item[0],item[1],m->chain->{Object r=chain.proceed();applyCaption(chain.getThisObject());return r;});
@@ -340,10 +341,10 @@ public final class MainHook extends XposedModule {
     private void applyCaption(Object owner){
         for(String[] entry:new String[][]{{"mBottomHandleView",Config.HIDE_BOTTOM},{"mControlView",Config.HIDE_TOP},{"mControlBackgroundView",Config.HIDE_TOP}}) {
             Object v=Reflect.field(owner,entry[0]);if(!(v instanceof View view))continue;
-            if(bool(entry[1])){synchronized(hiddenViews){hiddenViews.putIfAbsent(view,view.getVisibility());}view.setVisibility(View.INVISIBLE);hit(entry[0]);}
+            if(bool(entry[1])){hiddenViews.track(view,entry[1],view.getVisibility());view.setVisibility(View.INVISIBLE);hit(entry[0]);}
         }
     }
-    private void restoreViews(){synchronized(hiddenViews){hiddenViews.forEach((view,visibility)->view.post(()->view.setVisibility(visibility)));hiddenViews.clear();}}
+    private void restoreViews(){for(View view:hiddenViews.views())view.post(()->hiddenViews.reconcileOne(view,this::bool,View::setVisibility,View.INVISIBLE));}
     private void installEdge(){
         String handle=WM+"FloatHandleController",controller=WM+"FlexibleTaskController";
         hook(handle,"getLimitMaxFloatNum",m->m.getReturnType()==int.class&&m.getParameterCount()==0,m->chain->{

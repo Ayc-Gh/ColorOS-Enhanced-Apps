@@ -2,10 +2,7 @@
 package io.github.oshin.windowcapture;
 import android.app.*;
 import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
@@ -46,9 +43,6 @@ public final class WindowSettingsActivity extends Activity {
         toggle(Config.NOTIFICATION,"通知启动优先小窗","从系统通知打开应用时使用小窗");
         toggle(Config.LAUNCHER,"桌面启动优先小窗","从桌面图标启动应用时使用小窗");
         toggle(Config.EXCLUDE_SYSTEM,"排除系统应用","优先小窗规则跳过系统应用；桌面与系统界面始终保留原行为");
-        toggle(Config.FILTER,"启用应用过滤","过滤规则应用到所有优先小窗入口");
-        toggle(Config.BLACKLIST,"使用黑名单模式","开启：所选应用不强制小窗；关闭：只对所选应用生效");
-        Button apps=UiKit.button(this,"选择应用 · 已选 "+(SettingsBridge.prefs==null?0:SettingsBridge.prefs.getStringSet(Config.APPS,Set.of()).size())+" 个",false);apps.setEnabled(ready());apps.setOnClickListener(v->pickApps());body.addView(apps);
         section("贴边小窗");
         integer(Config.EDGE_COUNT,"贴边应用数量",1,Config.MAX_EDGE_COUNT,"个");
         TextView edgeNote=text("独立设置 1–5 个贴边应用，留空跟随系统。降低数量或恢复默认后，已有的多余贴边应用可继续保留；展开或关闭后按新上限管理。",12,false);edgeNote.setTextColor(muted);edgeNote.setPadding(0,dp(4),0,dp(10));body.addView(edgeNote);
@@ -58,7 +52,7 @@ public final class WindowSettingsActivity extends Activity {
         Button runtime=UiKit.button(this,"查看功能运行状态",true);runtime.setOnClickListener(v->startActivity(new android.content.Intent(this,com.op.aod.enhance.ui.RuntimeStatusActivity.class).putExtra("section","windows")));body.addView(runtime);
         toggle(Config.LOG,"详细日志","记录接口适配与首次生效事件，可在框架日志中查看");
         TextView note=text("安装或升级后重启手机一次。配置保存与宿主加载可分别在功能运行状态中查看；比例、圆角、阴影与捕获状态改变后，请重新打开目标应用。\n\n请停用其他同类模块，避免重复修改。所有功能默认关闭，数值留空表示跟随系统。高宽比不改变旧版保存的数值含义，最终尺寸仍受屏幕和系统布局限制。",13,false);note.setTextColor(muted);note.setPadding(0,dp(16),0,dp(12));body.addView(note);
-        Button reset=UiKit.button(this,"恢复分屏与小窗默认设置",false);reset.setEnabled(ready());reset.setOnClickListener(v->new AlertDialog.Builder(this).setTitle("恢复默认设置").setMessage("恢复分屏与小窗设置，清空对应数值和应用列表。OPPO 互联、截图录屏和 AOD 设置保留。").setNegativeButton("取消",null).setPositiveButton("恢复",(d,w)->save(e->{for(String key:Config.WINDOW_KEYS)e.remove(key);})).show());body.addView(reset);
+        Button reset=UiKit.button(this,"恢复分屏与小窗默认设置",false);reset.setEnabled(ready());reset.setOnClickListener(v->new AlertDialog.Builder(this).setTitle("恢复默认设置").setMessage("恢复分屏与小窗设置，清空对应数值。OPPO 互联、截图录屏和 AOD 设置保留。").setNegativeButton("取消",null).setPositiveButton("恢复",(d,w)->save(e->{for(String key:Config.WINDOW_KEYS)e.remove(key);})).show());body.addView(reset);
         TextView footer=text("v"+BuildConfig.VERSION_NAME+" · AGPL-3.0",12,false);footer.setPadding(0,dp(16),0,0);footer.setTextColor(muted);body.addView(footer);
         setContentView(scroll);UiKit.applyBars(this,scroll);ScrollView current=scroll;current.post(()->current.scrollTo(0,y));
     }
@@ -74,11 +68,6 @@ public final class WindowSettingsActivity extends Activity {
     }
     private void decimal(String key,String title,String hint){
         float value=SettingsBridge.prefs==null?-1:SettingsBridge.prefs.getFloat(key,-1);Button button=UiKit.button(this,title+"  ·  "+(value<0?"跟随系统":value),false);button.setEnabled(ready());button.setOnClickListener(v->{EditText input=new EditText(this);input.setSingleLine();input.setInputType(android.text.InputType.TYPE_CLASS_NUMBER|android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL);input.setHint(hint);if(value>0)input.setText(String.valueOf(value));AlertDialog dialog=new AlertDialog.Builder(this).setTitle(title).setView(input).setNegativeButton("取消",null).setNeutralButton("系统默认",(d,w)->save(e->e.remove(key))).setPositiveButton("保存",null).create();dialog.setOnShowListener(d->dialog.getButton(-1).setOnClickListener(b->{String s=input.getText().toString().trim();try{float n=s.isEmpty()?-1:Float.parseFloat(s);if(n!=-1&&(!Float.isFinite(n)||n<.25||n>3))throw new NumberFormatException();dialog.dismiss();save(e->{if(n<0)e.remove(key);else e.putFloat(key,n);});}catch(NumberFormatException x){input.setError("请输入 0.25–3，或留空");}}));dialog.show();});body.addView(button);
-    }
-    private void pickApps(){
-        List<ApplicationInfo> apps=new ArrayList<>(getPackageManager().getInstalledApplications(0));apps.removeIf(a->a.packageName.equals(getPackageName()));apps.sort(Comparator.comparing(a->a.loadLabel(getPackageManager()).toString(),java.text.Collator.getInstance()));
-        Set<String> selected=new HashSet<>(SettingsBridge.prefs.getStringSet(Config.APPS,Set.of()));String[] labels=new String[apps.size()];boolean[] checked=new boolean[apps.size()];for(int i=0;i<apps.size();i++){ApplicationInfo a=apps.get(i);labels[i]=a.loadLabel(getPackageManager())+"\n"+a.packageName;checked[i]=selected.contains(a.packageName);}
-        new AlertDialog.Builder(this).setTitle("选择应用").setMultiChoiceItems(labels,checked,(d,index,value)->{String pkg=apps.get(index).packageName;if(value)selected.add(pkg);else selected.remove(pkg);}).setNegativeButton("取消",null).setPositiveButton("保存",(d,w)->save(e->e.putStringSet(Config.APPS,selected))).show();
     }
     private void save(Consumer<SharedPreferences.Editor> edit){saving=true;SettingsBridge.save(edit,ok->{saving=false;if(isFinishing()||isDestroyed())return;if(!ok)Toast.makeText(this,"保存失败，请重新连接 LSPosed",Toast.LENGTH_LONG).show();render();});}
 }

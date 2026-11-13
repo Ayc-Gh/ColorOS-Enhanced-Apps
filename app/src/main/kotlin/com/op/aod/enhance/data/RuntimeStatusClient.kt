@@ -52,7 +52,7 @@ internal class RuntimeStatusClient(context: Context,private val hosts:List<Strin
             if (!saved) { mutableMessage.value = "检查请求未能保存，请重新连接配置服务"; return }
         }
         nonce = token; mutableMessage.value = "正在检查…"
-        fun query() { hosts.forEach { RuntimeProtocol.send(app, Intent(RuntimeProtocol.QUERY).setPackage(it).putExtra(RuntimeProtocol.NONCE, token)) } }
+        fun query() { hosts.forEach { RuntimeProtocol.send(app, Intent(RuntimeProtocol.QUERY).setPackage(it).addFlags(Intent.FLAG_RECEIVER_FOREGROUND).putExtra(RuntimeProtocol.NONCE, token)) } }
         query()
         // Android 13 uses a framework preference capability in place of sender
         // identity. Retry that same request once to allow cache delivery to settle.

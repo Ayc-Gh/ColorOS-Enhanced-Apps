@@ -1,0 +1,460 @@
+{
+  "date": "2026-11-14",
+  "device": "PHY110",
+  "rom": "PHY110_17.0.0.100(CN01)",
+  "android_sdk": 37,
+  "version": "1.8.0",
+  "code": 13,
+  "revision": "verified-ocr-2",
+  "apk_sha256": "200c3001153d95bd6eb3948ffbfb65635bce6ae19fbdc97cf82c364240268cbe",
+  "certificate_sha256": "ac8dd32294627c740e436288919805d7d9403592add3436c1f006df58ab16f37",
+  "source_files_identical": 98,
+  "unit_tests": {
+    "tests": 114,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lint": {
+    "Error": 0,
+    "Fatal": 0,
+    "Warning": 27
+  },
+  "runtime_after_final_boot": {
+    "android": {
+      "host": "android",
+      "version": "1.8.0",
+      "code": 13,
+      "adapter": {
+        "state": "ready",
+        "reason": "本机接口校验"
+      },
+      "features": [
+        {
+          "name": "Window.Caption",
+          "state": "loaded",
+          "hits": 0,
+          "optionalMissing": 0,
+          "reason": "必需接口已校验；缺失的可选接口保留原生处理"
+        },
+        {
+          "name": "Window.Capture",
+          "state": "loaded",
+          "hits": 1,
+          "optionalMissing": 1,
+          "reason": "必需接口已校验；缺失的可选接口保留原生处理"
+        },
+        {
+          "name": "Window.Edge",
+          "state": "loaded",
+          "hits": 1,
+          "optionalMissing": 0,
+          "reason": "必需接口已校验；缺失的可选接口保留原生处理"
+        },
+        {
+          "name": "Window.Launch",
+          "state": "loaded",
+          "hits": 1,
+          "optionalMissing": 0,
+          "reason": "必需接口已校验；缺失的可选接口保留原生处理"
+        },
+        {
+          "name": "Window.Layout",
+          "state": "loaded",
+          "hits": 1,
+          "optionalMissing": 1,
+          "reason": "必需接口已校验；缺失的可选接口保留原生处理"
+        },
+        {
+          "name": "Window.Split",
+          "state": "loaded",
+          "hits": 1,
+          "optionalMissing": 1,
+          "reason": "必需接口已校验；缺失的可选接口保留原生处理"
+        },
+        {
+          "name": "Window.Status",
+          "state": "loaded",
+          "hits": 1,
+          "optionalMissing": 0,
+          "reason": "必需接口已校验；缺失的可选接口保留原生处理"
+        }
+      ],
+      "launches": {
+        "LAUNCHER": {
+          "enabled": false,
+          "result": "unknown",
+          "ageMs": -1
+        },
+        "REMEMBER": {
+          "enabled": false,
+          "result": "unknown",
+          "ageMs": -1
+        },
+        "JUMP": {
+          "enabled": false,
+          "result": "unknown",
+          "ageMs": -1
+        },
+        "NOTIFICATION": {
+          "enabled": false,
+          "result": "unknown",
+          "ageMs": -1
+        }
+      }
+    },
+    "com.android.systemui": {
+      "host": "com.android.systemui",
+      "version": "1.8.0",
+      "code": 13,
+      "adapter": {
+        "state": "ready",
+        "reason": "本机版本与接口已校验"
+      },
+      "features": [
+        {
+          "name": "Brightness.Init",
+          "state": "loaded",
+          "paths": [
+            "OplusDozeServiceExImpl.setBrightnessBeforeDozing()"
+          ],
+          "hits": 0,
+          "failures": [],
+          "skipped": []
+        },
+        {
+          "name": "Brightness.Running",
+          "state": "loaded",
+          "paths": [
+            "DozeService.setDozeScreenBrightness(float)"
+          ],
+          "hits": 0,
+          "failures": [],
+          "skipped": []
+        },
+        {
+          "name": "Duration.NativeTimeout",
+          "state": "loaded",
+          "paths": [
+            "DozeService.onDreamingStarted()",
+            "DozeService.onDreamingStopped()",
+            "DreamService.onWakeUp()",
+            "PanoramicAodController.onEnergySavingNotifyHide()",
+            "PanoramicAodController.hideClock(int)",
+            "AODDisplayUtil.requestScreenState(int, int, String)"
+          ],
+          "hits": 0,
+          "failures": [],
+          "skipped": []
+        },
+        {
+          "name": "Panoramic.AllDay",
+          "state": "loaded",
+          "paths": [
+            "SmoothTransitionController.setPanoramicSupportAllDayForApplication(boolean)",
+            "SmoothTransitionController.initSmoothTransitionState()",
+            "SmoothTransitionController.setPanoramicSupportedByRemote()"
+          ],
+          "hits": 2,
+          "failures": [],
+          "skipped": []
+        },
+        {
+          "name": "SingleClick.Block",
+          "state": "loaded",
+          "paths": [
+            "AodViewSingleClickWakeUpHolder$AodSingleClickWakeUpCallback.onClick(OplusBlackScreenGestureEvent)",
+            "OplusWakeUpController$AodSingleClickWakeUpCallback.onClick(OplusBlackScreenGestureEvent)",
+            "OplusDoubleClickSleep$OnDoubleClickListener.onSingleTapConfirmed(MotionEvent)"
+          ],
+          "hits": 0,
+          "failures": [],
+          "skipped": [
+            "PanoramicAod: 当前系统未提供此版本入口"
+          ]
+        },
+        {
+          "name": "LowLight.Block",
+          "state": "loaded",
+          "paths": [
+            "AodUpdateManager$2.hideAodByDarkLight(int)"
+          ],
+          "hits": 0,
+          "failures": [],
+          "skipped": []
+        }
+      ],
+      "configurationRead": "ok",
+      "panoramic": {
+        "native": false,
+        "effective": false,
+        "enhanced": false
+      }
+    },
+    "com.oplus.aod": {
+      "host": "com.oplus.aod",
+      "version": "1.8.0",
+      "code": 13,
+      "adapter": {
+        "state": "ready",
+        "reason": "本机版本与接口已校验"
+      },
+      "features": [
+        {
+          "name": "AodSettings.AllDay",
+          "state": "loaded",
+          "paths": [
+            "SettingsUtils.getKeyAodAllDaySupportSettings(Context, int)"
+          ],
+          "hits": 1,
+          "failures": [],
+          "skipped": []
+        }
+      ],
+      "configurationRead": "ok"
+    },
+    "com.oplus.gesture": {
+      "host": "com.oplus.gesture",
+      "version": "1.8.0",
+      "code": 13,
+      "adapter": {
+        "state": "ready",
+        "reason": "接口校验完成",
+        "hostVersion": "8.6.0",
+        "enabled": false,
+        "paths": 1,
+        "hits": 0
+      },
+      "gesture": {
+        "enabled": false,
+        "nativeEngine": true
+      }
+    },
+    "com.oplus.trafficmonitor": {
+      "host": "com.oplus.trafficmonitor",
+      "version": "1.8.0",
+      "code": 13,
+      "adapter": {
+        "state": "ready",
+        "reason": "接口校验完成",
+        "hostVersion": "17.3.5",
+        "enabled": false,
+        "paths": 4,
+        "hits": 0
+      },
+      "network": {
+        "enabled": false,
+        "expanded": 0,
+        "nativePolicy": true
+      }
+    },
+    "com.oplus.gleanerservice": {
+      "host": "com.oplus.gleanerservice",
+      "version": "1.8.0",
+      "code": 13,
+      "adapter": {
+        "state": "ready",
+        "reason": "接口校验完成",
+        "hostVersion": "17.8.0",
+        "enabled": true,
+        "paths": 0,
+        "hits": 0
+      },
+      "memory": {
+        "pages": 3,
+        "attempts": 3,
+        "validMaps": 1,
+        "requests": 1,
+        "accepted": 1,
+        "ocr": 9,
+        "duplicates": 0,
+        "fields": 7,
+        "page": "result",
+        "state": "accepted",
+        "nativeResult": "unknown",
+        "ocrResult": "SUCCESS",
+        "reason": "none",
+        "validation": "VERIFIED",
+        "verified": 1,
+        "blocked": 2,
+        "corrected": 1,
+        "preciseDedup": 0,
+        "enabled": true,
+        "adapter": "adapted",
+        "rules": 8,
+        "repaired": 8,
+        "nativeGate": true,
+        "revision": "verified-ocr-2"
+      }
+    },
+    "com.oplus.cast": {
+      "host": "com.oplus.cast",
+      "version": "1.8.0",
+      "code": 13,
+      "adapter": {
+        "state": "ready",
+        "reason": "接口校验完成",
+        "hostVersion": "17.0.017",
+        "enabled": false,
+        "paths": 11,
+        "hits": 0
+      },
+      "cast": {
+        "enabled": false,
+        "requestedFps": 0,
+        "session": false
+      }
+    }
+  },
+  "memory_toggle_same_process": {
+    "on": {
+      "apps": [
+        "支付宝",
+        "其他",
+        "微信",
+        "云闪付"
+      ],
+      "pid": "22407"
+    },
+    "off": {
+      "apps": [
+        "支付宝",
+        "其他",
+        "云闪付"
+      ],
+      "pid": "22407"
+    },
+    "on-again": {
+      "apps": [
+        "支付宝",
+        "其他",
+        "微信",
+        "云闪付"
+      ],
+      "pid": "22407"
+    }
+  },
+  "caption_independent_restore": {
+    "both-hidden": {
+      "screenshot": "caption-both-hidden.png"
+    },
+    "only-bottom-hidden": {
+      "screenshot": "caption-only-bottom-hidden.png"
+    },
+    "native-restored": {
+      "screenshot": "caption-native-restored.png"
+    },
+    "method": "Visual inspection of three phone screenshots of the same test window.",
+    "bottom_remains_hidden_when_top_disabled": true,
+    "bottom_restores_when_own_option_disabled": true,
+    "same_task_id": 460
+  },
+  "cast_selected_encoder_when_enabled": {
+    "enabled": true,
+    "requestedFps": 60,
+    "session": true,
+    "codec": "c2.qti.avc.encoder",
+    "mime": "video/avc",
+    "width": 1080,
+    "height": 2376,
+    "validatedFps": 120,
+    "configuredFps": 60
+  },
+  "cast_when_disabled": {
+    "enabled": false,
+    "requestedFps": 0,
+    "session": false
+  },
+  "cast_native_stream": {
+    "module_enabled": false,
+    "stream_samples": [
+      {
+        "inputWidth": 1080,
+        "inputHeight": 2376,
+        "frameWidth": 1080,
+        "frameHeight": 2376,
+        "videoSendFps": 0,
+        "framesEncoded": 2,
+        "mimeType": "video/H264",
+        "encoderImplementation": "c2.qti.avc.encoder"
+      },
+      {
+        "inputWidth": 1080,
+        "inputHeight": 2376,
+        "frameWidth": 1080,
+        "frameHeight": 2376,
+        "videoSendFps": 0,
+        "framesEncoded": 2,
+        "mimeType": "video/H264",
+        "encoderImplementation": "c2.qti.avc.encoder"
+      },
+      {
+        "inputWidth": 1080,
+        "inputHeight": 2376,
+        "frameWidth": -1,
+        "frameHeight": -1,
+        "videoSendFps": -1,
+        "framesEncoded": -1,
+        "mimeType": "video/H264",
+        "encoderImplementation": "c2.qti.avc.encoder"
+      },
+      {
+        "inputWidth": 1080,
+        "inputHeight": 2376,
+        "frameWidth": -1,
+        "frameHeight": -1,
+        "videoSendFps": -1,
+        "framesEncoded": -1,
+        "mimeType": "video/H264",
+        "encoderImplementation": "c2.qti.avc.encoder"
+      }
+    ]
+  },
+  "real_payment": {
+    "user_confirmed_popup_record_amount_and_recipient_correct": true,
+    "final_apk_native_ocr_success": true,
+    "final_apk_amount_validation_verified": true,
+    "final_apk_engine_accepted": true,
+    "technical_counters": {
+      "pages": 3,
+      "attempts": 3,
+      "validMaps": 1,
+      "requests": 1,
+      "accepted": 1,
+      "ocr": 9,
+      "verified": 1,
+      "blocked": 2,
+      "corrected": 1,
+      "preciseDedup": 0
+    },
+    "counts_are_not_saved_bill_totals": true
+  },
+  "final_device": {
+    "installed_sha256": "200c3001153d95bd6eb3948ffbfb65635bce6ae19fbdc97cf82c364240268cbe",
+    "configuration_preserved_except_retired_keys": true,
+    "retired_keys_removed": true,
+    "scope_preserved": true,
+    "module_states_preserved": true,
+    "native_app_choices_preserved": true,
+    "aimemory_package_default_enabled_state": true,
+    "framework_safe_mode": false,
+    "hook_debug_enabled": false,
+    "screen_off_timeout": "30000",
+    "wechat_rule_database_metadata_unchanged": true,
+    "temporary_test_packages_removed": true,
+    "user_confirmed_payment_popup_record_and_fields_correct": true,
+    "user_confirmed_native_cast_reconnected": true
+  },
+  "diagnostics": {
+    "repeated_temporary_instrumentation_query_timed_out": true,
+    "temporary_test_process_stopped": true,
+    "seven_successful_reports_from_same_final_boot_retained": true
+  },
+  "limits": [
+    "未通过耗尽原生累计显示额度的长时间低光实验；此项依据匹配本机的系统源码核对拦截边界。",
+    "不同交易的订单号／时间判定和部分原生页面合并已做单元测试，未通过多次真实付款构造全部去重矩阵。",
+    "缺少足够交易证据时继续采用原生去重；不保证区分所有短时间同金额付款。",
+    "60 帧为编码配置值，未用静态画面统计值声称恒定发送 60 帧；90／120 帧和全部高级选项未扩大实测。"
+  ],
+  "published_to_github": false
+}

@@ -55,6 +55,7 @@ internal class HookRuntime(
         .setId(id)
         .setExceptionMode(XposedInterface.ExceptionMode.DEFAULT)
         .intercept { chain ->
+            if(owner!="Context"&&!HostDiagnostics.registry.ready(owner))return@intercept chain.proceed()
             if (firstHit.getAndSet(false)) {
                 AodLog.i("HOOK_HIT", "id=$id method=${method.declaringClass.name}#${method.name}")
                 HostDiagnostics.registry.hit(owner, id)

@@ -13,7 +13,7 @@ class FeaturesActivity:NativeSettingsActivity(){
         header("AOD 功能","全天能力、唤醒与自动显示时长");syncStatus();section("全天与唤醒")
         toggle("全天全景息屏","同时显示系统设置入口；请在系统中选择“全天显示”。下一次息屏生效。",c.enablePanoramic){save(Store.update(this){v->v.copy(enablePanoramic=it)})}
         toggle("单击唤醒屏蔽","避免单击误触；双击仍由原生设置管理。",c.blockSingleClick){save(Store.update(this){v->v.copy(blockSingleClick=it)})}
-        toggle("低光保持显示","阻止极暗、夜间低光及本机特殊规则隐藏 AOD。",c.blockLowLightHide){save(Store.update(this){v->v.copy(blockLowLightHide=it)})}
+        toggle("低光保持显示","只阻止极暗与夜间低光隐藏，保留累计显示时长等系统规则。",c.blockLowLightHide){save(Store.update(this){v->v.copy(blockLowLightHide=it)})}
         section("显示时长")
         action("目标显示时长  ·  "+durationModeLabel(c.aodDurationMode,c.aodDurationCustomMinutes)){
             val labels=(C.DURATION_MODE_SYSTEM..C.DURATION_MODE_CUSTOM).map{durationModeLabel(it,c.aodDurationCustomMinutes)}.toTypedArray()

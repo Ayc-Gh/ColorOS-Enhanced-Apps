@@ -15,7 +15,7 @@ internal object PanoramicHook {
     private fun supportsPanoramic(instance:Any)=runCatching {
         instance.javaClass.getDeclaredField("isSupportPanoramic").apply{isAccessible=true}.getBoolean(instance)
     }.getOrDefault(false)
-    private fun enabled(instance:Any)=AodConfigReader.read(MainHook.hostAppContext).enablePanoramic&&supportsPanoramic(instance)
+    private fun enabled(instance:Any)=HostDiagnostics.registry.ready("Panoramic.AllDay")&&AodConfigReader.read(MainHook.hostAppContext).enablePanoramic&&supportsPanoramic(instance)
     private fun reconcile(instance:Any){
         runCatching {
             val effective=state.apply(instance,enabled(instance))?:return

@@ -1,0 +1,92 @@
+{
+  "date": "2026-11-14",
+  "device": "PHY110",
+  "rom": "PHY110_17.0.0.100(CN01)",
+  "android_sdk": 37,
+  "version": "1.7.0",
+  "code": 12,
+  "revision": "result-ocr-1",
+  "apk_sha256": "318fe8cd9f794f675e977c804131357576fe489560c9502df9524e587a42c92a",
+  "certificate_sha256": "ac8dd32294627c740e436288919805d7d9403592add3436c1f006df58ab16f37",
+  "source_files_identical": 86,
+  "unit_tests": {
+    "tests": 96,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lint": {
+    "Error": 0,
+    "Fatal": 0,
+    "Warning": 25
+  },
+  "native_versions": {
+    "aimemory": "17.5.2",
+    "gleanerservice": "17.8.0 (17008000)",
+    "wechat": "8.0.80 (3220)",
+    "lsposed": "2.2.1 API 102"
+  },
+  "ui_pages": {
+    "分屏与小窗": true,
+    "OPPO 互联": true,
+    "AOD": true,
+    "隔空手势": true,
+    "联网管理": true,
+    "小布记忆": true
+  },
+  "behavior": {
+    "native_off_apps": [
+      "支付宝",
+      "其他",
+      "云闪付"
+    ],
+    "enhanced_apps": [
+      "支付宝",
+      "其他",
+      "微信",
+      "云闪付"
+    ],
+    "module_off_on_same_pid": true,
+    "native_app_off_no_extraction_before_reboot": true,
+    "original_native_app_choices_preserved": true,
+    "metadata_database_unmodified": true
+  },
+  "real_records": {
+    "bill_detail_saved_user_confirmed": true,
+    "scan_result_popup_user_confirmed": true,
+    "scan_result_saved_user_confirmed": true,
+    "scan_amount_and_recipient_correct_user_confirmed": true,
+    "scan_ocr_success_observed": true,
+    "scan_engine_acceptance_observed": true,
+    "native_duplicate_suppression_observed": true,
+    "diagnostic_counts": {
+      "pages": 3,
+      "extract_attempts": 3,
+      "required_field_hits": 3,
+      "requests": 2,
+      "engine_accepted": 2,
+      "ocr_calls": 8,
+      "duplicates": 1
+    },
+    "counts_scope": "One process before the final UI cleanup build; counters are not record totals."
+  },
+  "final_device": {
+    "installed_sha256": "318fe8cd9f794f675e977c804131357576fe489560c9502df9524e587a42c92a",
+    "configuration_preserved": true,
+    "scope_preserved": true,
+    "framework_safe_mode": false,
+    "screen_off_timeout": "30000",
+    "native_wechat_choice": "1"
+  },
+  "runtime_after_reboot": {
+    "memory": "1.7.0",
+    "framework": "1.7.0",
+    "trafficmonitor": "1.7.0"
+  },
+  "limits": [
+    "红包、其他转账结果页与全部小程序支付尚未逐项验证。",
+    "系统接受请求不等于账单保存；实测保存与字段正确性由用户另行确认。",
+    "适配限定已验证的记账服务与微信版本。"
+  ],
+  "published_to_github": false
+}

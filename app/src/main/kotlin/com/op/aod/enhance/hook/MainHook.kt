@@ -3,6 +3,8 @@ package com.op.aod.enhance.hook
 import android.app.Application
 import android.app.Instrumentation
 import android.content.Context
+import android.os.Build
+import io.github.oshin.windowcapture.CompatibilityPolicy
 import com.op.aod.enhance.data.AodConfigStore
 import com.op.aod.enhance.hook.AodDurationController.hookAodDurationControl
 import com.op.aod.enhance.hook.AodSettingsHook.hookAodAllDaySupportSettings
@@ -21,8 +23,20 @@ object MainHook {
         AodLog.bind(module)
         HostDiagnostics.bind(module.getRemotePreferences("aod_runtime_status"), hostPackage)
         val runtime=HookRuntime(module,classLoader)
-        AodConfigReader.bindPrefs(module.getRemotePreferences(AodConfigStore.PREFS_NAME),hostPackage)
         installContextCapture(runtime)
+        val context=runCatching {
+            val thread=Class.forName("android.app.ActivityThread")
+            thread.getMethod("getSystemContext").invoke(thread.getMethod("currentActivityThread").invoke(null)) as Context
+        }.getOrNull()
+        val version=runCatching{context?.packageManager?.getPackageInfo(hostPackage,0)?.longVersionCode}.getOrNull()
+        if(!CompatibilityPolicy.rom(Build.MODEL,Build.VERSION.SDK_INT,Build.DISPLAY)||version==null||!CompatibilityPolicy.host(hostPackage,version)){
+            HostDiagnostics.compatibility="unsupported"
+            HostDiagnostics.compatibilityReason="系统或息屏组件版本尚未适配，已保留原生行为"
+            return
+        }
+        HostDiagnostics.compatibility="ready"
+        HostDiagnostics.compatibilityReason="本机版本与接口已校验"
+        AodConfigReader.bindPrefs(module.getRemotePreferences(AodConfigStore.PREFS_NAME),hostPackage)
         when(hostPackage){
             SYSTEM_UI->{
                 runtime.hookWithLog("Brightness.Init"){hookInitBrightnessFix()}
@@ -64,6 +78,7 @@ object MainHook {
         HostDiagnostics.registry.begin(name)
         AodLog.i("HOOK_REGISTER","start name=$name")
         runCatching{block()}.onFailure{failure(it.message ?: it.javaClass.simpleName);AodLog.e("HOOK_REGISTER","failed name=$name",it)}
+        HostDiagnostics.registry.seal(name)
         val status = HostDiagnostics.registry.snapshot().first { it.name == name }
         AodLog.i("HOOK_REGISTER", "result=${status.state} name=$name paths=${status.paths.size} failures=${status.failures.size} skipped=${status.skipped.size}")
     }
