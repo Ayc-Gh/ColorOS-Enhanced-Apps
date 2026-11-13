@@ -1,0 +1,8 @@
+{
+  "five_entries": true,
+  "gesture_removed_actions": true,
+  "network_picker_removed": true,
+  "manifest_query_permission_removed": true,
+  "window_page_present": true,
+  "aod_page_present": true
+}

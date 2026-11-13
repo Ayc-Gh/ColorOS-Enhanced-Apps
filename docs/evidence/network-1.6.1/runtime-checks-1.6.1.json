@@ -1,0 +1,9 @@
+{
+  "network_live_off_on_off_same_pid": true,
+  "network_runtime_loaded": "1.6.1",
+  "framework_runtime_loaded": "1.6.1",
+  "aod_runtime_loaded": {
+    "com.android.systemui": "1.6.1",
+    "com.oplus.aod": "1.6.1"
+  }
+}

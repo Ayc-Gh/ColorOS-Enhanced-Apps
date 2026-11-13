@@ -1,0 +1,5 @@
+ColorOS 增强 v1.6.1
+versionCode: 11
+APK SHA-256: ab409d0c6a70a6a2503ef948096e80fe6dbc48e88291c2a3e5d4d1773c590fc9
+Certificate SHA-256: ac8dd32294627c740e436288919805d7d9403592add3436c1f006df58ab16f37
+沿用整合版签名，可覆盖安装并保留配置。已删除模块内的联网应用选择器、组件重启和系统手势学习入口；系统对应功能由 ColorOS 管理。源码不含私钥与密码。

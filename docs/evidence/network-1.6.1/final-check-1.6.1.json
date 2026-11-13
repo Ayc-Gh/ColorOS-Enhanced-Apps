@@ -1,0 +1,9 @@
+{
+  "installed_apk_matches_build": true,
+  "all_preexisting_modules_enabled": true,
+  "network_toggle": false,
+  "aod_config_restored": true,
+  "scopes_preserved_with_traffic_host": true,
+  "framework_safe_mode": false,
+  "screen_timeout": "30000"
+}

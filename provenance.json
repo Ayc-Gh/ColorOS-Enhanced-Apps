@@ -1,6 +1,6 @@
 {
   "application_id_source": "app/build.gradle.kts",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "device": "PHY110",
   "rom": "PHY110_17.0.0.100(CN01)",
   "android_sdk": 37,
@@ -20,7 +20,7 @@
     "oplus-services.jar": "5a3613f87b766bc5923e4d9d75a0e3b79aa2c22f92d43a984d3cb0823f9e5a90",
     "services.jar": "78be31cdbfda61fdbfd84013c2c0b31812468bec8ffc4a0aa56ab4f4e0937e44"
   },
-  "apk_sha256": "af2daa6e107c779e7bc3d6364737f7f6cfcfcd9f81fb45c94ac4ca095ef04770",
+  "apk_sha256": "ab409d0c6a70a6a2503ef948096e80fe6dbc48e88291c2a3e5d4d1773c590fc9",
   "license": "AGPL-3.0-or-later",
   "optional_features_not_exhaustively_tested": true,
   "oem_cast_apks": {
@@ -29,7 +29,7 @@
     "ShareScreen.apk": "83912117bb5906a2e86a6870e05f41e6bde34a8a878b8d3c05688c81bef8e070"
   },
   "added_scope": "com.oplus.trafficmonitor",
-  "validation": "docs/evidence/network-1.6.0/validation.json",
+  "validation": "docs/evidence/network-1.6.1/validation.json",
   "final_cast": {
     "width": 1440,
     "height": 3168,
@@ -40,7 +40,7 @@
     "requested_fps": 60,
     "custom_bitrate": false
   },
-  "version_code": 10,
+  "version_code": 11,
   "app_name": "ColorOS 增强",
   "aod_source": {
     "repository": "NOTICE",
@@ -67,7 +67,8 @@
     "docs/evidence/cast-1.1.0/validation.json",
     "docs/evidence/release-1.4.1/validation.json",
     "docs/evidence/edge-count-1.4.2/validation.json",
-    "docs/evidence/optimization-1.5.0/validation.json"
+    "docs/evidence/optimization-1.5.0/validation.json",
+    "docs/evidence/network-1.6.0/validation.json"
   ],
   "historical_confirmed_tests": [
     "Three settings entrances and AOD subpages",
@@ -79,7 +80,7 @@
     "50 AOD unit tests and 17 cast policy checks"
   ],
   "device_tested_this_release": true,
-  "changes": "Unlock missing native WLAN/mobile-data options for manageable system applications, add searchable native details, and unify all five module entries and AOD pages with common native UI controls.",
+  "changes": "Remove the in-module network app picker and gesture component-restart / learning controls while retaining native ColorOS settings and the five-entry unified UI.",
   "historical_final_enabled": [
     "unlock_flexible",
     "unlock_split",

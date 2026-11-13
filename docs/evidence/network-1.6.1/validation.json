@@ -1,0 +1,65 @@
+{
+  "date": "2026-11-13",
+  "device": "PHY110",
+  "rom": "PHY110_17.0.0.100(CN01)",
+  "android_sdk": 37,
+  "version": "1.6.1",
+  "code": 11,
+  "apk_sha256": "ab409d0c6a70a6a2503ef948096e80fe6dbc48e88291c2a3e5d4d1773c590fc9",
+  "certificate_sha256": "ac8dd32294627c740e436288919805d7d9403592add3436c1f006df58ab16f37",
+  "source_files_identical": 79,
+  "unit_tests": {
+    "tests": 91,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lint": {
+    "Error": 0,
+    "Fatal": 0,
+    "Warning": 25
+  },
+  "ui_removed": {
+    "five_entries": true,
+    "gesture_removed_actions": true,
+    "network_picker_removed": true,
+    "manifest_query_permission_removed": true,
+    "window_page_present": true,
+    "aod_page_present": true
+  },
+  "runtime_after_reboot": {
+    "network_live_off_on_off_same_pid": true,
+    "network_runtime_loaded": "1.6.1",
+    "framework_runtime_loaded": "1.6.1",
+    "aod_runtime_loaded": {
+      "com.android.systemui": "1.6.1",
+      "com.oplus.aod": "1.6.1"
+    }
+  },
+  "final_device_state": {
+    "installed_apk_matches_build": true,
+    "all_preexisting_modules_enabled": true,
+    "network_toggle": false,
+    "aod_config_restored": true,
+    "scopes_preserved_with_traffic_host": true,
+    "framework_safe_mode": false,
+    "screen_timeout": "30000"
+  },
+  "removed_features": [
+    "联网管理中的“选择应用的联网设置”及应用选择器代码",
+    "隔空手势中的“应用并重启两个组件”及 Root 重启代码",
+    "隔空手势中的系统手势学习入口、课程按钮和旧设备提示语"
+  ],
+  "retained_features": [
+    "联网管理开关、系统流量管理入口、运行状态",
+    "隔空手势开关与系统隔空手势设置入口",
+    "五个主页入口、分屏与小窗、OPPO 互联、AOD"
+  ],
+  "verification_scope": [
+    "页面文字和入口删减已在实机 UI 树核对",
+    "91 项单元测试通过；Lint 0 错误、25 警告",
+    "重启后系统框架、系统界面、AOD、流量管理均加载 1.6.1",
+    "联网开关保持关闭；AOD、作用域、模块启用状态、屏幕超时恢复",
+    "未重复执行已删除的学习课程或组件重启操作"
+  ]
+}
