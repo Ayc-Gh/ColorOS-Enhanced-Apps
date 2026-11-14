@@ -33,7 +33,8 @@ public final class MainActivity extends Activity {
         entrance(4,"隔空手势","解锁设置入口，保留原生手势识别",GestureSettingsActivity.class,0xFFB36916);
         entrance(5,"联网管理","所有可管理应用的 WLAN 与移动数据",NetworkSettingsActivity.class,0xFF427B57);
         entrance(6,"小布记忆","解锁微信自动记账支持",AimemorySettingsActivity.class,0xFF8B4D8B);
-        entrance(7,"相册增强","AI 修图师与原生编辑保存",GallerySettingsActivity.class,0xFFB15C54);
+        entrance(7,"相机与相册","AI 修图、灵感推荐与 Log 视频",GallerySettingsActivity.class,0xFFB15C54);
+        entrance(8,"声音分轨","解除原生分轨功能的应用限制",SoundSettingsActivity.class,0xFF437E94);
         TextView footer=text("v"+BuildConfig.VERSION_NAME+"  ·  AGPL-3.0\n调整设置后，按各页面提示使其生效。",12,false);footer.setTextColor(UiKit.MUTED);footer.setPadding(dp(4),dp(22),dp(4),0);body.addView(footer);
         setContentView(scroll);UiKit.applyBars(this,scroll);
     }

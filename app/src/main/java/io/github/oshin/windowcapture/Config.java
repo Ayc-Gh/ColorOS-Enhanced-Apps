@@ -16,6 +16,7 @@ public final class Config {
     public static final String AIMEMORY_WECHAT_BILL="aimemory_wechat_bill";
     public static final String GALLERY_AI_RETOUCH="gallery_ai_retouch";
     public static final String CAMERA_INSPIRATION="camera_inspiration_recommendation";
+    public static final String CAMERA_LOG="camera_log_video";
     public static final String CAST="cast_enabled", CAST_QUALITY="cast_quality", CAST_BITRATE="cast_bitrate_mbps";
     public static final String CAST_FPS="cast_fps", CAST_RESOLUTION="cast_resolution", CAST_DENSITY="cast_density";
     public static final String CAST_LOW_BANDWIDTH="cast_low_bandwidth", CAST_MODEL="cast_model_degrade";

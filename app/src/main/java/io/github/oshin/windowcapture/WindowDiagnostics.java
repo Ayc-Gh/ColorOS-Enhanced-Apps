@@ -35,6 +35,7 @@ final class WindowDiagnostics {
         case "Window.Launch"->Set.of(wm+"FlexibleTaskController#adjustOptionsForSmartMultiWindow");
         case "Window.Caption"->Set.of(wm+"FlexibleTaskCaptionView#initCaptionView",wm+"FlexibleCaptionView#updateThreeButtonVisibility");
         case "Window.Edge"->Set.of(wm+"FloatHandleController#getLimitMaxFloatNum",wm+"FlexibleTaskController#exitFlexibleTask");
+        case "Sound.Startup"->Set.of("com.android.server.am.OplusAppStartupManager#isAllowStartFromProvider","com.android.server.am.OplusAppStartupManager$OplusStartupStrategy#isAllowAssociateByList");
         default->Set.of();};}
     static void trigger(String feature){Entry entry=entries.get(feature);if(entry!=null&&!entry.triggered)entry.triggered=true;}
     static synchronized long generation(){return launchGeneration;}

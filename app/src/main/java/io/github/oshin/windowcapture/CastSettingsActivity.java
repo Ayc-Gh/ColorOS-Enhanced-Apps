@@ -25,7 +25,7 @@ public final class CastSettingsActivity extends Activity {
         body=new LinearLayout(this);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(dp(20),dp(16),dp(20),dp(28));scroll.addView(body);
         UiKit.header(this,body,"OPPO 互联","电脑投屏与截图录屏");body.addView(UiKit.status(this,SettingsBridge.status));
         section("截图与录屏");
-        toggle(Config.CAPTURE,"解除截图录屏限制","用于手机截图、录屏和电脑投屏；移除普通窗口的安全标记限制。独立于下方投屏优化开关，修改后重新打开目标应用。");
+        toggle(Config.CAPTURE,"解除截图录屏限制","用于手机截图、录屏和电脑投屏；移除普通窗口的安全标记限制。独立于下方投屏优化开关，修改后重新打开目标应用；电脑投屏还需停止并重新投屏。");
         section("电脑投屏");
         toggle(Config.CAST,"启用电脑投屏优化","作用于 OPPO 互联使用的屏幕投屏组件；改变设置后停止并重新发起手机投屏");
         Button recommended=UiKit.button(this,"应用本机建议设置",true);recommended.setEnabled(ready());recommended.setOnClickListener(v->save(e->{e.putBoolean(Config.CAST,true);e.putInt(Config.CAST_QUALITY,1);e.remove(Config.CAST_BITRATE);e.putInt(Config.CAST_FPS,60);e.putInt(Config.CAST_RESOLUTION,0);e.putBoolean(Config.CAST_DENSITY,true);for(String k:new String[]{Config.CAST_LOW_BANDWIDTH,Config.CAST_MODEL,Config.CAST_HARDWARE,Config.CAST_GAME})e.putBoolean(k,false);}));body.addView(recommended);

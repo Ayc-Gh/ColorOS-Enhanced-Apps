@@ -1,0 +1,78 @@
+{
+  "date": "2026-11-14",
+  "device": "PHY110",
+  "rom": "PHY110_17.0.0.100(CN01)",
+  "version": "2.1.0",
+  "version_code": 16,
+  "apk_sha256": "9659813ccfbb124236d3819604f37e0ce8f1b60c4c39c8989c9ec1d8a030177a",
+  "certificate_sha256": "ac8dd32294627c740e436288919805d7d9403592add3436c1f006df58ab16f37",
+  "build": {
+    "release": "passed",
+    "lint_errors": 0,
+    "lint_warnings": 32,
+    "junit_tests": 125,
+    "junit_failures": 0,
+    "test_classes": 27,
+    "runner": "JUnit 4.13.2 directly on compiled Java/Kotlin classes; Gradle Windows class-loading issue documented"
+  },
+  "native_camera": {
+    "RAW": "available",
+    "RAW_MAX": "available",
+    "professional_video": "available",
+    "long_exposure": "available",
+    "RAW_plus": "old separate control not verified usable",
+    "O_Log2": "not verified",
+    "starry": "entry and preview only; shutter did not produce image",
+    "filters": [
+      "和光 and 反差黑白 absent from real native list",
+      "required LUTs missing from installed firmware",
+      "donor resources located; offscreen harness inconclusive because native control also returned null",
+      "donor filters not bundled"
+    ]
+  },
+  "log": {
+    "implemented": "native in-memory feature registry",
+    "verified_recording": {
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "codec": "HEVC",
+      "profile": "Main10"
+    },
+    "selection": "current camera process only; stored native state remains SDR / off",
+    "module_disabled_then_camera_restarted": "native SDR label and native SDR-only format menu verified",
+    "new_process_with_feature_on": "defaults to SDR",
+    "samples_deleted": true
+  },
+  "sound": {
+    "native_policy": "MMListService runtime mss-whitelist; no persistent system file edit",
+    "enable_before": -1,
+    "enable_after": 0,
+    "enabled_query_after": 1,
+    "enable_after_restore": -1,
+    "native_gain_change": {
+      "background_before": 100,
+      "background_after_drag": 34,
+      "background_set_and_read": 50
+    },
+    "native_panel": "verified with independent local synthetic media fixture",
+    "scope_hosts": [
+      "com.oplus.audio.effectcenter",
+      "com.oplus.atlas"
+    ],
+    "module_disabled_then_audio_host_restarted": "native policy restored",
+    "xml_sha256_before_and_after": "ab631bcdf76aeb055c8574d84ae263a3bc23620749d8e3177605b368d015234d"
+  },
+  "final_device": {
+    "installed_apk_hash_matches": true,
+    "module_enabled": true,
+    "new_toggles_off": true,
+    "root_sound_companion_stopped": true,
+    "temporary_test_packages_removed": true,
+    "temporary_filter_resources_removed": true,
+    "audio_support_property": 1,
+    "spatial_render_setting_restored_to_absent": true,
+    "reboot_completed": true,
+    "native_camera_format": "JPG and SDR; professional video EIS restored on"
+  }
+}

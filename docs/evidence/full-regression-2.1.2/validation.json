@@ -1,0 +1,574 @@
+{
+  "version": "2.1.2",
+  "version_code": 18,
+  "date": "2026-11-14",
+  "device": {
+    "model": "PHY110",
+    "rom": "PHY110_17.0.0.100(CN01)",
+    "api": 37,
+    "effective_size": [
+      1080,
+      2376
+    ],
+    "density_dpi": 480
+  },
+  "apk_sha256": "bb229b565135e23748e03126f866b8c85d9eae60a24ff65c7d9befec9dabf8c5",
+  "certificate_sha256": "ac8dd32294627c740e436288919805d7d9403592add3436c1f006df58ab16f37",
+  "validation_scope": {
+    "initial_paired_tests_version": "2.1.1",
+    "fixed_runtime_version": "2.1.2",
+    "final_apk_changes_after_functional_test": "Projection reconnect guidance text only; installed and UI-smoke checked.",
+    "all_combinations_passed": false
+  },
+  "build": {
+    "release": "passed",
+    "lint_errors": 0,
+    "lint_warnings": 32,
+    "junit_tests": 130,
+    "junit_classes": 28,
+    "junit_runner": "JUnitCore; Windows test-worker path workaround"
+  },
+  "hosts": {
+    "android": {
+      "version": "2.1.2",
+      "code": 18,
+      "adapter": "ready"
+    },
+    "com.android.systemui": {
+      "version": "2.1.2",
+      "code": 18,
+      "adapter": "ready"
+    },
+    "com.oplus.aod": {
+      "version": "2.1.2",
+      "code": 18,
+      "adapter": "ready"
+    },
+    "com.oplus.gesture": {
+      "version": "2.1.2",
+      "code": 18,
+      "adapter": "ready"
+    },
+    "com.oplus.trafficmonitor": {
+      "version": "2.1.2",
+      "code": 18,
+      "adapter": "ready"
+    },
+    "com.oplus.gleanerservice": {
+      "version": "2.1.2",
+      "code": 18,
+      "adapter": "ready"
+    },
+    "com.coloros.gallery3d": {
+      "version": "2.1.2",
+      "code": 18,
+      "adapter": "ready"
+    },
+    "com.oplus.camera": {
+      "version": "2.1.2",
+      "code": 18,
+      "adapter": "ready"
+    },
+    "com.oplus.cast": {
+      "version": "2.1.2",
+      "code": 18,
+      "adapter": "ready"
+    }
+  },
+  "windows": {
+    "initial_core_cases": 16,
+    "initial_extra_cases": 15,
+    "all_listed_cases_passed": true,
+    "core": {
+      "capture-off": {
+        "screenshot_rgb": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "recording_rgb": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "passed": true
+      },
+      "capture-on": {
+        "screenshot_rgb": [
+          [
+            0,
+            200,
+            122
+          ],
+          [
+            255,
+            90,
+            66
+          ]
+        ],
+        "recording_rgb": [
+          [
+            0,
+            198,
+            120
+          ],
+          [
+            254,
+            88,
+            65
+          ]
+        ],
+        "passed": true
+      },
+      "capture-restored": {
+        "screenshot_rgb": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "recording_rgb": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "passed": true
+      },
+      "window-count-None-3": {
+        "visible": 2,
+        "passed": true
+      },
+      "window-count-5-4": {
+        "visible": 5,
+        "passed": true
+      },
+      "window-count-None-5": {
+        "visible": 2,
+        "passed": true
+      },
+      "window-count-5-6": {
+        "visible": 5,
+        "passed": true
+      },
+      "window-count-None-7": {
+        "visible": 2,
+        "passed": true
+      },
+      "edge-count-None-8": {
+        "parked": 2,
+        "passed": true
+      },
+      "edge-count-5-9": {
+        "parked": 5,
+        "passed": true
+      },
+      "edge-count-None-10": {
+        "parked": 2,
+        "passed": true
+      },
+      "ratio-2.0": {
+        "actual": 2.0,
+        "passed": true
+      },
+      "ratio-1.5": {
+        "actual": 1.5,
+        "passed": true
+      },
+      "edge-foreground-False-13": {
+        "passed": true
+      },
+      "edge-foreground-True-14": {
+        "passed": true
+      },
+      "edge-foreground-False-15": {
+        "passed": true
+      }
+    },
+    "extra": {
+      "desktop-off": {
+        "expected_floating": false,
+        "actual_floating": false,
+        "passed": true
+      },
+      "desktop-on": {
+        "expected_floating": true,
+        "actual_floating": true,
+        "passed": true
+      },
+      "desktop-restored": {
+        "expected_floating": false,
+        "actual_floating": false,
+        "passed": true
+      },
+      "remember-off": {
+        "expected_floating": false,
+        "actual_floating": false,
+        "passed": true
+      },
+      "remember-on": {
+        "expected_floating": true,
+        "actual_floating": true,
+        "passed": true
+      },
+      "remember-restored": {
+        "expected_floating": false,
+        "actual_floating": false,
+        "passed": true
+      },
+      "jump-off": {
+        "expected_floating": false,
+        "actual_floating": false,
+        "passed": true
+      },
+      "jump-on": {
+        "expected_floating": true,
+        "actual_floating": true,
+        "passed": true
+      },
+      "jump-restored": {
+        "expected_floating": false,
+        "actual_floating": false,
+        "passed": true
+      },
+      "notification-off": {
+        "expected_floating": false,
+        "actual_floating": false,
+        "passed": true
+      },
+      "notification-on": {
+        "expected_floating": true,
+        "actual_floating": true,
+        "passed": true
+      },
+      "notification-restored": {
+        "expected_floating": false,
+        "actual_floating": false,
+        "passed": true
+      },
+      "split-off": {
+        "height": 2041,
+        "passed": true
+      },
+      "split-on": {
+        "height": 1116,
+        "passed": true
+      },
+      "split-restored": {
+        "height": 2041,
+        "passed": true
+      }
+    },
+    "candidate_capture": {
+      "off": {
+        "version": "2.1.2",
+        "enabled": false,
+        "screenshot_rgb": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "secure_requested": true,
+        "passed": true
+      },
+      "on": {
+        "version": "2.1.2",
+        "enabled": true,
+        "screenshot_rgb": [
+          [
+            0,
+            200,
+            122
+          ],
+          [
+            255,
+            90,
+            66
+          ]
+        ],
+        "secure_requested": true,
+        "passed": true
+      }
+    },
+    "appearance": {
+      "status": "not_confirmed",
+      "reason": "Same appearance in both requested settings; no observed geometry change on attempted drag.",
+      "observations": {
+        "appearance-square": {
+          "bounds": [
+            104,
+            274,
+            977,
+            1826
+          ],
+          "requested_corner": 0,
+          "requested_shadow": 0
+        },
+        "appearance-round-shadow": {
+          "bounds": [
+            104,
+            274,
+            977,
+            1826
+          ],
+          "requested_corner": 120,
+          "requested_shadow": 90
+        },
+        "free-False": {
+          "before": [
+            104,
+            274,
+            977,
+            1826
+          ],
+          "after": [
+            104,
+            274,
+            977,
+            1826
+          ],
+          "ratio_before": 0.5625,
+          "ratio_after": 0.5625
+        },
+        "free-True": {
+          "before": [
+            104,
+            274,
+            977,
+            1826
+          ],
+          "after": [
+            104,
+            274,
+            977,
+            1826
+          ],
+          "ratio_before": 0.5625,
+          "ratio_after": 0.5625
+        }
+      }
+    },
+    "advanced_caption_multi_mode_and_system_exclusion_exhaustively_tested": false
+  },
+  "cast": {
+    "enhanced60": {
+      "enabled": true,
+      "requestedFps": 60,
+      "session": true,
+      "codec": "c2.qti.avc.encoder",
+      "mime": "video/avc",
+      "width": 1080,
+      "height": 2376,
+      "validatedFps": 120,
+      "configuredFps": 60
+    },
+    "enhanced90": {
+      "enabled": true,
+      "requestedFps": 90,
+      "session": true,
+      "codec": "c2.qti.avc.encoder",
+      "mime": "video/avc",
+      "width": 1080,
+      "height": 2376,
+      "validatedFps": 120,
+      "configuredFps": 90
+    },
+    "enhanced120": {
+      "enabled": true,
+      "requestedFps": 120,
+      "session": true,
+      "codec": "c2.qti.avc.encoder",
+      "mime": "video/avc",
+      "width": 1080,
+      "height": 2376,
+      "validatedFps": 120,
+      "configuredFps": 120
+    },
+    "native_final": {
+      "enabled": false,
+      "requestedFps": 0,
+      "session": false
+    },
+    "normal_fixture_visible_on_pc": true,
+    "actual_transmitted_fps_measured": false
+  },
+  "capture_projection": {
+    "version": "2.1.2",
+    "secure_fixture_primary_off_black": true,
+    "secure_fixture_primary_on_colors": true,
+    "pc_kept_previous_protection_until_reconnected": true,
+    "pc_after_reconnect_colors_visible": true,
+    "pc_window_must_be_foreground_for_reliable_graphics_capture": true
+  },
+  "aod": {
+    "native_hide_seconds_approx": 6.7,
+    "thirty_second_deadline_ms": 30025,
+    "running_multiplier": {
+      "requested": 1.25,
+      "original": 0.24409449,
+      "observed": 0.3051181
+    },
+    "all_day_requires_native_selection": true,
+    "full_night_power_tested": false,
+    "long_low_light_all_physical_taps_and_all_initial_brightness_levels_tested": false
+  },
+  "gesture": {
+    "entry_off_on_off_passed": true,
+    "physical_learning_user_confirmed": [
+      "answer",
+      "scroll",
+      "pause_play"
+    ],
+    "native_engine_unchanged": true,
+    "real_call_tested": false
+  },
+  "network": {
+    "category_cases": 15,
+    "uid_rule_sequence": [
+      1,
+      4,
+      2,
+      0
+    ],
+    "other_uid_rules_unchanged": true,
+    "fixture_final_rule": 0,
+    "actual_packet_filtering_tested": false
+  },
+  "memory": {
+    "entry_off_on_off_passed": true,
+    "existing_unrecorded_bill_created_record_user_confirmed": true,
+    "new_payment_requested": false,
+    "bill_fields_read": false,
+    "runtime_counters_captured_event": false,
+    "all_payment_ocr_and_dedup_paths_retested": false
+  },
+  "gallery": {
+    "entry_off_on_off_passed": true,
+    "synthetic_fixture_used": true,
+    "native_cloud_edit_saved_new_picture": true,
+    "result_size": [
+      1200,
+      900
+    ],
+    "mean_rgb_difference": [
+      53.223167592592596,
+      9.51142037037037,
+      30.601151851851853
+    ],
+    "own_media_removed": true
+  },
+  "camera": {
+    "log_format_verified": "HEVC Main10, 1920x1080, nominal 30fps",
+    "log_duration_ms": 4843,
+    "video_stream": "Stream #0:0[0x1](eng): Video: hevc (Main 10) (hvc1 / 0x31637668), yuv420p10le(tv, bt709), 1920x1080, 31730 kb/s, 30.02 fps, 30 tbr, 90k tbn (default)",
+    "session_restarts_in_sdr": true,
+    "toggle_off_removes_log": true,
+    "olog2_claimed": false,
+    "inspiration": {
+      "version": "2.1.2",
+      "list_visible": true,
+      "visible_recommendations_at_least": 5,
+      "selected_reference_visible": true,
+      "pose_guidance_visible": true,
+      "user_confirmed_selectable_and_guidance_visible": true,
+      "dynamic_tracking_tested": false,
+      "raw_screenshots_removed": true
+    },
+    "temporary_clip_removed": true,
+    "settings_snapshot_restored": true
+  },
+  "sound": {
+    "off_on_off_on_passed": true,
+    "native_finite_gain_readback_passed": true,
+    "background_samples": 7,
+    "background_observation_seconds_at_least": 60,
+    "audioserver_pid_stable": true,
+    "ui_restore": {
+      "ui_off_restore_seconds": 4.26,
+      "off_native": {
+        "tv.danmaku.bili": "transact=true bytes=12\r\nattribute=null found=0",
+        "com.dragon.read": "transact=true bytes=12\r\nattribute= found=0"
+      },
+      "ui_on_apply_seconds": 4.96,
+      "on_native": {
+        "tv.danmaku.bili": "transact=true bytes=12\r\nattribute=1 found=1",
+        "com.dragon.read": "transact=true bytes=12\r\nattribute=3 found=1"
+      },
+      "force_stop": {
+        "app_pid": "",
+        "state": "1681589\r\n已恢复系统原生应用范围",
+        "native": {
+          "tv.danmaku.bili": "transact=true bytes=12\r\nattribute=null found=0",
+          "com.dragon.read": "transact=true bytes=12\r\nattribute= found=0"
+        }
+      },
+      "reopen_restores_feature": true
+    },
+    "cold_boot": {
+      "previous_version_provider_start_blocked": true,
+      "new_version_applies_without_opening_manager": true,
+      "active_at_uptime_seconds": 49.73,
+      "source_fix": "Exact audio-host provider association context; keep prior native checks."
+    },
+    "system_disk_files_unchanged": true,
+    "full_vocal_background_elimination_implemented": false
+  },
+  "ui": {
+    "pages": 9,
+    "home_entrances": 8,
+    "observed_controls_enabled": true,
+    "removed_labels_absent": true
+  },
+  "restoration": {
+    "exact_configuration_restored": true,
+    "module_scope_unchanged": true,
+    "module_state_unchanged": true,
+    "installed_apk_matches_final_build": true,
+    "billing_choices_preserved": true,
+    "configuration_helper_removed": true,
+    "scratch_removed": true,
+    "temporary_log_video_removed": true
+  },
+  "final_enabled_enhancements": [
+    "camera_inspiration_recommendation",
+    "camera_log_video",
+    "gallery_ai_retouch",
+    "sound_mss_apps"
+  ],
+  "final_window_and_edge_count": "system default",
+  "real_user_bill_preserved": true,
+  "raw_user_content_distributed": false
+}

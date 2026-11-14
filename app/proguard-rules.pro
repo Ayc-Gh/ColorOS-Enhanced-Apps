@@ -4,6 +4,8 @@
 -keep class io.github.oshin.windowcapture.AimemoryEntry { *; }
 -keep class io.github.oshin.windowcapture.GalleryEntry { *; }
 -keep class io.github.oshin.windowcapture.CameraInspirationEntry { *; }
+-keep class io.github.oshin.windowcapture.SoundEntry { *; }
+-keep class io.github.oshin.windowcapture.SoundPolicyRoot { *; }
 -keep class io.github.oshin.windowcapture.Config { *; }
 -keep class com.op.aod.enhance.ModuleEntry { *; }
 -dontwarn io.github.libxposed.annotation.**

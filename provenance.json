@@ -1,6 +1,6 @@
 {
   "application_id_source": "app/build.gradle.kts",
-  "version": "2.0.0",
+  "version": "2.1.2",
   "device": "PHY110",
   "rom": "PHY110_17.0.0.100(CN01)",
   "android_sdk": 37,
@@ -20,7 +20,7 @@
     "oplus-services.jar": "5a3613f87b766bc5923e4d9d75a0e3b79aa2c22f92d43a984d3cb0823f9e5a90",
     "services.jar": "78be31cdbfda61fdbfd84013c2c0b31812468bec8ffc4a0aa56ab4f4e0937e44"
   },
-  "apk_sha256": "115270ad87cc7b3cadcda83887c43a9df990b838e339b02eeaf4db622540713e",
+  "apk_sha256": "bb229b565135e23748e03126f866b8c85d9eae60a24ff65c7d9befec9dabf8c5",
   "license": "AGPL-3.0-or-later",
   "optional_features_not_exhaustively_tested": true,
   "oem_cast_apks": {
@@ -28,18 +28,8 @@
     "OPSynergy.apk": "a94af8ff5c0425095fbbf921d10afe1608197c0538b12e246f3a2a3a92db05c3",
     "ShareScreen.apk": "83912117bb5906a2e86a6870e05f41e6bde34a8a878b8d3c05688c81bef8e070"
   },
-  "validation": "docs/GALLERY_AI_RETOUCH_2.0.0.md",
-  "final_cast": {
-    "width": 1440,
-    "height": 3168,
-    "density_dpi": 560,
-    "virtual_refresh_hz": 60.0,
-    "stream_min_kbps": 12000,
-    "stream_max_kbps": 16000,
-    "requested_fps": 60,
-    "custom_bitrate": false
-  },
-  "version_code": 15,
+  "validation": "docs/evidence/full-regression-2.1.2/validation.json",
+  "version_code": 18,
   "app_name": "ColorOS 增强",
   "aod_source": {
     "repository": "NOTICE",
@@ -49,14 +39,15 @@
   },
   "scopes": [
     "com.android.systemui",
-    "com.coloros.aod",
+    "com.coloros.gallery3d",
     "com.oplus.aod",
+    "com.oplus.atlas",
+    "com.oplus.audio.effectcenter",
     "com.oplus.camera",
     "com.oplus.cast",
     "com.oplus.gesture",
     "com.oplus.gleanerservice",
     "com.oplus.trafficmonitor",
-    "com.coloros.gallery3d",
     "system"
   ],
   "licenses": {
@@ -75,7 +66,10 @@
     "docs/evidence/network-1.6.0/validation.json",
     "docs/evidence/network-1.6.1/validation.json",
     "docs/evidence/optimization-1.5.0/validation.json",
-    "docs/evidence/release-1.4.1/validation.json"
+    "docs/evidence/release-1.4.1/validation.json",
+    "docs/evidence/camera-sound-2.1.0/validation.json",
+    "docs/evidence/sound-fix-2.1.1/validation.json",
+    "docs/evidence/full-regression-2.1.2/validation.json"
   ],
   "historical_confirmed_tests": [
     "Three settings entrances and AOD subpages",
@@ -87,7 +81,7 @@
     "50 AOD unit tests and 17 cast policy checks"
   ],
   "device_tested_this_release": true,
-  "changes": "Add Gallery AI retouch and tested cloud inspiration recommendation entries; preserve native account, network, quota, save and reference/shoot-same flows; exclude failed local composition runtime.",
+  "changes": "Fix the native audio host provider association at cold boot; retain force-stop and prior native checks. Add projection reconnect guidance after capture toggles. Perform paired regression with explicit unverified cases.",
   "historical_final_enabled": [
     "unlock_flexible",
     "unlock_split",
@@ -120,5 +114,27 @@
     "native_phone_limit": 2,
     "device_validated_maximum": 5,
     "final_preference": "unset"
+  },
+  "historical_cast_configuration": {
+    "enhancement_enabled": false,
+    "requested_fps": 0,
+    "parameters": "native negotiation"
+  },
+  "final_enabled": [
+    "camera_inspiration_recommendation",
+    "camera_log_video",
+    "gallery_ai_retouch",
+    "sound_mss_apps"
+  ],
+  "validation_scope": {
+    "initial_paired_tests_version": "2.1.1",
+    "fixed_runtime_version": "2.1.2",
+    "final_apk_changes_after_functional_test": "Projection reconnect guidance text only; installed and UI-smoke checked.",
+    "all_combinations_passed": false
+  },
+  "final_cast": {
+    "enhancement_enabled": false,
+    "requested_fps": 0,
+    "parameters": "native negotiation"
   }
 }

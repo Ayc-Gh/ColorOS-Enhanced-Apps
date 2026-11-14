@@ -1,0 +1,84 @@
+{
+  "date": "2026-11-14",
+  "device": "PHY110",
+  "rom": "PHY110_17.0.0.100(CN01)",
+  "version": "2.1.1",
+  "version_code": 17,
+  "apk_sha256": "60b79fa4c486ef58e41e264b158338da53f5bef95d4f91b8c638f23b370c0a16",
+  "certificate_sha256": "ac8dd32294627c740e436288919805d7d9403592add3436c1f006df58ab16f37",
+  "build": {
+    "release": "passed",
+    "lint_errors": 0,
+    "lint_warnings": 32,
+    "junit_tests": 127,
+    "junit_failures": 0,
+    "test_classes": 27,
+    "runner": "JUnit 4.13.2 directly on compiled Java/Kotlin classes"
+  },
+  "regression_causes": {
+    "bilibili": "native whitelist category bit 16 remained; native backend rejected under music-only application policy",
+    "tomato": "transient provider connection lost its renewal; expired lease restored original whitelist"
+  },
+  "application_attributes": {
+    "tv.danmaku.bili": {
+      "native_xml": 17,
+      "patched": 1
+    },
+    "com.dragon.read": {
+      "native_xml": "absent",
+      "patched": 3
+    }
+  },
+  "native_controls": {
+    "tv.danmaku.bili": {
+      "attribute": "transact=true bytes=12\r\nattribute=1 found=1\r\n",
+      "enable": "Result: Parcel(\t00000000 00000000   '........')\r\n",
+      "active": "Result: Parcel(\t00000000 00000001   '........')\r\n",
+      "disable": "Result: Parcel(\t00000000 00000000   '........')\r\n"
+    },
+    "com.dragon.read": {
+      "attribute": "transact=true bytes=12\r\nattribute=3 found=1\r\n",
+      "enable": "Result: Parcel(\t00000000 00000000   '........')\r\n",
+      "active": "Result: Parcel(\t00000000 00000001   '........')\r\n",
+      "disable": "Result: Parcel(\t00000000 00000000   '........')\r\n"
+    }
+  },
+  "background": {
+    "seconds": 257.3,
+    "samples": 16,
+    "all_leases_fresh": true,
+    "all_application_attributes_correct": true,
+    "stable_provider_connection": true
+  },
+  "recovery_checks": {
+    "native_policy_reload_recovered": true,
+    "toggle_off_restores_both_native_policies": true,
+    "root_companion_stopped_when_off": true,
+    "toggle_on_reapplies_both": true,
+    "module_disabled_audio_host_restart_restores": true,
+    "module_reenabled_audio_host_restart_reapplies": true,
+    "system_xml_unchanged": true
+  },
+  "user_confirmation": {
+    "normal_entry_test": "user_confirmed_both_applications_open_native_panel",
+    "reported_apps": [
+      "tv.danmaku.bili",
+      "com.dragon.read"
+    ],
+    "verbatim_reply": "两个都能打开",
+    "effect_listening": "not_requested_or_user_confirmed"
+  },
+  "final_device": {
+    "module_enabled": true,
+    "installed_version_17": true,
+    "sound_toggle_preserved_on": true,
+    "both_application_policies_active": true,
+    "fresh_runtime_status": true,
+    "system_policy_unchanged": true,
+    "temporary_probes_removed": true
+  },
+  "limits": [
+    "Application whitelist and classification restrictions only. Native device, spatial effect and media-scene compatibility remain.",
+    "Native panel opening and native gain controls were observed; listening perception requires actual content and output-device verification."
+  ]
+}

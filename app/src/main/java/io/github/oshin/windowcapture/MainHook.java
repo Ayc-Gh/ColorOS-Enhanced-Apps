@@ -36,6 +36,8 @@ public final class MainHook extends XposedModule {
     private final EdgeCountPolicy edgeCountPolicy=new EdgeCountPolicy();
     private final ThreadLocal<Integer> minimizing=ThreadLocal.withInitial(()->0);
     private final ThreadLocal<ArrayDeque<LaunchContext>> launchContext=ThreadLocal.withInitial(ArrayDeque::new);
+    private record SoundCaller(String packageName,int targetUid){}
+    private final ThreadLocal<SoundCaller> soundCaller=new ThreadLocal<>();
     private String registeringFeature="Window.Framework";
     private final java.util.concurrent.atomic.AtomicInteger pendingLaunchChecks=new java.util.concurrent.atomic.AtomicInteger();
     private record LaunchContext(Object controller,Object target,Object source,Object task,Object existingTask,
@@ -60,6 +62,7 @@ public final class MainHook extends XposedModule {
         installFeature("Window.Capture",this::installCapture);installFeature("Window.Layout",this::installWindows);
         installFeature("Window.Split",this::installSplit);installFeature("Window.Launch",this::installLaunch);
         installFeature("Window.Caption",this::installCaption);installFeature("Window.Edge",this::installEdge);
+        installFeature("Sound.Startup",this::installSoundStartup);
         installDiagnostics();
         log(Log.INFO,TAG,"Installed "+hooks+" hooks; device="+android.os.Build.MODEL+" API="+android.os.Build.VERSION.SDK_INT);
     }
@@ -86,6 +89,45 @@ public final class MainHook extends XposedModule {
     private int count(){int n=number(Config.COUNT);return n>=1?Math.min(n,Config.MAX_COUNT):-1;}
     private void info(String s){if(bool(Config.LOG))log(Log.INFO,TAG,s);}
     private void hit(String key){if(bool(Config.LOG)&&reported.add(key))log(Log.INFO,TAG,"Applied: "+key);}
+    private void installSoundStartup(){
+        String manager="com.android.server.am.OplusAppStartupManager";
+        Class<?> owner=cls(manager);
+        if(owner==null)throw new IllegalStateException("Startup manager unavailable");
+        final Class<?> strategy;
+        try{strategy=owner.getDeclaredField("mOplusStartupStrategy").getType();}
+        catch(ReflectiveOperationException error){throw new IllegalStateException(error);}
+        hook(manager,"isAllowStartFromProvider",m->m.getReturnType()==boolean.class&&Arrays.equals(
+                Arrays.stream(m.getParameterTypes()).map(Class::getName).toArray(String[]::new),
+                new String[]{"com.android.server.am.ProcessRecord","com.android.server.am.ContentProviderRecord","android.content.pm.ApplicationInfo","java.lang.String","int"}),m->chain->{
+            SoundCaller previous=soundCaller.get(),current=null;
+            if(bool(SoundPolicy.KEY)){
+                Object process=chain.getArg(0),record=chain.getArg(1),value=chain.getArg(2);
+                Object name=Reflect.field(record,"name");
+                if(value instanceof ApplicationInfo info&&name instanceof android.content.ComponentName component&&SoundStartupPolicy.APP.equals(component.getPackageName())){
+                    String caller=(String)chain.getArg(3);
+                    if(SoundStartupPolicy.caller(true,(Integer)chain.getArg(4),Reflect.integer(process,"uid",-1),
+                            (String)Reflect.field(process,"processName"),caller,info.packageName,component.getClassName(),info.uid,
+                            (info.flags&(ApplicationInfo.FLAG_STOPPED|ApplicationInfo.FLAG_SUSPENDED))!=0))current=new SoundCaller(caller,info.uid);
+                }
+            }
+            if(current==null)soundCaller.remove();else soundCaller.set(current);
+            try{return chain.proceed();}finally{if(previous==null)soundCaller.remove();else soundCaller.set(previous);}
+        });
+        // Override only the final association list decision. The native provider
+        // path still applies thermal, force-stop, suspension and enterprise checks.
+        hook(strategy.getName(),"isAllowAssociateByList",m->m.getReturnType()==boolean.class&&Arrays.equals(
+                m.getParameterTypes(),new Class<?>[]{int.class,String.class,String.class,String.class,String.class,String.class,int.class,int.class,int.class,int.class,int.class}),m->chain->{
+            Object nativeValue=chain.proceed();SoundCaller caller=soundCaller.get();
+            if(Boolean.FALSE.equals(nativeValue)&&caller!=null&&SoundStartupPolicy.association(bool(SoundPolicy.KEY),
+                    (Integer)chain.getArg(0),(String)chain.getArg(1),(String)chain.getArg(2),(String)chain.getArg(3),
+                    (String)chain.getArg(5),(Integer)chain.getArg(8),(Integer)chain.getArg(10),caller.packageName(),caller.targetUid())){
+                hit("sound provider association");return true;
+            }
+            return nativeValue;
+        });
+        for(Method method:owner.getDeclaredMethods())if(Set.of("shouldPreventStartProvider","isAllowStartFromProvider").contains(method.getName()))deoptimize(method);
+        for(Method method:strategy.getDeclaredMethods())if(method.getName().equals("isAllowAssociateByList"))deoptimize(method);
+    }
     private void flag(String c,String n,String key,boolean value) {
         hook(c,n,m->m.getReturnType()==boolean.class,m->chain->{if(!bool(key))return chain.proceed();hit(n);return value;});
     }
