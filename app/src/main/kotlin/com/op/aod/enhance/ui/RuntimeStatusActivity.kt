@@ -12,7 +12,7 @@ class RuntimeStatusActivity:NativeSettingsActivity(){
     private var hosts=RuntimeProtocol.hosts
     override val observeAod=false
     override fun onCreate(state:Bundle?){
-        hosts=when(intent.getStringExtra("section")){"windows"->RuntimeProtocol.windowHosts;"network"->listOf("com.oplus.trafficmonitor");"memory"->listOf("com.oplus.gleanerservice");"cast"->listOf("com.oplus.cast");"gesture"->listOf("com.oplus.gesture");else->RuntimeProtocol.hosts}
+        hosts=when(intent.getStringExtra("section")){"windows"->RuntimeProtocol.windowHosts;"network"->listOf("com.oplus.trafficmonitor");"memory"->listOf("com.oplus.gleanerservice");"cast"->listOf("com.oplus.cast");"gesture"->listOf("com.oplus.gesture");"gallery"->listOf("com.coloros.gallery3d");"camera"->listOf("com.oplus.camera");else->RuntimeProtocol.hosts}
         client=RuntimeStatusClient(this,hosts);super.onCreate(state)
         jobs.launch{client.reports.collect{refreshPage()}};jobs.launch{client.message.collect{refreshPage()}}
     }
@@ -20,7 +20,7 @@ class RuntimeStatusActivity:NativeSettingsActivity(){
         header("功能运行状态","配置保存、接口加载与实际效果分别确认")
         note(client.message.value);action("刷新功能状态",true){client.refresh()}
         for(host in hosts){
-            section(when(host){"android"->"系统框架";"com.android.systemui"->"系统界面";"com.oplus.trafficmonitor"->"流量管理";"com.oplus.gleanerservice"->"小布记忆";"com.oplus.cast"->"屏幕投屏";"com.oplus.gesture"->"手势体感";else->"系统息屏设置"})
+            section(when(host){"android"->"系统框架";"com.android.systemui"->"系统界面";"com.oplus.trafficmonitor"->"流量管理";"com.oplus.gleanerservice"->"小布记忆";"com.oplus.cast"->"屏幕投屏";"com.oplus.gesture"->"手势体感";"com.coloros.gallery3d"->"相册";"com.oplus.camera"->"相机";else->"系统息屏设置"})
             val report=client.reports.value[host]
             if(report==null){note("未知：尚未收到该进程回复。首次更新需重启手机，并打开对应系统页面后检查。");continue}
             if(report.optInt("code")!=BuildConfig.VERSION_CODE){note("仍在运行旧版 ${report.optString("version")}，请重启手机一次。");continue}
@@ -33,6 +33,12 @@ class RuntimeStatusActivity:NativeSettingsActivity(){
                 note("编码配置与实际传输帧率分别判断；此处不测量电脑收到的实时帧率。")
             }
             report.optJSONObject("gesture")?.let{g->note(if(g.optBoolean("enabled"))"额外手势入口已开启" else "额外手势入口已关闭");note("手势识别继续使用系统原生引擎。")}
+            report.optJSONObject("gallery")?.let{g->
+                note(if(g.optBoolean("enabled"))"AI 修图师解锁已开启" else "AI 修图师解锁已关闭")
+                note(when{!g.has("nativeSupport")->"尚未读取相册支持判断，请先进入照片编辑。";g.optBoolean("nativeSupport")->"系统已原生支持，保持原生处理。";g.optBoolean("expanded")->"已补齐本机隐藏的 AI 修图师入口。";else->"本机原生未开放 AI 修图师入口。"})
+                note("修图请求、联网授权和保存结果由相册处理；入口已显示不代表本次修图成功。")
+            }
+            report.optJSONObject("camera")?.let{c->note(if(c.optBoolean("enabled"))"云端灵感推荐解锁已开启" else "云端灵感推荐解锁已关闭");note(if(c.optBoolean("expanded"))"已恢复相机灵感推荐入口" else "尚未触发相机入口");note("推荐图片、网络请求和参考／跟拍引导由相机及云端服务处理；本地实时灵感构图未加入。")}
             report.optJSONObject("memory")?.let{m->
                 note(if(m.optBoolean("enabled"))"微信支持恢复已开启" else "微信支持恢复已关闭")
                 note(when(m.optString("adapter")){"adapted"->"已补齐微信页面配置：${m.optInt("repaired")} 项";"mixed"->"保留原生页面配置，另补齐 ${m.optInt("repaired")} 项缺失页面";"native"->"系统已有微信支持，保持原生配置";"ready"->"适配接口已加载，尚未读取系统列表";else->"未找到可适配配置，保持原生处理"})

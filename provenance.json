@@ -1,6 +1,6 @@
 {
   "application_id_source": "app/build.gradle.kts",
-  "version": "1.8.0",
+  "version": "2.0.0",
   "device": "PHY110",
   "rom": "PHY110_17.0.0.100(CN01)",
   "android_sdk": 37,
@@ -20,7 +20,7 @@
     "oplus-services.jar": "5a3613f87b766bc5923e4d9d75a0e3b79aa2c22f92d43a984d3cb0823f9e5a90",
     "services.jar": "78be31cdbfda61fdbfd84013c2c0b31812468bec8ffc4a0aa56ab4f4e0937e44"
   },
-  "apk_sha256": "200c3001153d95bd6eb3948ffbfb65635bce6ae19fbdc97cf82c364240268cbe",
+  "apk_sha256": "115270ad87cc7b3cadcda83887c43a9df990b838e339b02eeaf4db622540713e",
   "license": "AGPL-3.0-or-later",
   "optional_features_not_exhaustively_tested": true,
   "oem_cast_apks": {
@@ -28,7 +28,7 @@
     "OPSynergy.apk": "a94af8ff5c0425095fbbf921d10afe1608197c0538b12e246f3a2a3a92db05c3",
     "ShareScreen.apk": "83912117bb5906a2e86a6870e05f41e6bde34a8a878b8d3c05688c81bef8e070"
   },
-  "validation": "docs/evidence/optimization-1.8.0/validation.json",
+  "validation": "docs/GALLERY_AI_RETOUCH_2.0.0.md",
   "final_cast": {
     "width": 1440,
     "height": 3168,
@@ -39,7 +39,7 @@
     "requested_fps": 60,
     "custom_bitrate": false
   },
-  "version_code": 13,
+  "version_code": 15,
   "app_name": "ColorOS 增强",
   "aod_source": {
     "repository": "NOTICE",
@@ -49,11 +49,14 @@
   },
   "scopes": [
     "com.android.systemui",
+    "com.coloros.aod",
     "com.oplus.aod",
+    "com.oplus.camera",
     "com.oplus.cast",
     "com.oplus.gesture",
     "com.oplus.gleanerservice",
     "com.oplus.trafficmonitor",
+    "com.coloros.gallery3d",
     "system"
   ],
   "licenses": {
@@ -63,14 +66,16 @@
   "aod_configuration_migrated": true,
   "prior_validation": [
     "docs/DEVICE_VALIDATION.md",
+    "docs/GALLERY_AI_RETOUCH_2.0.0.md",
     "docs/OPPO_CONNECT_CAST.md",
+    "docs/OPTIMIZATION_1.8.0.md",
+    "docs/evidence/aimemory-1.7.0/validation.json",
     "docs/evidence/cast-1.1.0/validation.json",
-    "docs/evidence/release-1.4.1/validation.json",
     "docs/evidence/edge-count-1.4.2/validation.json",
-    "docs/evidence/optimization-1.5.0/validation.json",
     "docs/evidence/network-1.6.0/validation.json",
     "docs/evidence/network-1.6.1/validation.json",
-    "docs/evidence/aimemory-1.7.0/validation.json"
+    "docs/evidence/optimization-1.5.0/validation.json",
+    "docs/evidence/release-1.4.1/validation.json"
   ],
   "historical_confirmed_tests": [
     "Three settings entrances and AOD subpages",
@@ -82,7 +87,7 @@
     "50 AOD unit tests and 17 cast policy checks"
   ],
   "device_tested_this_release": true,
-  "changes": "Remove application filtering controls; verify OCR amounts, preserve native rules per page, refine evidence-based duplicate checks, narrow low-light interception, independently restore caption controls, and validate selected encoders and host compatibility.",
+  "changes": "Add Gallery AI retouch and tested cloud inspiration recommendation entries; preserve native account, network, quota, save and reference/shoot-same flows; exclude failed local composition runtime.",
   "historical_final_enabled": [
     "unlock_flexible",
     "unlock_split",

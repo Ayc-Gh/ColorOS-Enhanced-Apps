@@ -1,0 +1,6 @@
+ColorOS 增强 v2.0.0
+versionCode: 15
+APK SHA-256: 115270ad87cc7b3cadcda83887c43a9df990b838e339b02eeaf4db622540713e
+Certificate SHA-256: ac8dd32294627c740e436288919805d7d9403592add3436c1f006df58ab16f37
+沿用既有签名，可覆盖安装。新增相册 AI 修图师与云端灵感推荐；本地实时灵感构图不加入。
+源码不含私钥、手机数据库或厂商 APK。

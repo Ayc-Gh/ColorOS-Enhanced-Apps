@@ -3,3 +3,5 @@ com.op.aod.enhance.ModuleEntry
 io.github.oshin.windowcapture.AirGestureEntry
 io.github.oshin.windowcapture.NetworkEntry
 io.github.oshin.windowcapture.AimemoryEntry
+io.github.oshin.windowcapture.GalleryEntry
+io.github.oshin.windowcapture.CameraInspirationEntry
