@@ -30,7 +30,6 @@ public final class WindowSettingsActivity extends Activity {
         toggle(Config.SPLIT,"允许不支持的应用分屏","尝试让不可调整大小的普通应用进入分屏；应用布局仍受自身实现影响");
         toggle(Config.MULTI,"强制多窗口模式","在小窗调用链启用多模式，保留分屏自身的系统策略");
         integer(Config.COUNT,"同时开启的小窗数量",1,10,"个");
-        toggle(Config.FREE,"自由调整小窗比例","开放自由比例与系统的可调整比例集合");
         decimal(Config.RATIO,"自定义小窗高宽比","高度 ÷ 宽度，0.25–3；2 表示高度为宽度的两倍；留空跟随系统");
         section("小窗外观");
         integer(Config.CORNER,"小窗圆角",0,300,"px");

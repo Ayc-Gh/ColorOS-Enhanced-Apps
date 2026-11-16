@@ -60,7 +60,6 @@ public final class MainHook extends XposedModule {
         boolean supported=CompatibilityPolicy.rom(android.os.Build.MODEL,android.os.Build.VERSION.SDK_INT,android.os.Build.DISPLAY);WindowDiagnostics.compatibility(supported);
         if(!supported){installDiagnostics();return;}
         installFeature("Window.Capture",this::installCapture);installFeature("Window.Layout",this::installWindows);
-        installFeature("Window.FreeResize",this::installFreeResize);
         new WindowAppearanceHooks(this,loader,prefs).install();
         installFeature("Window.Split",this::installSplit);installFeature("Window.Launch",this::installLaunch);
         installFeature("Window.Caption",this::installCaption);installFeature("Window.Edge",this::installEdge);
@@ -181,11 +180,6 @@ public final class MainHook extends XposedModule {
             return result;
         });
         deopt(WM+"FlexibleTaskController","updateTaskMaxNumWhenFocusChangedInPanoramic","adjustOptionsForSmartMultiWindow","isSupportMultiMode");
-    }
-    private void installFreeResize(){
-        String owner=WM+"FlexibleWindowUtils";
-        flag(owner,"isFlexibleTaskInSupportFreeRatiosList",Config.FREE,true);
-        hook(owner,"getUnSupportRatiosSetInFlexibleTask",m->Set.class.isAssignableFrom(m.getReturnType()),m->chain->{if(!bool(Config.FREE))return chain.proceed();return new HashSet<Float>();});
     }
     private boolean flexibleCaller(){
         boolean flexible=false;StackTraceElement[] frames=Thread.currentThread().getStackTrace();

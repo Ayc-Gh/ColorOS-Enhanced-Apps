@@ -1,0 +1,322 @@
+{
+  "completed": true,
+  "completed_at": "2026-11-17T03:20:18+0800",
+  "version": "2.1.5",
+  "version_code": 21,
+  "device": "PHY110",
+  "rom": "PHY110_17.0.0.100(CN01)",
+  "apk_sha256": "7fc8b123edf4af1695199d2c2f457a4849bb81c8247d69e9707c91dcd187f7d1",
+  "build_success": true,
+  "signature_valid": true,
+  "certificate_sha256": "ac8dd32294627c740e436288919805d7d9403592add3436c1f006df58ab16f37",
+  "lint_errors": 0,
+  "lint_warnings": 31,
+  "unit_tests": {
+    "classes": 32,
+    "exit_code": 0,
+    "tests": 147,
+    "runner": "JUnitCore on freshly compiled 2.1.5 classes"
+  },
+  "reproduction": {
+    "prior_version": "2.1.4",
+    "same_lower_corner_shrink_with_free_ratio_on": 0.0,
+    "same_lower_corner_shrink_with_free_ratio_off": 0.24166666,
+    "observed_native_zero_minimum_dimensions": true
+  },
+  "withdrawn_feature": {
+    "settings_entry_removed": true,
+    "hook_installation_and_implementation_removed": true,
+    "diagnostic_removed": true,
+    "old_true_preference_migrated_away": true,
+    "other_preferences_preserved": true
+  },
+  "final_framework_report": {
+    "code": 21,
+    "retired_feature_absent": true
+  },
+  "resize_cases": {
+    "probe1-left-400": {
+      "before": {
+        "scale": 0.80833334,
+        "bounds": [
+          104,
+          274,
+          977,
+          1826
+        ],
+        "window_type": 1
+      },
+      "after": {
+        "scale": 0.24166666,
+        "bounds": [
+          759,
+          144,
+          1020,
+          608
+        ],
+        "window_type": 2
+      },
+      "settled": {
+        "scale": 0.24166666,
+        "bounds": [
+          759,
+          144,
+          1020,
+          608
+        ],
+        "window_type": 2
+      },
+      "passed": true,
+      "mini_restored": {
+        "scale": 0.80833334,
+        "bounds": [
+          104,
+          274,
+          977,
+          1826
+        ],
+        "window_type": 1
+      }
+    },
+    "probe1-right-650": {
+      "before": {
+        "scale": 0.80833334,
+        "bounds": [
+          104,
+          274,
+          977,
+          1826
+        ],
+        "window_type": 1
+      },
+      "after": {
+        "scale": 0.24166666,
+        "bounds": [
+          60,
+          144,
+          321,
+          608
+        ],
+        "window_type": 2
+      },
+      "settled": {
+        "scale": 0.24166666,
+        "bounds": [
+          60,
+          144,
+          321,
+          608
+        ],
+        "window_type": 2
+      },
+      "passed": true,
+      "mini_restored": {
+        "scale": 0.80833334,
+        "bounds": [
+          104,
+          274,
+          977,
+          1826
+        ],
+        "window_type": 1
+      }
+    },
+    "probe1-left-1000": {
+      "before": {
+        "scale": 0.80833334,
+        "bounds": [
+          104,
+          274,
+          977,
+          1826
+        ],
+        "window_type": 1
+      },
+      "after": {
+        "scale": 0.24166666,
+        "bounds": [
+          759,
+          144,
+          1020,
+          608
+        ],
+        "window_type": 2
+      },
+      "settled": {
+        "scale": 0.24166666,
+        "bounds": [
+          759,
+          144,
+          1020,
+          608
+        ],
+        "window_type": 2
+      },
+      "passed": true,
+      "mini_restored": {
+        "scale": 0.80833334,
+        "bounds": [
+          104,
+          274,
+          977,
+          1826
+        ],
+        "window_type": 1
+      }
+    },
+    "probe2-left-400": {
+      "before": {
+        "scale": 0.80833334,
+        "bounds": [
+          104,
+          274,
+          977,
+          1826
+        ],
+        "window_type": 1
+      },
+      "after": {
+        "scale": 0.24166666,
+        "bounds": [
+          759,
+          144,
+          1020,
+          608
+        ],
+        "window_type": 2
+      },
+      "settled": {
+        "scale": 0.24166666,
+        "bounds": [
+          759,
+          144,
+          1020,
+          608
+        ],
+        "window_type": 2
+      },
+      "passed": true,
+      "mini_restored": {
+        "scale": 0.80833334,
+        "bounds": [
+          104,
+          274,
+          977,
+          1826
+        ],
+        "window_type": 1
+      }
+    },
+    "probe2-right-650": {
+      "before": {
+        "scale": 0.80833334,
+        "bounds": [
+          104,
+          274,
+          977,
+          1826
+        ],
+        "window_type": 1
+      },
+      "after": {
+        "scale": 0.24166666,
+        "bounds": [
+          60,
+          144,
+          321,
+          608
+        ],
+        "window_type": 2
+      },
+      "settled": {
+        "scale": 0.24166666,
+        "bounds": [
+          60,
+          144,
+          321,
+          608
+        ],
+        "window_type": 2
+      },
+      "passed": true,
+      "mini_restored": {
+        "scale": 0.80833334,
+        "bounds": [
+          104,
+          274,
+          977,
+          1826
+        ],
+        "window_type": 1
+      }
+    },
+    "probe2-left-1000": {
+      "before": {
+        "scale": 0.80833334,
+        "bounds": [
+          104,
+          274,
+          977,
+          1826
+        ],
+        "window_type": 1
+      },
+      "after": {
+        "scale": 0.24166666,
+        "bounds": [
+          759,
+          144,
+          1020,
+          608
+        ],
+        "window_type": 2
+      },
+      "settled": {
+        "scale": 0.24166666,
+        "bounds": [
+          759,
+          144,
+          1020,
+          608
+        ],
+        "window_type": 2
+      },
+      "passed": true,
+      "mini_restored": {
+        "scale": 0.80833334,
+        "bounds": [
+          104,
+          274,
+          977,
+          1826
+        ],
+        "window_type": 1
+      }
+    }
+  },
+  "settings_page": {
+    "retired_control_absent": true,
+    "custom_ratio_preserved": true
+  },
+  "cleanup": {
+    "owned_test_tasks_removed": true,
+    "other_preferences_preserved": true,
+    "retired_key_absent": true,
+    "module_enable_scope_and_other_modules_preserved": true,
+    "native_settings_preserved": true,
+    "test_app_private_and_external_data_absent": true,
+    "temporary_directory_matches_initial_empty_state": true,
+    "test_packages_match_initial_empty_state": true,
+    "installed_apk_matches_final_build": true,
+    "no_additional_reboot_or_core_process_restart": true,
+    "verified": true
+  },
+  "temporary_test_apps_removed": 3,
+  "new_crash_entries_after_final_reboot": 0,
+  "final_apk_changes_after_tests": "None",
+  "limitations": [
+    "Targeted window regression only; unrelated feature matrices were not repeated.",
+    "The withdrawn free-ratio feature is no longer supported; custom fixed aspect ratio remains available.",
+    "System-managed logs and installed application runtime data are outside temporary test artifacts."
+  ]
+}

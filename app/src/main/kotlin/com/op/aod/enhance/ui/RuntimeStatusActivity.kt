@@ -70,7 +70,7 @@ class RuntimeStatusActivity:NativeSettingsActivity(){
     override fun onStop(){client.stop();super.onStop()}
     private fun extractionState(value:String)=when(value){"SUCCESS"->"已取得结果";"VIEW_TREE_FAILED"->"无法读取页面控件";"RULE_FETCH_FAILED"->"缺少页面识别规则";"RULE_PRECONDITION_FAILED"->"页面条件不满足";"RULE_MATCH_FAILED"->"未匹配到账单字段";"SCREENSHOT_FAILED"->"无法获取页面图像";"BILL_EXTRACT_FAILED"->"未识别到支付成功与金额";else->"尚未观察"}
     companion object{
-        private val TITLES=mapOf("Brightness.Init" to "初始亮度","Brightness.Running" to "亮度倍率","Duration.NativeTimeout" to "显示时长","Panoramic.AllDay" to "全天全景","SingleClick.Block" to "单击屏蔽","LowLight.Block" to "低光保持","AodSettings.AllDay" to "全天选项","Window.Capture" to "截图录屏","Window.Layout" to "小窗数量与比例","Window.FreeResize" to "自由调整比例","Window.Corner" to "圆角","Window.ShadowFocused" to "聚焦阴影","Window.ShadowUnfocused" to "非聚焦阴影","Window.Split" to "分屏","Window.Launch" to "启动策略","Window.Caption" to "操作条","Window.Edge" to "贴边","Window.Status" to "状态查询")
+        private val TITLES=mapOf("Brightness.Init" to "初始亮度","Brightness.Running" to "亮度倍率","Duration.NativeTimeout" to "显示时长","Panoramic.AllDay" to "全天全景","SingleClick.Block" to "单击屏蔽","LowLight.Block" to "低光保持","AodSettings.AllDay" to "全天选项","Window.Capture" to "截图录屏","Window.Layout" to "小窗数量与比例","Window.Corner" to "圆角","Window.ShadowFocused" to "聚焦阴影","Window.ShadowUnfocused" to "非聚焦阴影","Window.Split" to "分屏","Window.Launch" to "启动策略","Window.Caption" to "操作条","Window.Edge" to "贴边","Window.Status" to "状态查询")
         private val LAUNCH_TITLES=mapOf("LAUNCHER" to "桌面优先小窗","REMEMBER" to "贴边恢复","JUMP" to "应用跳转小窗","NOTIFICATION" to "通知小窗")
     }
 }

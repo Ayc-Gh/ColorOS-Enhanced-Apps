@@ -33,7 +33,6 @@ final class WindowDiagnostics {
     private static Set<String> required(String feature){String wm="com.android.server.wm.";return switch(feature){
         case "Window.Capture"->Set.of(wm+"WindowState#isSecureLocked",wm+"WindowManagerService#addWindow",wm+"WindowManagerService#relayoutWindow");
         case "Window.Layout"->Set.of(wm+"FlexibleTaskInfo#getRatio",wm+"FlexibleWindowManagerService#getMaxWinNum");
-        case "Window.FreeResize"->Set.of(wm+"FlexibleWindowUtils#isFlexibleTaskInSupportFreeRatiosList",wm+"FlexibleWindowUtils#getUnSupportRatiosSetInFlexibleTask");
         case "Window.Corner"->Set.of(wm+"TaskExtImpl#getCornerRadius");
         case "Window.ShadowFocused"->Set.of(wm+"TaskExtImpl#getShadowRadiusFocused");
         case "Window.ShadowUnfocused"->Set.of(wm+"TaskExtImpl#getShadowRadiusUnfocused");

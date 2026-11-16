@@ -17,6 +17,8 @@
 
 ## 当前版本
 
+2.1.5 移除“自由调整小窗比例”开关及对应 hook，升级自动清理旧配置，恢复原生比例缩放与迷你小窗。该功能在本机缩小操作中会产生 0 倍缩放，导致小窗消失；此前仅验证横向调节的证据未覆盖该路径。原因与回归见 [2.1.5 小窗修复](docs/WINDOW_FIX_2.1.5.md)。
+
 2.1.4 更新应用图标和主页图标。蓝色窗口标识支持桌面自适应遮罩与单色主题，主页 8 个编号入口改为对应功能的矢量图标，入口箭头统一为矢量。预览和验证见 [2.1.4 图标更新](docs/ICONS_2.1.4.md)。
 
 2.1.3 修复投屏诊断的多进程覆盖和会话结束状态，将圆角与阴影适配独立到原生任务取值路径，并降低声音后台状态的重复写入。另补齐逐项窗口诊断、相机／相册诊断初始化及相机偏好监听器持有。改动与实机回归见 [2.1.3 修复与回归](docs/IMPROVEMENTS_2.1.3.md)。
@@ -31,7 +33,7 @@
 
 ## 安装与使用
 
-1. 安装 `dist/ColorOSEnhance_PHY110_v2.1.4.apk`。
+1. 安装 `dist/ColorOSEnhance_PHY110_v2.1.5.apk`。
 2. 在支持 modern API 102 的 LSPosed 中启用模块，勾选系统框架（`system`）、屏幕投屏（`com.oplus.cast`）、系统界面（`com.android.systemui`）、息屏（`com.oplus.aod`）、手势体感（`com.oplus.gesture`）、流量管理（`com.oplus.trafficmonitor`）、记账服务（`com.oplus.gleanerservice`）、相册（`com.coloros.gallery3d`）、相机（`com.oplus.camera`）、音效（`com.oplus.audio.effectcenter`）与 Atlas 服务（`com.oplus.atlas`）。不需要勾选 AONService 或微信。
 3. 停用其他重叠功能模块，更新后重启手机并打开“ColorOS 增强”。
 
