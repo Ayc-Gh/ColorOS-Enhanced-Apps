@@ -3,6 +3,7 @@ package io.github.oshin.windowcapture;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
@@ -12,12 +13,14 @@ import android.view.WindowInsets;
 import android.view.WindowInsetsController;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /** Small shared visual language for the programmatic settings screens. */
 public final class UiKit {
     public static final int BG=Color.rgb(244,247,252), CARD=Color.WHITE, INK=Color.rgb(25,35,53), MUTED=Color.rgb(94,106,126), BLUE=Color.rgb(38,105,239);
     private UiKit() {}
+    public static ImageView icon(Context context,int resource,int tint){ImageView view=new ImageView(context);view.setImageResource(resource);view.setImageTintList(ColorStateList.valueOf(tint));view.setScaleType(ImageView.ScaleType.FIT_CENTER);view.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);return view;}
     public static int dp(Context c,int value){return Math.round(value*c.getResources().getDisplayMetrics().density);}
     static GradientDrawable rounded(int color,int radius){GradientDrawable d=new GradientDrawable();d.setColor(color);d.setCornerRadius(radius);return d;}
     static GradientDrawable outlined(int color,int stroke,int strokeColor,int radius){GradientDrawable d=rounded(color,radius);d.setStroke(stroke,strokeColor);return d;}

@@ -1,0 +1,76 @@
+{
+  "completed": true,
+  "version": "2.1.4",
+  "version_code": 20,
+  "device": "PHY110",
+  "apk_sha256": "6816a77a24f9fab20b14e88c7595371911af88c63adaa28d0afcb08fd39d896a",
+  "build_success": true,
+  "lint_errors": 0,
+  "lint_warnings": 31,
+  "signature_valid": true,
+  "functional_adapter_sources_unchanged": true,
+  "unit_tests_rerun": false,
+  "previous_functional_baseline": "2.1.3 / 147 tests; docs/IMPROVEMENTS_2.1.3.md",
+  "icon_resources": {
+    "home_features": 8,
+    "adaptive_launcher": true,
+    "circular_crop_preview": true,
+    "monochrome_preview": true,
+    "rendered_with_installed_android_resources": true
+  },
+  "home_navigation": {
+    "分屏与小窗": {
+      "destination": "WindowSettingsActivity",
+      "passed": true
+    },
+    "OPPO 互联": {
+      "destination": "CastSettingsActivity",
+      "passed": true
+    },
+    "AOD": {
+      "destination": "com.op.aod.enhance.ui.MainActivity",
+      "passed": true
+    },
+    "隔空手势": {
+      "destination": "GestureSettingsActivity",
+      "passed": true
+    },
+    "联网管理": {
+      "destination": "NetworkSettingsActivity",
+      "passed": true
+    },
+    "小布记忆": {
+      "destination": "AimemorySettingsActivity",
+      "passed": true
+    },
+    "相机与相册": {
+      "destination": "GallerySettingsActivity",
+      "passed": true
+    },
+    "声音分轨": {
+      "destination": "SoundSettingsActivity",
+      "passed": true
+    }
+  },
+  "number_badges_removed": true,
+  "decorative_images_excluded_from_accessibility": true,
+  "configuration_and_processes_unchanged": {
+    "enabled": true,
+    "scope": true,
+    "other_modules": true,
+    "config": true,
+    "pids": true
+  },
+  "boot_unchanged": true,
+  "temporary_preview_tool_removed": true,
+  "new_application_crash_observed": false,
+  "temporary_renderer_failure": {
+    "type": "Typeface not initialized in standalone app_process",
+    "resolved": "Rendered successfully in normal application context using temporary signed instrumentation"
+  },
+  "limitations": [
+    "No full functional regression repeated for this UI-only release.",
+    "No device reboot in this run; resident hosts retain earlier version metadata until normal restart.",
+    "Monochrome resource preview does not establish support in every OEM launcher theme."
+  ]
+}

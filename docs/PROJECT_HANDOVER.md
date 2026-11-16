@@ -1,6 +1,6 @@
 # ColorOS 增强项目接手记录
 
-接手日期：2026 年 11 月 15 日。11 月 16 日维护基线更新为 **2.1.3，versionCode 19**，改动与本轮验证见 [2.1.3 修复与回归](IMPROVEMENTS_2.1.3.md)。下文的接手核验和公开发布信息保留其日期与版本，不代表 2.1.3 已发布到 GitHub。项目面向 Find X7 Ultra（PHY110）、`PHY110_17.0.0.100(CN01)`、Android 17 API 37，使用 modern libxposed API 102。
+接手日期：2026 年 11 月 15 日。11 月 16 日维护基线更新为 **2.1.4，versionCode 20**，本轮为 [图标与主页更新](ICONS_2.1.4.md)。2.1.3 的底层修复和实机验证见 [2.1.3 修复与回归](IMPROVEMENTS_2.1.3.md)，已于同日发布到 [GitHub](https://github.com/Ayc-Gh/ColorOS-Enhanced-Apps/releases/tag/v2.1.3)。2.1.4 当前为本地交付；下文的接手核验保留其日期与版本。项目面向 Find X7 Ultra（PHY110）、`PHY110_17.0.0.100(CN01)`、Android 17 API 37，使用 modern libxposed API 102。
 
 目标聊天的 70 个历史轮次已完整分页读取，并与现有源码、交付文件、GitHub 和手机状态交叉核对。最近一次全面行为回归见 [2.1.2 实测报告](FULL_REGRESSION_2.1.2.md)。本次接手重新运行了构建和现有单元测试，手机侧仅做只读检查。
 
