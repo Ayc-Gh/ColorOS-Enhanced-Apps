@@ -15,6 +15,8 @@ final class AdapterRuntime {
     private final String host;
     private volatile String state="loading",reason="正在核对接口",hostVersion="unknown";
     private final AtomicBoolean attached=new AtomicBoolean();
+    private final AtomicBoolean armed=new AtomicBoolean();
+    private final long startedAt=android.os.SystemClock.elapsedRealtime();
     private volatile int paths,hits;
     AdapterRuntime(String host){this.host=host;}
     boolean ready(){return state.equals("ready");}
@@ -37,10 +39,11 @@ final class AdapterRuntime {
         catch(Exception error){state="unsupported";reason="版本查询不可用，已保留原生行为";return false;}
     }
     void arm(XposedModule module,BooleanSupplier enabled,Details details){
+        if(!armed.compareAndSet(false,true))return;
         try{
             var method=Instrumentation.class.getDeclaredMethod("callApplicationOnCreate",Application.class);
             module.hook(method).intercept(chain->{Object result=chain.proceed();Object app=chain.getArg(0);if(app instanceof Application application&&host.equals(application.getPackageName()))attach(application,enabled,details,module);return result;});
-        }catch(Exception error){module.log(android.util.Log.WARN,"ColorOSEnhance-Status","Runtime receiver unavailable for "+host,error);}
+        }catch(Exception error){armed.set(false);module.log(android.util.Log.WARN,"ColorOSEnhance-Status","Runtime receiver unavailable for "+host,error);}
     }
     private void attach(Application app,BooleanSupplier enabled,Details details,XposedModule module){
         if(!attached.compareAndSet(false,true))return;
@@ -52,6 +55,7 @@ final class AdapterRuntime {
                     if(Build.VERSION.SDK_INT>=34){if(getSentFromUid()!=context.getPackageManager().getPackageUid(name,0))return;}
                     else if(!nonce.equals(module.getRemotePreferences("aod_runtime_status").getString("request_nonce",null)))return;
                     JSONObject report=new JSONObject().put("host",host).put("version",BuildConfig.VERSION_NAME).put("code",BuildConfig.VERSION_CODE)
+                        .put("process",Application.getProcessName()).put("pid",android.os.Process.myPid()).put("startedAt",startedAt).put("sampledAt",android.os.SystemClock.elapsedRealtime())
                         .put("adapter",new JSONObject().put("state",state).put("reason",reason).put("hostVersion",hostVersion).put("enabled",enabled.getAsBoolean()).put("paths",paths).put("hits",hits));
                     details.add(report);
                     Intent reply=new Intent(name+".REPLY_RUNTIME").setPackage(name).putExtra("host",host).putExtra("request_nonce",nonce).putExtra("payload",report.toString());

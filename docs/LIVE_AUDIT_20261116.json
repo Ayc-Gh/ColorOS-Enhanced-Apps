@@ -1,0 +1,192 @@
+{
+  "schema": 1,
+  "audit_date": "2026-11-16",
+  "version": "2.1.2",
+  "version_code": 18,
+  "device_model": "PHY110",
+  "rom": "PHY110_17.0.0.100(CN01)",
+  "api": 37,
+  "installed_apk_sha256": "bb229b565135e23748e03126f866b8c85d9eae60a24ff65c7d9befec9dabf8c5",
+  "product_source_unchanged": true,
+  "product_source_files_compared": 120,
+  "unit_tests": {
+    "classes": 28,
+    "exit_code": 0,
+    "tests": 130,
+    "runner": "JUnitCore on previously compiled unchanged baseline classes"
+  },
+  "results": {
+    "window_capture_count_ratio_foreground": {
+      "passed": 14,
+      "total": 14
+    },
+    "window_launch_split": {
+      "passed": 15,
+      "total": 15
+    },
+    "free_resize": {
+      "off_size": [
+        873,
+        1552
+      ],
+      "on_size": [
+        678,
+        1552
+      ]
+    },
+    "appearance": {
+      "focused_shadow": "observed",
+      "bottom_caption": "observed and restored",
+      "corner": "no stable pixel effect for embedded launch at 0/120/0",
+      "unfocused_shadow": "not established",
+      "top_caption": "not established"
+    },
+    "network": {
+      "native_rule_sequence": [
+        1,
+        4,
+        2,
+        0
+      ],
+      "wifi_https": [
+        "body fully read",
+        "ConnectException",
+        "body fully read"
+      ],
+      "cellular_actual_block": "not tested",
+      "rules_restored": true
+    },
+    "sound": {
+      "native_policy_off_on_restore": true,
+      "test_gain_readback": true,
+      "background_sample_span_ms": 77122,
+      "process_io_sample_seconds": 60.4,
+      "process_write_bytes_delta": 724992,
+      "battery_measurement": false
+    },
+    "cast": {
+      "pc_screen_observed": true,
+      "configured_fps": 60,
+      "actual_transmitted_fps_measured": false,
+      "repeated_queries": 12,
+      "active_reports": 7,
+      "idle_reports": 5
+    },
+    "gallery": {
+      "native_entry_off_on_restore": true,
+      "synthetic_cloud_enhancement_saved": true,
+      "input_size": [
+        1200,
+        900
+      ],
+      "output_size": [
+        4096,
+        3072
+      ]
+    },
+    "camera": {
+      "log_entry_off_on_restore": true,
+      "duration_ms": 5829,
+      "codec": "HEVC Main 10",
+      "size": [
+        1920,
+        1080
+      ],
+      "full_decode": true,
+      "inspiration_result": "no recommendation for prepared scene"
+    },
+    "aod": {
+      "uninterrupted_deadline_ms": 30018,
+      "running_brightness_multiplier": 1.25,
+      "restored": true,
+      "native_proximity_protection_preserved": true,
+      "overnight_test": false
+    },
+    "gesture": {
+      "call_silence": "user confirmed recognition",
+      "scroll": "user confirmed recognition",
+      "pause_play": "not verified: learning option unavailable"
+    },
+    "memory": {
+      "user_confirmed_generated_record": true,
+      "technical_counter_deltas": {
+        "pages": 7,
+        "attempts": 7,
+        "validMaps": 7,
+        "requests": 5,
+        "accepted": 5,
+        "duplicates": 2,
+        "ocr": 0
+      },
+      "counts_are_not_unique_record_totals": true,
+      "private_bill_content_collected": false
+    },
+    "settings_ui": {
+      "home": true,
+      "settings_pages": 8
+    }
+  },
+  "findings": [
+    {
+      "priority": "P2",
+      "area": "cast diagnostics",
+      "status": "reproduced",
+      "summary": "active and idle process reports collide under the same host key"
+    },
+    {
+      "priority": "P2",
+      "area": "window corners",
+      "status": "reproduced for embedded launch",
+      "summary": "stable screenshots unchanged across 0/120/0 settings"
+    },
+    {
+      "priority": "P3",
+      "area": "sound status persistence",
+      "status": "measured optimization opportunity",
+      "summary": "reduce repeated status writes while retaining liveness and lease fallback"
+    },
+    {
+      "priority": "P3",
+      "area": "adapter diagnostics",
+      "status": "code review recommendations",
+      "summary": "report per-feature readiness, process identity and optional-counter availability"
+    }
+  ],
+  "cleanup": {
+    "baseline_equal": {
+      "apk_sha256": true,
+      "enabled": true,
+      "scope": true,
+      "other_modules": true,
+      "config": true,
+      "pids": true
+    },
+    "native_settings_exact": true,
+    "gesture_settings_exact": true,
+    "camera_preferences_exact": true,
+    "camera_preference_files": 31,
+    "native_billing_choices_preserved": true,
+    "all_uid_policies_restored": true,
+    "all_nine_test_apps_removed": true,
+    "temporary_device_files_removed": true,
+    "test_video_absent": true,
+    "sound_fresh_status_and_current_host_lease": true,
+    "cast_active_encoder_report": true,
+    "pc_connect_shows_active_cast": true,
+    "boot_id_unchanged": true,
+    "system_files_unchanged": true,
+    "crash_buffer_unchanged": true,
+    "crash_entries_during_audit": 0,
+    "no_owned_background_audit_processes": true,
+    "synthetic_phone_images_deleted": 2
+  },
+  "refactoring": "retain overall architecture; targeted fixes and incremental extraction",
+  "limits": [
+    "single device and host-version set",
+    "no overnight battery study",
+    "no complete single/double-tap matrix",
+    "no actual cast transport frame-rate measurement",
+    "no successful inspiration list in this round",
+    "no payment-result OCR flow in this round"
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "completed": true,
+  "completed_at": "2026-11-16T15:51:02+0800",
+  "version": "2.1.3",
+  "version_code": 19,
+  "device": "PHY110",
+  "rom": "PHY110_17.0.0.100(CN01)",
+  "final_apk_sha256": "42f00ffef08d5128febe860ee171c2b46b617796a5d9a622f8837ecb3584ded1",
+  "build": {
+    "success": true,
+    "lint_errors": 0,
+    "lint_warnings": 30
+  },
+  "unit_tests": {
+    "classes": 32,
+    "exit_code": 0,
+    "tests": 147,
+    "runner": "JUnitCore on freshly compiled 2.1.3 classes"
+  },
+  "final_apk_changes_after_functional_test": "None",
+  "window_checks": {
+    "baseline_matrix": 14,
+    "extended_matrix": 15,
+    "all_passed": true,
+    "native_corner_restoration": true,
+    "free_ratio": [
+      0.5625,
+      0.43556701030927836,
+      0.5625
+    ],
+    "pixel_regions": {
+      "focused_shadow": {
+        "region": [
+          8,
+          360,
+          38,
+          960
+        ],
+        "mean_absolute_rgb_change": 12.766666666666667,
+        "restored_exactly": true
+      },
+      "bottom_bar": {
+        "region": [
+          120,
+          1622,
+          833,
+          1712
+        ],
+        "mean_absolute_rgb_change": 2.4855020518414626,
+        "restored_exactly": true
+      }
+    },
+    "unfocused_shadow_restoration": true
+  },
+  "aod": {
+    "uninterrupted_30s": true,
+    "running_multiplier_1_25": true,
+    "restored": true,
+    "deadline_elapsed_ms": 30016,
+    "native_style_restored": true
+  },
+  "cast": {
+    "production_client_used": true,
+    "responding_processes": 2,
+    "active_refreshes": 3,
+    "stopped_refreshes": 2,
+    "reconnected_refreshes": 3,
+    "active_encoder_consistent": true,
+    "ended_session_cleared": true,
+    "reconnect_generation_advanced": true,
+    "configured_fps": 60
+  },
+  "sound": {
+    "native_policy_toggle_and_background_passed": true,
+    "test_gain_readback_passed": true,
+    "sample_seconds": 62.89,
+    "process_write_bytes": 65536,
+    "status_write_calls": 6,
+    "status_samples_fresh": true,
+    "prior_2_1_2_sample_seconds": 60.4,
+    "prior_2_1_2_process_write_bytes": 724992,
+    "normalized_process_write_rate_reduction_percent": 91.32,
+    "native_fallback_observed_after_force_stop_ms": 24800,
+    "reopen_recovery_passed": true
+  },
+  "camera": {
+    "same_process_log_to_sdr": true,
+    "restart_with_log_disabled_removes_entry": true,
+    "video_duration_ms": 4864,
+    "resolution": "1920x1080",
+    "hevc_main10": true,
+    "decode_passed": true,
+    "temporary_video_deleted": true,
+    "native_preference_files_restored": 31
+  },
+  "gallery": {
+    "entry_off_on_restore": true,
+    "current_version_diagnostics": true,
+    "synthetic_input_only": true,
+    "cloud_processing_repeated": false
+  },
+  "other_checks": {
+    "memory_and_gesture_entries_passed": true,
+    "native_billing_choices_preserved": true,
+    "network_option_and_uid_rule_matrix_passed": true,
+    "real_wifi_block_restore_passed": true,
+    "home_and_four_affected_settings_pages_smoke_checked": true
+  },
+  "cleanup": {
+    "verified": true,
+    "baseline_equal": {
+      "enabled": true,
+      "scope": true,
+      "other_modules": true,
+      "config": true
+    },
+    "final_apk_matches_build": true,
+    "core_processes_and_boot_unchanged_since_final_install": true,
+    "system_files_unchanged": true,
+    "native_settings_exact": true,
+    "all_nine_test_apps_removed": true,
+    "temporary_device_files_removed": true,
+    "sound_fresh_status_and_current_host_lease": true,
+    "cast_active_encoder_report": true
+  },
+  "new_crash_entries_since_final_install": 0,
+  "test_interruption": "A concurrent manual window drag was reported by the user; isolated and off/on/restore retests passed. No product change was made for that event.",
+  "limitations": [
+    "Not all device/ROM versions or setting combinations are covered.",
+    "Configured cast fps is verified; actual transmitted fps is not measured.",
+    "Process I/O samples do not establish battery savings or overnight endurance.",
+    "Physical gesture recognition and real WeChat bill creation were not repeated on 2.1.3; prior user confirmations remain historical evidence. Pause/play gesture recognition is not established.",
+    "Gallery cloud image generation and camera cloud inspiration results were not repeated; this release checks their entries/diagnostics and the camera preference listener.",
+    "No stable paired visual proof for the top caption bar was added in this run.",
+    "Log UI selection and a decodable 1080p HEVC Main10 file are verified; this does not establish O-Log2 or calibrated transfer-function measurements."
+  ]
+}

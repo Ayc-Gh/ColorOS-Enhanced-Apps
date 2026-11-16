@@ -12,6 +12,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import org.json.JSONObject
 import java.util.UUID
+import io.github.oshin.windowcapture.BuildConfig
+import io.github.oshin.windowcapture.RuntimeReportIndex
 
 internal class RuntimeStatusClient(context: Context,private val hosts:List<String> = RuntimeProtocol.hosts) {
     private val app = context.applicationContext
@@ -22,6 +24,7 @@ internal class RuntimeStatusClient(context: Context,private val hosts:List<Strin
     val message = mutableMessage.asStateFlow()
     private var nonce: String? = null
     private var listening = false
+    private val processReports = RuntimeReportIndex<JSONObject>()
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             if (intent.action != RuntimeProtocol.REPLY || nonce == null || intent.getStringExtra(RuntimeProtocol.NONCE) != nonce) return
@@ -30,7 +33,13 @@ internal class RuntimeStatusClient(context: Context,private val hosts:List<Strin
             if (Build.VERSION.SDK_INT >= 34 && sentFromUid != runCatching { app.packageManager.getPackageUid(host, 0) }.getOrNull()) return
             val data = runCatching { JSONObject(intent.getStringExtra("payload") ?: "") }.getOrNull() ?: return
             if (data.optString("host") != host) return
-            mutableReports.value = mutableReports.value + (host to data)
+            val cast = data.optJSONObject("cast")
+            val activity = when { cast?.optBoolean("session") == true && cast.has("codec") -> 2; cast?.optBoolean("session") == true -> 1; else -> 0 }
+            val identity = RuntimeReportIndex.Identity(host, data.optString("process", host), data.optInt("pid", 0), data.optLong("startedAt", 0), data.optLong("sampledAt", 0), data.optInt("code", 0), activity)
+            val selected = processReports.accept(identity, data, BuildConfig.VERSION_CODE)
+            // Copy before adding aggregate metadata; individual process snapshots remain intact.
+            val aggregate = JSONObject(selected.toString()).put("respondingProcesses", processReports.processCount(host))
+            mutableReports.value = mutableReports.value + (host to aggregate)
         }
     }
     fun start() {
@@ -43,7 +52,7 @@ internal class RuntimeStatusClient(context: Context,private val hosts:List<Strin
     }
     fun refresh() {
         if (!listening) return
-        handler.removeCallbacksAndMessages(null); mutableReports.value = emptyMap(); nonce = null
+        handler.removeCallbacksAndMessages(null); mutableReports.value = emptyMap(); processReports.clear(); nonce = null
         val token = UUID.randomUUID().toString()
         if (Build.VERSION.SDK_INT < 34) {
             val service = AodApplication.service()

@@ -25,6 +25,12 @@ public final class GalleryEntry extends XposedModule {
     @Override public void onPackageReady(XposedModuleInterface.PackageReadyParam param){install(param.getPackageName(),param.getClassLoader());}
     private synchronized void install(String pkg,ClassLoader loader){
         if(installed||!GalleryPolicy.HOST.equals(pkg)||!GalleryPolicy.HOST.equals(processName))return;
+        runtime.arm(this,this::requested,data->{
+            var gallery=new org.json.JSONObject().put("enabled",enabled()).put("expanded",enabled()&&expanded);
+            if(nativeSupport!=null)gallery.put("nativeSupport",nativeSupport.booleanValue());
+            data.put("gallery",gallery);
+        });
+        if(!runtime.check(this)){installed=true;return;}
         Method getter,delegate,support,menu;
         try{
             Class<?> config=Class.forName("com.oplus.aiunit.vision.qab",false,loader);
@@ -35,14 +41,8 @@ public final class GalleryEntry extends XposedModule {
             if(getter.getReturnType()!=boolean.class||!Modifier.isStatic(getter.getModifiers())||
                     delegate.getReturnType()!=boolean.class||support.getReturnType()!=boolean.class||menu.getReturnType()!=void.class)
                 throw new NoSuchMethodException("Unexpected Gallery interface");
-        }catch(ReflectiveOperationException error){return;}
+        }catch(ReflectiveOperationException error){runtime.failed("相册适配接口不可用，已保留原生行为");log(Log.WARN,"ColorOSEnhance-Gallery","Gallery interface resolution failed",error);return;}
         installed=true;
-        runtime.arm(this,this::requested,data->{
-            var gallery=new org.json.JSONObject().put("enabled",enabled()).put("expanded",enabled()&&expanded);
-            if(nativeSupport!=null)gallery.put("nativeSupport",nativeSupport.booleanValue());
-            data.put("gallery",gallery);
-        });
-        if(!runtime.check(this))return;
         try{
             prefs=getRemotePreferences(Config.PREFS);
             prefs.registerOnSharedPreferenceChangeListener(listener);

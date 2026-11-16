@@ -1,6 +1,6 @@
 {
   "application_id_source": "app/build.gradle.kts",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "device": "PHY110",
   "rom": "PHY110_17.0.0.100(CN01)",
   "android_sdk": 37,
@@ -20,7 +20,7 @@
     "oplus-services.jar": "5a3613f87b766bc5923e4d9d75a0e3b79aa2c22f92d43a984d3cb0823f9e5a90",
     "services.jar": "78be31cdbfda61fdbfd84013c2c0b31812468bec8ffc4a0aa56ab4f4e0937e44"
   },
-  "apk_sha256": "bb229b565135e23748e03126f866b8c85d9eae60a24ff65c7d9befec9dabf8c5",
+  "apk_sha256": "42f00ffef08d5128febe860ee171c2b46b617796a5d9a622f8837ecb3584ded1",
   "license": "AGPL-3.0-or-later",
   "optional_features_not_exhaustively_tested": true,
   "oem_cast_apks": {
@@ -28,8 +28,8 @@
     "OPSynergy.apk": "a94af8ff5c0425095fbbf921d10afe1608197c0538b12e246f3a2a3a92db05c3",
     "ShareScreen.apk": "83912117bb5906a2e86a6870e05f41e6bde34a8a878b8d3c05688c81bef8e070"
   },
-  "validation": "docs/evidence/full-regression-2.1.2/validation.json",
-  "version_code": 18,
+  "validation": "docs/evidence/improvements-2.1.3/validation.json",
+  "version_code": 19,
   "app_name": "ColorOS 增强",
   "aod_source": {
     "repository": "NOTICE",
@@ -81,7 +81,7 @@
     "50 AOD unit tests and 17 cast policy checks"
   ],
   "device_tested_this_release": true,
-  "changes": "Fix the native audio host provider association at cold boot; retain force-stop and prior native checks. Add projection reconnect guidance after capture toggles. Perform paired regression with explicit unverified cases.",
+  "changes": "Aggregate authenticated runtime replies per process; track encoder session termination; resolve task-level window appearance without overwriting native caches; separate appearance readiness; reduce sound status persistence while retaining lease fallback; register diagnostics before adapter resolution and retain the camera preference listener.",
   "historical_final_enabled": [
     "unlock_flexible",
     "unlock_split",
@@ -121,20 +121,43 @@
     "parameters": "native negotiation"
   },
   "final_enabled": [
+    "aimemory_wechat_bill",
     "camera_inspiration_recommendation",
     "camera_log_video",
+    "capture",
+    "cast_density",
+    "cast_enabled",
+    "exclude_system",
+    "force_multi_mode",
+    "foreground",
     "gallery_ai_retouch",
-    "sound_mss_apps"
+    "hide_bottom",
+    "hide_top",
+    "jump",
+    "notification",
+    "remember",
+    "sound_mss_apps",
+    "unlock_flexible",
+    "unlock_split"
   ],
   "validation_scope": {
-    "initial_paired_tests_version": "2.1.1",
-    "fixed_runtime_version": "2.1.2",
-    "final_apk_changes_after_functional_test": "Projection reconnect guidance text only; installed and UI-smoke checked.",
-    "all_combinations_passed": false
+    "runtime_version": "2.1.3",
+    "final_apk_sha256": "42f00ffef08d5128febe860ee171c2b46b617796a5d9a622f8837ecb3584ded1",
+    "final_apk_changes_after_functional_test": "None",
+    "all_combinations_passed": false,
+    "limitations": [
+      "Not all device/ROM versions or setting combinations are covered.",
+      "Configured cast fps is verified; actual transmitted fps is not measured.",
+      "Process I/O samples do not establish battery savings or overnight endurance.",
+      "Physical gesture recognition and real WeChat bill creation were not repeated on 2.1.3; prior user confirmations remain historical evidence. Pause/play gesture recognition is not established.",
+      "Gallery cloud image generation and camera cloud inspiration results were not repeated; this release checks their entries/diagnostics and the camera preference listener.",
+      "No stable paired visual proof for the top caption bar was added in this run.",
+      "Log UI selection and a decodable 1080p HEVC Main10 file are verified; this does not establish O-Log2 or calibrated transfer-function measurements."
+    ]
   },
   "final_cast": {
-    "enhancement_enabled": false,
-    "requested_fps": 0,
-    "parameters": "native negotiation"
+    "enhancement_enabled": true,
+    "requested_fps": 60,
+    "parameters": "User baseline restored; native negotiated resolution and current display density; configured fps is not a measurement of delivered fps."
   }
 }

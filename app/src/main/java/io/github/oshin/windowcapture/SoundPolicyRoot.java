@@ -26,7 +26,14 @@ public final class SoundPolicyRoot {
         String[] pids=run("/system/bin/pidof","mmlistservice").trim().split("\\s+");if(pids.length!=1)throw new IOException("Audio policy service unavailable");int pid=Integer.parseInt(pids[0]);
         if(!new File("/proc/"+pid+"/exe").getCanonicalPath().equals("/system_ext/bin/mmlistservice"))throw new IOException("Audio policy service changed");return pid;
     }
-    private static void status(File dir,String message){try{atomic(new File(dir,"status"),SystemClock.elapsedRealtime()+"\n"+message);}catch(IOException ignored){}}
+    private static long lastStatusAt=-1;
+    private static String lastStatus;
+    static void writeStatus(File dir,String message)throws IOException{atomic(new File(dir,"status"),SystemClock.elapsedRealtime()+"\n"+message+"\n"+BuildConfig.VERSION_CODE);}
+    private static void status(File dir,String message){
+        long now=SystemClock.elapsedRealtime();
+        if(!SoundStatusPolicy.write(now,lastStatusAt,lastStatus,message))return;
+        try{writeStatus(dir,message);lastStatus=message;lastStatusAt=now;}catch(IOException ignored){}
+    }
     private static boolean lease(File dir,String apk){try{
         List<String> s=Files.readAllLines(new File(dir,"lease").toPath());if(s.size()!=4||!apk.equals(s.get(3))||!new File(apk).isFile())return false;
         int pid=Integer.parseInt(s.get(2));String process=new String(Files.readAllBytes(new File("/proc/"+pid+"/cmdline").toPath()),StandardCharsets.UTF_8).split("\0",2)[0];

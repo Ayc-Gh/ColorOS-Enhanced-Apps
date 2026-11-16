@@ -21,7 +21,9 @@ final class WindowDiagnostics {
     private static volatile String compatibility="ready",compatibilityReason="本机接口校验";
     private static final class Entry {
         final Map<String,Boolean> paths=new ConcurrentHashMap<>();volatile boolean triggered,sealed;volatile String error;
+        volatile Value observation;
     }
+    private record Value(String path,int original,int applied,long at) {}
     private record Observation(String result,long at) {}
     static void register(String feature,String path,boolean present){entries.computeIfAbsent(feature,k->new Entry()).paths.put(path,present);}
     static void seal(String feature){entries.computeIfAbsent(feature,k->new Entry()).sealed=true;}
@@ -31,6 +33,10 @@ final class WindowDiagnostics {
     private static Set<String> required(String feature){String wm="com.android.server.wm.";return switch(feature){
         case "Window.Capture"->Set.of(wm+"WindowState#isSecureLocked",wm+"WindowManagerService#addWindow",wm+"WindowManagerService#relayoutWindow");
         case "Window.Layout"->Set.of(wm+"FlexibleTaskInfo#getRatio",wm+"FlexibleWindowManagerService#getMaxWinNum");
+        case "Window.FreeResize"->Set.of(wm+"FlexibleWindowUtils#isFlexibleTaskInSupportFreeRatiosList",wm+"FlexibleWindowUtils#getUnSupportRatiosSetInFlexibleTask");
+        case "Window.Corner"->Set.of(wm+"TaskExtImpl#getCornerRadius");
+        case "Window.ShadowFocused"->Set.of(wm+"TaskExtImpl#getShadowRadiusFocused");
+        case "Window.ShadowUnfocused"->Set.of(wm+"TaskExtImpl#getShadowRadiusUnfocused");
         case "Window.Split"->Set.of(wm+"TaskDisplayArea#supportsNonResizableMultiWindow",wm+"TaskDisplayArea#supportsActivityMinWidthHeightMultiWindow");
         case "Window.Launch"->Set.of(wm+"FlexibleTaskController#adjustOptionsForSmartMultiWindow");
         case "Window.Caption"->Set.of(wm+"FlexibleTaskCaptionView#initCaptionView",wm+"FlexibleCaptionView#updateThreeButtonVisibility");
@@ -38,6 +44,7 @@ final class WindowDiagnostics {
         case "Sound.Startup"->Set.of("com.android.server.am.OplusAppStartupManager#isAllowStartFromProvider","com.android.server.am.OplusAppStartupManager$OplusStartupStrategy#isAllowAssociateByList");
         default->Set.of();};}
     static void trigger(String feature){Entry entry=entries.get(feature);if(entry!=null&&!entry.triggered)entry.triggered=true;}
+    static void value(String feature,String path,int original,int applied){Entry entry=entries.get(feature);if(entry!=null){entry.triggered=true;entry.observation=new Value(path,original,applied,SystemClock.elapsedRealtime());}}
     static synchronized long generation(){return launchGeneration;}
     static synchronized void configurationChanged(String key){if(key==null||LAUNCH_KEYS.contains(key)){launchGeneration++;launches.clear();}}
     static synchronized void launch(String policy,String result,long generation){if(generation==launchGeneration)launches.put(policy,new Observation(result,SystemClock.elapsedRealtime()));}
@@ -55,7 +62,11 @@ final class WindowDiagnostics {
                     for(var item:new TreeMap<>(entries).entrySet()){
                         Entry entry=item.getValue();long valid=entry.paths.values().stream().filter(Boolean::booleanValue).count();
                         String state=ready(item.getKey())?"loaded":"failed";
-                        features.put(new JSONObject().put("name",item.getKey()).put("state",state).put("hits",entry.triggered?1:0).put("optionalMissing",entry.paths.size()-valid).put("reason",entry.error==null?"必需接口已校验；缺失的可选接口保留原生处理":entry.error));
+                        JSONObject feature=new JSONObject().put("name",item.getKey()).put("state",state).put("hits",entry.triggered?1:0).put("optionalMissing",entry.paths.entrySet().stream().filter(p->!p.getValue()&&!required(item.getKey()).contains(p.getKey())).count()).put("reason",entry.error==null?(ready(item.getKey())?"必需接口已校验；实际效果需行为验证":"必需接口缺失，保留原生行为"):entry.error);
+                        JSONArray paths=new JSONArray();for(var path:new TreeMap<>(entry.paths).entrySet())paths.put(new JSONObject().put("name",path.getKey()).put("present",path.getValue()).put("required",required(item.getKey()).contains(path.getKey())));
+                        feature.put("paths",paths);
+                        Value value=entry.observation;if(value!=null)feature.put("lastValue",new JSONObject().put("path",value.path()).put("native",value.original()).put("applied",value.applied()).put("ageMs",SystemClock.elapsedRealtime()-value.at()));
+                        features.put(feature);
                     }
                     data.put("features",features);JSONObject observations=new JSONObject();
                     for(String policy:List.of("LAUNCHER","REMEMBER","JUMP","NOTIFICATION")){

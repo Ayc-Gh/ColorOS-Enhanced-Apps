@@ -16,6 +16,13 @@ public final class CameraInspirationEntry extends XposedModule {
     private volatile boolean expanded;
     private volatile boolean logExpanded;
     private final CameraLogSession logSession=new CameraLogSession();
+    private ClassLoader cameraLoader;
+    private final SharedPreferences.OnSharedPreferenceChangeListener listener=(p,key)->{
+        if(key==null||CameraInspirationPolicy.KEY.equals(key))expanded=false;
+        if((key==null||Config.CAMERA_LOG.equals(key))&&!value(Config.CAMERA_LOG)){
+            logSession.clear();new android.os.Handler(android.os.Looper.getMainLooper()).post(()->restoreLogSelection(cameraLoader));
+        }
+    };
     private boolean value(String key){try{return prefs!=null&&prefs.getBoolean(key,false);}catch(Throwable ignored){return false;}}
     private boolean requested(){return value(CameraInspirationPolicy.KEY)||value(Config.CAMERA_LOG);}
     private boolean enabled(){return runtime.ready()&&value(CameraInspirationPolicy.KEY);}
@@ -25,6 +32,8 @@ public final class CameraInspirationEntry extends XposedModule {
     @Override public void onPackageReady(XposedModuleInterface.PackageReadyParam p){install(p.getPackageName(),p.getClassLoader());}
     private synchronized void install(String pkg,ClassLoader loader){
         if(installed||!CameraInspirationPolicy.HOST.equals(pkg)||!CameraInspirationPolicy.HOST.equals(processName))return;
+        runtime.arm(this,this::requested,data->data.put("camera",new org.json.JSONObject().put("enabled",enabled()).put("expanded",enabled()&&expanded).put("logEnabled",logEnabled()).put("logExpanded",logExpanded)));
+        if(!runtime.check(this)){installed=true;return;}
         try{
             Class<?> config=Class.forName("com.oplus.camera.configure.CameraConfig",false,loader),aps=Class.forName("com.oplus.ocs.camera.consumer.apsAdapter.adapter.ApsUtils",false,loader),configure=Class.forName("com.oplus.ocs.camera.configure.CameraConfigure",false,loader),table=Class.forName("com.oplus.ocs.camera.configure.ProtobufFeatureConfig$FeatureTable",false,loader);
             Method gate=config.getDeclaredMethod("w",String.class,boolean.class),vendor=aps.getDeclaredMethod("getVendorTagConfig",String.class),registry=configure.getDeclaredMethod("initFeatureTable",table);
@@ -33,9 +42,8 @@ public final class CameraInspirationEntry extends XposedModule {
             // between Camera minor releases; the method signatures above are the
             // stable calls used by the already tested temporary adapter.
             installed=true;
-            runtime.arm(this,this::requested,data->data.put("camera",new org.json.JSONObject().put("enabled",enabled()).put("expanded",enabled()&&expanded).put("logEnabled",logEnabled()).put("logExpanded",logExpanded)));
-            if(!runtime.check(this))return;
-            prefs=getRemotePreferences(Config.PREFS);prefs.registerOnSharedPreferenceChangeListener((p,key)->{if(key==null||CameraInspirationPolicy.KEY.equals(key))expanded=false;if((key==null||Config.CAMERA_LOG.equals(key))&&!value(Config.CAMERA_LOG)){logSession.clear();new android.os.Handler(android.os.Looper.getMainLooper()).post(()->restoreLogSelection(loader));}});
+            cameraLoader=loader;
+            prefs=getRemotePreferences(Config.PREFS);prefs.registerOnSharedPreferenceChangeListener(listener);
             // A restart is already required for the feature table. Keep the hot
             // data repository completely native in processes started with Log off.
             if(value(Config.CAMERA_LOG)){

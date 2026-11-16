@@ -60,6 +60,8 @@ public final class MainHook extends XposedModule {
         boolean supported=CompatibilityPolicy.rom(android.os.Build.MODEL,android.os.Build.VERSION.SDK_INT,android.os.Build.DISPLAY);WindowDiagnostics.compatibility(supported);
         if(!supported){installDiagnostics();return;}
         installFeature("Window.Capture",this::installCapture);installFeature("Window.Layout",this::installWindows);
+        installFeature("Window.FreeResize",this::installFreeResize);
+        new WindowAppearanceHooks(this,loader,prefs).install();
         installFeature("Window.Split",this::installSplit);installFeature("Window.Launch",this::installLaunch);
         installFeature("Window.Caption",this::installCaption);installFeature("Window.Edge",this::installEdge);
         installFeature("Sound.Startup",this::installSoundStartup);
@@ -160,8 +162,6 @@ public final class MainHook extends XposedModule {
         for(String n:List.of("isUnSupportCallerFlexibleWindow","isInFlexibleWindowBlackList","isInMultiWindowFlexibleBlackList","isFlexibleTaskInPSBlackList","isDisableCustomZoomWindow"))flag(u,n,Config.UNLOCK,false);
         flag(u,"isSupportFlexibleWindow",Config.UNLOCK,true);
         hook(u,"getUnSupportRatiosInFlexibleTask",m->m.getReturnType()==String.class,m->chain->{if(!bool(Config.UNLOCK))return chain.proceed();return "";});
-        flag(u,"isFlexibleTaskInSupportFreeRatiosList",Config.FREE,true);
-        hook(u,"getUnSupportRatiosSetInFlexibleTask",m->Set.class.isAssignableFrom(m.getReturnType()),m->chain->{if(!bool(Config.FREE))return chain.proceed();return new HashSet<Float>();});
         for(String n:List.of("isSupportMultiMode"))hook(u,n,m->m.getReturnType()==boolean.class,m->chain->{
             if(bool(Config.MULTI)&&flexibleCaller()){hit(n);return true;}return chain.proceed();
         });
@@ -175,15 +175,17 @@ public final class MainHook extends XposedModule {
         for(String n:List.of("getMaxWinNum","getMaxFlexibleTaskNum"))hook(u,n,m->m.getParameterCount()==0&&m.getReturnType()==int.class,m->chain->{
             int c=count();if(c<1)return chain.proceed();hit("panorama "+n+"="+c);return n.equals("getMaxFlexibleTaskNum")?c:Math.max((Integer)chain.proceed(),c+3);
         });
-        for(String[] entry:new String[][]{{"getCornerRadius",Config.CORNER},{"getShadowRadiusFocused",Config.SHADOW_FOCUS},{"getShadowRadiusUnfocused",Config.SHADOW_BLUR}}) {
-            hook(f,entry[0],m->m.getReturnType()==int.class,m->chain->{int v=number(entry[1]);if(v<0)return chain.proceed();return Math.min(v,300);});
-        }
         hook(WM+"OplusFlexibleTaskLayoutPolicy","avoidOverlappingAreas",m->m.getParameterCount()==5,m->chain->{
             Object result=chain.proceed();if(count()<2)return result;
             try {cascade(chain.getThisObject(),chain.getArgs());}catch(Throwable t){info("cascade skipped: "+t);}
             return result;
         });
         deopt(WM+"FlexibleTaskController","updateTaskMaxNumWhenFocusChangedInPanoramic","adjustOptionsForSmartMultiWindow","isSupportMultiMode");
+    }
+    private void installFreeResize(){
+        String owner=WM+"FlexibleWindowUtils";
+        flag(owner,"isFlexibleTaskInSupportFreeRatiosList",Config.FREE,true);
+        hook(owner,"getUnSupportRatiosSetInFlexibleTask",m->Set.class.isAssignableFrom(m.getReturnType()),m->chain->{if(!bool(Config.FREE))return chain.proceed();return new HashSet<Float>();});
     }
     private boolean flexibleCaller(){
         boolean flexible=false;StackTraceElement[] frames=Thread.currentThread().getStackTrace();
