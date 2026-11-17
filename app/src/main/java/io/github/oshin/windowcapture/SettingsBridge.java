@@ -28,10 +28,14 @@ final class SettingsBridge {
                         application.onServiceBind(current);
                         SharedPreferences value=current.getRemotePreferences(Config.PREFS);
                         // Retired controls are removed once; all remaining settings are preserved.
-                        if(value.contains("filter")||value.contains("blacklist")||value.contains("apps")||value.contains("free_ratio"))
-                            value.edit().remove("filter").remove("blacklist").remove("apps").remove("free_ratio").commit();
+                        var retired=RetiredSettings.presentKeys(value.getAll().keySet());
+                        if(!retired.isEmpty()){
+                            SharedPreferences.Editor editor=value.edit();retired.forEach(editor::remove);
+                            if(!editor.commit())throw new IllegalStateException("旧设置清理失败，请重新连接");
+                        }
+                        if(current.getScope().contains("com.oplus.cast"))current.removeScope(java.util.List.of("com.oplus.cast"));
                         var scope=current.getScope();
-                        String message="配置服务已连接 "+current.getFrameworkName()+" · API "+current.getApiVersion()+"\n系统框架"+(scope.contains("system")?"已勾选":"未勾选")+" · 屏幕投屏"+(scope.contains("com.oplus.cast")?"已勾选":"未勾选")+"\n系统界面"+(scope.contains("com.android.systemui")?"已勾选":"未勾选")+" · 息屏"+(scope.contains("com.oplus.aod")?"已勾选":"未勾选")+"\n手势体感"+(scope.contains("com.oplus.gesture")?"已勾选":"未勾选")+" · 流量管理"+(scope.contains(NetworkPolicy.HOST)?"已勾选":"未勾选")+" · 小布记忆"+(scope.contains(AimemoryPolicy.HOST)?"已勾选":"未勾选")+" · 相册"+(scope.contains(GalleryPolicy.HOST)?"已勾选":"未勾选")+" · 相机"+(scope.contains(CameraInspirationPolicy.HOST)?"已勾选":"未勾选")+" · 音效服务"+(scope.contains(SoundPolicy.HOST)?"已勾选":"未勾选")+"\n已连接不代表新版本已加载，可在功能运行状态中检查。";
+                        String message="配置服务已连接 "+current.getFrameworkName()+" · API "+current.getApiVersion()+"\n系统框架"+(scope.contains("system")?"已勾选":"未勾选")+"\n系统界面"+(scope.contains("com.android.systemui")?"已勾选":"未勾选")+" · 息屏"+(scope.contains("com.oplus.aod")?"已勾选":"未勾选")+"\n手势体感"+(scope.contains("com.oplus.gesture")?"已勾选":"未勾选")+" · 流量管理"+(scope.contains(NetworkPolicy.HOST)?"已勾选":"未勾选")+" · 小布记忆"+(scope.contains(AimemoryPolicy.HOST)?"已勾选":"未勾选")+" · 相册"+(scope.contains(GalleryPolicy.HOST)?"已勾选":"未勾选")+" · 相机"+(scope.contains(CameraInspirationPolicy.HOST)?"已勾选":"未勾选")+" · 音效服务"+(scope.contains(SoundPolicy.HOST)?"已勾选":"未勾选")+"\n已连接不代表新版本已加载，可在功能运行状态中检查。";
                         main.post(()->{
                             if(service!=current) return;
                             SettingsBridge.scope=java.util.Set.copyOf(scope);

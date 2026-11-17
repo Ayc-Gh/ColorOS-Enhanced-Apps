@@ -2,7 +2,6 @@
     <queries>
         <package android:name="com.android.systemui" />
         <package android:name="com.oplus.aod" />
-        <package android:name="com.oplus.cast" />
         <package android:name="com.oplus.gesture" />
         <package android:name="com.oplus.trafficmonitor" />
         <package android:name="com.oplus.gleanerservice" />
@@ -22,7 +21,7 @@
                 <category android:name="de.robv.android.xposed.category.MODULE_SETTINGS" />
             </intent-filter>
         </activity>
-        <activity android:name=".CastSettingsActivity" android:exported="false" />
+        <activity android:name=".CaptureSettingsActivity" android:exported="false" />
         <activity android:name=".GestureSettingsActivity" android:exported="false" />
         <activity android:name=".WindowSettingsActivity" android:exported="false" />
         <activity android:name=".NetworkSettingsActivity" android:exported="false" />

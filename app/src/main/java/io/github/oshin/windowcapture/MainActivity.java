@@ -31,7 +31,7 @@ public final class MainActivity extends Activity {
         hero.addView(UiKit.status(this,SettingsBridge.status));
         TextView hint=text("按需开启，设置自动保存。",12,false);hint.setTextColor(UiKit.MUTED);hint.setPadding(0,dp(12),0,0);hero.addView(hint);
         entrance(R.drawable.ic_home_windows,"分屏与小窗","应用分屏、小窗数量、外观与贴边",WindowSettingsActivity.class,0xFF2669EF);
-        entrance(R.drawable.ic_home_cast,"OPPO 互联","电脑投屏与解除截图录屏限制",CastSettingsActivity.class,0xFF008C83);
+        entrance(R.drawable.ic_home_capture,"截图与录屏","解除普通窗口的截图录屏限制",CaptureSettingsActivity.class,0xFF008C83);
         entrance(R.drawable.ic_home_aod,"AOD","息屏亮度、显示时长与唤醒设置",com.op.aod.enhance.ui.MainActivity.class,0xFF7653C1);
         entrance(R.drawable.ic_home_gesture,"隔空手势","解锁设置入口，保留原生手势识别",GestureSettingsActivity.class,0xFFB36916);
         entrance(R.drawable.ic_home_network,"联网管理","所有可管理应用的 WLAN 与移动数据",NetworkSettingsActivity.class,0xFF427B57);

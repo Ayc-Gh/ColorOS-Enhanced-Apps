@@ -1,6 +1,6 @@
 {
   "application_id_source": "app/build.gradle.kts",
-  "version": "2.1.6",
+  "version": "2.1.7",
   "device": "PHY110",
   "rom": "PHY110_17.0.0.100(CN01)",
   "android_sdk": 37,
@@ -20,7 +20,7 @@
     "oplus-services.jar": "5a3613f87b766bc5923e4d9d75a0e3b79aa2c22f92d43a984d3cb0823f9e5a90",
     "services.jar": "78be31cdbfda61fdbfd84013c2c0b31812468bec8ffc4a0aa56ab4f4e0937e44"
   },
-  "apk_sha256": "1cb1c2f49e628e54b45bdf9b4ec03662b07951b58d7f773bec4016c1e01a014f",
+  "apk_sha256": "e772fd78e71f3e5e8e13b89e6822e01d1820f249e31b257bf0247bb9b381043a",
   "license": "AGPL-3.0-or-later",
   "optional_features_not_exhaustively_tested": true,
   "oem_cast_apks": {
@@ -28,8 +28,8 @@
     "OPSynergy.apk": "a94af8ff5c0425095fbbf921d10afe1608197c0538b12e246f3a2a3a92db05c3",
     "ShareScreen.apk": "83912117bb5906a2e86a6870e05f41e6bde34a8a878b8d3c05688c81bef8e070"
   },
-  "validation": "docs/evidence/audio-upgrade-2.1.6/validation.json",
-  "version_code": 22,
+  "validation": "docs/evidence/capture-only-2.1.7/validation.json",
+  "version_code": 23,
   "app_name": "ColorOS 增强",
   "aod_source": {
     "repository": "NOTICE",
@@ -72,7 +72,8 @@
     "docs/evidence/full-regression-2.1.2/validation.json",
     "docs/evidence/improvements-2.1.3/validation.json",
     "docs/evidence/icons-2.1.4/validation.json",
-    "docs/evidence/window-fix-2.1.5/validation.json"
+    "docs/evidence/window-fix-2.1.5/validation.json",
+    "docs/evidence/audio-upgrade-2.1.6/validation.json"
   ],
   "historical_confirmed_tests": [
     "Three settings entrances and AOD subpages",
@@ -84,7 +85,7 @@
     "50 AOD unit tests and 17 cast policy checks"
   ],
   "device_tested_this_release": true,
-  "changes": "Pin the installed APK inode across daemon/reload/final restore and detach the Root cleanup shell from app-owned pipes, preserving native restoration after APK replacement and daemon termination.",
+  "changes": "Remove OPPO casting enhancements and scope; preserve independent secure-window capture control and existing capture preference.",
   "historical_final_enabled": [
     "unlock_flexible",
     "unlock_split",
@@ -146,16 +147,14 @@
     "unlock_split"
   ],
   "validation_scope": {
-    "scope": "Focused sound companion APK replacement and teardown regression",
+    "scope": "Upgrade migration, capture UI, FLAG_SECURE screenshot/recording OFF-ON-OFF, native casting start/stop, logs and cleanup",
     "all_features_retested": false,
-    "final_apk_sha256": "1cb1c2f49e628e54b45bdf9b4ec03662b07951b58d7f773bec4016c1e01a014f",
+    "final_apk_sha256": "e772fd78e71f3e5e8e13b89e6822e01d1820f249e31b257bf0247bb9b381043a",
     "limitations": [
-      "Focused audio-upgrade regression only; unrelated features were not retested.",
-      "The historical 03:17 sequence cannot be reconstructed completely; two concrete failure conditions were reproduced independently and fixed.",
-      "Final-build replacement tests use 22->22 reinstall to force a new APK path; an earlier candidate also exercised 21->22.",
-      "No claim of survival if the cleanup shell itself is killed or the phone loses power.",
-      "The audio shared process was deliberately reloaded once; phone/system_server/SystemUI/audioserver were not restarted.",
-      "Initial transition from previously installed 2.1.5 cannot retroactively pin code for its already running old wrapper."
+      "Only targeted capture/removal/native casting regression; unrelated features not fully retested.",
+      "Ordinary FLAG_SECURE test windows only; hardware DRM is outside scope.",
+      "The device owner confirmed missing Root authorization during this test. Sound code is unchanged; post-authorization sound behavior was not retested.",
+      "OS diagnostic logs and ordinary application data were not erased."
     ]
   },
   "final_cast": {

@@ -25,8 +25,6 @@ import io.github.libxposed.api.XposedInterface;
 public final class MainHook extends XposedModule {
     private static final String TAG="WindowCapture", WM="com.android.server.wm.";
     private final AtomicBoolean installed=new AtomicBoolean();
-    private final AtomicBoolean castInstalled=new AtomicBoolean();
-    private CastHooks casting;
     private SharedPreferences prefs;
     private ClassLoader loader;
     private int hooks;
@@ -66,11 +64,6 @@ public final class MainHook extends XposedModule {
         installFeature("Sound.Startup",this::installSoundStartup);
         installDiagnostics();
         log(Log.INFO,TAG,"Installed "+hooks+" hooks; device="+android.os.Build.MODEL+" API="+android.os.Build.VERSION.SDK_INT);
-    }
-    @Override public void onPackageReady(XposedModuleInterface.PackageReadyParam param) {
-        if(!"com.oplus.cast".equals(param.getPackageName())||!castInstalled.compareAndSet(false,true))return;
-        casting=new CastHooks(this,param.getClassLoader());
-        casting.install();
     }
     private Class<?> cls(String name){try{return Class.forName(name,false,loader);}catch(Throwable t){return null;}}
     private interface Installer { XposedInterface.Hooker create(Method m); }

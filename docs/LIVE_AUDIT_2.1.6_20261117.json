@@ -1,0 +1,89 @@
+{
+  "version": "2.1.6",
+  "version_code": 22,
+  "apk_sha256": "1cb1c2f49e628e54b45bdf9b4ec03662b07951b58d7f773bec4016c1e01a014f",
+  "started_at": "2026-11-17T15:31:12+0800",
+  "finished_at": "2026-11-17T17:07:52+0800",
+  "product_apk_or_source_changed": false,
+  "unit_tests": 153,
+  "unit_test_classes": 33,
+  "issues": [
+    {
+      "id": "ENV-1",
+      "priority": "P1",
+      "title": "卸载等待 artd，触发 PackageManager 预看门狗",
+      "confirmed": true,
+      "layer": "系统服务/设备环境，根因未定",
+      "evidence": [
+        "cleanup-package-manager-selected-stacks.txt",
+        "cleanup-service-failure-dmesg.txt",
+        "native-prewatchdog-original.trace",
+        "artd-recovery.json"
+      ],
+      "recovery": "用户手动重启后原生 artd 可启动，10 个测试应用均正常卸载；尚未证明根因已永久修复",
+      "attribution": "与并行 chroot 挂载试验强相关；完整因果尚未证明"
+    },
+    {
+      "id": "UI-1",
+      "priority": "P2",
+      "title": "重启后声音页可能继续显示旧失败提示",
+      "confirmed": true,
+      "layer": "模块状态展示",
+      "evidence": [
+        "sound-stale-error-after-reboot.json",
+        "sound-stale-error-after-reboot.xml"
+      ],
+      "recovery": "通过正常开关刷新了本次状态；源码尚未修改"
+    },
+    {
+      "id": "ENV-2",
+      "priority": "P2",
+      "title": "重启期间 qti-testscripts 服务 SIGABRT",
+      "confirmed": true,
+      "layer": "原生启动服务，触发原因未定",
+      "evidence": [
+        "post-reboot-kernel.log",
+        "system-logs-final/crash.txt"
+      ],
+      "recovery": "系统启动完成，后续核心进程稳定；未修改该服务",
+      "historical_context": "暂无直接关联证据；部署前已有同形态 init 子进程崩溃，旧服务身份未确认"
+    }
+  ],
+  "manual_reboot_during_audit": true,
+  "module_non_sound_warning_error_headers": [],
+  "module_sound_warning_headers": 41,
+  "module_warning_error_headers_after_cleanup": [],
+  "native_fatal_signals": [
+    {
+      "service": "qti-testscripts",
+      "pid": 6821,
+      "time": "2026-11-17T16:52:22+0800",
+      "signal": "SIGABRT"
+    }
+  ],
+  "prewatchdog_incidents": 1,
+  "sound_policy_root_class_failure_reproduced": false,
+  "cleanup_verified": true,
+  "owned_test_apps_removed": 10,
+  "preexisting_temporary_files_preserved": 5,
+  "sound_background_seconds": 127.65,
+  "sound_background_samples": 12,
+  "core_pids_stable_since_reboot": true,
+  "not_verified": [
+    "AOD 实体单击/双击/真实低光",
+    "本轮隔空手势实体识别及真实播放控制",
+    "微信真实账单：未安装微信",
+    "顶部三个点：关闭基线也不可见",
+    "实际传输 90/120 fps、真实弱网或游戏场景",
+    "相机真实推荐列表：本场景返回暂无推荐",
+    "其他 ROM、长期稳定性、逐个其他模块停用隔离"
+  ],
+  "evidence_directory": ".analysis/full-audit-2.1.6-20261117",
+  "cross_thread_correlation": {
+    "artd": "与并行 chroot 挂载试验强相关；完整因果尚未证明",
+    "qti_testscripts": "暂无直接关联证据；部署前已有同形态 init 子进程崩溃，旧服务身份未确认",
+    "restart": "另一会话经用户授权执行",
+    "phone_operations_in_cross_check": false,
+    "source": "Parallel deployment log, summarized without chat identifiers"
+  }
+}

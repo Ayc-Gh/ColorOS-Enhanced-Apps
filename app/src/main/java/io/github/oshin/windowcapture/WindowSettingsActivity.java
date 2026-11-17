@@ -51,7 +51,7 @@ public final class WindowSettingsActivity extends Activity {
         Button runtime=UiKit.button(this,"查看功能运行状态",true);runtime.setOnClickListener(v->startActivity(new android.content.Intent(this,com.op.aod.enhance.ui.RuntimeStatusActivity.class).putExtra("section","windows")));body.addView(runtime);
         toggle(Config.LOG,"详细日志","记录接口适配与首次生效事件，可在框架日志中查看");
         TextView note=text("安装或升级后重启手机一次。配置保存与宿主加载可分别在功能运行状态中查看；比例、圆角、阴影与捕获状态改变后，请重新打开目标应用。\n\n请停用其他同类模块，避免重复修改。所有功能默认关闭，数值留空表示跟随系统。高宽比不改变旧版保存的数值含义，最终尺寸仍受屏幕和系统布局限制。",13,false);note.setTextColor(muted);note.setPadding(0,dp(16),0,dp(12));body.addView(note);
-        Button reset=UiKit.button(this,"恢复分屏与小窗默认设置",false);reset.setEnabled(ready());reset.setOnClickListener(v->new AlertDialog.Builder(this).setTitle("恢复默认设置").setMessage("恢复分屏与小窗设置，清空对应数值。OPPO 互联、截图录屏和 AOD 设置保留。").setNegativeButton("取消",null).setPositiveButton("恢复",(d,w)->save(e->{for(String key:Config.WINDOW_KEYS)e.remove(key);})).show());body.addView(reset);
+        Button reset=UiKit.button(this,"恢复分屏与小窗默认设置",false);reset.setEnabled(ready());reset.setOnClickListener(v->new AlertDialog.Builder(this).setTitle("恢复默认设置").setMessage("恢复分屏与小窗设置，清空对应数值。截图录屏和其他功能设置保留。").setNegativeButton("取消",null).setPositiveButton("恢复",(d,w)->save(e->{for(String key:Config.WINDOW_KEYS)e.remove(key);})).show());body.addView(reset);
         TextView footer=text("v"+BuildConfig.VERSION_NAME+" · AGPL-3.0",12,false);footer.setPadding(0,dp(16),0,0);footer.setTextColor(muted);body.addView(footer);
         setContentView(scroll);UiKit.applyBars(this,scroll);ScrollView current=scroll;current.post(()->current.scrollTo(0,y));
     }

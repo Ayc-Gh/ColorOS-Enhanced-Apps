@@ -1,0 +1,180 @@
+{
+  "version": "2.1.7",
+  "version_code": 23,
+  "apk_sha256": "e772fd78e71f3e5e8e13b89e6822e01d1820f249e31b257bf0247bb9b381043a",
+  "signing_certificate_sha256": "ac8dd32294627c740e436288919805d7d9403592add3436c1f006df58ab16f37",
+  "publication_status": "release_artifact",
+  "completed_at": "2026-11-18T02:15:50+0800",
+  "unit_tests": {
+    "classes": 32,
+    "exit_code": 0,
+    "tests": 147,
+    "runner": "JUnitCore on freshly compiled 2.1.7 classes"
+  },
+  "lint": {
+    "Warning": 31
+  },
+  "migration": {
+    "passed": true,
+    "removed_settings": [
+      "cast_density",
+      "cast_enabled",
+      "cast_fps",
+      "cast_game",
+      "cast_hardware",
+      "cast_low_bandwidth",
+      "cast_model_degrade",
+      "cast_quality",
+      "cast_resolution"
+    ],
+    "capture_preserved": true,
+    "scope_count": 10,
+    "other_settings_and_modules_unchanged": true
+  },
+  "capture_core_unchanged": {
+    "unchanged": true,
+    "sha256": "dfed07035b10cee11a8669383df61abdf6a67fdb1858803eee28958c4a75a6e6"
+  },
+  "capture_cases": {
+    "capture-off": {
+      "enabled": false,
+      "app_still_requests_secure": true,
+      "screenshot_rgb": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "recording_rgb": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "passed": true
+    },
+    "capture-on": {
+      "enabled": true,
+      "app_still_requests_secure": true,
+      "screenshot_rgb": [
+        [
+          0,
+          200,
+          122
+        ],
+        [
+          255,
+          90,
+          66
+        ]
+      ],
+      "recording_rgb": [
+        [
+          0,
+          198,
+          120
+        ],
+        [
+          254,
+          88,
+          65
+        ]
+      ],
+      "passed": true
+    },
+    "capture-off-again": {
+      "enabled": false,
+      "app_still_requests_secure": true,
+      "screenshot_rgb": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "recording_rgb": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "passed": true
+    }
+  },
+  "capture_ui": {
+    "toggle_persisted_off_and_on": true,
+    "original_value_restored": true,
+    "single_switch": true
+  },
+  "native_cast": {
+    "started": true,
+    "synthetic_colors_visible_on_pc": true,
+    "no_cast_scope": true,
+    "module_apk_not_mapped_in_cast_process": true,
+    "stopped": true,
+    "cast_wake_lock_released": true,
+    "actual_fps_or_bitrate_not_measured": true
+  },
+  "log_review": {
+    "java_fatal_exception_count": 0,
+    "anr_marker_count": 0,
+    "removed_cast_hook_log_count": 0,
+    "sound_binder_disconnect_warnings": 2,
+    "native_boot_crash": "qti-testscripts init child SIGABRT reappeared at boot; previously matched to supplied firmware, no changes made. Another early init crash entry has a pre-clock-sync timestamp and was not newly attributed.",
+    "sound_observation": {
+      "status": "无法启动声音适配，请检查 Root 授权",
+      "version": "23",
+      "shell_su_exists": true,
+      "su_visible_in_module_mount_namespace": false,
+      "sound_setting_kept": true,
+      "root_manager_settings_changed": false,
+      "attribution": "The device owner confirmed that Root permission had not been granted to the module and will grant it separately. Sound code is unchanged; no post-authorization test is claimed.",
+      "user_confirmed_missing_root_permission": true,
+      "confirmation_date": "2026-11-18",
+      "post_authorization_retested": false
+    },
+    "sound_source_files_unchanged": 14
+  },
+  "cleanup": {
+    "verified": true,
+    "temporary_apps_removed": 2,
+    "test_recordings_removed": 3,
+    "screenshots_written_only_to_pc": true,
+    "test_app_data_profiles_and_compiled_files_absent": true,
+    "phone_temporary_directory_empty": true,
+    "shared_storage_and_mediastore_test_items_absent": true,
+    "settings_preserved_except_retired_cast": true,
+    "screen_off_timeout_restored_ms": 30000,
+    "other_modules_preserved": true,
+    "logs_saved_on_pc_only": true
+  },
+  "limits": [
+    "Only targeted capture/removal/native casting regression; unrelated features not fully retested.",
+    "Ordinary FLAG_SECURE test windows only; hardware DRM is outside scope.",
+    "The device owner confirmed missing Root authorization during this test. Sound code is unchanged; post-authorization sound behavior was not retested.",
+    "OS diagnostic logs and ordinary application data were not erased."
+  ]
+}

@@ -5,7 +5,7 @@ import java.util.*;
 
 /** One request's authenticated replies, retained per process instead of arrival order. */
 public final class RuntimeReportIndex<T> {
-    public record Identity(String host,String process,int pid,long started,long sampled,int code,int activity) {}
+    public record Identity(String host,String process,int pid,long started,long sampled,int code) {}
     private record Entry<T>(Identity identity,T report) {}
     private final Map<String,Map<String,Entry<T>>> hosts=new HashMap<>();
     public void clear(){hosts.clear();}
@@ -16,7 +16,6 @@ public final class RuntimeReportIndex<T> {
         if(previous==null||identity.sampled()>=previous.identity().sampled())processes.put(key,new Entry<>(identity,report));
         return processes.values().stream().max(Comparator
             .<Entry<T>>comparingInt(e->e.identity().code()==expectedCode?1:0)
-            .thenComparingInt(e->e.identity().activity())
             .thenComparingLong(e->e.identity().sampled())
             .thenComparing(e->e.identity().process())
             .thenComparingInt(e->e.identity().pid())).orElseThrow().report();
