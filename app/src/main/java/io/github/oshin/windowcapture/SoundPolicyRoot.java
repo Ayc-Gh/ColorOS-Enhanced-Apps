@@ -14,7 +14,7 @@ public final class SoundPolicyRoot {
     static final String PACKAGE="io.github.oshin.windowcapture",ROOT_CLASS=PACKAGE+".SoundPolicyRoot";
     private static final String POLICY="/system_ext/etc/Multimedia_Daemon_List.xml";
     private SoundPolicyRoot(){}
-    static String quote(String s){return "'"+s.replace("'","'\\''")+"'";}
+    static String quote(String s){return SoundCompanionCommand.quote(s);}
     static void atomic(File file,String data)throws IOException{
         android.util.AtomicFile a=new android.util.AtomicFile(file);FileOutputStream out=a.startWrite();try{out.write(data.getBytes(StandardCharsets.UTF_8));a.finishWrite(out);}catch(Throwable t){a.failWrite(out);throw t;}
     }
@@ -40,13 +40,13 @@ public final class SoundPolicyRoot {
         return Integer.parseInt(s.get(0))==BuildConfig.VERSION_CODE&&SoundPolicy.leaseValid(SystemClock.elapsedRealtime(),Long.parseLong(s.get(1)),pid,SoundPolicy.PROCESS.equals(process));
     }catch(Exception e){return false;}}
     private static Set<String> installed()throws Exception{Set<String> a=new TreeSet<>();for(String line:run("/system/bin/cmd","package","list","packages","--user","0").split("\\R"))if(line.startsWith("package:"))a.add(line.substring(8).trim());if(a.isEmpty())throw new IOException("Application list unavailable");return a;}
-    private static void apply(File dir,String apk,int pid,SoundPolicy.Patch patch)throws Exception{
+    private static void apply(File dir,String classpath,int pid,SoundPolicy.Patch patch)throws Exception{
         File source=new File(dir,"runtime-policy.xml");atomic(source,patch.xml());
         try{
             run("/system/bin/chmod","644",source.getPath());run("/system/bin/chcon","u:object_r:system_file:s0",source.getPath());
             String mounts=new String(Files.readAllBytes(new File("/proc/"+pid+"/mountinfo").toPath()),StandardCharsets.UTF_8);for(String line:mounts.split("\\R"))if(line.contains(" "+POLICY+" "))throw new IOException("An existing audio overlay must be retained");
             // The shell owns unmount cleanup, including if its Java caller exits.
-            String script="set -e\ntrap "+quote("umount "+quote(POLICY))+" EXIT\nmount --bind "+quote(source.getPath())+" "+quote(POLICY)+"\nCLASSPATH="+quote(apk)+" app_process /system/bin "+ROOT_CLASS+" reload\n";
+            String script="set -e\ntrap "+quote("umount "+quote(POLICY))+" EXIT\nmount --bind "+quote(source.getPath())+" "+quote(POLICY)+"\nCLASSPATH="+quote(classpath)+" app_process /system/bin "+ROOT_CLASS+" reload\n";
             run("/system/bin/nsenter","-t",String.valueOf(pid),"-m","--","/system/bin/sh","-c",script);
         }finally{Files.deleteIfExists(source.toPath());}
     }
@@ -60,6 +60,8 @@ public final class SoundPolicyRoot {
         if(args.length==1&&args[0].equals("reload")){SoundNative.reload();return;}
         if(args.length!=3||!(args[0].equals("daemon")||args[0].equals("restore")))throw new IllegalArgumentException("Invalid audio companion arguments");
         File dir=new File(args[1]);String apk=args[2];if(!dir.getCanonicalPath().equals("/data/user_de/0/"+PACKAGE+"/files/sound-policy")||!new File(apk).getCanonicalPath().startsWith("/data/app/")||!apk.endsWith("/base.apk"))throw new IOException("Invalid audio companion path");
+        String classpath=SoundCompanionCommand.classpath(System.getenv("CLASSPATH"),apk);
+        if(!new File(classpath).isFile())throw new IOException("Audio companion code is unavailable");
         try(RandomAccessFile file=new RandomAccessFile(new File(dir,"lock"),"rw");FileLock lock=file.getChannel().tryLock()){
             if(lock==null)return;
             if(args[0].equals("restore")){restore(dir);return;}
@@ -75,11 +77,11 @@ public final class SoundPolicyRoot {
                     long now=SystemClock.elapsedRealtime();
                     if(now>=refresh){Set<String> current=installed();if(!current.equals(packages)){
                         patch=SoundPolicy.expand(xml,current);Set<String> tracked=new LinkedHashSet<>();File record=new File(dir,"expanded");if(record.isFile())tracked.addAll(Files.readAllLines(record.toPath()));for(String pkg:patch.expanded())if(!tracked.contains(pkg)&&original.containsKey(pkg)&&SoundNative.enabled(pkg))baseline.add(pkg);tracked.addAll(patch.expanded());atomic(new File(dir,"native-active-baseline"),String.join("\n",baseline));atomic(record,String.join("\n",tracked));
-                        apply(dir,apk,pid,patch);if(!patch.expanded().isEmpty()){String test=patch.expanded().iterator().next();String attr=SoundNative.attribute(test);if(attr==null||(Integer.parseInt(attr)&1)==0)throw new IOException("Native policy activation failed");}packages=current;
+                        apply(dir,classpath,pid,patch);if(!patch.expanded().isEmpty()){String test=patch.expanded().iterator().next();String attr=SoundNative.attribute(test);if(attr==null||(Integer.parseInt(attr)&1)==0)throw new IOException("Native policy activation failed");}packages=current;
                     }refresh=now+60_000;}
                     // Native audio rules can be refreshed independently of package
                     // installation. Recover a lost runtime policy without a toggle.
-                    if(now>=check&&patch!=null&&patch.expanded().contains(PACKAGE)){String expected=String.valueOf(SoundPolicy.entries(patch.xml()).get(PACKAGE));if(!expected.equals(SoundNative.attribute(PACKAGE))){pid=listPid();apply(dir,apk,pid,patch);if(!expected.equals(SoundNative.attribute(PACKAGE)))throw new IOException("Native policy refresh failed");}check=now+10_000;}
+                    if(now>=check&&patch!=null&&patch.expanded().contains(PACKAGE)){String expected=String.valueOf(SoundPolicy.entries(patch.xml()).get(PACKAGE));if(!expected.equals(SoundNative.attribute(PACKAGE))){pid=listPid();apply(dir,classpath,pid,patch);if(!expected.equals(SoundNative.attribute(PACKAGE)))throw new IOException("Native policy refresh failed");}check=now+10_000;}
                     status(dir,"已生效 · 原生声音分轨应用限制已解除");Thread.sleep(1000);
                 }
             }catch(Exception error){activationError=error;}

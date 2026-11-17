@@ -23,7 +23,7 @@ final class SoundController {
             File state=new File(dir,"status");if(state.isFile()){var lines=Files.readAllLines(state.toPath());if(fresh(lines)&&lines.get(1).startsWith("已生效"))return;}
             long now=SystemClock.elapsedRealtime();if(now-lastAttempt<10_000)return;lastAttempt=now;
             worker.execute(()->{try{
-                String command="CLASSPATH="+SoundPolicyRoot.quote(apk)+" app_process /system/bin "+SoundPolicyRoot.ROOT_CLASS+" daemon "+SoundPolicyRoot.quote(dir.getPath())+" "+SoundPolicyRoot.quote(apk)+"; CLASSPATH="+SoundPolicyRoot.quote(apk)+" app_process /system/bin "+SoundPolicyRoot.ROOT_CLASS+" restore "+SoundPolicyRoot.quote(dir.getPath())+" "+SoundPolicyRoot.quote(apk);
+                String command=SoundCompanionCommand.script(dir.getPath(),apk,SoundPolicyRoot.ROOT_CLASS);
                 Process process=new ProcessBuilder("su","-c",command).redirectErrorStream(true).start();companion=process;
                 try(InputStream in=process.getInputStream()){in.transferTo(OutputStream.nullOutputStream());}int code=process.waitFor();if(code!=0)SoundPolicyRoot.writeStatus(dir,"未生效，请检查本应用的 Root 授权");
             }catch(Exception e){try{SoundPolicyRoot.writeStatus(dir,"无法启动声音适配，请检查 Root 授权");}catch(IOException ignored){}}});

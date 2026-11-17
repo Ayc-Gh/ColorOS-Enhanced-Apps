@@ -1,0 +1,190 @@
+{
+  "version": "2.1.5",
+  "version_code": 21,
+  "started_at": "2026-11-17T03:30:41+0800",
+  "finished_at": "2026-11-17T11:07:08+0800",
+  "audit_finished": true,
+  "all_features_fully_verified": false,
+  "execution": "Staged real-device audit with user-handoff pauses; not a continuous multi-hour stress test",
+  "device": {
+    "model": "PHY110",
+    "rom": "PHY110_17.0.0.100(CN01)",
+    "api": 37
+  },
+  "apk_sha256": "7fc8b123edf4af1695199d2c2f457a4849bb81c8247d69e9707c91dcd187f7d1",
+  "scope_count": 11,
+  "product_apk_unchanged": true,
+  "coverage": {
+    "windows": {
+      "core_cases": 14,
+      "extended_cases": 15,
+      "native_resize_cases": 6,
+      "free_ratio_removed": true
+    },
+    "appearance": {
+      "corner_restores": true,
+      "focused_and_unfocused_shadow_restore": true,
+      "bottom_handle_restores": true,
+      "top_control_visual_confirmed": false
+    },
+    "ui": {
+      "pages": 9,
+      "independent_reset_scopes": 3
+    },
+    "network": {
+      "five_application_classes_off_on_restore": true,
+      "uid_rules_restored": true,
+      "real_wifi_https_allowed_blocked_restored": true
+    },
+    "sound": {
+      "native_panel_slider_changes_gain_and_restores": true,
+      "force_stop_fallback_first_observed_ms": 36120,
+      "normal_background_observation_seconds": 129.42,
+      "healthy_background_samples": 12,
+      "post_tracking_cleanup_samples_healthy": true
+    },
+    "aod": {
+      "all_day_entry_and_backend_ab": true,
+      "deadline_30s_ms": 30011,
+      "deadline_custom_1m_ms": 60011,
+      "always_sample_seconds": 40,
+      "running_multiplier": 1.25,
+      "native_brightness_and_style_restored": true,
+      "physical_touch_and_low_light_verified": false
+    },
+    "gallery": {
+      "entry_off_on_restore": true,
+      "cloud_processed_and_saved_new_image": true,
+      "input_size": [
+        1200,
+        900
+      ],
+      "output_size": [
+        4096,
+        3072
+      ],
+      "owned_input_output_and_trash_deleted": true
+    },
+    "camera": {
+      "log_off_on_restore": true,
+      "recording_duration_ms": 4821,
+      "codec": "HEVC Main 10",
+      "size": [
+        1920,
+        1080
+      ],
+      "full_decode_passed": true,
+      "live_disable_same_process_sdr": true,
+      "new_process_default_sdr": true,
+      "native_inspiration_empty_result": true,
+      "test_video_and_trash_deleted": true,
+      "post_consent_preference_files_restored": 25
+    },
+    "cast": {
+      "profiles": 7,
+      "configured_fps": [
+        60,
+        90,
+        120
+      ],
+      "hardware_ceiling_fps": 120,
+      "high_quality_bitrate_bps": 20000000,
+      "custom_bitrate_bps": 18000000,
+      "two_process_aggregation": true,
+      "stopped_state_clears_codec": true,
+      "original_settings_and_active_cast_restored": true
+    },
+    "air_gesture": {
+      "answer_or_mute_learning_user_verified": true,
+      "scroll_learning_user_verified": true,
+      "pause_play_supported_apps_installed": false
+    },
+    "wechat": {
+      "installed": false,
+      "unsupported_native_fallback_verified": true,
+      "real_bill_verified": false
+    }
+  },
+  "logs": {
+    "checked_at": "2026-11-17T11:05:47+0800",
+    "new_crash_or_anr_observed": false,
+    "core_pids_unchanged": true,
+    "new_tombstone_or_anr_files": 0,
+    "final_warning_error_headers": 1669,
+    "module_sound_warning_headers": 362,
+    "module_non_sound_warning_errors": 0,
+    "explicit_framework_hook_conflict_markers": 0,
+    "earlier_event_capture": {
+      "crash_events": 0,
+      "anr_events": 0,
+      "job_scheduler_wtf": 44,
+      "module_provider_timeout_wtf": 1,
+      "other_native_parcel_wtf": 1,
+      "last_module_warning": "2026-11-17T10:46:57.718",
+      "explicit_hook_conflict_markers": 0
+    },
+    "historical_gms_crashes_before_audit": 4,
+    "historical_root_companion_crash": {
+      "at": "2026-11-17T03:17:09+0800",
+      "before_current_audit": true,
+      "process": "SoundPolicyRoot restore via app_process",
+      "signal": "SIGABRT",
+      "exception": "ClassNotFoundException: io.github.oshin.windowcapture.SoundPolicyRoot",
+      "classpath_differs_from_current_installation": true,
+      "old_apk_path_exists_now": false,
+      "inference": "Old-APK classpath during upgrade/replacement is a plausible cause; exact upgrade transition was not reproduced in this audit",
+      "new_upgrade_path_test_required": true
+    }
+  },
+  "findings": [
+    {
+      "priority": "P2 candidate",
+      "name": "Historical audio restore subprocess ClassNotFoundException/SIGABRT",
+      "status": "Before audit; old classpath path differs and is now absent. Upgrade transition root cause requires reproduction."
+    },
+    {
+      "priority": "P2 test harness",
+      "name": "Repeated target instrumentation disrupts ContentProvider lifecycle and sound lease",
+      "status": "Timeout cleanup improved; normal UI reopen restored sound; 129.42 seconds normal background healthy. Prefer a long-lived test session."
+    },
+    {
+      "priority": "P3 coverage",
+      "name": "Top control visual comparison lacks a visible OFF baseline",
+      "status": "Unverified; not classified as a confirmed product defect."
+    }
+  ],
+  "cleanup": {
+    "verified_at": "2026-11-17T11:07:08+0800",
+    "distinct_temporary_apps_removed": 10,
+    "test_runner_absent": true,
+    "active_test_instrumentation_absent": true,
+    "temporary_directory_empty": true,
+    "test_install_data_and_compiled_paths_absent": true,
+    "owned_media_rows_paths_and_trash_absent": true,
+    "production_audio_records_have_no_test_package_names": true,
+    "module_configuration_scope_and_other_modules_restored": true,
+    "native_aod_style_master_and_tracked_system_settings_restored": true,
+    "camera_user_consent_preserved": true,
+    "system_audio_files_unchanged": true
+  },
+  "normal_native_initialization": [
+    "Opening native billing initialized four default selection preferences; pre-existing choices were preserved.",
+    "User personally completed Gallery and Camera first-use agreements; the post-consent Camera baseline was preserved."
+  ],
+  "limitations": [
+    "AOD shell-injected taps did not trigger physical black-screen callbacks; physical single/double tap and real ambient low-light behavior remain unverified.",
+    "WeChat is not installed, so no current-run real WeChat bill was tested; unsupported/native fallback was checked.",
+    "Air pause/play lists supported applications as not installed; only entry exposure was verified.",
+    "Top three-dot control was absent in the OFF baseline; hiding/restoration has no effective visual proof in this window path.",
+    "Cast encoder configured rates are verified; actual delivered 90/120 fps is not measured. Native source is already 1080x2376, so resolution caps did not resize; density on/off both yielded 480.",
+    "Actual weak-network throttling, true game-specific cast sessions, other ROMs and overnight endurance are not covered.",
+    "Bilibili and DragonRead are absent; audio panel/policy tests used owned synthetic fixtures.",
+    "Logcat rotates; this audit combines snapshots, staged scoped live PC logs, LSPosed logs, DropBox and exit history. No per-module disabling A/B isolation was performed."
+  ],
+  "next_work": [
+    "Reproduce and harden audio companion teardown across APK replacement/upgrade.",
+    "Reduce repeated instrumentation target restarts; preserve explicit cleanup of MediaStore recycle-bin copies and audio tracking records.",
+    "Create a window path with a visible three-dot baseline before deciding on a product fix."
+  ],
+  "architecture_recommendation": "Local hardening and test-driver cleanup; no evidence justifies a whole-project rewrite."
+}

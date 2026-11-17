@@ -1,0 +1,74 @@
+{
+  "completed": true,
+  "version": "2.1.6",
+  "version_code": 22,
+  "final_apk_sha256": "1cb1c2f49e628e54b45bdf9b4ec03662b07951b58d7f773bec4016c1e01a014f",
+  "signing_certificate_sha256": "ac8dd32294627c740e436288919805d7d9403592add3436c1f006df58ab16f37",
+  "publication_status": "release_artifact",
+  "completed_at": "2026-11-17T11:57:01+0800",
+  "changes": [
+    "Pin one read-only APK file descriptor for daemon/reload/final restoration instead of reopening an installation path that may disappear.",
+    "Detach inherited standard streams so a broken output pipe after package replacement cannot terminate the outer cleanup shell.",
+    "Keep original installation path and version in the bounded lease; deleted/changed APK still stops the old daemon and restores native policy."
+  ],
+  "unit_tests": {
+    "classes": 33,
+    "exit_code": 0,
+    "tests": 153,
+    "runner": "JUnitCore on freshly compiled audio lifecycle fix classes"
+  },
+  "lint": {
+    "Warning": 33
+  },
+  "device_tests": {
+    "old_real_2_1_5_class_missing_after_owned_copy_unlink": true,
+    "pinned_real_2_1_5_class_still_loads": true,
+    "normal_abnormal_sigkill_and_quoted_path_canaries": true,
+    "reload_through_audio_mount_namespace_after_unlink": true,
+    "missing_before_start_fails_without_starting_java": true,
+    "broken_pipe_before_fix_restore_reached": false,
+    "broken_pipe_after_fix_restore_reached": true,
+    "final_build_apk_replacement_graceful": {
+      "installation_path_changed": true,
+      "old_apk_path_removed": true,
+      "old_pinned_code_readable_after_replacement": true,
+      "old_root_fallback_restored_native_policy": true,
+      "old_pinned_code_closed_after_restore": true,
+      "old_code": "22",
+      "new_code": 22
+    },
+    "final_build_apk_replacement_sigkill": {
+      "installation_path_changed": true,
+      "old_apk_path_removed": true,
+      "old_pinned_code_readable_after_replacement": true,
+      "old_root_fallback_restored_native_policy": true,
+      "old_pinned_code_closed_after_restore": true,
+      "new_setting_held_off_only_during_native_fallback_probe": true,
+      "old_code": "22",
+      "new_code": 22
+    },
+    "background_seconds": 76.67,
+    "healthy_samples": 6,
+    "standard_streams_all_dev_null": true,
+    "new_native_crash_or_anr_tombstone": false
+  },
+  "cleanup": {
+    "verified": true,
+    "temporary_files_absent": true,
+    "temporary_apps_and_data_absent": true,
+    "test_instrumentation_absent": true,
+    "test_package_names_absent_from_audio_records": true,
+    "module_preferences_scope_other_modules_preserved": true,
+    "native_settings_and_system_files_unchanged": true,
+    "core_pids_unchanged_except_deliberate_audio_host_reload": true,
+    "phone_rebooted": false
+  },
+  "limits": [
+    "Focused audio-upgrade regression only; unrelated features were not retested.",
+    "The historical 03:17 sequence cannot be reconstructed completely; two concrete failure conditions were reproduced independently and fixed.",
+    "Final-build replacement tests use 22->22 reinstall to force a new APK path; an earlier candidate also exercised 21->22.",
+    "No claim of survival if the cleanup shell itself is killed or the phone loses power.",
+    "The audio shared process was deliberately reloaded once; phone/system_server/SystemUI/audioserver were not restarted.",
+    "Initial transition from previously installed 2.1.5 cannot retroactively pin code for its already running old wrapper."
+  ]
+}
