@@ -1,0 +1,567 @@
+{
+  "completed": true,
+  "version": "2.1.8",
+  "version_code": 24,
+  "final_apk_sha256": "8df92327614c3f2e5815f7f1151583c467fcbc4132784143fc2b5da2400398b6",
+  "certificate_sha256": "ac8dd32294627c740e436288919805d7d9403592add3436c1f006df58ab16f37",
+  "publication_status": "local_validated_not_published",
+  "completed_at": "2026-11-18T04:02:45+08:00",
+  "device": "PHY110 / ColorOS 17.0.0.100 CN01 / API 37",
+  "camera": "7.006.191 / 60000",
+  "unit_tests": {
+    "classes": 33,
+    "exit_code": 0,
+    "tests": 153,
+    "runner": "JUnitCore on freshly compiled 2.1.8 classes"
+  },
+  "lint": {
+    "Warning": 32
+  },
+  "photo_catalog_before": 20,
+  "photo_catalog_after": 53,
+  "added_photo_filters": 33,
+  "photo_previews_and_saved_images": [
+    {
+      "name": "和光",
+      "index": 20,
+      "stage": "sweep-20",
+      "sha256": "45e9281a3d2c557c931bbd69bde9cba55b3de30948778e4f71fecca05e6e1c8f",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 16.918925,
+      "native_lut_log_count": 0
+    },
+    {
+      "name": "浓郁",
+      "index": 21,
+      "stage": "sweep-21",
+      "sha256": "7b0b28ffe3b21ee6db3a6bd3ab47688d1e94a98e6c11356b0cafff28be37d11c",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 15.378548148148148,
+      "native_lut_log_count": 0
+    },
+    {
+      "name": "反差黑白",
+      "index": 22,
+      "stage": "sweep-22",
+      "sha256": "84ccb583489f7e326f6e2a4d976050eee53b5f4f9ec190ac1af1111b298020aa",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 0.7050824074074074,
+      "native_lut_log_count": 0
+    },
+    {
+      "name": "望舒",
+      "index": 23,
+      "stage": "sweep-23",
+      "sha256": "5a9de1cd947d3fbd49374d63758d2c5a73d8032f88134cc5e95a52ae663855de",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 10.889732407407408,
+      "native_lut_log_count": 2
+    },
+    {
+      "name": "天青",
+      "index": 24,
+      "stage": "sweep-24",
+      "sha256": "1ddeb8d8c69c48d1f269bd48f874af6465b64d78e015c9119bfeb20370fbd3a9",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 19.692039814814816,
+      "native_lut_log_count": 2
+    },
+    {
+      "name": "惊砂",
+      "index": 25,
+      "stage": "sweep-25",
+      "sha256": "26ac4b504c1ced630170ddd6c53f198784d7c33310c0aeffdd57dac546effc52",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 29.197382407407407,
+      "native_lut_log_count": 2
+    },
+    {
+      "name": "大漠传奇",
+      "index": 26,
+      "stage": "sweep-26",
+      "sha256": "b51a99b4bb19a8525b27f0063b1856a3e0142c8722aab88d7aba5ce5299af016",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 36.66238888888889,
+      "native_lut_log_count": 2
+    },
+    {
+      "name": "翠微",
+      "index": 27,
+      "stage": "sweep-27",
+      "sha256": "e023246f21c61852286f9aaa732efa72abbb928f7d224368c326c9ca2bbd4487",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 14.746391666666666,
+      "native_lut_log_count": 2
+    },
+    {
+      "name": "落晖",
+      "index": 28,
+      "stage": "sweep-28",
+      "sha256": "b0b07071c217cd53133224e4645e093a65e8afad2f67e0ff7dfe01c35dd726f6",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 31.11694537037037,
+      "native_lut_log_count": 2
+    },
+    {
+      "name": "秋绪",
+      "index": 29,
+      "stage": "sweep-29",
+      "sha256": "ed2154bc0e4954582d6c3df61abfb6c02ec7e45b6d91aa5385bb690d391f3785",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 22.13040925925926,
+      "native_lut_log_count": 2
+    },
+    {
+      "name": "烟火",
+      "index": 30,
+      "stage": "sweep-30",
+      "sha256": "f9275ae0bff3811156166a8dfa56ea46a984eaa859d69e94215138c39a4e3bdc",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 26.17437314814815,
+      "native_lut_log_count": 2
+    },
+    {
+      "name": "晴红",
+      "index": 31,
+      "stage": "sweep-31",
+      "sha256": "450f3b91284ff6dd2a53fc2bd47068ee3fba1a17ce46ee779f83f388b3c93471",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 19.83566111111111,
+      "native_lut_log_count": 2
+    },
+    {
+      "name": "昔日",
+      "index": 32,
+      "stage": "sweep-32",
+      "sha256": "53d6ebd46ab3206eefae63ca08df954700175c51d88f19bc02e9069ffb864232",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 38.32341481481482,
+      "native_lut_log_count": 2
+    },
+    {
+      "name": "云梦",
+      "index": 33,
+      "stage": "sweep-33",
+      "sha256": "f1e99a52f895e05213ebfa0d9e637a6e7c6f8447795ab884a10bb6b223e3d955",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 14.979890740740741,
+      "native_lut_log_count": 2
+    },
+    {
+      "name": "沧渊",
+      "index": 34,
+      "stage": "sweep-34",
+      "sha256": "37e6690289b1db9d651988c8161b770c98f3d127b23def071c8e61908250c1cf",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 13.710108333333332,
+      "native_lut_log_count": 2
+    },
+    {
+      "name": "花朝",
+      "index": 35,
+      "stage": "sweep-35",
+      "sha256": "b4e8b895ff343ba4abd6c0bfbc7596536cdacd515f0bb9a63bb8da94be43eafd",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 20.31829074074074,
+      "native_lut_log_count": 2
+    },
+    {
+      "name": "红妆",
+      "index": 36,
+      "stage": "sweep-36",
+      "sha256": "6cf12353a636bad1bc0f43ff4d7e0ceeecd20489a7c86a50dd578a1a84ec424d",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 41.19228611111111,
+      "native_lut_log_count": 2
+    },
+    {
+      "name": "光影有声",
+      "index": 37,
+      "stage": "sweep-37",
+      "sha256": "ce190cc8afdf95ed87e1e8cdfffbd9e3c630a121ea3eb5da954472bbd501b59d",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 20.898151851851853,
+      "native_lut_log_count": 2
+    },
+    {
+      "name": "山野",
+      "index": 38,
+      "stage": "sweep-38",
+      "sha256": "e131c4a1a88b375e9118331d4c3010d29e5087012547bcab41444e40c6a908af",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 17.8052,
+      "native_lut_log_count": 2
+    },
+    {
+      "name": "海岛",
+      "index": 39,
+      "stage": "sweep-39",
+      "sha256": "8c016c1ddbb8c6d91ba4a9961dac4a1516a0b0f1fb08fa911174db88864d0dad",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 13.634347222222223,
+      "native_lut_log_count": 2
+    },
+    {
+      "name": "城市",
+      "index": 40,
+      "stage": "sweep-40",
+      "sha256": "05a05661dacced58792111e367525c9240564e740a8b0a57b56ed659d8e3bdb4",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 16.318400925925925,
+      "native_lut_log_count": 8
+    },
+    {
+      "name": "童话",
+      "index": 41,
+      "stage": "sweep-41",
+      "sha256": "90a50772c2055d6935ab723a76ead04654fe2d2329cabe22356febf02212ef0f",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 17.077287962962963,
+      "native_lut_log_count": 2
+    },
+    {
+      "name": "少年奇旅",
+      "index": 42,
+      "stage": "sweep-42",
+      "sha256": "0bd454cf9d1ba49f3082c247dee6210cd973daa246e45e45ff306292b0eb3119",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 29.78045462962963,
+      "native_lut_log_count": 2
+    },
+    {
+      "name": "壮志凌云",
+      "index": 43,
+      "stage": "sweep-43",
+      "sha256": "9936f52f29fec9b6e6cd19a146f84bc84bca82077277091378fb4126b7e182f7",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 28.49835277777778,
+      "native_lut_log_count": 2
+    },
+    {
+      "name": "倒带人生",
+      "index": 44,
+      "stage": "sweep-44",
+      "sha256": "0e50abdac723c846ee117a33f845bc1c76db1af87e908dc804d2b624ba3ec0a7",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 19.997456481481482,
+      "native_lut_log_count": 2
+    },
+    {
+      "name": "柔和",
+      "index": 45,
+      "stage": "sweep-45",
+      "sha256": "91d1ccf86ac717d4f66888f7e8d14a2417921f088d0041311cd94993f61c62d2",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 2.1843092592592592,
+      "native_lut_log_count": 2
+    },
+    {
+      "name": "黑金",
+      "index": 46,
+      "stage": "sweep-46",
+      "sha256": "13caae6977f894f038c1a7fc773582a5d706e045e236606713ef39be68716752",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 81.1574787037037,
+      "native_lut_log_count": 2
+    },
+    {
+      "name": "黄蓝",
+      "index": 47,
+      "stage": "sweep-47",
+      "sha256": "867322e444080d7cfa8313f9c01060e1a4998da247caf840278c2a2e60fb5607",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 32.797175,
+      "native_lut_log_count": 2
+    },
+    {
+      "name": "粉青",
+      "index": 48,
+      "stage": "sweep-48",
+      "sha256": "28077d4eeccc08bcbf2a9cb9bb5ac4fe4f7250498517abb1dcc398f61d099a87",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 34.87667314814815,
+      "native_lut_log_count": 2
+    },
+    {
+      "name": "夜之城",
+      "index": 49,
+      "stage": "sweep-49",
+      "sha256": "6e4a05fcfec9ad68d271f54f954cbc4c47519a45d2d92450ab4e0007fdff5397",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 19.48826111111111,
+      "native_lut_log_count": 2
+    },
+    {
+      "name": "冷调闪光",
+      "index": 50,
+      "stage": "sweep-50",
+      "sha256": "47d26b6fc44cc1d62d9e6e68ea7cd4e5b4e69c1399c791a6cd7133b78f247785",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 18.617200925925925,
+      "native_lut_log_count": 1
+    },
+    {
+      "name": "暖调闪光",
+      "index": 51,
+      "stage": "sweep-51",
+      "sha256": "cf5ef352e8702a3d3639931e449de12ab5de396e1039d81bad8b1185222f6d08",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 39.17080925925926,
+      "native_lut_log_count": 1
+    },
+    {
+      "name": "贾樟柯滤镜",
+      "index": 52,
+      "stage": "sweep-52",
+      "sha256": "0ddbe83fb75f383e46e99b93277482c1ba6acc9d244e690ed5e02951d364b20a",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 26.898310185185185,
+      "native_lut_log_count": 1
+    }
+  ],
+  "portrait_previews_and_saved_images": [
+    {
+      "stage": "portrait-heguang",
+      "sha256": "27d666ab992d46c25f6595a1470b1ca7997aafde124ca9a6f7c29096c47065c5",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 33.92430092592593
+    },
+    {
+      "stage": "portrait-nongyu",
+      "sha256": "f144f917f6f8240eb798d4de36d56fa413afadd7a9239622adf66e4ff54f9528",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 36.8590787037037
+    },
+    {
+      "stage": "portrait-bw",
+      "sha256": "e3405c65663fb253e706829d67b1c4c3373a3a44133ac2f8d8013d1953c5bf7c",
+      "size": [
+        4096,
+        3072
+      ],
+      "mean_channel_spread": 0.279887962962963
+    }
+  ],
+  "video_previews_and_decoded_output": [
+    {
+      "stage": "video-heguang",
+      "sha256": "363a480e09b312996d21613244c5cacb656ba93fa11ecc90b21fbd924cd99af7",
+      "size": [
+        1920,
+        1080
+      ],
+      "mean_channel_spread": 14.003637037037038,
+      "duration": "00:00:15.73",
+      "fps": 30,
+      "decode_exit_code": 0,
+      "menu_preview_and_output_visually_verified": true
+    },
+    {
+      "stage": "video-nongyu",
+      "sha256": "a085059aac56711474d055c4f488cd5b9e737531e2af47641bb12f348856e1c3",
+      "size": [
+        1920,
+        1080
+      ],
+      "mean_channel_spread": 16.063107407407408,
+      "duration": "00:00:02.96",
+      "fps": 30,
+      "decode_exit_code": 0,
+      "menu_preview_and_output_visually_verified": true
+    },
+    {
+      "stage": "video-contrast-bw",
+      "sha256": "d79f482de99f53395ac35c87b977b3565646ec62d1cb5f33f4269f35b49875f6",
+      "size": [
+        1920,
+        1080
+      ],
+      "mean_channel_spread": 0.0,
+      "duration": "00:00:02.96",
+      "fps": 30,
+      "decode_exit_code": 0,
+      "menu_preview_and_output_visually_verified": true
+    }
+  ],
+  "toggle_off": {
+    "pid": "25449",
+    "resource_close_warnings": 10942,
+    "warning_first": "03:40:00.370",
+    "warning_last": "03:42:25.995",
+    "anonymous_lut_descriptors": "",
+    "native_last_filter": "cyberpunk-kitsch-3.1.CUBE.rgb.bin",
+    "native_count": 20,
+    "extended_list_absent": true,
+    "restart_selection": "OEM clamps former added index to native final filter"
+  },
+  "final_apk_checks": [
+    "Installed APK hash equals release artifact",
+    "Runtime UI reports loaded 2.1.8 and 53 photo filters",
+    "Three added ordinary video filters preview/record/decode verified",
+    "Camera reset to rear photo/original filter; portrait/video original filter restored"
+  ],
+  "test_build_scope": "The 33 photo captures and portrait captures were made during candidate validation. Later changes excluded the unrelated master group and added status text; photo processing stayed the same. Final signed APK separately exercised all three added ordinary-video filters and the 53-item photo status. Unrelated module features were not retested.",
+  "logs": {
+    "capture_start": "11-18 02:55:45.153",
+    "capture_end": "11-18 04:03:32.263",
+    "fatal_or_anr_count": 0,
+    "hook_exceptions_after_float_fix": 0,
+    "final_lut_error_messages": {
+      ": NvInitNdkSymbols load error by function: MsGetEffectFloatValue": 1,
+      ": NvInitNdkSymbols load error by function: MsSetFacePoints": 1,
+      ": NvInitNdkSymbols load error by function: MsCreateRenderCoreWithOption": 1,
+      ": Invalid boolean paramId: LightFlow Enable": 7697,
+      ": Invalid boolean paramId: Polaroid Enable": 7696,
+      ": Invalid boolean paramId: Fish Eye Enable": 7696,
+      ": Invalid boolean paramId: Soft Focus Enable": 7695,
+      ": Invalid string paramId: Custom LUT File Path": 7695,
+      ": Invalid float paramId: Custom LUT Factor": 7695
+    },
+    "same_error_messages_in_feature_off_baseline": {
+      ": NvInitNdkSymbols load error by function: MsGetEffectFloatValue": 1,
+      ": NvInitNdkSymbols load error by function: MsSetFacePoints": 1,
+      ": NvInitNdkSymbols load error by function: MsCreateRenderCoreWithOption": 1,
+      ": Invalid boolean paramId: LightFlow Enable": 3630,
+      ": Invalid boolean paramId: Polaroid Enable": 3630,
+      ": Invalid boolean paramId: Fish Eye Enable": 3630,
+      ": Invalid boolean paramId: Soft Focus Enable": 3630,
+      ": Invalid string paramId: Custom LUT File Path": 3630,
+      ": Invalid float paramId: Custom LUT Factor": 3628
+    }
+  },
+  "development_issue": "An earlier prototype used getInt on the OEM float intensity field. Exceptions were limited to prototype PID 24682 and ended at 03:07:32.671; fixed before the accepted photo sweep. Failed/repeated prototype samples are excluded from pass counts.",
+  "cleanup": {
+    "completed_at": "2026-11-18T04:02:45+08:00",
+    "test_images": 45,
+    "test_videos": 3,
+    "test_media_entries_absent": true,
+    "test_media_source_files_absent": true,
+    "owned_trash_files_removed": 48,
+    "trash_remaining": [],
+    "temporary_files": [],
+    "probe_packages": [],
+    "screen_timeout": "30000",
+    "camera_pid": "",
+    "installed_apk_sha256": "8df92327614c3f2e5815f7f1151583c467fcbc4132784143fc2b5da2400398b6",
+    "phone_rebooted": false,
+    "verified": true,
+    "other_module_settings_and_scopes_preserved": true,
+    "media_caches_empty": true,
+    "camera_filter_memfds_released": true,
+    "filter_setting_enabled": true,
+    "normal_camera_assets_preserved": true
+  },
+  "limits": [
+    "Rear photo 1x, rear portrait still life, ordinary 1080p30 SDR video only; no claim for front cameras, HDR/RAW/Log or every lens/resolution.",
+    "Portrait testing verifies filter color, not person segmentation or depth quality.",
+    "Master presets retain native behavior. GR/retro/festival/vibe dedicated modes have additional unverified dependencies and are not unlocked.",
+    "Preview/output consistency is visually inspected, not calibrated colorimetric equivalence with a donor phone.",
+    "Existing native camera diagnostic errors also occur with filter expansion off; this is not a claim that all OS logs are error-free.",
+    "User data, original OEM assets and ordinary system/application diagnostic history are preserved. All task-created test media, trash copies and temporary files are removed."
+  ]
+}

@@ -17,6 +17,7 @@ public final class CameraInspirationEntry extends XposedModule {
     private volatile boolean logExpanded;
     private final CameraLogSession logSession=new CameraLogSession();
     private ClassLoader cameraLoader;
+    private CameraFilterAdapter filterAdapter;
     private final SharedPreferences.OnSharedPreferenceChangeListener listener=(p,key)->{
         if(key==null||CameraInspirationPolicy.KEY.equals(key))expanded=false;
         if((key==null||Config.CAMERA_LOG.equals(key))&&!value(Config.CAMERA_LOG)){
@@ -24,7 +25,7 @@ public final class CameraInspirationEntry extends XposedModule {
         }
     };
     private boolean value(String key){try{return prefs!=null&&prefs.getBoolean(key,false);}catch(Throwable ignored){return false;}}
-    private boolean requested(){return value(CameraInspirationPolicy.KEY)||value(Config.CAMERA_LOG);}
+    private boolean requested(){return value(CameraInspirationPolicy.KEY)||value(Config.CAMERA_LOG)||value(Config.CAMERA_FILTERS);}
     private boolean enabled(){return runtime.ready()&&value(CameraInspirationPolicy.KEY);}
     private boolean logEnabled(){return runtime.ready()&&value(Config.CAMERA_LOG);}
     @Override public void onModuleLoaded(XposedModuleInterface.ModuleLoadedParam p){processName=p.getProcessName();}
@@ -32,7 +33,7 @@ public final class CameraInspirationEntry extends XposedModule {
     @Override public void onPackageReady(XposedModuleInterface.PackageReadyParam p){install(p.getPackageName(),p.getClassLoader());}
     private synchronized void install(String pkg,ClassLoader loader){
         if(installed||!CameraInspirationPolicy.HOST.equals(pkg)||!CameraInspirationPolicy.HOST.equals(processName))return;
-        runtime.arm(this,this::requested,data->data.put("camera",new org.json.JSONObject().put("enabled",enabled()).put("expanded",enabled()&&expanded).put("logEnabled",logEnabled()).put("logExpanded",logExpanded)));
+        runtime.arm(this,this::requested,data->data.put("camera",new org.json.JSONObject().put("enabled",enabled()).put("expanded",enabled()&&expanded).put("logEnabled",logEnabled()).put("logExpanded",logExpanded).put("filtersRequested",value(Config.CAMERA_FILTERS)).put("filters",filterAdapter==null?org.json.JSONObject.NULL:filterAdapter.diagnostics())));
         if(!runtime.check(this)){installed=true;return;}
         try{
             Class<?> config=Class.forName("com.oplus.camera.configure.CameraConfig",false,loader),aps=Class.forName("com.oplus.ocs.camera.consumer.apsAdapter.adapter.ApsUtils",false,loader),configure=Class.forName("com.oplus.ocs.camera.configure.CameraConfigure",false,loader),table=Class.forName("com.oplus.ocs.camera.configure.ProtobufFeatureConfig$FeatureTable",false,loader);
@@ -44,6 +45,8 @@ public final class CameraInspirationEntry extends XposedModule {
             installed=true;
             cameraLoader=loader;
             prefs=getRemotePreferences(Config.PREFS);prefs.registerOnSharedPreferenceChangeListener(listener);
+            try{filterAdapter=new CameraFilterAdapter(this,()->runtime.ready()&&value(Config.CAMERA_FILTERS));filterAdapter.install(loader);}
+            catch(Throwable error){log(Log.WARN,"ColorOSEnhance-Filters","Filter adapter unavailable; retaining native filters",error);}
             // A restart is already required for the feature table. Keep the hot
             // data repository completely native in processes started with Log off.
             if(value(Config.CAMERA_LOG)){

@@ -1,0 +1,39 @@
+{
+  "completed": true,
+  "firmware": "PHY110_17.0.0.100",
+  "partition": "my_product.img",
+  "partition_sha256": "9448e36ebb6800ff0b90efa775c2cd7cb42d5c8a94d27474973d807380e3b149",
+  "partition_matches_provided_checksum": true,
+  "camera": {
+    "partition": "my_product.img",
+    "path": "/app/OplusCamera/OplusCamera.apk",
+    "package": "com.oplus.camera",
+    "versionName": "7.006.191",
+    "versionCode": 60000,
+    "sha256": "9eed439a83d6f4e9e666619626cd5371cc31da7db31a05138f35745cc8c2aa97",
+    "matches_previously_pulled_phone_camera_apk": true
+  },
+  "default_strength_rules": {
+    "mono.cube.rgb.bin": 50,
+    "blackandwhite.cube.rgb.bin": 50,
+    "blackandwhite_HC_normal.bin": 50,
+    "blackandwhite_HC_master.bin": 50,
+    "other_generic_filters": 100
+  },
+  "default_helper": "zf.d.j(String)",
+  "default_is_used_when_no_saved_override": {
+    "palette": "ag.y.b -> kt.b.h(..., zf.d.j(filterType))",
+    "common_filter_presenter": "ag.t.d3 -> DataManager.b(key, zf.d.j(selectedType)) when effect-style support is enabled and the selected index is valid",
+    "other_branch": "100 is the fallback when effect-style support is disabled or selected filter list/index is unavailable"
+  },
+  "normal_decompilation_note": "JADX reports unrelated class decompilation errors for zf.d and ag.t; the exact simple default helper was independently checked using raw fallback instructions, which completed with exit 0.",
+  "raw_fallback_instructions_independently_verified": true,
+  "native_runtime_effect_style_support": 1,
+  "native_runtime_flag_source": "Previously captured device runtime snapshot, not decoded from the firmware ODM configuration.",
+  "real_off_on_strength": {
+    "mono.cube.rgb.bin": 50,
+    "blackandwhite.cube.rgb.bin": 50
+  },
+  "phone_accessed_for_firmware_check": false,
+  "firmware_modified": false
+}

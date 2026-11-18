@@ -1,6 +1,6 @@
 {
   "application_id_source": "app/build.gradle.kts",
-  "version": "2.1.7",
+  "version": "2.1.8",
   "device": "PHY110",
   "rom": "PHY110_17.0.0.100(CN01)",
   "android_sdk": 37,
@@ -20,7 +20,7 @@
     "oplus-services.jar": "5a3613f87b766bc5923e4d9d75a0e3b79aa2c22f92d43a984d3cb0823f9e5a90",
     "services.jar": "78be31cdbfda61fdbfd84013c2c0b31812468bec8ffc4a0aa56ab4f4e0937e44"
   },
-  "apk_sha256": "e772fd78e71f3e5e8e13b89e6822e01d1820f249e31b257bf0247bb9b381043a",
+  "apk_sha256": "8df92327614c3f2e5815f7f1151583c467fcbc4132784143fc2b5da2400398b6",
   "license": "AGPL-3.0-or-later",
   "optional_features_not_exhaustively_tested": true,
   "oem_cast_apks": {
@@ -28,8 +28,8 @@
     "OPSynergy.apk": "a94af8ff5c0425095fbbf921d10afe1608197c0538b12e246f3a2a3a92db05c3",
     "ShareScreen.apk": "83912117bb5906a2e86a6870e05f41e6bde34a8a878b8d3c05688c81bef8e070"
   },
-  "validation": "docs/evidence/capture-only-2.1.7/validation.json",
-  "version_code": 23,
+  "validation": "docs/evidence/camera-filters-2.1.8/validation.json",
+  "version_code": 24,
   "app_name": "ColorOS 增强",
   "aod_source": {
     "repository": "NOTICE",
@@ -38,17 +38,16 @@
     "license": "MIT"
   },
   "scopes": [
+    "system",
     "com.android.systemui",
-    "com.coloros.gallery3d",
     "com.oplus.aod",
-    "com.oplus.atlas",
-    "com.oplus.audio.effectcenter",
-    "com.oplus.camera",
-    "com.oplus.cast",
     "com.oplus.gesture",
-    "com.oplus.gleanerservice",
     "com.oplus.trafficmonitor",
-    "system"
+    "com.oplus.gleanerservice",
+    "com.coloros.gallery3d",
+    "com.oplus.camera",
+    "com.oplus.audio.effectcenter",
+    "com.oplus.atlas"
   ],
   "licenses": {
     "combined": "AGPL-3.0-or-later",
@@ -73,7 +72,8 @@
     "docs/evidence/improvements-2.1.3/validation.json",
     "docs/evidence/icons-2.1.4/validation.json",
     "docs/evidence/window-fix-2.1.5/validation.json",
-    "docs/evidence/audio-upgrade-2.1.6/validation.json"
+    "docs/evidence/audio-upgrade-2.1.6/validation.json",
+    "docs/evidence/capture-only-2.1.7/validation.json"
   ],
   "historical_confirmed_tests": [
     "Three settings entrances and AOD subpages",
@@ -85,7 +85,7 @@
     "50 AOD unit tests and 17 cast policy checks"
   ],
   "device_tested_this_release": true,
-  "changes": "Remove OPPO casting enhancements and scope; preserve independent secure-window capture control and existing capture preference.",
+  "changes": "Add 33 supported rear photo filters and three portrait/common-video film styles through sealed memory LUT resources; verify preview/output, preserve original filters, add status reporting.",
   "historical_final_enabled": [
     "unlock_flexible",
     "unlock_split",
@@ -129,9 +129,8 @@
     "air_gesture_entries",
     "camera_inspiration_recommendation",
     "camera_log_video",
+    "camera_missing_filters",
     "capture",
-    "cast_density",
-    "cast_enabled",
     "exclude_system",
     "force_multi_mode",
     "foreground",
@@ -147,26 +146,31 @@
     "unlock_split"
   ],
   "validation_scope": {
-    "scope": "Upgrade migration, capture UI, FLAG_SECURE screenshot/recording OFF-ON-OFF, native casting start/stop, logs and cleanup",
+    "scope": "Camera filter catalogs, preview/photo/video outputs, off restoration, runtime UI, logs and cleanup",
     "all_features_retested": false,
-    "final_apk_sha256": "e772fd78e71f3e5e8e13b89e6822e01d1820f249e31b257bf0247bb9b381043a",
+    "final_apk_sha256": "8df92327614c3f2e5815f7f1151583c467fcbc4132784143fc2b5da2400398b6",
     "limitations": [
-      "Only targeted capture/removal/native casting regression; unrelated features not fully retested.",
-      "Ordinary FLAG_SECURE test windows only; hardware DRM is outside scope.",
-      "The device owner confirmed missing Root authorization during this test. Sound code is unchanged; post-authorization sound behavior was not retested.",
-      "OS diagnostic logs and ordinary application data were not erased."
+      "Rear photo 1x, rear portrait still life, ordinary 1080p30 SDR video only; no claim for front cameras, HDR/RAW/Log or every lens/resolution.",
+      "Portrait testing verifies filter color, not person segmentation or depth quality.",
+      "Master presets retain native behavior. GR/retro/festival/vibe dedicated modes have additional unverified dependencies and are not unlocked.",
+      "Preview/output consistency is visually inspected, not calibrated colorimetric equivalence with a donor phone.",
+      "Existing native camera diagnostic errors also occur with filter expansion off; this is not a claim that all OS logs are error-free.",
+      "User data, original OEM assets and ordinary system/application diagnostic history are preserved. All task-created test media, trash copies and temporary files are removed."
     ]
-  },
-  "final_cast": {
-    "enhancement_enabled": true,
-    "requested_fps": 60,
-    "parameters": "User baseline restored; native negotiated resolution and current display density; configured fps is not a measurement of delivered fps."
   },
   "retired_features": {
     "free_ratio": {
       "removed_in": "2.1.5",
       "reason": "Native mini-window calculation can yield zero scale when free-ratio support is forced on PHY110."
+    },
+    "cast_enhancements": {
+      "removed_in": "2.1.7",
+      "reason": "User requested native OPPO casting; secure-window capture toggle retained."
     }
   },
-  "publication_status": "release_artifact"
+  "publication_status": "published",
+  "camera_filter_resources": "docs/CAMERA_FILTER_RESOURCES_2.1.8.json",
+  "camera_filter_native_ab_validation": "docs/evidence/filter-native-ab-2.1.8/validation.json",
+  "github_release": "https://github.com/Ayc-Gh/ColorOS-Enhanced-Apps/releases/tag/v2.1.8",
+  "camera_filter_default_strength_validation": "docs/evidence/filter-default-strength-2.1.8/validation.json"
 }

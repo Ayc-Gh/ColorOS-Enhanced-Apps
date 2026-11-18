@@ -17,6 +17,7 @@ public final class Config {
     public static final String GALLERY_AI_RETOUCH="gallery_ai_retouch";
     public static final String CAMERA_INSPIRATION="camera_inspiration_recommendation";
     public static final String CAMERA_LOG="camera_log_video";
+    public static final String CAMERA_FILTERS="camera_missing_filters";
     public static final int MAX_COUNT=10;
     public static final int MAX_EDGE_COUNT=5;
     public static final String[] WINDOW_KEYS={UNLOCK,SPLIT,MULTI,RATIO,COUNT,EDGE_COUNT,CORNER,SHADOW_FOCUS,SHADOW_BLUR,JUMP,NOTIFICATION,LAUNCHER,EXCLUDE_SYSTEM,HIDE_BOTTOM,HIDE_TOP,REMEMBER,FOREGROUND};

@@ -35,6 +35,18 @@ class RuntimeStatusActivity:NativeSettingsActivity(){
                 note("修图请求、联网授权和保存结果由相册处理；入口已显示不代表本次修图成功。")
             }
             report.optJSONObject("camera")?.let{c->note(if(c.optBoolean("enabled"))"云端灵感推荐解锁已开启" else "云端灵感推荐解锁已关闭");note(if(c.optBoolean("expanded"))"已恢复相机灵感推荐入口" else "尚未触发相机入口");note(when{c.optBoolean("logEnabled")&&c.optBoolean("logExpanded")->"Log 功能表已补齐，录制由原生相机处理";c.optBoolean("logEnabled")->"Log 解锁已开启，等待重启相机进程";c.optBoolean("logExpanded")->"Log 解锁已关闭，重启相机进程后恢复原生功能表";else->"Log 解锁已关闭"});note("推荐图片、网络请求和参考／跟拍引导由相机及云端服务处理；本地实时灵感构图未加入。")}
+            report.optJSONObject("camera")?.let{c->
+                c.optJSONObject("filters")?.let{f->
+                    note(when{
+                        !f.optBoolean("installed")->"滤镜适配不可用，保留原生列表"
+                        f.optBoolean("resourceFailure")->"滤镜资源校验失败，保留原生列表"
+                        c.optBoolean("filtersRequested")!=f.optBoolean("sessionEnabled")->"滤镜开关已修改，重启相机进程后生效"
+                        !f.optBoolean("sessionEnabled")->"滤镜补齐已关闭，使用原生列表"
+                        f.optBoolean("resourcesReady")&&f.optInt("photoFilterCount")>0->"照片滤镜已补齐，共 ${f.optInt("photoFilterCount")} 项"
+                        else->"滤镜补齐已开启，等待相机初始化"
+                    })
+                }
+            }
             report.optJSONObject("memory")?.let{m->
                 note(if(m.optBoolean("enabled"))"微信支持恢复已开启" else "微信支持恢复已关闭")
                 note(when(m.optString("adapter")){"adapted"->"已补齐微信页面配置：${m.optInt("repaired")} 项";"mixed"->"保留原生页面配置，另补齐 ${m.optInt("repaired")} 项缺失页面";"native"->"系统已有微信支持，保持原生配置";"ready"->"适配接口已加载，尚未读取系统列表";else->"未找到可适配配置，保持原生处理"})

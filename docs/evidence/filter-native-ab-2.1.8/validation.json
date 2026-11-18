@@ -1,0 +1,1796 @@
+{
+  "completed": true,
+  "version": "2.1.8",
+  "apk_unchanged": true,
+  "apk_sha256": "8df92327614c3f2e5815f7f1151583c467fcbc4132784143fc2b5da2400398b6",
+  "completed_at": "2026-11-18T08:50:53+08:00",
+  "scope": "Rear photo mode, 1x, fixed still life, original plus all 19 stock filters, real preview and 4096x3072 JPEG output. No app source changes or unrelated feature regressions.",
+  "off_restoration": {
+    "camera_pid": "18203",
+    "anonymous_lut_descriptors": [],
+    "filter_count": 20,
+    "catalog": [
+      "default",
+      "800t.bin",
+      "fuji_cc.bin",
+      "fuji-nc.bin",
+      "fuji-proNegHi.bin",
+      "Radiance.cube.rgb.bin",
+      "Serenity.cube.rgb.bin",
+      "Emerald.cube.rgb.bin",
+      "fuji-eterna-v2.cube.rgb.bin",
+      "fuji.cube.rgb.bin",
+      "vivid-warm.cube.rgb.bin",
+      "vivid-cool.cube.rgb.bin",
+      "vivid-lut.cube.rgb.bin",
+      "mono.cube.rgb.bin",
+      "blackandwhite.cube.rgb.bin",
+      "natural.cube.rgb.bin",
+      "gourmet.cube.rgb.bin",
+      "kodak.cube.rgb.bin",
+      "morandi.cube.rgb.bin",
+      "cyberpunk-kitsch-3.1.CUBE.rgb.bin"
+    ],
+    "catalog_evidence": "Native log prefix has 19 entries before Android line truncation; last native item is both the actual preview filter and the visibly selected terminal menu item. Combined list matches native 20-entry catalog.",
+    "selected_filter_after_restart": "cyberpunk-kitsch-3.1.CUBE.rgb.bin",
+    "selected_filter_name": "赛博朋克",
+    "added_resource_names_absent": true,
+    "prior_selection_not_automatically_restored": true,
+    "matches_preexisting_native_catalog": true
+  },
+  "photo_comparison": {
+    "filters": [
+      {
+        "index": 0,
+        "name": "原图",
+        "file": "default",
+        "off_sha256": "63d32413a63a9a4786f78db1342e042f10b83f77168f0e0953b1dd66e164f5f8",
+        "on_sha256": "b167bb894838de874bfe614813891d5520fdae8220f0bd93202bc09439de97b4",
+        "off_size": [
+          4096,
+          3072
+        ],
+        "on_size": [
+          4096,
+          3072
+        ],
+        "aligned_offset_at_160x120": [
+          0,
+          0
+        ],
+        "blurred_rgb_mae_255": 2.440167802318296,
+        "mean_rgb_delta_by_channel": [
+          2.163783482142857,
+          2.183402843045113,
+          2.9733170817669174
+        ],
+        "max_grid_mean_rgb_delta_255": 3.9002489331436814,
+        "max_grid_channel_fraction_delta": 0.0059799721579403275,
+        "exif_a": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:29:23"
+        },
+        "exif_b": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:38:35"
+        },
+        "preview_comparison": {
+          "aligned_offset_at_160x120": [
+            0,
+            0
+          ],
+          "blurred_rgb_mae_255": 2.2247758067042605,
+          "mean_rgb_delta_by_channel": [
+            1.8248061560150375,
+            1.8160097509398496,
+            3.0335115131578947
+          ],
+          "max_grid_mean_rgb_delta_255": 3.252430061640581,
+          "max_grid_channel_fraction_delta": 0.006595905721462958,
+          "exif_a": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:29:23"
+          },
+          "exif_b": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:38:35"
+          }
+        }
+      },
+      {
+        "index": 1,
+        "name": "霓虹",
+        "file": "800t.bin",
+        "off_sha256": "a4c954d5dd750ce4010737f3055b2a3260ec157819423dffb536097a38e15a29",
+        "on_sha256": "b8bab53cac3d45d6f8ac864b693f1940d92b7e3d32024eab7e0502d3b8d3287b",
+        "off_size": [
+          4096,
+          3072
+        ],
+        "on_size": [
+          4096,
+          3072
+        ],
+        "aligned_offset_at_160x120": [
+          0,
+          0
+        ],
+        "blurred_rgb_mae_255": 2.83586407424812,
+        "mean_rgb_delta_by_channel": [
+          2.2464608787593985,
+          2.2251820958646618,
+          4.035949248120301
+        ],
+        "max_grid_mean_rgb_delta_255": 3.794748696064488,
+        "max_grid_channel_fraction_delta": 0.006463148427762244,
+        "exif_a": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:29:45"
+        },
+        "exif_b": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:39:00"
+        },
+        "preview_comparison": {
+          "aligned_offset_at_160x120": [
+            0,
+            0
+          ],
+          "blurred_rgb_mae_255": 3.1592947211779445,
+          "mean_rgb_delta_by_channel": [
+            2.598419877819549,
+            2.250161536654135,
+            4.62930274906015
+          ],
+          "max_grid_mean_rgb_delta_255": 3.991583688952119,
+          "max_grid_channel_fraction_delta": 0.011906151063688752,
+          "exif_a": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:29:45"
+          },
+          "exif_b": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:39:00"
+          }
+        }
+      },
+      {
+        "index": 2,
+        "name": "清新",
+        "file": "fuji_cc.bin",
+        "off_sha256": "8773ee18829977611ca3ea0e229c0b5d9c6a0dcf80ab4214b904f439b7ee764b",
+        "on_sha256": "1b99c6d53bea3075adc424476228af9f7121b249142c2ab0ed533b6f443861ba",
+        "off_size": [
+          4096,
+          3072
+        ],
+        "on_size": [
+          4096,
+          3072
+        ],
+        "aligned_offset_at_160x120": [
+          0,
+          0
+        ],
+        "blurred_rgb_mae_255": 3.07289219141604,
+        "mean_rgb_delta_by_channel": [
+          2.604470159774436,
+          2.5033041588345863,
+          4.110902255639098
+        ],
+        "max_grid_mean_rgb_delta_255": 5.570058479532169,
+        "max_grid_channel_fraction_delta": 0.006660028263161533,
+        "exif_a": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:30:08"
+        },
+        "exif_b": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:39:26"
+        },
+        "preview_comparison": {
+          "aligned_offset_at_160x120": [
+            0,
+            0
+          ],
+          "blurred_rgb_mae_255": 3.447030662593985,
+          "mean_rgb_delta_by_channel": [
+            2.789253406954887,
+            2.511689379699248,
+            5.04014920112782
+          ],
+          "max_grid_mean_rgb_delta_255": 5.370935672514619,
+          "max_grid_channel_fraction_delta": 0.0066166799784058705,
+          "exif_a": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:30:08"
+          },
+          "exif_b": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:39:26"
+          }
+        }
+      },
+      {
+        "index": 3,
+        "name": "复古",
+        "file": "fuji-nc.bin",
+        "off_sha256": "ea0d13c432b318e41fb1891e9d5503e38b557d6dd31fc23a1d57fb0373a91c8c",
+        "on_sha256": "774541fcfeefa112a7d67a8df99cbe70da6b3cce3efc3d788a9593e07ab20d3e",
+        "off_size": [
+          4096,
+          3072
+        ],
+        "on_size": [
+          4096,
+          3072
+        ],
+        "aligned_offset_at_160x120": [
+          0,
+          0
+        ],
+        "blurred_rgb_mae_255": 2.991590303884712,
+        "mean_rgb_delta_by_channel": [
+          2.465093397556391,
+          2.368156719924812,
+          4.141520794172933
+        ],
+        "max_grid_mean_rgb_delta_255": 5.679064327485373,
+        "max_grid_channel_fraction_delta": 0.006020469393848593,
+        "exif_a": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:30:32"
+        },
+        "exif_b": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:39:51"
+        },
+        "preview_comparison": {
+          "aligned_offset_at_160x120": [
+            0,
+            0
+          ],
+          "blurred_rgb_mae_255": 3.4510054432957395,
+          "mean_rgb_delta_by_channel": [
+            3.1254258693609023,
+            2.5741306390977443,
+            4.653459821428571
+          ],
+          "max_grid_mean_rgb_delta_255": 7.283567251461989,
+          "max_grid_channel_fraction_delta": 0.007805334185160717,
+          "exif_a": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:30:32"
+          },
+          "exif_b": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:39:51"
+          }
+        }
+      },
+      {
+        "index": 4,
+        "name": "通透",
+        "file": "fuji-proNegHi.bin",
+        "off_sha256": "0c3eae8a4213b4c3041bdf64658f7da2cef23f55a16a870de01165778d3c11c8",
+        "on_sha256": "4ea8ab0320872e949684754ae785a39a887b937b0a835694c0e42abfde57dadb",
+        "off_size": [
+          4096,
+          3072
+        ],
+        "on_size": [
+          4096,
+          3072
+        ],
+        "aligned_offset_at_160x120": [
+          0,
+          0
+        ],
+        "blurred_rgb_mae_255": 2.3920837249373434,
+        "mean_rgb_delta_by_channel": [
+          2.524656367481203,
+          2.9210232612781954,
+          1.7305715460526316
+        ],
+        "max_grid_mean_rgb_delta_255": 3.524385964912284,
+        "max_grid_channel_fraction_delta": 0.007660136058243117,
+        "exif_a": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:30:56"
+        },
+        "exif_b": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:40:17"
+        },
+        "preview_comparison": {
+          "aligned_offset_at_160x120": [
+            0,
+            0
+          ],
+          "blurred_rgb_mae_255": 2.416803728070175,
+          "mean_rgb_delta_by_channel": [
+            2.191112546992481,
+            2.8412388392857144,
+            2.2180597979323307
+          ],
+          "max_grid_mean_rgb_delta_255": 3.4685964912280647,
+          "max_grid_channel_fraction_delta": 0.008721103619755588,
+          "exif_a": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:30:56"
+          },
+          "exif_b": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:40:17"
+          }
+        }
+      },
+      {
+        "index": 5,
+        "name": "大师童话",
+        "file": "Radiance.cube.rgb.bin",
+        "off_sha256": "23896f4ac2111b73ce8034e970124e0199225cc78d750c0054fe897efa44ec7a",
+        "on_sha256": "f34f8db7ac429941455f4d54e26005f19ad047b3bb3d7b5224295c236d744167",
+        "off_size": [
+          4096,
+          3072
+        ],
+        "on_size": [
+          4096,
+          3072
+        ],
+        "aligned_offset_at_160x120": [
+          0,
+          0
+        ],
+        "blurred_rgb_mae_255": 2.2393043154761902,
+        "mean_rgb_delta_by_channel": [
+          2.2569313909774436,
+          2.160567434210526,
+          2.3004141212406015
+        ],
+        "max_grid_mean_rgb_delta_255": 3.372807017543863,
+        "max_grid_channel_fraction_delta": 0.0026259261603382433,
+        "exif_a": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:31:21"
+        },
+        "exif_b": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:40:43"
+        },
+        "preview_comparison": {
+          "aligned_offset_at_160x120": [
+            0,
+            0
+          ],
+          "blurred_rgb_mae_255": 2.238344885651629,
+          "mean_rgb_delta_by_channel": [
+            2.143253641917293,
+            2.253201362781955,
+            2.318579652255639
+          ],
+          "max_grid_mean_rgb_delta_255": 3.5563742690058384,
+          "max_grid_channel_fraction_delta": 0.0017772174307284505,
+          "exif_a": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:31:21"
+          },
+          "exif_b": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:40:43"
+          }
+        }
+      },
+      {
+        "index": 6,
+        "name": "大师人像",
+        "file": "Serenity.cube.rgb.bin",
+        "off_sha256": "dee959443b7897b65a29761c820ef038d1d663ab2b20ad410ac2979aa8e9667c",
+        "on_sha256": "7c9b91ec226aa1247c3a6571ce05350716a17e41fc2f631b82a459186d146c41",
+        "off_size": [
+          4096,
+          3072
+        ],
+        "on_size": [
+          4096,
+          3072
+        ],
+        "aligned_offset_at_160x120": [
+          0,
+          0
+        ],
+        "blurred_rgb_mae_255": 2.182634320175439,
+        "mean_rgb_delta_by_channel": [
+          2.2137570488721803,
+          2.186545465225564,
+          2.1476004464285716
+        ],
+        "max_grid_mean_rgb_delta_255": 4.140701754385968,
+        "max_grid_channel_fraction_delta": 0.0014307184496059056,
+        "exif_a": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:31:45"
+        },
+        "exif_b": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:41:08"
+        },
+        "preview_comparison": {
+          "aligned_offset_at_160x120": [
+            0,
+            0
+          ],
+          "blurred_rgb_mae_255": 2.301109218358396,
+          "mean_rgb_delta_by_channel": [
+            2.291720512218045,
+            2.342296170112782,
+            2.269310972744361
+          ],
+          "max_grid_mean_rgb_delta_255": 4.307017543859634,
+          "max_grid_channel_fraction_delta": 0.0026471296719721704,
+          "exif_a": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:31:45"
+          },
+          "exif_b": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:41:08"
+          }
+        }
+      },
+      {
+        "index": 7,
+        "name": "大师风光",
+        "file": "Emerald.cube.rgb.bin",
+        "off_sha256": "1c8a49052d8787d41687b189e2f2867548ac8d0dd68d9bc017551b43f5f67047",
+        "on_sha256": "089a4c822fbec965938f1e59a2375ff7b154a92a9686c47259615de9175dee07",
+        "off_size": [
+          4096,
+          3072
+        ],
+        "on_size": [
+          4096,
+          3072
+        ],
+        "aligned_offset_at_160x120": [
+          0,
+          0
+        ],
+        "blurred_rgb_mae_255": 3.2517475328947367,
+        "mean_rgb_delta_by_channel": [
+          3.3106496710526314,
+          3.288607260338346,
+          3.155985667293233
+        ],
+        "max_grid_mean_rgb_delta_255": 5.329181286549708,
+        "max_grid_channel_fraction_delta": 0.004756038533699769,
+        "exif_a": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:32:10"
+        },
+        "exif_b": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:41:33"
+        },
+        "preview_comparison": {
+          "aligned_offset_at_160x120": [
+            0,
+            0
+          ],
+          "blurred_rgb_mae_255": 3.44351601660401,
+          "mean_rgb_delta_by_channel": [
+            3.523628406954887,
+            3.47898554981203,
+            3.327934093045113
+          ],
+          "max_grid_mean_rgb_delta_255": 5.663859649122808,
+          "max_grid_channel_fraction_delta": 0.002165819580677908,
+          "exif_a": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:32:10"
+          },
+          "exif_b": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:41:33"
+          }
+        }
+      },
+      {
+        "index": 8,
+        "name": "明艳",
+        "file": "fuji-eterna-v2.cube.rgb.bin",
+        "off_sha256": "28bdd26482de911c969de8c7043d1cfc6add225338162f098fa07d59942e7b0e",
+        "on_sha256": "faf50028a0a34e5464ab23159d4497131c3463c508208e279ca8fb0cde459039",
+        "off_size": [
+          4096,
+          3072
+        ],
+        "on_size": [
+          4096,
+          3072
+        ],
+        "aligned_offset_at_160x120": [
+          0,
+          0
+        ],
+        "blurred_rgb_mae_255": 2.3963766838972433,
+        "mean_rgb_delta_by_channel": [
+          2.441655897556391,
+          2.614309210526316,
+          2.1331649436090228
+        ],
+        "max_grid_mean_rgb_delta_255": 4.642982456140355,
+        "max_grid_channel_fraction_delta": 0.002351517078601262,
+        "exif_a": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:32:34"
+        },
+        "exif_b": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:41:58"
+        },
+        "preview_comparison": {
+          "aligned_offset_at_160x120": [
+            0,
+            0
+          ],
+          "blurred_rgb_mae_255": 2.6772399749373434,
+          "mean_rgb_delta_by_channel": [
+            2.6614779135338344,
+            2.803659539473684,
+            2.5665824718045114
+          ],
+          "max_grid_mean_rgb_delta_255": 5.030994152046787,
+          "max_grid_channel_fraction_delta": 0.008121155128595486,
+          "exif_a": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:32:34"
+          },
+          "exif_b": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:41:58"
+          }
+        }
+      },
+      {
+        "index": 9,
+        "name": "胶片",
+        "file": "fuji.cube.rgb.bin",
+        "off_sha256": "928f605fb70d40b67fa7199d688849ffeb17c269807bafbfa1bb3f6f4623df1c",
+        "on_sha256": "94ad273f13f5ce59ec98646b75aac519d7e0d0c9b3782cc7af364e0c88d2d81e",
+        "off_size": [
+          4096,
+          3072
+        ],
+        "on_size": [
+          4096,
+          3072
+        ],
+        "aligned_offset_at_160x120": [
+          0,
+          0
+        ],
+        "blurred_rgb_mae_255": 2.500107691102757,
+        "mean_rgb_delta_by_channel": [
+          2.7593984962406015,
+          2.3893620770676693,
+          2.3515625
+        ],
+        "max_grid_mean_rgb_delta_255": 5.188128654970758,
+        "max_grid_channel_fraction_delta": 0.0018689176522445616,
+        "exif_a": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:32:58"
+        },
+        "exif_b": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:42:23"
+        },
+        "preview_comparison": {
+          "aligned_offset_at_160x120": [
+            0,
+            0
+          ],
+          "blurred_rgb_mae_255": 2.752330043859649,
+          "mean_rgb_delta_by_channel": [
+            3.118406367481203,
+            2.539767387218045,
+            2.5988163768796992
+          ],
+          "max_grid_mean_rgb_delta_255": 5.571052631578946,
+          "max_grid_channel_fraction_delta": 0.002240910595953216,
+          "exif_a": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:32:58"
+          },
+          "exif_b": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:42:23"
+          }
+        }
+      },
+      {
+        "index": 10,
+        "name": "暖调",
+        "file": "vivid-warm.cube.rgb.bin",
+        "off_sha256": "6fd58944e5a3711a1f6773fb9f1eb8a1eea6c8bac6fb45310d0cd28935c9db17",
+        "on_sha256": "d844115ad380beb9112b2bbff9d9441c4ca95c2eb89f283516e4b6fc39a4a170",
+        "off_size": [
+          4096,
+          3072
+        ],
+        "on_size": [
+          4096,
+          3072
+        ],
+        "aligned_offset_at_160x120": [
+          0,
+          0
+        ],
+        "blurred_rgb_mae_255": 2.5953066259398496,
+        "mean_rgb_delta_by_channel": [
+          2.3652784304511276,
+          2.7194402020676693,
+          2.701201245300752
+        ],
+        "max_grid_mean_rgb_delta_255": 4.450233918128636,
+        "max_grid_channel_fraction_delta": 0.002567435442577315,
+        "exif_a": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:33:23"
+        },
+        "exif_b": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:42:48"
+        },
+        "preview_comparison": {
+          "aligned_offset_at_160x120": [
+            0,
+            0
+          ],
+          "blurred_rgb_mae_255": 2.607279918546366,
+          "mean_rgb_delta_by_channel": [
+            2.271073190789474,
+            2.6981761043233083,
+            2.852590460526316
+          ],
+          "max_grid_mean_rgb_delta_255": 4.582397660818724,
+          "max_grid_channel_fraction_delta": 0.004307230199598555,
+          "exif_a": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:33:23"
+          },
+          "exif_b": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:42:48"
+          }
+        }
+      },
+      {
+        "index": 11,
+        "name": "冷调",
+        "file": "vivid-cool.cube.rgb.bin",
+        "off_sha256": "f04e3aa5301a9d9c22fbe7231f2984e273e3f174c3c08f2ed838fe853affc4d0",
+        "on_sha256": "76dfd6d5c5f639083f5bbfbbf75550316d41560c7e05e61b6fce02f380f6f0dc",
+        "off_size": [
+          4096,
+          3072
+        ],
+        "on_size": [
+          4096,
+          3072
+        ],
+        "aligned_offset_at_160x120": [
+          0,
+          0
+        ],
+        "blurred_rgb_mae_255": 2.5370506343984967,
+        "mean_rgb_delta_by_channel": [
+          2.6946663533834587,
+          2.6295083411654137,
+          2.2869772086466167
+        ],
+        "max_grid_mean_rgb_delta_255": 5.278947368421048,
+        "max_grid_channel_fraction_delta": 0.0014775679636061523,
+        "exif_a": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:33:47"
+        },
+        "exif_b": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:43:14"
+        },
+        "preview_comparison": {
+          "aligned_offset_at_160x120": [
+            0,
+            0
+          ],
+          "blurred_rgb_mae_255": 2.6337229793233083,
+          "mean_rgb_delta_by_channel": [
+            2.8424136513157894,
+            2.6915824718045114,
+            2.3671728148496243
+          ],
+          "max_grid_mean_rgb_delta_255": 5.346959064327488,
+          "max_grid_channel_fraction_delta": 0.0019151007308652046,
+          "exif_a": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:33:47"
+          },
+          "exif_b": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:43:14"
+          }
+        }
+      },
+      {
+        "index": 12,
+        "name": "灰调",
+        "file": "vivid-lut.cube.rgb.bin",
+        "off_sha256": "0949923c22f288e2d68373a94785b88d0fec66b875cbfbf6223dd36bf7765836",
+        "on_sha256": "b9c13721f08429ced29250c6077ab221b41f9c059e8518057506e15c14014c9e",
+        "off_size": [
+          4096,
+          3072
+        ],
+        "on_size": [
+          4096,
+          3072
+        ],
+        "aligned_offset_at_160x120": [
+          0,
+          0
+        ],
+        "blurred_rgb_mae_255": 2.8444548872180455,
+        "mean_rgb_delta_by_channel": [
+          3.0147732612781954,
+          2.7714109492481205,
+          2.7471804511278197
+        ],
+        "max_grid_mean_rgb_delta_255": 4.603333333333334,
+        "max_grid_channel_fraction_delta": 0.0007066779454463212,
+        "exif_a": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:34:11"
+        },
+        "exif_b": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:43:39"
+        },
+        "preview_comparison": {
+          "aligned_offset_at_160x120": [
+            0,
+            0
+          ],
+          "blurred_rgb_mae_255": 2.933016134085213,
+          "mean_rgb_delta_by_channel": [
+            3.096657659774436,
+            2.8501967810150375,
+            2.8521939614661656
+          ],
+          "max_grid_mean_rgb_delta_255": 4.623918128654964,
+          "max_grid_channel_fraction_delta": 0.0013402733928528643,
+          "exif_a": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:34:11"
+          },
+          "exif_b": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:43:39"
+          }
+        }
+      },
+      {
+        "index": 13,
+        "name": "单色",
+        "file": "mono.cube.rgb.bin",
+        "off_sha256": "bde69a127b0028c158db0a3f2bcdd6a7b60e3061fde81f2a757fe60a67021540",
+        "on_sha256": "7347427014badc6629a072240ee1804a9c4d12a6394180bbcd6716f7d421b8d0",
+        "off_size": [
+          4096,
+          3072
+        ],
+        "on_size": [
+          4096,
+          3072
+        ],
+        "aligned_offset_at_160x120": [
+          0,
+          0
+        ],
+        "blurred_rgb_mae_255": 3.2691347509398496,
+        "mean_rgb_delta_by_channel": [
+          3.299826715225564,
+          3.317948190789474,
+          3.1896293468045114
+        ],
+        "max_grid_mean_rgb_delta_255": 5.774210526315794,
+        "max_grid_channel_fraction_delta": 0.0012590141579807979,
+        "exif_a": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:34:35"
+        },
+        "exif_b": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:44:04"
+        },
+        "preview_comparison": {
+          "aligned_offset_at_160x120": [
+            0,
+            0
+          ],
+          "blurred_rgb_mae_255": 3.1774896224937343,
+          "mean_rgb_delta_by_channel": [
+            3.181346921992481,
+            3.1973537359022557,
+            3.1537682095864663
+          ],
+          "max_grid_mean_rgb_delta_255": 5.35877192982457,
+          "max_grid_channel_fraction_delta": 0.002450897712110267,
+          "exif_a": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:34:35"
+          },
+          "exif_b": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:44:04"
+          }
+        }
+      },
+      {
+        "index": 14,
+        "name": "黑白",
+        "file": "blackandwhite.cube.rgb.bin",
+        "off_sha256": "5a70156c18125370670a8248f3b90a41926c3c2bace848079ccc53578cdac31f",
+        "on_sha256": "d64c92fa506b575437b5ad7412afa870c8a60f2de75c7bacd96142a8d3f9d2be",
+        "off_size": [
+          4096,
+          3072
+        ],
+        "on_size": [
+          4096,
+          3072
+        ],
+        "aligned_offset_at_160x120": [
+          0,
+          0
+        ],
+        "blurred_rgb_mae_255": 3.125411184210526,
+        "mean_rgb_delta_by_channel": [
+          3.160420582706767,
+          3.135720159774436,
+          3.0800928101503757
+        ],
+        "max_grid_mean_rgb_delta_255": 5.619649122807023,
+        "max_grid_channel_fraction_delta": 0.0022252552505285794,
+        "exif_a": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:35:00"
+        },
+        "exif_b": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:44:28"
+        },
+        "preview_comparison": {
+          "aligned_offset_at_160x120": [
+            0,
+            0
+          ],
+          "blurred_rgb_mae_255": 3.210957080200501,
+          "mean_rgb_delta_by_channel": [
+            3.2679599389097747,
+            3.231364544172932,
+            3.133546757518797
+          ],
+          "max_grid_mean_rgb_delta_255": 5.618771929824561,
+          "max_grid_channel_fraction_delta": 0.000872931512111208,
+          "exif_a": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:35:00"
+          },
+          "exif_b": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:44:28"
+          }
+        }
+      },
+      {
+        "index": 15,
+        "name": "自然",
+        "file": "natural.cube.rgb.bin",
+        "off_sha256": "91dc070939a5ebb6e2d1652eb275de1780b4ae9513d6b1d1862f587c4b916c18",
+        "on_sha256": "c393acfe73ffd7547f2f004aaaf395cd9ed9d899e400d9b22d5ed78276b43f88",
+        "off_size": [
+          4096,
+          3072
+        ],
+        "on_size": [
+          4096,
+          3072
+        ],
+        "aligned_offset_at_160x120": [
+          0,
+          0
+        ],
+        "blurred_rgb_mae_255": 1.4070038377192982,
+        "mean_rgb_delta_by_channel": [
+          1.3289179981203008,
+          1.6310502819548873,
+          1.2610432330827068
+        ],
+        "max_grid_mean_rgb_delta_255": 2.4623976608187,
+        "max_grid_channel_fraction_delta": 0.0023465944104864023,
+        "exif_a": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:35:24"
+        },
+        "exif_b": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:44:53"
+        },
+        "preview_comparison": {
+          "aligned_offset_at_160x120": [
+            0,
+            0
+          ],
+          "blurred_rgb_mae_255": 0.9088345864661654,
+          "mean_rgb_delta_by_channel": [
+            0.8527079417293233,
+            0.9821134868421053,
+            0.8916823308270677
+          ],
+          "max_grid_mean_rgb_delta_255": 1.4936842105263206,
+          "max_grid_channel_fraction_delta": 0.004520132491040774,
+          "exif_a": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:35:24"
+          },
+          "exif_b": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:44:53"
+          }
+        }
+      },
+      {
+        "index": 16,
+        "name": "美味",
+        "file": "gourmet.cube.rgb.bin",
+        "off_sha256": "f6bc66e821a44afe4012932328966d4bc86023b3617ca775ca22e7703f51af5e",
+        "on_sha256": "e9ebb84c34a4431d479db46bb1d1b529c9fcffeba183bdc0106cb6f297403892",
+        "off_size": [
+          4096,
+          3072
+        ],
+        "on_size": [
+          4096,
+          3072
+        ],
+        "aligned_offset_at_160x120": [
+          0,
+          0
+        ],
+        "blurred_rgb_mae_255": 1.5677132283834585,
+        "mean_rgb_delta_by_channel": [
+          1.5568021616541354,
+          1.593015742481203,
+          1.5533217810150375
+        ],
+        "max_grid_mean_rgb_delta_255": 2.9990516832622043,
+        "max_grid_channel_fraction_delta": 0.004302776063364988,
+        "exif_a": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:35:50"
+        },
+        "exif_b": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:45:18"
+        },
+        "preview_comparison": {
+          "aligned_offset_at_160x120": [
+            0,
+            0
+          ],
+          "blurred_rgb_mae_255": 1.5011943922305766,
+          "mean_rgb_delta_by_channel": [
+            1.4468544407894737,
+            1.5624118890977443,
+            1.4943168468045114
+          ],
+          "max_grid_mean_rgb_delta_255": 2.8949739212897234,
+          "max_grid_channel_fraction_delta": 0.0011164175125550346,
+          "exif_a": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:35:50"
+          },
+          "exif_b": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:45:18"
+          }
+        }
+      },
+      {
+        "index": 17,
+        "name": "菲林",
+        "file": "kodak.cube.rgb.bin",
+        "off_sha256": "a0002007d59344654762b7c78686e530d452d6032d74dbf37cfa5c240bc15149",
+        "on_sha256": "bb93d114a0a02f102052f757442ed1a4f4ebd10c385e62bf8fea76fd8e0b64c4",
+        "off_size": [
+          4096,
+          3072
+        ],
+        "on_size": [
+          4096,
+          3072
+        ],
+        "aligned_offset_at_160x120": [
+          0,
+          0
+        ],
+        "blurred_rgb_mae_255": 1.9638255795739348,
+        "mean_rgb_delta_by_channel": [
+          2.122797227443609,
+          1.8904487781954886,
+          1.8782307330827068
+        ],
+        "max_grid_mean_rgb_delta_255": 5.544269005847951,
+        "max_grid_channel_fraction_delta": 0.004269649839745732,
+        "exif_a": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:36:15"
+        },
+        "exif_b": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:45:44"
+        },
+        "preview_comparison": {
+          "aligned_offset_at_160x120": [
+            0,
+            0
+          ],
+          "blurred_rgb_mae_255": 2.280359100877193,
+          "mean_rgb_delta_by_channel": [
+            2.62156367481203,
+            2.1777784304511276,
+            2.0417351973684212
+          ],
+          "max_grid_mean_rgb_delta_255": 4.778362573099415,
+          "max_grid_channel_fraction_delta": 0.0071338757135098185,
+          "exif_a": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:36:15"
+          },
+          "exif_b": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:45:44"
+          }
+        }
+      },
+      {
+        "index": 18,
+        "name": "高级灰",
+        "file": "morandi.cube.rgb.bin",
+        "off_sha256": "9def7f6f7dcc59bab77654259c9638cb5c99bed27e0ccb0b8f0010deead4525c",
+        "on_sha256": "f96f5f87f57941a4c0bf7ba423128412615f8ab3976db444e9782ca9427ee5c9",
+        "off_size": [
+          4096,
+          3072
+        ],
+        "on_size": [
+          4096,
+          3072
+        ],
+        "aligned_offset_at_160x120": [
+          0,
+          0
+        ],
+        "blurred_rgb_mae_255": 1.026673128132832,
+        "mean_rgb_delta_by_channel": [
+          1.0180186795112782,
+          0.9691171287593985,
+          1.0928835761278195
+        ],
+        "max_grid_mean_rgb_delta_255": 1.9288304093567252,
+        "max_grid_channel_fraction_delta": 0.000864220728859888,
+        "exif_a": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:36:40"
+        },
+        "exif_b": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:46:09"
+        },
+        "preview_comparison": {
+          "aligned_offset_at_160x120": [
+            0,
+            0
+          ],
+          "blurred_rgb_mae_255": 1.2423098762531328,
+          "mean_rgb_delta_by_channel": [
+            1.2371504934210527,
+            1.1845335996240602,
+            1.3052455357142858
+          ],
+          "max_grid_mean_rgb_delta_255": 1.9379532163742728,
+          "max_grid_channel_fraction_delta": 0.002659683503265675,
+          "exif_a": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:36:40"
+          },
+          "exif_b": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:46:09"
+          }
+        }
+      },
+      {
+        "index": 19,
+        "name": "赛博朋克",
+        "file": "cyberpunk-kitsch-3.1.CUBE.rgb.bin",
+        "off_sha256": "9d3713a2affee688920c332e4bb54885a181fc1e29e9de1fe6f83321bb863648",
+        "on_sha256": "37b84fd0072a2ec7bbccaea22fd264e2c49b59d20d5a57577ac45b17a7f24c28",
+        "off_size": [
+          4096,
+          3072
+        ],
+        "on_size": [
+          4096,
+          3072
+        ],
+        "aligned_offset_at_160x120": [
+          0,
+          0
+        ],
+        "blurred_rgb_mae_255": 2.8450373981829578,
+        "mean_rgb_delta_by_channel": [
+          2.320591517857143,
+          2.7769619360902253,
+          3.437558740601504
+        ],
+        "max_grid_mean_rgb_delta_255": 4.285739687055487,
+        "max_grid_channel_fraction_delta": 0.004259944962992757,
+        "exif_a": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:37:05"
+        },
+        "exif_b": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:46:34"
+        },
+        "preview_comparison": {
+          "aligned_offset_at_160x120": [
+            0,
+            0
+          ],
+          "blurred_rgb_mae_255": 2.6956306782581456,
+          "mean_rgb_delta_by_channel": [
+            2.029590578007519,
+            2.716547227443609,
+            3.3407542293233083
+          ],
+          "max_grid_mean_rgb_delta_255": 3.6011735419630306,
+          "max_grid_channel_fraction_delta": 0.002572843629994548,
+          "exif_a": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:37:05"
+          },
+          "exif_b": {
+            "exposure_seconds": "0.01",
+            "f_number": "1.8",
+            "iso": "320",
+            "focal_length": "8.67",
+            "white_balance": "0",
+            "datetime": "2026:11:18 08:46:34"
+          }
+        }
+      }
+    ],
+    "same_state_original_controls": {
+      "off": {
+        "aligned_offset_at_160x120": [
+          0,
+          0
+        ],
+        "blurred_rgb_mae_255": 2.334464089912281,
+        "mean_rgb_delta_by_channel": [
+          2.007298519736842,
+          2.101782777255639,
+          2.894310972744361
+        ],
+        "max_grid_mean_rgb_delta_255": 3.763928402086293,
+        "max_grid_channel_fraction_delta": 0.0036291655895588915,
+        "exif_a": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:29:23"
+        },
+        "exif_b": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:37:41"
+        }
+      },
+      "on": {
+        "aligned_offset_at_160x120": [
+          0,
+          0
+        ],
+        "blurred_rgb_mae_255": 2.7627320253759398,
+        "mean_rgb_delta_by_channel": [
+          2.511204769736842,
+          2.6757665648496243,
+          3.1012247415413534
+        ],
+        "max_grid_mean_rgb_delta_255": 3.3663742690058505,
+        "max_grid_channel_fraction_delta": 0.0029458455817023,
+        "exif_a": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:38:35"
+        },
+        "exif_b": {
+          "exposure_seconds": "0.01",
+          "f_number": "1.8",
+          "iso": "320",
+          "focal_length": "8.67",
+          "white_balance": "0",
+          "datetime": "2026:11:18 08:47:12"
+        }
+      }
+    },
+    "method": "PIL RGB images resized to 320x240, Gaussian blur 1.2px, whole-image translation search +/-2px at 160x120; RGB MAE and 4x3 grid normalized channel fractions. Descriptive comparisons, not calibrated colorimetry or statistical equivalence."
+  },
+  "near_switch_original": {
+    "aligned_offset_at_160x120": [
+      0,
+      0
+    ],
+    "blurred_rgb_mae_255": 0.46405075187969924,
+    "mean_rgb_delta_by_channel": [
+      0.5089285714285714,
+      0.35479323308270677,
+      0.5284304511278195
+    ],
+    "max_grid_mean_rgb_delta_255": 0.38187134502923453,
+    "max_grid_channel_fraction_delta": 0.002350806568381436,
+    "exif_a": {
+      "exposure_seconds": "0.01",
+      "f_number": "1.8",
+      "iso": "320",
+      "focal_length": "8.67",
+      "white_balance": "0",
+      "datetime": "2026:11:18 08:37:41"
+    },
+    "exif_b": {
+      "exposure_seconds": "0.01",
+      "f_number": "1.8",
+      "iso": "320",
+      "focal_length": "8.67",
+      "white_balance": "0",
+      "datetime": "2026:11:18 08:38:35"
+    }
+  },
+  "visual_review": {
+    "all_20_pairs_reviewed": true,
+    "menu_selections_verified": true,
+    "preview_and_image_no_extra_effect_observed": true,
+    "reviewed_images": [
+      "ab-photos-00-04.jpg",
+      "ab-photos-05-09.jpg",
+      "ab-photos-10-14.jpg",
+      "ab-photos-15-19.jpg",
+      "ab-menu-first10.jpg",
+      "ab-menu-last10.jpg"
+    ],
+    "restored_original_filter_selection_verified": true
+  },
+  "logs": {
+    "capture_start": "11-18 08:19:07.074",
+    "capture_end": "11-18 08:50:53.929",
+    "fatal_or_anr_count": 0,
+    "hook_error_count": 0,
+    "on_catalog_count": 53,
+    "on_native_catalog": [
+      "default = 原图",
+      "800t.bin = 霓虹",
+      "fuji_cc.bin = 清新",
+      "fuji-nc.bin = 复古",
+      "fuji-proNegHi.bin = 通透",
+      "Radiance.cube.rgb.bin = 大师童话",
+      "Serenity.cube.rgb.bin = 大师人像",
+      "Emerald.cube.rgb.bin = 大师风光",
+      "fuji-eterna-v2.cube.rgb.bin = 明艳",
+      "fuji.cube.rgb.bin = 胶片",
+      "vivid-warm.cube.rgb.bin = 暖调",
+      "vivid-cool.cube.rgb.bin = 冷调",
+      "vivid-lut.cube.rgb.bin = 灰调",
+      "mono.cube.rgb.bin = 单色",
+      "blackandwhite.cube.rgb.bin = 黑白",
+      "natural.cube.rgb.bin = 自然",
+      "gourmet.cube.rgb.bin = 美味",
+      "kodak.cube.rgb.bin = 菲林",
+      "morandi.cube.rgb.bin = 高级灰",
+      "cyberpunk-kitsch-3.1.CUBE.rgb.bin = 赛博朋克"
+    ],
+    "preview_filter_observations": {
+      "off": {
+        "null": 4709,
+        "cyberpunk-kitsch-3.1.CUBE.rgb.bin": 3716,
+        "800t.bin": 636,
+        "fuji_cc.bin": 631,
+        "fuji-nc.bin": 680,
+        "fuji-proNegHi.bin": 676,
+        "Radiance.cube.rgb.bin": 679,
+        "Serenity.cube.rgb.bin": 674,
+        "Emerald.cube.rgb.bin": 684,
+        "fuji-eterna-v2.cube.rgb.bin": 664,
+        "fuji.cube.rgb.bin": 687,
+        "vivid-warm.cube.rgb.bin": 679,
+        "vivid-cool.cube.rgb.bin": 676,
+        "vivid-lut.cube.rgb.bin": 662,
+        "mono.cube.rgb.bin": 600,
+        "blackandwhite.cube.rgb.bin": 614,
+        "natural.cube.rgb.bin": 626,
+        "gourmet.cube.rgb.bin": 637,
+        "kodak.cube.rgb.bin": 628,
+        "morandi.cube.rgb.bin": 622
+      },
+      "on": {
+        "null": 3006,
+        "800t.bin": 660,
+        "fuji_cc.bin": 1261,
+        "fuji-nc.bin": 616,
+        "fuji-proNegHi.bin": 622,
+        "Radiance.cube.rgb.bin": 616,
+        "Serenity.cube.rgb.bin": 590,
+        "Emerald.cube.rgb.bin": 620,
+        "fuji-eterna-v2.cube.rgb.bin": 601,
+        "fuji.cube.rgb.bin": 619,
+        "vivid-warm.cube.rgb.bin": 615,
+        "vivid-cool.cube.rgb.bin": 609,
+        "vivid-lut.cube.rgb.bin": 611,
+        "mono.cube.rgb.bin": 604,
+        "blackandwhite.cube.rgb.bin": 595,
+        "natural.cube.rgb.bin": 608,
+        "gourmet.cube.rgb.bin": 607,
+        "kodak.cube.rgb.bin": 616,
+        "morandi.cube.rgb.bin": 597,
+        "cyberpunk-kitsch-3.1.CUBE.rgb.bin": 852
+      }
+    },
+    "preview_filter_intensity_observations": {
+      "off": {
+        "cyberpunk-kitsch-3.1.CUBE.rgb.bin@100": 3699,
+        "800t.bin@100": 635,
+        "fuji_cc.bin@100": 631,
+        "fuji-nc.bin@100": 680,
+        "fuji-proNegHi.bin@100": 676,
+        "Radiance.cube.rgb.bin@100": 678,
+        "Serenity.cube.rgb.bin@100": 674,
+        "Emerald.cube.rgb.bin@100": 684,
+        "fuji-eterna-v2.cube.rgb.bin@100": 663,
+        "fuji.cube.rgb.bin@100": 687,
+        "vivid-warm.cube.rgb.bin@100": 677,
+        "vivid-cool.cube.rgb.bin@100": 675,
+        "vivid-lut.cube.rgb.bin@100": 662,
+        "mono.cube.rgb.bin@50": 599,
+        "blackandwhite.cube.rgb.bin@50": 612,
+        "natural.cube.rgb.bin@100": 624,
+        "gourmet.cube.rgb.bin@100": 633,
+        "kodak.cube.rgb.bin@100": 627,
+        "morandi.cube.rgb.bin@100": 620
+      },
+      "on": {
+        "800t.bin@100": 658,
+        "fuji_cc.bin@100": 1259,
+        "fuji-nc.bin@100": 613,
+        "fuji-proNegHi.bin@100": 620,
+        "Radiance.cube.rgb.bin@100": 614,
+        "Serenity.cube.rgb.bin@100": 590,
+        "Emerald.cube.rgb.bin@100": 618,
+        "fuji-eterna-v2.cube.rgb.bin@100": 601,
+        "fuji.cube.rgb.bin@100": 619,
+        "vivid-warm.cube.rgb.bin@100": 613,
+        "vivid-cool.cube.rgb.bin@100": 607,
+        "vivid-lut.cube.rgb.bin@100": 609,
+        "mono.cube.rgb.bin@50": 604,
+        "blackandwhite.cube.rgb.bin@50": 594,
+        "natural.cube.rgb.bin@100": 606,
+        "gourmet.cube.rgb.bin@100": 605,
+        "kodak.cube.rgb.bin@100": 616,
+        "morandi.cube.rgb.bin@100": 597,
+        "cyberpunk-kitsch-3.1.CUBE.rgb.bin@100": 850
+      }
+    },
+    "sdk_errors": {
+      "off": {
+        ": init jar VERSION: <N>": 5,
+        ": NvInitNdkSymbols load error by function: MsGetEffectFloatValue": 1,
+        ": NvInitNdkSymbols load error by function: MsSetFacePoints": 1,
+        ": NvInitNdkSymbols load error by function: MsCreateRenderCoreWithOption": 1,
+        ": nativeInitWithOptions use CreateRenderCore": 5,
+        ": Current EGL display is invalid!": 19
+      },
+      "on": {
+        ": init jar VERSION: <N>": 3,
+        ": NvInitNdkSymbols load error by function: MsGetEffectFloatValue": 1,
+        ": NvInitNdkSymbols load error by function: MsSetFacePoints": 1,
+        ": NvInitNdkSymbols load error by function: MsCreateRenderCoreWithOption": 1,
+        ": nativeInitWithOptions use CreateRenderCore": 3,
+        ": Current EGL display is invalid!": 19
+      }
+    },
+    "sdk_error_messages_only_when_enabled": [],
+    "limitations": "Native capture LUT file-path traces were not emitted in this capture. Evidence combines native preview filter IDs, no module resource remaps, unmodified stock LUT hashes and paired real photos.",
+    "added_menu_resource_remaps": [
+      "11-18 08:38:12.316  2762  3687 I LSPosedFramework: (com.oplus.camera)[io.github.oshin.windowcapture,ColorOSEnhance-Filters,aca-1a1ec16e668-bf-40,0,1] Preview resource portra400_sdr_gen_a_1.bin,portra400_sdr_gen_d_1.bin",
+      "11-18 08:38:12.324  2762  3687 I LSPosedFramework: (com.oplus.camera)[io.github.oshin.windowcapture,ColorOSEnhance-Filters,aca-1a1ec16e668-bf-41,0,1] Preview resource positive_sdr_gen_a_1.bin,positive_sdr_gen_d_1.bin",
+      "11-18 08:38:12.329  2762  3687 I LSPosedFramework: (com.oplus.camera)[io.github.oshin.windowcapture,ColorOSEnhance-Filters,aca-1a1ec16e668-bf-42,0,1] Preview resource blackandwhite_HC_normal.bin",
+      "11-18 08:38:12.383  2762  3687 I LSPosedFramework: (com.oplus.camera)[io.github.oshin.windowcapture,ColorOSEnhance-Filters,aca-1a1ec16e668-bf-43,0,1] Preview resource ccd_base_cold.bin",
+      "11-18 08:38:12.384  2762  3687 I LSPosedFramework: (com.oplus.camera)[io.github.oshin.windowcapture,ColorOSEnhance-Filters,aca-1a1ec16e668-bf-44,0,1] Preview resource ccd_base_warm.bin",
+      "11-18 08:38:12.384  2762  3687 I LSPosedFramework: (com.oplus.camera)[io.github.oshin.windowcapture,ColorOSEnhance-Filters,aca-1a1ec16e668-bf-45,0,1] Preview resource jzk-movie.cube.rgb.bin"
+    ],
+    "capture_mapping_events": [],
+    "native_resource_name_remap_events": [],
+    "native_preview_filter_ids_identical": true,
+    "native_preview_intensity_values_identical": true,
+    "menu_resource_note": "Six added-style resource mappings occur while initializing the extended menu, before the first ON sample. No native filter name is remapped, no added filter ID appears in active full-preview observations, and no capture mapping occurs."
+  },
+  "cleanup": {
+    "verified": true,
+    "completed_at": "2026-11-18T08:50:53+08:00",
+    "photos_removed": 42,
+    "trash_copies_removed_during_capture": 42,
+    "late_trash_copies_removed": 0,
+    "existing_media_preserved": true,
+    "additional_unowned_media_entries_preserved": 632,
+    "additional_entry_ids_precede_first_test_photo": false,
+    "native_lut_files_unchanged": true,
+    "module_configs_scope_and_states_restored": {
+      "module_configs": true,
+      "scope": true,
+      "modules_state": true
+    },
+    "temporary_files_restored_to_baseline": true,
+    "trash_restored_to_baseline": true,
+    "no_probe_apps_installed": true,
+    "media_caches_empty": true,
+    "camera_process_stopped_and_memfds_released": true,
+    "screen_timeout": "30000",
+    "filter_setting_enabled": true,
+    "filter_selection_restored": "清新 / fuji_cc.bin",
+    "installed_apk_sha256": "8df92327614c3f2e5815f7f1151583c467fcbc4132784143fc2b5da2400398b6",
+    "phone_rebooted": false,
+    "normal_zero_byte_gallery_lock_files_preserved": 3
+  },
+  "limitations": [
+    "Automatic exposure, white balance, denoising and native filter grain are not deterministic; no pixel-identical claim.",
+    "Only this rear still-photo configuration was compared, not all lenses, modes, lighting or scene types.",
+    "Closing the feature requires camera process restart; original selection history is not saved, and an out-of-range added index is clamped by the OEM camera. User accepted restoration of native functionality."
+  ]
+}

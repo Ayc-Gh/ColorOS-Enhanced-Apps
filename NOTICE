@@ -25,3 +25,9 @@ AOD source:
   Derived from Qjj7679/ColorOS_Aod_Enhance, MIT License.
   Original copyright and license: third_party/coloros-aod/LICENSE.
   Integration changes are documented in third_party/coloros-aod/UPSTREAM.md.
+
+Camera LUT assets (2.1.8):
+  User-supplied PYB110 firmware, com.oplus.camera.aps.algo.model.
+  These OEM data assets retain their original ownership and are not licensed
+  by this project under AGPL. Exact sources and hashes are documented in
+  docs/CAMERA_FILTER_RESOURCES_2.1.8.json. No OEM executable libraries are bundled.
