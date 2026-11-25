@@ -10,12 +10,16 @@ public final class RuntimeReportIndex<T> {
     private final Map<String,Map<String,Entry<T>>> hosts=new HashMap<>();
     public void clear(){hosts.clear();}
     public T accept(Identity identity,T report,int expectedCode){
+        return accept(identity,report,expectedCode,null);
+    }
+    public T accept(Identity identity,T report,int expectedCode,String preferredProcess){
         Map<String,Entry<T>> processes=hosts.computeIfAbsent(identity.host(),key->new HashMap<>());
         String key=identity.process()+":"+identity.pid()+":"+identity.started();
         Entry<T> previous=processes.get(key);
         if(previous==null||identity.sampled()>=previous.identity().sampled())processes.put(key,new Entry<>(identity,report));
         return processes.values().stream().max(Comparator
             .<Entry<T>>comparingInt(e->e.identity().code()==expectedCode?1:0)
+            .thenComparingInt(e->e.identity().process().equals(preferredProcess)?1:0)
             .thenComparingLong(e->e.identity().sampled())
             .thenComparing(e->e.identity().process())
             .thenComparingInt(e->e.identity().pid())).orElseThrow().report();

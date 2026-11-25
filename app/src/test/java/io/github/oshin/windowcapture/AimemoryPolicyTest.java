@@ -13,9 +13,21 @@ public class AimemoryPolicyTest {
         assertFalse(AimemoryPolicy.repairable(AimemoryPolicy.SCENE,null,null,null));
     }
     @Test public void unsupportedApplicationUpdatesKeepNativeBehavior(){
+        assertTrue(AimemoryPolicy.supported(17008000,3182));
         assertTrue(AimemoryPolicy.supported(17008000,3220));
+        assertFalse(AimemoryPolicy.supported(17008001,3182));
         assertFalse(AimemoryPolicy.supported(17008001,3220));
+        assertFalse(AimemoryPolicy.supported(17008000,3181));
+        assertFalse(AimemoryPolicy.supported(17008000,3183));
         assertFalse(AimemoryPolicy.supported(17008000,3221));
+    }
+    @Test public void wechat79RequiresTheInstalledActivityForEachKnownRule(){
+        String result="com.tencent.mm.plugin.lite.ui.WxaLiteAppPayTransparentLiteUI";
+        assertTrue(AimemoryPolicy.supportedPage(17008000,3182,page,page::equals));
+        assertFalse(AimemoryPolicy.supportedPage(17008000,3182,result,page::equals));
+        assertFalse(AimemoryPolicy.supportedPage(17008000,3182,"com.tencent.mm.ui.LauncherUI",name->true));
+        assertFalse(AimemoryPolicy.supportedPage(17008000,3183,page,name->true));
+        assertTrue(AimemoryPolicy.supportedPage(17008000,3220,result,name->{throw new AssertionError("8.0.80 behavior changed");}));
     }
     @Test public void nativePerAppChoiceStartsDisabledAndWebPagesUseDetailMode(){
         assertTrue(AimemoryPolicy.metadata(page).contains("\"switchOpen\":false"));

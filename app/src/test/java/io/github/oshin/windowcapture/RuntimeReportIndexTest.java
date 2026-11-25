@@ -3,6 +3,16 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class RuntimeReportIndexTest {
+    @Test public void aodWorkerCannotReplaceAMatchingMainProcess(){
+        var index=new RuntimeReportIndex<String>();
+        assertEquals("worker",index.accept(report("host:worker",2,19,25),"worker",25,"host"));
+        assertEquals("main",index.accept(report("host",1,11,25),"main",25,"host"));
+        assertEquals("main",index.accept(report("host:worker",2,20,25),"fresh worker",25,"host"));
+        assertEquals(2,index.processCount("host"));
+        index.clear();
+        index.accept(report("host",1,21,24),"old main",25,"host");
+        assertEquals("current worker",index.accept(report("host:worker",2,20,25),"current worker",25,"host"));
+    }
     private RuntimeReportIndex.Identity report(String process,int pid,long stamp,int code){return new RuntimeReportIndex.Identity("host",process,pid,1,stamp,code);}
     @Test public void newestSampleWinsRegardlessOfArrivalOrder(){
         for(boolean reversed:new boolean[]{false,true}){

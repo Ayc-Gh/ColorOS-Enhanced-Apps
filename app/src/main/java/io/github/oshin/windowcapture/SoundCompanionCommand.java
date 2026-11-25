@@ -16,17 +16,18 @@ final class SoundCompanionCommand {
             throw new IllegalArgumentException("Invalid audio companion command");
         }
         String entry = " app_process /system/bin " + quote(mainClass);
-        String arguments = " " + quote(directory) + " " + quote(apk) + "\n";
+        String arguments = " " + quote(directory) + " " + quote(apk);
         // The app drains and discards this output. Detach all standard streams
         // so package replacement cannot give the cleanup shell a broken pipe.
         return "exec </dev/null >/dev/null 2>&1\n"
                 + "exec 3<" + quote(apk) + " || exit 1\n"
                 + "code=\"/proc/$$/fd/3\"\n"
-                + "CLASSPATH=\"$code\"" + entry + " daemon" + arguments
+                + "CLASSPATH=\"$code\"" + entry + " daemon" + arguments + "\ndaemon_status=$?\n"
                 // A failing/killed daemon must still reach restoration. Keep the
                 // shell alive until it finishes: /proc/<shell>/fd/3 is its inode.
-                + "CLASSPATH=\"$code\"" + entry + " restore" + arguments
-                + "result=$?\nexec 3<&-\nexit \"$result\"\n";
+                + "CLASSPATH=\"$code\"" + entry + " restore" + arguments + " \"$daemon_status\"\n"
+                + "restore_status=$?\nexec 3<&-\n"
+                + "if [ \"$restore_status\" -ne 0 ]; then exit \"$restore_status\"; fi\nexit \"$daemon_status\"\n";
     }
 
     static String classpath(String inherited, String apk) {

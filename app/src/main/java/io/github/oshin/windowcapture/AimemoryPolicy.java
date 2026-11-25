@@ -4,6 +4,7 @@ package io.github.oshin.windowcapture;
 final class AimemoryPolicy {
     static final String HOST="com.oplus.gleanerservice", WECHAT="com.tencent.mm", SCENE="flashNotes_autoPayment";
     static final String REVISION="verified-ocr-2";
+    private static final long WECHAT_8_0_79=3182L, WECHAT_8_0_80=3220L;
     private static final java.util.Set<String> PAGES=java.util.Set.of(
         "com.tencent.mm.framework.app.UIPageFragmentActivity",
         "com.tencent.mm.plugin.webview.ui.tools.MMWebViewUI",
@@ -14,7 +15,14 @@ final class AimemoryPolicy {
         "com.tencent.mm.plugin.lite.ui.WxaLiteAppPayTransparentLiteUI",
         "com.tencent.mm.plugin.lite.ui.WxaLiteAppLiteUI");
     private AimemoryPolicy(){}
-    static boolean supported(long host,long wechat){return host==17008000L&&wechat==3220L;}
+    static boolean supported(long host,long wechat){
+        return CompatibilityPolicy.host(HOST,host)&&(wechat==WECHAT_8_0_79||wechat==WECHAT_8_0_80);
+    }
+    static boolean supportedPage(long host,long wechat,String page,java.util.function.Predicate<String> declared){
+        if(!supported(host,wechat)||!paymentPage(page))return false;
+        // Keep the existing 8.0.80 adapter. On 8.0.79 restore only activities available in this installation.
+        return wechat==WECHAT_8_0_80||declared.test(page);
+    }
     static boolean paymentPage(String page){return page!=null&&PAGES.contains(page);}
     static boolean usesOcr(String page){return paymentPage(page)&&(page.startsWith("com.tencent.mm.plugin.lite.ui.")||page.equals("com.tencent.mm.framework.app.UIPageFragmentActivity"));}
     static String pageKind(String page){return !paymentPage(page)?"other":page.contains("MMWebViewUI")?"detail":usesOcr(page)?"result":page.contains("luckymoney")?"redpacket":"transfer";}

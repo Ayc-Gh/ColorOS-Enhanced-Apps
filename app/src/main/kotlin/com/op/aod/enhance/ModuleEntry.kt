@@ -1,6 +1,7 @@
 package com.op.aod.enhance
 
 import android.util.Log
+import io.github.oshin.windowcapture.BuildConfig
 import com.op.aod.enhance.hook.MainHook
 import io.github.libxposed.api.XposedModule
 import io.github.libxposed.api.XposedModuleInterface.ModuleLoadedParam
@@ -12,7 +13,7 @@ class ModuleEntry : XposedModule() {
 
     override fun onModuleLoaded(param: ModuleLoadedParam) {
         processName = param.processName
-        val message = "event=module_loaded process=${param.processName} api=${getApiVersion()} framework=${getFrameworkName()}"
+        val message = "event=module_loaded process=${param.processName} version=${BuildConfig.VERSION_NAME} code=${BuildConfig.VERSION_CODE} api=${getApiVersion()} framework=${getFrameworkName()}"
         log(Log.INFO, TAG, message)
         Log.i(TAG, message)
     }

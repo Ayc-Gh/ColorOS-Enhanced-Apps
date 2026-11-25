@@ -4,6 +4,7 @@ package io.github.oshin.windowcapture;
 
 import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
@@ -14,6 +15,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -25,12 +27,15 @@ import io.github.libxposed.api.XposedInterface;
 public final class MainHook extends XposedModule {
     private static final String TAG="WindowCapture", WM="com.android.server.wm.";
     private final AtomicBoolean installed=new AtomicBoolean();
-    private SharedPreferences prefs;
+    private final AtomicBoolean configRetryQueued=new AtomicBoolean();
+    private volatile SharedPreferences prefs;
+    private final WindowConfigConnection configConnection=new WindowConfigConnection();
+    private final WindowSplitScope splitScope=new WindowSplitScope();
     private ClassLoader loader;
     private int hooks;
     private final Set<String> reported=ConcurrentHashMap.newKeySet();
     private final CaptionVisibilityTracker<View> hiddenViews=new CaptionVisibilityTracker<>();
-    private final Map<Integer,Object> parked=new ConcurrentHashMap<>();
+    private final WindowParkedTasks parked=new WindowParkedTasks();
     private final EdgeCountPolicy edgeCountPolicy=new EdgeCountPolicy();
     private final ThreadLocal<Integer> minimizing=ThreadLocal.withInitial(()->0);
     private final ThreadLocal<ArrayDeque<LaunchContext>> launchContext=ThreadLocal.withInitial(ArrayDeque::new);
@@ -46,24 +51,45 @@ public final class MainHook extends XposedModule {
         // Restore parked task surfaces before returning to the normal exit path.
         if((k==null||Config.FOREGROUND.equals(k))&&!bool(Config.FOREGROUND)) {
             new Handler(Looper.getMainLooper()).post(()->{
-                for(Object task:new ArrayList<>(parked.values())) restoreTask(task);
+                for(var entry:parked.snapshot()) restoreTask(entry);
             });
         }
     };
     @Override public void onSystemServerStarting(XposedModuleInterface.SystemServerStartingParam param) {
         if(!installed.compareAndSet(false,true))return;
         loader=param.getClassLoader();
-        try {prefs=getRemotePreferences(Config.PREFS);prefs.registerOnSharedPreferenceChangeListener(listener);}
-        catch(Throwable t){log(Log.ERROR,TAG,"Cannot read configuration; all features stay disabled",t);return;}
         boolean supported=CompatibilityPolicy.rom(android.os.Build.MODEL,android.os.Build.VERSION.SDK_INT,android.os.Build.DISPLAY);WindowDiagnostics.compatibility(supported);
-        if(!supported){installDiagnostics();return;}
+        installFeature("Window.Status",()->installDiagnostics(supported));
+        if(supported){
+            Looper main=Looper.getMainLooper();
+            connectWindowConfig(main==null?null:new Handler(main));
+        }
+    }
+    private void connectWindowConfig(Handler retryHandler) {
+        try {
+            configConnection.connect(()->{
+                SharedPreferences value=getRemotePreferences(Config.PREFS);
+                value.getAll();
+                value.registerOnSharedPreferenceChangeListener(listener);
+                prefs=value;
+            },this::installWindowFeatures);
+        } catch(Throwable error) {
+            log(Log.WARN,TAG,"Window framework initialization incomplete",error);
+            if(prefs==null && retryHandler!=null && configRetryQueued.compareAndSet(false,true))
+                retryHandler.postDelayed(()->{
+                    configRetryQueued.set(false);
+                    connectWindowConfig(retryHandler);
+                },configConnection.retryDelayMs());
+        }
+    }
+    private void installWindowFeatures() {
         installFeature("Window.Capture",this::installCapture);installFeature("Window.Layout",this::installWindows);
         new WindowAppearanceHooks(this,loader,prefs).install();
         installFeature("Window.Split",this::installSplit);installFeature("Window.Launch",this::installLaunch);
         installFeature("Window.Caption",this::installCaption);installFeature("Window.Edge",this::installEdge);
         installFeature("Sound.Startup",this::installSoundStartup);
-        installDiagnostics();
-        log(Log.INFO,TAG,"Installed "+hooks+" hooks; device="+android.os.Build.MODEL+" API="+android.os.Build.VERSION.SDK_INT);
+        log(Log.INFO,TAG,"Installed "+hooks+" hooks; version="+BuildConfig.VERSION_NAME+" code="+BuildConfig.VERSION_CODE
+                +" device="+android.os.Build.MODEL+" API="+android.os.Build.VERSION.SDK_INT);
     }
     private Class<?> cls(String name){try{return Class.forName(name,false,loader);}catch(Throwable t){return null;}}
     private interface Installer { XposedInterface.Hooker create(Method m); }
@@ -200,21 +226,92 @@ public final class MainHook extends XposedModule {
         // Restrict to standard app tasks. Keep home, recents, assistant and lockscreen native.
         for(String c:List.of("ActivityRecord","Task"))for(String method:List.of("supportsSplitScreenWindowingMode","supportsSplitScreenWindowingModeInDisplayArea","supportsSplitScreenWindowingModeInner"))
             hook(WM+c,method,m->m.getReturnType()==boolean.class,m->chain->{
-                if(!bool(Config.SPLIT)||!standard(chain.getThisObject()))return chain.proceed();hit("split "+c);return true;
+                if(!bool(Config.SPLIT))return chain.proceed();
+                return querySplitTask(chain.getThisObject(),chain::proceed);
             });
         hook(WM+"OplusSplitScreenManagerService","supportsSplitScreenWindowingMode",m->m.getReturnType()==boolean.class,m->chain->{
-            if(bool(Config.SPLIT)&&!chain.getArgs().isEmpty()&&standard(chain.getArg(0))){hit("split vendor task");return true;}return chain.proceed();
+            if(!bool(Config.SPLIT)||chain.getArgs().isEmpty())return chain.proceed();
+            return querySplitTask(chain.getArg(0),chain::proceed);
         });
         hook(WM+"OplusSplitScreenManagerService","supportsSplitScreenByVendorPolicy",m->m.getReturnType()==boolean.class,m->chain->{
             if(!bool(Config.SPLIT)||chain.getArgs().isEmpty())return chain.proceed();Object target=chain.getArg(0);
-            if(standard(target)||target instanceof String pkg&&!Set.of("android","com.android.systemui","com.android.launcher").contains(pkg)){hit("split vendor policy");return true;}return chain.proceed();
+            if(target instanceof String pkg)return splitScope.query(splitScope.matches(pkg),pkg,chain::proceed);
+            return querySplitTask(target,chain::proceed);
         });
-        hook(WM+"TaskDisplayArea","supportsNonResizableMultiWindow",m->m.getReturnType()==boolean.class,m->chain->{if(!bool(Config.SPLIT))return chain.proceed();hit("non-resizable split");return true;});
-        hook(WM+"TaskDisplayArea","supportsActivityMinWidthHeightMultiWindow",m->m.getReturnType()==boolean.class,m->chain->{if(!bool(Config.SPLIT))return chain.proceed();return true;});
+        for(String method:List.of("supportsNonResizableMultiWindow","supportsActivityMinWidthHeightMultiWindow"))
+            hook(WM+"TaskDisplayArea",method,m->m.getReturnType()==boolean.class,m->chain->
+                bool(Config.SPLIT)&&splitScope.active()?true:chain.proceed());
         deopt(WM+"ActivityRecord","supportsMultiWindowInDisplayArea","supportsSplitScreenWindowingMode");
         deopt(WM+"Task","supportsMultiWindowInDisplayArea","supportsSplitScreenWindowingMode");
+        installPhoneCanvasLayout();
+    }
+    private void installPhoneCanvasLayout() {
+        // This phone policy builds the Canvas layout bundle before the pair is attached. Other
+        // window modes have separate calculators. Keep the manifest and TaskInfo untouched.
+        final Field resizeMode;
+        final int resizable;
+        try {
+            resizeMode=ActivityInfo.class.getDeclaredField("resizeMode");
+            resizeMode.setAccessible(true);
+            resizable=ActivityInfo.class.getField("RESIZE_MODE_RESIZEABLE").getInt(null);
+        } catch(ReflectiveOperationException e){return;}
+        String policy=WM+"PhoneCanvasTaskLayoutPolicy";
+        Class<?> display=cls(WM+"DisplayContent");
+        hook(policy,"calculateFlexibleWindowBounds",m->m.getReturnType()==Bundle.class&&Arrays.equals(m.getParameterTypes(),
+                new Class<?>[]{int.class,Intent.class,int.class,display,ActivityInfo.class,boolean.class}),m->chain->{
+            if(!bool(Config.SPLIT)||!(chain.getArg(1) instanceof Intent intent)||!(chain.getArg(4) instanceof ActivityInfo info))return chain.proceed();
+            ActivityInfo copy=null;
+            try {
+                if(resizeMode.getInt(info)==0&&isCanvasStandardTask(chain.getThisObject(),chain.getArg(3),intent,info)) {
+                    copy=new ActivityInfo(info);
+                    resizeMode.setInt(copy,resizable);
+                }
+            } catch(ReflectiveOperationException|RuntimeException e){copy=null;}
+            if(copy==null)return chain.proceed();
+            // The native state check still handles snapshot editing, one-handed mode and vendor exclusions.
+            Object[] args=chain.getArgs().toArray();args[4]=copy;
+            hit("split phone Canvas layout");
+            return chain.proceed(args);
+        });
+        deopt(WM+"FlexibleWindowManagerService","calculateFlexibleWindowBounds");
+    }
+    private static WindowSplitScope.CanvasActivity canvasActivity(ActivityInfo info) {
+        return info==null||info.applicationInfo==null?null:
+                new WindowSplitScope.CanvasActivity(info.packageName,info.name,info.applicationInfo.uid);
+    }
+    private boolean isCanvasStandardTask(Object policy,Object display,Intent intent,ActivityInfo info) {
+        int displayId=Reflect.integer(display,"mDisplayId",-1);
+        // Both the Canvas client and the service's per-app mirror intents tag split sizing with scenario 2.
+        if(!WindowSplitScope.isPhoneCanvasRequest(displayId,intent.getIntExtra("androidx.activity.LaunchScenario",-1)))return false;
+        WindowSplitScope.CanvasActivity target=canvasActivity(info);
+        if(target==null||intent.hasCategory(Intent.CATEGORY_HOME)||intent.hasCategory(Intent.CATEGORY_SECONDARY_HOME))return false;
+        int requestedId=intent.getIntExtra("androidx.activity.LaunchEmbeddedTaskId",-1);
+        Object lock=Reflect.field(Reflect.field(policy,"mAtms"),"mGlobalLock");
+        if(lock==null)return false;
+        synchronized(lock) {
+            java.util.function.Predicate<Object> matches=task->{
+                int id=Reflect.integer(task,"mTaskId",-1);
+                if(requestedId!=-1&&requestedId!=id)return false;
+                Object top=Reflect.call(task,"getTopNonFinishingActivity");
+                if(top==null||Reflect.call(top,"getTask")!=task||!(Reflect.field(top,"info") instanceof ActivityInfo actual))return false;
+                Object type=Reflect.call(task,"getActivityType");
+                return type instanceof Integer activityType&&WindowSplitScope.canvasTask(requestedId,id,activityType,target,canvasActivity(actual));
+            };
+            return Reflect.call(display,"getTask",matches)!=null;
+        }
     }
     private boolean standard(Object task){Object type=Reflect.call(task,"getActivityType");return type instanceof Integer&&((Integer)type)==1;}
+    private Object querySplitTask(Object task,WindowSplitScope.Query original)throws Throwable{
+        boolean eligible=standard(task);
+        String pkg=null;
+        if(eligible){
+            Object name=Reflect.field(task,"packageName");
+            if(!(name instanceof String))name=Reflect.call(task,"getBasePackageName");
+            if(name instanceof String value)pkg=value;
+            hit("split standard task");
+        }
+        return splitScope.query(eligible,pkg,original);
+    }
     private void deopt(String c,String...names){Class<?> type=cls(c);if(type==null)return;Set<String> set=new HashSet<>(Arrays.asList(names));for(Method m:type.getDeclaredMethods())if(set.contains(m.getName()))try{deoptimize(m);}catch(Throwable ignored){}}
     private void installLaunch() {
         String controller=WM+"FlexibleTaskController";
@@ -279,7 +376,8 @@ public final class MainHook extends XposedModule {
         });
         hook(controller,"getReusableOptionsForFreeForm",m->m.getReturnType()==ActivityOptions.class&&m.getParameterCount()==7,m->chain->{
             Object target=chain.getArg(0),task=chain.getArg(3),owner=chain.getThisObject();int id=Reflect.integer(task,"mTaskId",-1);
-            if(bool(Config.REMEMBER)&&parked.containsKey(id)&&chain.getArg(2) instanceof ActivityOptions options){
+            var parkedTask=parked.get(id);
+            if(bool(Config.REMEMBER)&&parkedTask!=null&&parkedTask.task==task&&chain.getArg(2) instanceof ActivityOptions options){
                 Object extra=Reflect.call(options,"getExtraBundle");
                 if(extra instanceof Bundle bundle&&id==bundle.getInt("key_start_float_handle_view_task_id",-1)&&"coloros-enhance-reopen".equals(bundle.getString("key_start_float_handle_view_reason"))){
                     Object value=Reflect.field(owner,"mContext");String pkg=(String)Reflect.field(target,"packageName");
@@ -356,10 +454,17 @@ public final class MainHook extends XposedModule {
             finally{pendingLaunchChecks.decrementAndGet();}
         },1200);
     }
-    private void installDiagnostics(){
-        registeringFeature="Window.Status";
-        hook(WM+"WindowManagerService","systemReady",m->m.getParameterCount()==0,m->chain->{Object result=chain.proceed();try{Object value=Reflect.field(chain.getThisObject(),"mContext");if(value instanceof Context context)WindowDiagnostics.attach(context,prefs,getRemotePreferences("aod_runtime_status"));}catch(Throwable t){log(Log.WARN,TAG,"Runtime status receiver unavailable",t);}return result;});
-        WindowDiagnostics.seal("Window.Status");
+    private void installDiagnostics(boolean supported){
+        hook(WM+"WindowManagerService","systemReady",m->m.getParameterCount()==0,m->chain->{
+            Object result=chain.proceed();
+            Object value=Reflect.field(chain.getThisObject(),"mContext");
+            if(value instanceof Context context){
+                try{WindowDiagnostics.attach(context,()->prefs,()->getRemotePreferences("aod_runtime_status"));}
+                catch(Throwable error){log(Log.WARN,TAG,"Runtime status receiver unavailable",error);}
+                if(supported && prefs==null)connectWindowConfig(new Handler(context.getMainLooper()));
+            }
+            return result;
+        });
     }
     private boolean allowPackage(String pkg,Context context){
         if(Set.of("android","com.android.systemui","com.android.launcher","com.android.settings",getModuleApplicationInfo().packageName).contains(pkg))return false;
@@ -399,45 +504,75 @@ public final class MainHook extends XposedModule {
         });
         hook(controller,"exitFlexibleTask",m->Arrays.equals(Arrays.stream(m.getParameterTypes()).map(Class::getName).toArray(String[]::new),new String[]{WM+"Task","boolean","int","int"}),m->chain->{
             Object task=chain.getArg(0);int id=Reflect.integer(task,"mTaskId",-1),reason=(Integer)chain.getArg(2);
-            if(parked.containsKey(id)&&reason!=16)restoreTask(task);
+            if(reason!=16)restoreIfParked(task);
             if(bool(Config.FOREGROUND)&&reason==16&&id>=0) {
                 Object manager=Reflect.call(cls(handle),"getInstance");
                 if(Boolean.TRUE.equals(Reflect.call(manager,"isInFloatingList",id))&&parkTask(chain.getThisObject(),task)) {hit("park foreground "+id);return null;}
             }
             return chain.proceed();
         });
-        hook(controller,"resetFlexibleTaskToFullScreen",m->m.getParameterCount()==1,m->chain->{Object task=chain.getArg(0);restoreTask(task);return chain.proceed();});
+        hook(controller,"resetFlexibleTaskToFullScreen",m->m.getParameterCount()==1,m->chain->{restoreIfParked(chain.getArg(0));return chain.proceed();});
         hook(WM+"ExitFlexibleTaskToFloatStrategy","onMinimizeAnimationStartInner",m->chain->{
             int old=minimizing.get();minimizing.set(old+1);try{return chain.proceed();}finally{if(old==0)minimizing.remove();else minimizing.set(old);}
         });
         hook(WM+"TaskFragmentExtImpl","pauseInRecentsAnim",m->m.getReturnType()==void.class,m->chain->{if(bool(Config.FOREGROUND)&&minimizing.get()>0)return null;return chain.proceed();});
         for(String n:List.of("windowsAreFocusable","isFocusable"))hook(WM+"ActivityRecord",n,m->m.getReturnType()==boolean.class,m->chain->{
-            Object result=chain.proceed();Object task=Reflect.call(chain.getThisObject(),"getTask");if(parked.containsKey(Reflect.integer(task,"mTaskId",-1)))return false;return result;
+            Object result=chain.proceed();Object task=Reflect.call(chain.getThisObject(),"getTask");
+            var entry=parked.get(Reflect.integer(task,"mTaskId",-1));
+            if(entry!=null&&entry.task==task)return false;return result;
         });
         hook(handle,"removeFloatHandle",m->m.getParameterCount()==4,m->chain->{
-            if(!chain.getArgs().isEmpty()&&chain.getArg(0) instanceof Integer id){Object task=parked.get(id);if(task!=null)restoreTask(task);}return chain.proceed();
+            if(!chain.getArgs().isEmpty()&&chain.getArg(0) instanceof Integer id){var entry=parked.get(id);if(entry!=null)restoreTask(entry);}return chain.proceed();
         });
-        hook(WM+"Task","removeImmediately",m->chain->{parked.remove(Reflect.integer(chain.getThisObject(),"mTaskId",-1));return chain.proceed();});
+        hook(WM+"Task","removeImmediately",m->chain->{
+            Object task=chain.getThisObject();
+            var entry=parked.get(Reflect.integer(task,"mTaskId",-1));
+            Object result=chain.proceed();
+            if(entry!=null&&entry.task==task&&Reflect.call(task,"getParent")==null)parked.finish(entry);
+            return result;
+        });
     }
     private boolean parkTask(Object controller,Object task){
         try {
             Object atms=Reflect.field(controller,"mAtms");Object lock=Reflect.call(atms,"getGlobalLock");if(lock==null)return false;
             synchronized(lock){
-                Object surface=Reflect.call(task,"getSurfaceControl"),parent=Reflect.call(task,"getParentSurfaceControl"),transaction=Reflect.call(task,"getSyncTransaction");
-                if(surface==null||parent==null||transaction==null||!Boolean.TRUE.equals(Reflect.call(surface,"isValid"))||!Boolean.TRUE.equals(Reflect.call(parent,"isValid")))return false;
-                Reflect.call(transaction,"reparent",surface,parent);Reflect.call(transaction,"setVisibility",surface,false);Reflect.call(transaction,"apply");
-                parked.put(Reflect.integer(task,"mTaskId",-1),task);Object wms=Reflect.field(atms,"mWindowManager");Reflect.call(wms,"updateFocusedWindowLocked",0,true);return true;
+                if(!setTaskVisible(task,false))return false;
+                parked.park(Reflect.integer(task,"mTaskId",-1),task);
+                refreshFocus(atms);
+                return true;
             }
         }catch(Throwable t){log(Log.WARN,TAG,"Cannot park task",t);return false;}
     }
-    private void restoreTask(Object task){
-        int id=Reflect.integer(task,"mTaskId",-1);if(!parked.containsKey(id))return;
+    private void restoreIfParked(Object task){
+        var entry=parked.get(Reflect.integer(task,"mTaskId",-1));
+        if(entry!=null&&entry.task==task)restoreTask(entry);
+    }
+    private boolean setTaskVisible(Object task,boolean visible){
+        if(!(Reflect.call(task,"getSurfaceControl") instanceof android.view.SurfaceControl surface)
+                ||!(Reflect.call(task,"getParentSurfaceControl") instanceof android.view.SurfaceControl parent)
+                ||!(Reflect.call(task,"getSyncTransaction") instanceof android.view.SurfaceControl.Transaction transaction)
+                ||!surface.isValid()||!parent.isValid())return false;
+        transaction.reparent(surface,parent).setVisibility(surface,visible).apply();
+        return true;
+    }
+    private void refreshFocus(Object atms){
+        try{Reflect.call(Reflect.field(atms,"mWindowManager"),"updateFocusedWindowLocked",0,true);}
+        catch(RuntimeException error){log(Log.WARN,TAG,"Cannot refresh focus after task visibility changed",error);}
+    }
+    private void restoreTask(WindowParkedTasks.Entry entry){
+        if(!parked.current(entry))return;
         try {
-            Object atms=Reflect.field(task,"mAtmService"),lock=Reflect.call(atms,"getGlobalLock");if(lock==null)lock=Reflect.field(atms,"mGlobalLock");if(lock==null)return;
-            synchronized(lock){Object surface=Reflect.call(task,"getSurfaceControl"),parent=Reflect.call(task,"getParentSurfaceControl"),transaction=Reflect.call(task,"getSyncTransaction");
-                if(surface!=null&&parent!=null&&transaction!=null&&Boolean.TRUE.equals(Reflect.call(surface,"isValid"))&&Boolean.TRUE.equals(Reflect.call(parent,"isValid"))){Reflect.call(transaction,"reparent",surface,parent);Reflect.call(transaction,"setVisibility",surface,true);Reflect.call(transaction,"apply");}
-                parked.remove(id);Reflect.call(Reflect.field(atms,"mWindowManager"),"updateFocusedWindowLocked",0,true);
+            Object atms=Reflect.field(entry.task,"mAtmService"),lock=Reflect.call(atms,"getGlobalLock");
+            if(lock==null)lock=Reflect.field(atms,"mGlobalLock");
+            if(lock!=null)synchronized(lock){
+                if(!parked.current(entry))return;
+                if(setTaskVisible(entry.task,true)){
+                    parked.finish(entry);
+                    refreshFocus(atms);
+                    return;
+                }
             }
-        }catch(Throwable t){log(Log.WARN,TAG,"Cannot restore parked task "+id,t);}
+        }catch(RuntimeException error){info("Cannot yet restore parked task "+entry.id+": "+error.getClass().getSimpleName());}
+        parked.retry(entry,(work,delay)->new Handler(Looper.getMainLooper()).postDelayed(work,delay),()->restoreTask(entry));
     }
 }

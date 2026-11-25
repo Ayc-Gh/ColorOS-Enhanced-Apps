@@ -28,7 +28,7 @@
         <activity android:name=".AimemorySettingsActivity" android:exported="false" />
         <activity android:name=".GallerySettingsActivity" android:exported="false" />
         <activity android:name=".SoundSettingsActivity" android:exported="false" />
-        <provider android:name=".SoundBridgeProvider" android:authorities="io.github.oshin.windowcapture.sound-policy" android:exported="true" android:directBootAware="true" />
+        <provider android:name=".SoundBridgeProvider" android:authorities="io.github.oshin.windowcapture.sound-policy" android:exported="true" />
         <activity android:name="com.op.aod.enhance.ui.MainActivity" android:exported="false" android:configChanges="orientation|screenSize|screenLayout" />
         <activity android:name="com.op.aod.enhance.ui.BrightnessActivity" android:exported="false" android:configChanges="orientation|screenSize|screenLayout" />
         <activity android:name="com.op.aod.enhance.ui.FeaturesActivity" android:exported="false" android:configChanges="orientation|screenSize|screenLayout" />

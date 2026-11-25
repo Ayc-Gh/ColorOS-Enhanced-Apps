@@ -1,0 +1,1165 @@
+{
+  "device": "PHY110",
+  "firmware": "PHY110_17.0.0.100(CN01)",
+  "android_api": 37,
+  "version": "2.1.10",
+  "version_code": 26,
+  "date": "2026-11-25",
+  "timezone": "Asia/Shanghai",
+  "final_signed_build": {
+    "installed": {
+      "old_digest": "b36081712209bf8258149b4236e92698ffb068ce1555caabbe457a0385cfc88b",
+      "apk_sha256": "ff773e3d1062844b4f101755a35191d09494071b5f851ade3dd6563ed39ee8f2",
+      "version": "2.1.10",
+      "versionCode": 26,
+      "uid_before_and_after": 10413,
+      "mode": "adb install -r",
+      "certificate_sha256": "98aa09400941e6ab1b5059c75b2ccfe6c150786e0a40be492c2d6b854e825255"
+    },
+    "apk_signature": {
+      "verified": true,
+      "v2_verified": true,
+      "certificate_sha256": "98aa09400941e6ab1b5059c75b2ccfe6c150786e0a40be492c2d6b854e825255",
+      "apk_bytes": 3988149
+    },
+    "boot": {
+      "old_boot_id": "1162c197-2dc3-4795-8d28-84e1a61715e8",
+      "new_boot_id": "70691c29-73f7-4910-90f4-d9a6ad23f02c",
+      "state_at_boot_completed": "RUNNING_LOCKED",
+      "elapsed_sec": 70.5
+    },
+    "third_boot_confirmed": true,
+    "observations": {
+      "cold_start": {
+        "events": [
+          "11-25 11:01:26.899  3559  4051 I am_user_state_changed: [0,1]",
+          "11-25 11:01:32.024  3559  5329 I am_user_state_changed: [0,2]",
+          "11-25 11:01:32.077  3559  4095 I am_user_state_changed: [0,3]",
+          "11-25 11:01:39.041  3559  4098 I am_proc_start: [0,13066,10413,io.github.oshin.windowcapture,content provider,{io.github.oshin.windowcapture/io.github.oshin.windowcapture.SoundBridgeProvider},{ callingPackage = com.oplus.atlas }]"
+        ],
+        "lease_samples": [
+          {
+            "lease_code": "26",
+            "lease_elapsed": 91325,
+            "pid": 8268,
+            "status_code": "26",
+            "healthy": true,
+            "now": 1795575721
+          },
+          {
+            "lease_code": "26",
+            "lease_elapsed": 101361,
+            "pid": 8268,
+            "status_code": "26",
+            "healthy": true,
+            "now": 1795575733
+          },
+          {
+            "lease_code": "26",
+            "lease_elapsed": 111376,
+            "pid": 8268,
+            "status_code": "26",
+            "healthy": true,
+            "now": 1795575745
+          },
+          {
+            "lease_code": "26",
+            "lease_elapsed": 121394,
+            "pid": 8268,
+            "status_code": "26",
+            "healthy": true,
+            "now": 1795575757
+          }
+        ],
+        "manual_module_launch_before_lease": false
+      },
+      "camera": {
+        "current_process_markers": [
+          "[ 2026-11-25T11:01:58.890    10186: 19021: 19021 I/LSPosedFramework ] (com.oplus.camera)[io.github.oshin.windowcapture,ColorOSEnhance-Filters,4a4d-1a210a72382-2-2,0,1] Filter adapter installed",
+          "[ 2026-11-25T11:01:58.892    10186: 19021: 19021 I/LSPosedFramework ] (com.oplus.camera)[io.github.oshin.windowcapture,ColorOSEnhance-Camera,4a4d-1a210a72382-2-3,0,1] Cloud recommendation and native Log registry adapter loaded"
+        ],
+        "diagnostics": [
+          "已加载 2.1.10",
+          "云端灵感推荐解锁已关闭",
+          "Log 解锁已关闭",
+          "滤镜补齐已关闭，使用原生列表",
+          "已加载表示适配入口可用，已触发表示系统调用过入口；最近一次结果不代表所有应用均兼容。仅在打开本页或刷新时查询。"
+        ]
+      },
+      "gallery": {
+        "process_marker": "[ 2026-11-25T11:01:34.625    10167: 10459: 10459 I/LSPosedFramework ] (com.coloros.gallery3d)[io.github.oshin.windowcapture,ColorOSEnhance-Gallery,28db-1a210a6c37b-2-2,0,1] Installed v2.1.10; native retouch service and saving retained",
+        "diagnostics": [
+          "AI 修图师解锁已关闭"
+        ]
+      },
+      "sound": {
+        "sampled_namespaces": {
+          "init": {
+            "pid": 1,
+            "namespace": "mnt:[4026531841]",
+            "standalone_policy_mounts": 0
+          },
+          "Multimedia native service": {
+            "pid": 2644,
+            "namespace": "mnt:[4026531841]",
+            "standalone_policy_mounts": 0
+          },
+          "Atlas / Audio Effect Center": {
+            "pid": 8268,
+            "namespace": "mnt:[4026536102]",
+            "standalone_policy_mounts": 0
+          },
+          "Module": {
+            "pid": 13066,
+            "namespace": "mnt:[4026536163]",
+            "standalone_policy_mounts": 0
+          }
+        },
+        "native_XML_and_native_service": {
+          "final_boot_on": {
+            "total": 498,
+            "native": 26,
+            "expanded_if_on": 471,
+            "multidigit": 7,
+            "mismatch": 0,
+            "stable": true,
+            "mount_clean": true,
+            "tracked": 471,
+            "tracked_as_expected": true,
+            "firmware_xml_sha256": "ab631bcdf76aeb055c8574d84ae263a3bc23620749d8e3177605b368d015234d",
+            "service_pid": 2644
+          },
+          "final_off": {
+            "total": 498,
+            "native": 26,
+            "expanded_if_on": 471,
+            "multidigit": 7,
+            "mismatch": 0,
+            "stable": true,
+            "mount_clean": true,
+            "tracked": 0,
+            "tracked_as_expected": true,
+            "firmware_xml_sha256": "ab631bcdf76aeb055c8574d84ae263a3bc23620749d8e3177605b368d015234d",
+            "service_pid": 2644
+          },
+          "final_on": {
+            "total": 498,
+            "native": 26,
+            "expanded_if_on": 471,
+            "multidigit": 7,
+            "mismatch": 0,
+            "stable": true,
+            "mount_clean": true,
+            "tracked": 471,
+            "tracked_as_expected": true,
+            "firmware_xml_sha256": "ab631bcdf76aeb055c8574d84ae263a3bc23620749d8e3177605b368d015234d",
+            "service_pid": 2644
+          }
+        },
+        "final_enabled": true,
+        "pre_reboot_observation": "The enabled UI setting persisted through in-place replacement. The previous-generation live host did not reacquire while waiting 90 seconds before the requested reboot."
+      },
+      "network": {
+        "pages": {
+          "off_initial": [
+            "软件更新",
+            "禁用移动数据"
+          ],
+          "on_ota": [
+            "软件更新",
+            "禁用移动数据",
+            "禁用 WLAN"
+          ],
+          "on_downloads": [
+            "禁用移动数据",
+            "禁用 WLAN",
+            "下载"
+          ],
+          "off_restored": [
+            "软件更新",
+            "禁用移动数据"
+          ]
+        },
+        "scope": "Compared native settings for OTA and Downloads. Existing user networking policies were preserved."
+      },
+      "aod": {
+        "registration": {
+          "com.android.systemui": [
+            "loaded name=Brightness.Init paths=1 failures=0 skipped=0",
+            "loaded name=Brightness.Running paths=1 failures=0 skipped=0",
+            "loaded name=Duration.NativeTimeout paths=6 failures=0 skipped=0",
+            "loaded name=Panoramic.AllDay paths=3 failures=0 skipped=0",
+            "loaded name=SingleClick.Block paths=3 failures=0 skipped=1",
+            "loaded name=LowLight.Block paths=1 failures=0 skipped=0"
+          ],
+          "com.oplus.aod": [
+            "loaded name=AodSettings.AllDay paths=1 failures=0 skipped=0"
+          ]
+        },
+        "diagnostics": [
+          "已加载 2.1.10",
+          "初始亮度：已加载 · 尚未触发",
+          "亮度倍率：已加载 · 尚未触发",
+          "显示时长：已加载 · 尚未触发",
+          "全天全景：已加载 · 已触发",
+          "单击屏蔽：已加载 · 尚未触发",
+          "低光保持：已加载 · 尚未触发",
+          "全天选项：已加载 · 已触发",
+          "已加载表示适配入口可用，已触发表示系统调用过入口；最近一次结果不代表所有应用均兼容。仅在打开本页或刷新时查询。"
+        ]
+      },
+      "gesture": {
+        "settings_process_cold_started_for_each_state": true,
+        "module_setting_restored_off": true,
+        "vendor_settings_page": {
+          "off": [
+            "隔空手势",
+            "隔空接听或静音",
+            "隔空接听来电"
+          ],
+          "on": [
+            "隔空手势",
+            "隔空接听或静音",
+            "隔空暂停或播放视频",
+            "隔空滑动"
+          ],
+          "restored": [
+            "隔空手势",
+            "隔空接听或静音",
+            "隔空接听来电"
+          ]
+        },
+        "current_process_markers": [
+          "[ 2026-11-25T11:00:58.192    10302:  6265:  6265 I/LSPosedFramework ] (com.oplus.gesture)[io.github.oshin.windowcapture,AOD_Enhance,1879-1a210a636c6-2-1,0,1] event=module_loaded process=com.oplus.gesture version=2.1.10 code=26 api=102 framework=LSPosed",
+          "[ 2026-11-25T11:00:58.280    10302:  6265:  6265 I/LSPosedFramework ] (com.oplus.gesture)[io.github.oshin.windowcapture,ColorOSEnhance-Gesture,1879-1a210a636c6-2-2,0,1] Installed UI feature hook v2.1.10 enabled=false; AONService unchanged"
+        ]
+      },
+      "wechat": {
+        "native_switches": {
+          "自动记账(体验版)": true,
+          "微信": true
+        },
+        "version": "8.0.79 (3182)",
+        "diagnostic_counters": {
+          "before": [
+            "已补齐微信页面配置：8 项",
+            "本次进程：页面触发 0 · 原生提取 0 · 取得必填字段 0 · 提交记录 0",
+            "系统接受请求 0 · 文字识别调用 0 · 系统去重 0",
+            "金额校验通过 0 · 拦截存疑结果 0 · 修正金额 0 · 依据交易证据区分 0"
+          ],
+          "after": [
+            "已补齐微信页面配置：8 项",
+            "本次进程：页面触发 7 · 原生提取 7 · 取得必填字段 5 · 提交记录 3",
+            "系统接受请求 3 · 文字识别调用 1 · 系统去重 0",
+            "金额校验通过 0 · 拦截存疑结果 1 · 修正金额 0 · 依据交易证据区分 0"
+          ]
+        },
+        "user_confirmed_new_bill": true,
+        "flow": "Existing WeChat bill detail viewed by user; counters are callbacks."
+      },
+      "cleanup": {
+        "window_probe": true,
+        "sound_and_wechat_enabled": true,
+        "network_extension_restored_off": true
+      },
+      "hosts": {
+        "verified_runtime_processes": {
+          "Android system_server": {
+            "pid": [
+              "3559"
+            ],
+            "loaded": true,
+            "basis": [
+              "[ 2026-11-25T11:00:42.270     1000:  3559:  3559 I/LSPosedFramework ] (system)[io.github.oshin.windowcapture,AOD_Enhance,de7-1a210a5f89e-2-1,0,1] event=module_loaded process=system version=2.1.10 code=26 api=102 framework=LSPosed",
+              "[ 2026-11-25T11:00:42.350     1000:  3559:  3559 I/LSPosedFramework ] (system)[io.github.oshin.windowcapture,WindowCapture,de7-1a210a5f89e-2-2,0,1] Installed 60 hooks; version=2.1.10 code=26 device=PHY110 API=37"
+            ]
+          },
+          "System UI": {
+            "pid": [
+              "5084"
+            ],
+            "loaded": true,
+            "basis": [
+              "[ 2026-11-25T11:00:56.378    10263:  5084:  5084 I/LSPosedFramework ] (com.android.systemui)[io.github.oshin.windowcapture,AOD_Enhance,13dc-1a210a62fba-2-1,0,1] event=module_loaded process=com.android.systemui version=2.1.10 code=26 api=102 framework=LSPosed",
+              "[ 2026-11-25T11:00:56.550    10263:  5084:  5084 I/LSPosedFramework ] (com.android.systemui)[io.github.oshin.windowcapture,AOD_Enhance,13dc-1a210a62fba-2-5,0,1] HOOK_REGISTER: result=loaded name=Brightness.Init paths=1 failures=0 skipped=0"
+            ]
+          },
+          "AOD settings": {
+            "pid": [
+              "18265"
+            ],
+            "loaded": true,
+            "basis": [
+              "[ 2026-11-25T11:01:56.333    10197: 18265: 18265 I/LSPosedFramework ] (com.oplus.aod)[io.github.oshin.windowcapture,AOD_Enhance,4759-1a210a719ed-2-1,0,1] event=module_loaded process=com.oplus.aod version=2.1.10 code=26 api=102 framework=LSPosed",
+              "[ 2026-11-25T11:01:56.366    10197: 18265: 18265 I/LSPosedFramework ] (com.oplus.aod)[io.github.oshin.windowcapture,AOD_Enhance,4759-1a210a719ed-2-6,0,1] HOOK_REGISTER: result=loaded name=AodSettings.AllDay paths=1 failures=0 skipped=0"
+            ]
+          },
+          "Air gestures": {
+            "pid": [
+              "6265"
+            ],
+            "loaded": true,
+            "basis": [
+              "[ 2026-11-25T11:00:58.192    10302:  6265:  6265 I/LSPosedFramework ] (com.oplus.gesture)[io.github.oshin.windowcapture,AOD_Enhance,1879-1a210a636c6-2-1,0,1] event=module_loaded process=com.oplus.gesture version=2.1.10 code=26 api=102 framework=LSPosed",
+              "[ 2026-11-25T11:00:58.280    10302:  6265:  6265 I/LSPosedFramework ] (com.oplus.gesture)[io.github.oshin.windowcapture,ColorOSEnhance-Gesture,1879-1a210a636c6-2-2,0,1] Installed UI feature hook v2.1.10 enabled=false; AONService unchanged"
+            ]
+          },
+          "Traffic monitor": {
+            "pid": [
+              "19921"
+            ],
+            "loaded": true,
+            "basis": [
+              "[ 2026-11-25T11:02:02.311     1000: 19921: 19921 I/LSPosedFramework ] (com.oplus.trafficmonitor)[io.github.oshin.windowcapture,AOD_Enhance,4dd1-1a210a73146-2-1,0,1] event=module_loaded process=com.oplus.trafficmonitor version=2.1.10 code=26 api=102 framework=LSPosed",
+              "[ 2026-11-25T11:02:02.360     1000: 19921: 19921 I/LSPosedFramework ] (com.oplus.trafficmonitor)[io.github.oshin.windowcapture,ColorOSEnhance-Network,4dd1-1a210a73146-2-2,0,1] Installed v2.1.10; native networking policies retained"
+            ]
+          },
+          "Gleaner": {
+            "pid": [
+              "12924"
+            ],
+            "loaded": true,
+            "basis": [
+              "[ 2026-11-25T11:01:39.620    10215: 12924: 12924 I/LSPosedFramework ] (com.oplus.gleanerservice)[io.github.oshin.windowcapture,AOD_Enhance,327c-1a210a6d8a3-2-1,0,1] event=module_loaded process=com.oplus.gleanerservice version=2.1.10 code=26 api=102 framework=LSPosed",
+              "[ 2026-11-25T11:01:39.847    10215: 12924: 12924 I/LSPosedFramework ] (com.oplus.gleanerservice)[io.github.oshin.windowcapture,ColorOSEnhance-Memory,327c-1a210a6d8a3-2-2,0,1] Installed v2.1.10 verified-ocr-2; native per-app switch retained"
+            ]
+          },
+          "Gallery": {
+            "pid": [
+              "10459"
+            ],
+            "loaded": true,
+            "basis": [
+              "[ 2026-11-25T11:01:34.204    10167: 10459: 10459 I/LSPosedFramework ] (com.coloros.gallery3d)[io.github.oshin.windowcapture,AOD_Enhance,28db-1a210a6c37b-2-1,0,1] event=module_loaded process=com.coloros.gallery3d version=2.1.10 code=26 api=102 framework=LSPosed",
+              "[ 2026-11-25T11:01:34.625    10167: 10459: 10459 I/LSPosedFramework ] (com.coloros.gallery3d)[io.github.oshin.windowcapture,ColorOSEnhance-Gallery,28db-1a210a6c37b-2-2,0,1] Installed v2.1.10; native retouch service and saving retained"
+            ]
+          },
+          "Camera": {
+            "pid": [
+              "19021"
+            ],
+            "loaded": true,
+            "basis": [
+              "[ 2026-11-25T11:01:58.890    10186: 19021: 19021 I/LSPosedFramework ] (com.oplus.camera)[io.github.oshin.windowcapture,ColorOSEnhance-Filters,4a4d-1a210a72382-2-2,0,1] Filter adapter installed",
+              "[ 2026-11-25T11:01:58.892    10186: 19021: 19021 I/LSPosedFramework ] (com.oplus.camera)[io.github.oshin.windowcapture,ColorOSEnhance-Camera,4a4d-1a210a72382-2-3,0,1] Cloud recommendation and native Log registry adapter loaded"
+            ]
+          },
+          "Atlas / Audio Effect Center": {
+            "pid": [
+              "8268"
+            ],
+            "loaded": true,
+            "basis": [
+              "[ 2026-11-25T11:01:27.650     1000:  8268:  8268 I/LSPosedFramework ] (com.oplus.persist.multimedia)[io.github.oshin.windowcapture,AOD_Enhance,204c-1a210a6a9e2-2-1,0,1] event=module_loaded process=com.oplus.persist.multimedia version=2.1.10 code=26 api=102 framework=LSPosed",
+              "[ 2026-11-25T11:01:27.673     1000:  8268:  8268 I/LSPosedFramework ] (com.oplus.persist.multimedia)[io.github.oshin.windowcapture,AOD_Enhance,204c-1a210a6a9e2-2-2,0,1] event=module_loaded process=com.oplus.persist.multimedia version=2.1.10 code=26 api=102 framework=LSPosed"
+            ]
+          }
+        },
+        "scoped_packages": 10,
+        "shared_audio_packages": [
+          "com.oplus.atlas",
+          "com.oplus.audio.effectcenter"
+        ],
+        "module_scope_ui": [
+          "配置服务已连接 LSPosed · API 102\n系统框架已勾选 · 系统界面已勾选\n息屏已勾选 · 手势体感已勾选\n流量管理已勾选 · 小布记忆已勾选\n相册已勾选 · 相机已勾选\n音效服务已勾选 · Atlas 服务已勾选\n已连接不代表新版本已加载，可在功能运行状态中检查。"
+        ]
+      },
+      "notes": {
+        "synthetic_on_final_boot": {
+          "boot_id": "70691c29-73f7-4910-90f4-d9a6ad23f02c",
+          "classes": {
+            "SoundPolicyMountTest": 4,
+            "SoundRecoveryPlanTest": 3,
+            "SoundPolicyTest": 7,
+            "SoundAttributeReplyTest": 2,
+            "SoundCompanionCommandTest": 7,
+            "WindowRecoveryTest": 5
+          },
+          "recovery_tests": 28,
+          "payment_and_network_junit": 18,
+          "deviceqa_ocr_cases": 3,
+          "temp_removed": true
+        },
+        "window_edge_on_final_boot": {
+          "floatHeartbeat": {
+            "taskId": 374,
+            "ticks": 15,
+            "resumed": true,
+            "secure": false
+          },
+          "edgeAttemptHeartbeat": {
+            "taskId": 374,
+            "ticks": 24,
+            "resumed": true,
+            "secure": false
+          },
+          "parkedLaterHeartbeat": {
+            "taskId": 374,
+            "ticks": 29,
+            "resumed": true,
+            "secure": false
+          },
+          "expandedHeartbeat": {
+            "taskId": 374,
+            "ticks": 39,
+            "resumed": true,
+            "secure": false
+          },
+          "edgeSameTaskExpanded": true,
+          "parkDisabledHeartbeat": {
+            "taskId": 374,
+            "ticks": 83,
+            "resumed": true,
+            "secure": false
+          },
+          "disablingParkRestoresDrawing": true,
+          "switchesRestored": {
+            "split": false,
+            "park": false
+          },
+          "probeCleanup": true
+        },
+        "module_log_scan": {
+          "scoped_module_lines": 56,
+          "failed_registration_or_linkage_matches": 0,
+          "registration_groups_reporting_nonzero_failures": 0,
+          "scope": "Sample after starting all hosts on this boot. Runtime coexistence outside the sample was not exhaustively exercised."
+        },
+        "window_test": {
+          "enabled_synthetic_image": "split-enabled.png",
+          "disabled_synthetic_image": "split-native.png",
+          "initial_configuration_readout": {
+            "source": "preceding committed SQLite WAL snapshot, immediately before this session's UI switch",
+            "beforeCommit": 39,
+            "afterCommit": 40
+          }
+        }
+      }
+    },
+    "window": {
+      "enabled": {
+        "module": {
+          "tasks": {
+            "module": {
+              "taskId": 368,
+              "isFocused": true,
+              "isVisible": true,
+              "resizeMode": 1,
+              "supportsMultiWindow": true,
+              "supportsSplitScreenMultiWindow": true
+            },
+            "probe": {
+              "taskId": 369,
+              "isFocused": false,
+              "isVisible": true,
+              "resizeMode": 0,
+              "supportsMultiWindow": false,
+              "supportsSplitScreenMultiWindow": true
+            }
+          },
+          "logical_height_px": {
+            "module": 1050,
+            "probe": 1050
+          },
+          "panel_rows_px": [
+            120,
+            1169
+          ],
+          "marker_text_rows_px": [
+            [
+              279,
+              330
+            ],
+            [
+              340,
+              343
+            ],
+            [
+              884,
+              918
+            ],
+            [
+              947,
+              981
+            ]
+          ],
+          "landmarks_visible": {
+            "title": true,
+            "task_row": true,
+            "heartbeat_row": true
+          },
+          "top_resumed": {
+            "probe": true,
+            "module": true
+          },
+          "half_height_with_title_and_footer": true
+        },
+        "probe": {
+          "tasks": {
+            "probe": {
+              "taskId": 369,
+              "isFocused": true,
+              "isVisible": true,
+              "resizeMode": 0,
+              "supportsMultiWindow": false,
+              "supportsSplitScreenMultiWindow": true
+            },
+            "module": {
+              "taskId": 368,
+              "isFocused": false,
+              "isVisible": true,
+              "resizeMode": 1,
+              "supportsMultiWindow": true,
+              "supportsSplitScreenMultiWindow": true
+            }
+          },
+          "logical_height_px": {
+            "probe": 1050,
+            "module": 1050
+          },
+          "panel_rows_px": [
+            120,
+            1169
+          ],
+          "marker_text_rows_px": [
+            [
+              279,
+              330
+            ],
+            [
+              340,
+              343
+            ],
+            [
+              884,
+              918
+            ],
+            [
+              947,
+              981
+            ]
+          ],
+          "landmarks_visible": {
+            "title": true,
+            "task_row": true,
+            "heartbeat_row": true
+          },
+          "top_resumed": {
+            "probe": true,
+            "module": true
+          },
+          "half_height_with_title_and_footer": true
+        },
+        "probe_focus_confirmed": true,
+        "same_task_ids_in_both_focus_states": true,
+        "fit_confirmed_in_both_focus_states": true
+      },
+      "disabled": {
+        "module": {
+          "tasks": {
+            "module": {
+              "taskId": 368,
+              "isFocused": true,
+              "isVisible": true,
+              "resizeMode": 1,
+              "supportsMultiWindow": true,
+              "supportsSplitScreenMultiWindow": true
+            },
+            "probe": {
+              "taskId": 372,
+              "isFocused": false,
+              "isVisible": true,
+              "resizeMode": 0,
+              "supportsMultiWindow": false,
+              "supportsSplitScreenMultiWindow": false
+            }
+          },
+          "logical_height_px": {
+            "module": 1050,
+            "probe": 1909
+          },
+          "panel_rows_px": [
+            120,
+            1169
+          ],
+          "marker_text_rows_px": [
+            [
+              678,
+              712
+            ],
+            [
+              792,
+              826
+            ]
+          ],
+          "landmarks_visible": {
+            "title": false,
+            "task_row": false,
+            "heartbeat_row": false
+          },
+          "top_resumed": {
+            "probe": true,
+            "module": true
+          },
+          "half_height_with_title_and_footer": false
+        },
+        "probe": {
+          "tasks": {
+            "probe": {
+              "taskId": 372,
+              "isFocused": true,
+              "isVisible": true,
+              "resizeMode": 0,
+              "supportsMultiWindow": false,
+              "supportsSplitScreenMultiWindow": false
+            },
+            "module": {
+              "taskId": 368,
+              "isFocused": false,
+              "isVisible": true,
+              "resizeMode": 1,
+              "supportsMultiWindow": true,
+              "supportsSplitScreenMultiWindow": true
+            }
+          },
+          "logical_height_px": {
+            "probe": 1909,
+            "module": 1050
+          },
+          "panel_rows_px": [
+            120,
+            2028
+          ],
+          "marker_text_rows_px": [
+            [
+              451,
+              502
+            ],
+            [
+              512,
+              515
+            ],
+            [
+              1537,
+              1571
+            ],
+            [
+              1651,
+              1685
+            ]
+          ],
+          "landmarks_visible": {
+            "title": true,
+            "task_row": true,
+            "heartbeat_row": true
+          },
+          "top_resumed": {
+            "probe": true,
+            "module": true
+          },
+          "half_height_with_title_and_footer": false
+        },
+        "probe_focus_confirmed": true,
+        "same_task_ids_in_both_focus_states": true,
+        "fit_confirmed_in_both_focus_states": false
+      },
+      "capture_sha256": "50e7d89042daa07d551a3aa75a5baa68e9371766653c7e004ad858848d020917",
+      "probe_cleanup": true,
+      "initial_settings_equal_restored": true
+    },
+    "wechat_real_transaction": {
+      "state": "user_confirmed_new_bill",
+      "scope": "Final-build bill appearance is reported only from explicit user confirmation. Process counters and synthetic OCR are separate observations.",
+      "prior_2_1_9_bill_detail_record": "../sound-wechat-2.1.9/validation.json"
+    }
+  },
+  "build_checks": {
+    "test_source_matches_release_tree": true,
+    "compared_source_files": 185,
+    "assemble_succeeded": true,
+    "checks_succeeded": true,
+    "unit_test_classes": 38,
+    "unit_tests": {
+      "tests": 181,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "release_tree_lint": {
+      "errors": 0,
+      "warnings": 31,
+      "canvas_resize_api_warning": "Reflective access to resizeMode, which is not part of the public SDK and therefore likely to change in future Android releases"
+    }
+  },
+  "earlier_signed_candidate": {
+    "apk_sha256": "b36081712209bf8258149b4236e92698ffb068ce1555caabbe457a0385cfc88b",
+    "boot_id": "1162c197-2dc3-4795-8d28-84e1a61715e8",
+    "manager_scope": [
+      "配置服务已连接 LSPosed · API 102\n系统框架已勾选 · 系统界面已勾选\n息屏已勾选 · 手势体感已勾选\n流量管理已勾选 · 小布记忆已勾选\n相册已勾选 · 相机已勾选\n音效服务已勾选 · Atlas 服务已勾选\n已连接不代表新版本已加载，可在功能运行状态中检查。"
+    ],
+    "generic_host_log_markers": {
+      "framework": true,
+      "SystemUI": true,
+      "AOD": true,
+      "gesture": true,
+      "network": true,
+      "notes": true,
+      "gallery": true,
+      "camera": false,
+      "audio_and_atlas": true
+    },
+    "cold_start": {
+      "unlock_and_bridge_events": [
+        "11-25 10:36:01.157  3508  4012 I am_user_state_changed: [0,1]",
+        "11-25 10:37:02.377  3508  4006 I am_user_state_changed: [0,2]",
+        "11-25 10:37:02.535  3508  4055 I am_user_state_changed: [0,3]",
+        "11-25 10:37:05.367  3508  4056 I am_proc_start: [0,12472,10413,io.github.oshin.windowcapture,content provider,{io.github.oshin.windowcapture/io.github.oshin.windowcapture.SoundBridgeProvider},{ callingPackage = com.oplus.atlas }]"
+      ],
+      "lease_code": [
+        "26",
+        "26",
+        "26",
+        "26"
+      ],
+      "lease_elapsed_ms": [
+        196759,
+        206769,
+        216782,
+        236816
+      ],
+      "lease_healthy": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    "sound_native_policy_sweep": {
+      "final_boot_on": {
+        "total": 498,
+        "native": 26,
+        "expanded_if_on": 471,
+        "multidigit": 7,
+        "mismatch": 0,
+        "stable": true,
+        "mount_clean": true,
+        "tracked": 471,
+        "tracked_as_expected": true,
+        "firmware_xml_sha256": "ab631bcdf76aeb055c8574d84ae263a3bc23620749d8e3177605b368d015234d"
+      },
+      "final_off": {
+        "total": 498,
+        "native": 26,
+        "expanded_if_on": 471,
+        "multidigit": 7,
+        "mismatch": 0,
+        "stable": true,
+        "mount_clean": true,
+        "tracked": 0,
+        "tracked_as_expected": true,
+        "firmware_xml_sha256": "ab631bcdf76aeb055c8574d84ae263a3bc23620749d8e3177605b368d015234d"
+      },
+      "final_on": {
+        "total": 498,
+        "native": 26,
+        "expanded_if_on": 471,
+        "multidigit": 7,
+        "mismatch": 0,
+        "stable": true,
+        "mount_clean": true,
+        "tracked": 471,
+        "tracked_as_expected": true,
+        "firmware_xml_sha256": "ab631bcdf76aeb055c8574d84ae263a3bc23620749d8e3177605b368d015234d"
+      }
+    },
+    "camera": {
+      "generic_module_marker_at_sample": false,
+      "dedicated_adapter_log": [
+        "Filter adapter installed",
+        "Cloud recommendation and native Log registry adapter loaded"
+      ],
+      "camera_output_or_gallery_edit_exercised": false
+    },
+    "gallery": {
+      "generic_module_marker_at_sample": true,
+      "dedicated_adapter_log": [
+        "Installed v2.1.10; native retouch service and saving retained"
+      ],
+      "camera_output_or_gallery_edit_exercised": false
+    },
+    "aod": {
+      "registered_groups": {
+        "com.android.systemui": [
+          "loaded name=Brightness.Init paths=1 failures=0 skipped=0",
+          "loaded name=Brightness.Running paths=1 failures=0 skipped=0",
+          "loaded name=Duration.NativeTimeout paths=6 failures=0 skipped=0",
+          "loaded name=Panoramic.AllDay paths=3 failures=0 skipped=0",
+          "loaded name=SingleClick.Block paths=3 failures=0 skipped=1",
+          "loaded name=LowLight.Block paths=1 failures=0 skipped=0"
+        ],
+        "com.oplus.aod": [
+          "loaded name=AodSettings.AllDay paths=1 failures=0 skipped=0"
+        ]
+      },
+      "triggered_statuses": [
+        "初始亮度：已加载 · 已触发",
+        "显示时长：已加载 · 已触发",
+        "全天全景：已加载 · 已触发",
+        "全天选项：已加载 · 已触发"
+      ]
+    },
+    "gesture": [
+      "Installed UI feature hook v2.1.10 enabled=false; AONService unchanged",
+      "feature=oplus.software.aon_gestureui_side_enable native=false expose=false"
+    ],
+    "network_settings_rows": {
+      "off_initial": [
+        "软件更新",
+        "禁用移动数据"
+      ],
+      "on_ota": [
+        "软件更新",
+        "禁用移动数据",
+        "禁用 WLAN"
+      ],
+      "on_downloads": [
+        "禁用移动数据",
+        "禁用 WLAN",
+        "下载"
+      ],
+      "off_restored": [
+        "软件更新",
+        "禁用移动数据"
+      ]
+    },
+    "wechat": {
+      "native_switches": {
+        "自动记账(体验版)": true,
+        "微信": true
+      },
+      "adapter_log": [
+        "Installed v2.1.10 verified-ocr-2; native per-app switch retained"
+      ],
+      "process_counters_before_user_test": [
+        "已补齐微信页面配置：8 项",
+        "本次进程：页面触发 0 · 原生提取 0 · 取得必填字段 0 · 提交记录 0",
+        "系统接受请求 0 · 文字识别调用 0 · 系统去重 0",
+        "金额校验通过 0 · 拦截存疑结果 0 · 修正金额 0 · 依据交易证据区分 0"
+      ]
+    },
+    "window_baseline": {
+      "splitOff": {
+        "module": {
+          "tasks": {
+            "module": {
+              "taskId": 350,
+              "isFocused": true,
+              "isVisible": true,
+              "resizeMode": 1,
+              "supportsMultiWindow": true,
+              "supportsSplitScreenMultiWindow": true
+            },
+            "probe": {
+              "taskId": 356,
+              "isFocused": false,
+              "isVisible": true,
+              "resizeMode": 0,
+              "supportsMultiWindow": false,
+              "supportsSplitScreenMultiWindow": false
+            }
+          },
+          "logical_height_px": {
+            "module": 1050,
+            "probe": 1909
+          },
+          "panel_rows_px": [
+            120,
+            1169
+          ],
+          "marker_text_rows_px": [
+            [
+              678,
+              712
+            ],
+            [
+              792,
+              826
+            ]
+          ],
+          "landmarks_visible": {
+            "title": false,
+            "task_row": false,
+            "heartbeat_row": false
+          },
+          "top_resumed": {
+            "probe": true,
+            "module": true
+          },
+          "half_height_with_title_and_footer": false
+        },
+        "probe": {
+          "tasks": {
+            "probe": {
+              "taskId": 356,
+              "isFocused": true,
+              "isVisible": true,
+              "resizeMode": 0,
+              "supportsMultiWindow": false,
+              "supportsSplitScreenMultiWindow": false
+            },
+            "module": {
+              "taskId": 350,
+              "isFocused": false,
+              "isVisible": true,
+              "resizeMode": 1,
+              "supportsMultiWindow": true,
+              "supportsSplitScreenMultiWindow": true
+            }
+          },
+          "logical_height_px": {
+            "probe": 1909,
+            "module": 1050
+          },
+          "panel_rows_px": [
+            120,
+            2028
+          ],
+          "marker_text_rows_px": [
+            [
+              451,
+              502
+            ],
+            [
+              512,
+              515
+            ],
+            [
+              1537,
+              1571
+            ],
+            [
+              1651,
+              1685
+            ]
+          ],
+          "landmarks_visible": {
+            "title": true,
+            "task_row": true,
+            "heartbeat_row": true
+          },
+          "top_resumed": {
+            "probe": true,
+            "module": true
+          },
+          "half_height_with_title_and_footer": false
+        },
+        "probe_focus_confirmed": true,
+        "same_task_ids_in_both_focus_states": true,
+        "fit_confirmed_in_both_focus_states": false
+      },
+      "splitOn": {
+        "module": {
+          "tasks": {
+            "module": {
+              "taskId": 350,
+              "isFocused": true,
+              "isVisible": true,
+              "resizeMode": 1,
+              "supportsMultiWindow": true,
+              "supportsSplitScreenMultiWindow": true
+            },
+            "probe": {
+              "taskId": 354,
+              "isFocused": false,
+              "isVisible": true,
+              "resizeMode": 0,
+              "supportsMultiWindow": false,
+              "supportsSplitScreenMultiWindow": true
+            }
+          },
+          "logical_height_px": {
+            "module": 1050,
+            "probe": 1909
+          },
+          "panel_rows_px": [
+            120,
+            1169
+          ],
+          "marker_text_rows_px": [
+            [
+              678,
+              712
+            ],
+            [
+              792,
+              826
+            ]
+          ],
+          "landmarks_visible": {
+            "title": false,
+            "task_row": false,
+            "heartbeat_row": false
+          },
+          "top_resumed": {
+            "probe": true,
+            "module": true
+          },
+          "half_height_with_title_and_footer": false
+        },
+        "probe": {
+          "tasks": {
+            "probe": {
+              "taskId": 354,
+              "isFocused": true,
+              "isVisible": true,
+              "resizeMode": 0,
+              "supportsMultiWindow": false,
+              "supportsSplitScreenMultiWindow": true
+            },
+            "module": {
+              "taskId": 350,
+              "isFocused": false,
+              "isVisible": true,
+              "resizeMode": 1,
+              "supportsMultiWindow": true,
+              "supportsSplitScreenMultiWindow": true
+            }
+          },
+          "logical_height_px": {
+            "probe": 1909,
+            "module": 1050
+          },
+          "panel_rows_px": [
+            120,
+            2028
+          ],
+          "marker_text_rows_px": [
+            [
+              451,
+              502
+            ],
+            [
+              512,
+              515
+            ],
+            [
+              1537,
+              1571
+            ],
+            [
+              1651,
+              1685
+            ]
+          ],
+          "landmarks_visible": {
+            "title": true,
+            "task_row": true,
+            "heartbeat_row": true
+          },
+          "top_resumed": {
+            "probe": true,
+            "module": true
+          },
+          "half_height_with_title_and_footer": false
+        },
+        "probe_focus_confirmed": true,
+        "same_task_ids_in_both_focus_states": true,
+        "fit_confirmed_in_both_focus_states": false
+      }
+    },
+    "edge": {
+      "visibleEdgeHandle": {
+        "taskId": 353,
+        "visible": true,
+        "windowBounds": [
+          0,
+          0,
+          1080,
+          2376
+        ],
+        "touchableRegion": [
+          987,
+          507,
+          1323,
+          753
+        ]
+      },
+      "floatHeartbeat": {
+        "taskId": 353,
+        "ticks": 11,
+        "resumed": true,
+        "secure": false
+      },
+      "edgeAttemptHeartbeat": {
+        "taskId": 353,
+        "ticks": 38,
+        "resumed": true,
+        "secure": false
+      },
+      "parkedLaterHeartbeat": {
+        "taskId": 353,
+        "ticks": 100,
+        "resumed": true,
+        "secure": false
+      },
+      "expandedHeartbeat": {
+        "taskId": 353,
+        "ticks": 113,
+        "resumed": true,
+        "secure": false
+      },
+      "parkDisabledHeartbeat": {
+        "taskId": 353,
+        "ticks": 200,
+        "resumed": true,
+        "secure": false
+      },
+      "switchesRestored": {
+        "split": false,
+        "park": false
+      },
+      "probeCleanup": true
+    },
+    "edge_observations": {
+      "parkAndExpand": "verified same task 353, active heartbeat, test drawing hidden and restored, actual native edge handle present",
+      "disableWhileParked": "synthetic test drawing became visible after disabling front retention",
+      "windowKeysRestored": true
+    }
+  },
+  "device_synthetic_tests": {
+    "runtime": "Android ART on PHY110",
+    "synthetic_recovery_suite": {
+      "deviceBuild": "PHY110_17.0.0.100(CN01)",
+      "androidApi": 37,
+      "testProcessUid": 2000,
+      "engine": "ART app_process with JUnit 4.13.2",
+      "scope": "Synthetic mount, state and window recovery inputs; no real mount, daemon, Binder mutation or UI changes",
+      "classes": {
+        "SoundAttributeReplyTest": 2,
+        "SoundCompanionCommandTest": 7,
+        "SoundPolicyMountTest": 4,
+        "SoundPolicyTest": 7,
+        "SoundRecoveryPlanTest": 3,
+        "WindowRecoveryTest": 4
+      },
+      "tests": 27,
+      "failures": 0,
+      "skipped": 0,
+      "temporaryDirectoryRemoved": true,
+      "dexSha256": "033488c6bffd6d35313428b5354d7b0bd101bcf55090698790bf9754e28659cb"
+    },
+    "synthetic_ocr_and_network": {
+      "ocr_cases": 20,
+      "total_assertions": 31,
+      "vendor_recovery_result": "NATIVE_PURE_RESTORE 1 4 mapped=1",
+      "scope": "Synthetic OCR, caller scope and installed vendor recovery classifier. No real backup import or network policy write."
+    }
+  },
+  "limits": [
+    "Audio samples verify native policy membership and values. Listening quality was not measured.",
+    "Mount conflict and interruption scenarios use synthetic inputs. Kernel path-based unmount can still race another privileged writer after the final identity check.",
+    "Native network backup classification ran on synthetic inputs. No user backup or restore was performed.",
+    "Camera adapter registration and gallery adapter registration are tracked independently. A hook log alone cannot establish camera output, cloud delivery or a saved gallery edit.",
+    "The physical split-screen test covers the synthetic non-resizable probe paired with the module on this firmware."
+  ]
+}

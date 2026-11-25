@@ -5,6 +5,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class SoundCompanionCommandTest {
+    @Test public void propagatesDaemonFailureAfterFallbackAndPrioritizesRestorationFailure(){
+        String script=SoundCompanionCommand.script("/dir","/apk","org.example.Main");
+        assertTrue(script.contains("daemon_status=$?"));
+        assertTrue(script.contains("if [ \"$restore_status\" -ne 0 ]; then exit \"$restore_status\"; fi\nexit \"$daemon_status\""));
+    }
     @Test public void reloadKeepsPinnedCodeIndependentOfExpiredLeaseApkPath() {
         assertEquals("/proc/3124/fd/3", SoundCompanionCommand.classpath("/proc/3124/fd/3", "/data/app/removed/base.apk"));
     }

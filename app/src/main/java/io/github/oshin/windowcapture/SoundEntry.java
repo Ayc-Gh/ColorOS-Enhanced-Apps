@@ -4,7 +4,9 @@ package io.github.oshin.windowcapture;
 import android.content.Context;
 import android.content.ContentProviderClient;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.net.Uri;
+import android.os.SystemClock;
 import io.github.libxposed.api.XposedModule;
 import io.github.libxposed.api.XposedModuleInterface;
 import java.util.concurrent.*;
@@ -15,26 +17,59 @@ public final class SoundEntry extends XposedModule {
     private boolean installed;
     private ScheduledExecutorService timer;
     private SharedPreferences prefs;
-    private boolean wasEnabled;
     private ContentProviderClient bridge;
-    private long lastFailure;
-    private final SharedPreferences.OnSharedPreferenceChangeListener listener=(p,k)->{if((k==null||SoundPolicy.KEY.equals(k))&&timer!=null)timer.execute(this::pulse);};
+    private final SoundStatusPolicy.Retry retry=new SoundStatusPolicy.Retry();
+    private final SharedPreferences.OnSharedPreferenceChangeListener listener=(p,k)->{
+        if(k==null||SoundPolicy.KEY.equals(k))timer.execute(()->{retry.reset();pulse();});
+    };
     @Override public void onModuleLoaded(XposedModuleInterface.ModuleLoadedParam p){process=p.getProcessName();}
     @Override public synchronized void onPackageReady(XposedModuleInterface.PackageReadyParam p){
         if(installed||!SoundPolicy.PROCESS.equals(process)||!(SoundPolicy.HOST.equals(p.getPackageName())||"com.oplus.atlas".equals(p.getPackageName())))return;
         if(!CompatibilityPolicy.rom(android.os.Build.MODEL,android.os.Build.VERSION.SDK_INT,android.os.Build.DISPLAY))return;
-        try{Class<?> at=Class.forName("android.app.ActivityThread");Context c=(Context)at.getMethod("getSystemContext").invoke(at.getMethod("currentActivityThread").invoke(null));if(!CompatibilityPolicy.host(SoundPolicy.HOST,c.getPackageManager().getPackageInfo(SoundPolicy.HOST,0).getLongVersionCode()))return;prefs=getRemotePreferences(Config.PREFS);installed=true;prefs.registerOnSharedPreferenceChangeListener(listener);timer=Executors.newSingleThreadScheduledExecutor();timer.scheduleWithFixedDelay(this::pulse,1,10,TimeUnit.SECONDS);}catch(Throwable ignored){}
+        timer=Executors.newSingleThreadScheduledExecutor();
+        timer.scheduleWithFixedDelay(this::pulse,1,10,TimeUnit.SECONDS);
+        installed=true;
     }
-    private void pulse(){try{
-        boolean on=prefs!=null&&prefs.getBoolean(SoundPolicy.KEY,false);if(!on&&!wasEnabled)return;wasEnabled=on;
-        // Calling while off also invalidates a previous lease immediately.
-        Context c=(Context)Class.forName("android.app.ActivityThread").getMethod("currentApplication").invoke(null);
-        if(c==null)return;
-        // Hold a stable provider reference. Transient resolver calls allowed the
-        // module process to become cached between renewals on this ColorOS build.
-        if(bridge==null)bridge=c.getContentResolver().acquireContentProviderClient(Uri.parse("content://io.github.oshin.windowcapture.sound-policy"));
-        if(bridge==null)throw new IllegalStateException("Module provider unavailable");
-        bridge.call("lease",null,null);
-        if(!on){bridge.close();bridge=null;}
-    }catch(Throwable error){if(bridge!=null){bridge.close();bridge=null;}long now=android.os.SystemClock.elapsedRealtime();if(now-lastFailure>30_000){lastFailure=now;log(android.util.Log.WARN,"ColorOSEnhance-Sound","Audio lease renewal failed: "+error.getClass().getSimpleName(),error);}}}
+    private void pulse() {
+        long now=SystemClock.elapsedRealtime();
+        if(!retry.ready(now))return;
+        try {
+            Context c=(Context)Class.forName("android.app.ActivityThread").getMethod("currentApplication").invoke(null);
+            if(c==null)return;
+            // The module settings and its libxposed provider become available after first unlock.
+            android.os.UserManager users = c.getSystemService(android.os.UserManager.class);
+            if (users == null || !users.isUserUnlocked()) return;
+            if(prefs==null) {
+                long version=c.getPackageManager().getPackageInfo(SoundPolicy.HOST,0).getLongVersionCode();
+                if(!CompatibilityPolicy.host(SoundPolicy.HOST,version)){timer.shutdown();return;}
+                SharedPreferences value=getRemotePreferences(Config.PREFS);
+                value.registerOnSharedPreferenceChangeListener(listener);
+                prefs=value;
+            }
+            boolean enabled=prefs.getBoolean(SoundPolicy.KEY,false);
+            if(!enabled&&bridge==null){retry.reset();return;}
+            ApplicationInfo info=c.getPackageManager().getApplicationInfo(SoundStartupPolicy.APP,0);
+            if(!SoundStartupPolicy.available(info.enabled,info.flags)) {
+                disconnect();
+                retry.reset();
+                return;
+            }
+            // Keep a stable reference during a healthy lease. Only a normal, enabled
+            // package can receive a new connection after a stop or suspension.
+            if(bridge==null)bridge=c.getContentResolver().acquireContentProviderClient(Uri.parse("content://io.github.oshin.windowcapture.sound-policy"));
+            if(bridge==null)throw new IllegalStateException("Module provider unavailable");
+            bridge.call("lease",null,null);
+            if(!enabled)disconnect();
+            retry.reset();
+        }catch(Throwable error){
+            disconnect();
+            retry.failed(now);
+            log(android.util.Log.WARN,"ColorOSEnhance-Sound","Audio lease renewal failed: "+error.getClass().getSimpleName(),error);
+        }
+    }
+    private void disconnect() {
+        ContentProviderClient previous=bridge;
+        bridge=null;
+        if(previous!=null)try{previous.close();}catch(RuntimeException ignored){}
+    }
 }

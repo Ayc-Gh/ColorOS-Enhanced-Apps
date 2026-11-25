@@ -1,0 +1,150 @@
+{
+  "date": "2026-11-25",
+  "timezone": "Asia/Shanghai",
+  "device": "PHY110",
+  "rom": "PHY110_17.0.0.100(CN01)",
+  "android_sdk": 37,
+  "lsposed": "2.2.1 (7912) / API 102",
+  "module": {
+    "version": "2.1.9",
+    "version_code": 25,
+    "apk_sha256": "f956d07384b206b232606db376ed007ac563835f05e1f6dbc48616b4dcb1350c",
+    "certificate_sha256": "98aa09400941e6ab1b5059c75b2ccfe6c150786e0a40be492c2d6b854e825255",
+    "device_apk_digest_matched": true,
+    "installation": "Fresh user-authorized replacement of the old signed package. No old module configuration backup."
+  },
+  "build": {
+    "gradle": "9.6.1",
+    "jdk": 21,
+    "release_assembled": true,
+    "junit": {
+      "classes": 33,
+      "passed": 159,
+      "failed": 0,
+      "skipped": 0
+    },
+    "release_lint": {
+      "errors": 0,
+      "warnings": 30
+    },
+    "android_art_fixture": {
+      "passed": 54,
+      "identity": "ordinary shell",
+      "input": "synthetic payment text and lifecycle policy cases"
+    }
+  },
+  "sound": {
+    "scope": [
+      "com.oplus.audio.effectcenter",
+      "com.oplus.atlas",
+      "system"
+    ],
+    "module_root": "User authorized the new package in KernelSU.",
+    "reference_package": "com.heytap.music",
+    "reference_attribute": "3",
+    "probe_package": "io.github.oshin.windowcapture",
+    "original_2_1_8": {
+      "stopped": true,
+      "lease": "disabled",
+      "probe_attribute": null,
+      "vendor_blocked_provider": true,
+      "normal_launch_and_background_already_restored_attribute": "3"
+    },
+    "background_2_1_9": {
+      "elapsed_seconds": 68.62,
+      "uptime_seconds": [
+        2668.91,
+        2686.06,
+        2703.23,
+        2720.38,
+        2737.53
+      ],
+      "lease_elapsed_ms": [
+        2659830,
+        2679871,
+        2699904,
+        2719949,
+        2729969
+      ],
+      "native_probe_attributes": [
+        "3",
+        "3",
+        "3",
+        "3",
+        "3"
+      ],
+      "same_scoped_audio_process": true
+    },
+    "force_stop_2_1_9": {
+      "observation_seconds": 42,
+      "stopped": true,
+      "restored_native_scope": true,
+      "probe_attribute": null,
+      "provider_start_preventions_logged": 0,
+      "lease_renewal_failures_logged": 0
+    },
+    "normal_reopen_2_1_9": {
+      "launch_local_time": "10:01:05",
+      "sample_local_time": "10:01:20",
+      "lease_version": 25,
+      "root_status_version": 25,
+      "probe_attribute": "3",
+      "last_checked_local_time": "10:02:50",
+      "last_probe_attribute": "3"
+    },
+    "limits": [
+      "Checked native policy and renewal. Acoustic separation and audio output quality were not evaluated."
+    ]
+  },
+  "memory": {
+    "wechat": {
+      "version": "8.0.79",
+      "version_code": 3182
+    },
+    "host": {
+      "version": "17.8.0",
+      "version_code": 17008000
+    },
+    "installed_activity_targets_found": 8,
+    "native_ui": {
+      "old_package_wechat_row_present": false,
+      "new_package_wechat_row_present": true,
+      "native_master_enabled": true,
+      "wechat_enabled": true
+    },
+    "native_host": {
+      "loaded_module_version": "2.1.9",
+      "repaired_rules": 8
+    },
+    "payment_flow": {
+      "baseline": {
+        "page": 0,
+        "extract": 0,
+        "required_fields": 0,
+        "submitted": 0,
+        "accepted": 0,
+        "ocr": 0,
+        "duplicate": 0
+      },
+      "tested_scene": "Previously unrecorded, existing WeChat bill detail opened by the user. No new payment.",
+      "same_host_process": true,
+      "after": {
+        "page": 3,
+        "extract": 3,
+        "required_fields": 3,
+        "submitted": 3,
+        "accepted": 3,
+        "ocr": 0,
+        "duplicate": 0
+      },
+      "last_page": "bill detail",
+      "last_stage": "OEM accepted request",
+      "user_confirmed_new_record": true,
+      "limits": [
+        "Callback counts can repeat for one bill and do not measure how many records were created.",
+        "QR payment result screen OCR, red packets and transfers were not exercised end to end in this run."
+      ]
+    },
+    "authorization": "The user approved the OEM screen-information and notification-listener prompts."
+  }
+}

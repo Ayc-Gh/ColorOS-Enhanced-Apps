@@ -2,6 +2,14 @@ package io.github.oshin.windowcapture;
 import org.junit.Test;
 import static org.junit.Assert.*;
 public class SoundStartupPolicyTest {
+ @Test public void normalLaunchResumesContactAndRestrictedPackagesStayIdle(){
+  int stopped=android.content.pm.ApplicationInfo.FLAG_STOPPED,suspended=android.content.pm.ApplicationInfo.FLAG_SUSPENDED;
+  assertFalse(SoundStartupPolicy.available(true,stopped));
+  assertFalse(SoundStartupPolicy.available(true,suspended));
+  assertFalse(SoundStartupPolicy.available(true,stopped|suspended));
+  assertFalse(SoundStartupPolicy.available(false,0));
+  assertTrue(SoundStartupPolicy.available(true,0));
+ }
  private boolean caller(boolean on,int uid,String process,String source,String target,String component,int targetUid,boolean stopped){
   return SoundStartupPolicy.caller(on,uid,uid,process,source,target,component,targetUid,stopped);
  }

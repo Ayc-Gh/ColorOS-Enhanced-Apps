@@ -9,6 +9,7 @@ import android.os.SystemClock;
 import org.json.*;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Supplier;
 
 /** Answers only an authenticated, user-initiated status request; never lists apps. */
 final class WindowDiagnostics {
@@ -47,16 +48,23 @@ final class WindowDiagnostics {
     static synchronized long generation(){return launchGeneration;}
     static synchronized void configurationChanged(String key){if(key==null||LAUNCH_KEYS.contains(key)){launchGeneration++;launches.clear();}}
     static synchronized void launch(String policy,String result,long generation){if(generation==launchGeneration)launches.put(policy,new Observation(result,SystemClock.elapsedRealtime()));}
-    static synchronized void attach(Context context,SharedPreferences config,SharedPreferences status){
+    static synchronized void attach(Context context,Supplier<SharedPreferences> config,Supplier<SharedPreferences> status){
         if(attached)return;
         BroadcastReceiver receiver=new BroadcastReceiver(){
             @Override public void onReceive(Context ctx,Intent intent){
                 String token=intent.getStringExtra("request_nonce");if(!QUERY.equals(intent.getAction())||token==null||token.length()<32||token.length()>64)return;
                 try{
                     if(Build.VERSION.SDK_INT>=34){if(getSentFromUid()!=ctx.getPackageManager().getPackageUid(APP,0))return;}
-                    else if(!token.equals(status.getString("request_nonce",null)))return;
+                    else if(!token.equals(status.get().getString("request_nonce",null)))return;
                     JSONObject data=new JSONObject().put("host","android").put("version",BuildConfig.VERSION_NAME).put("code",BuildConfig.VERSION_CODE);
                     data.put("adapter",new JSONObject().put("state",compatibility).put("reason",compatibilityReason));
+                    SharedPreferences current=config.get();
+                    Map<String,?> saved=null;
+                    if(current!=null)try{saved=current.getAll();}catch(RuntimeException ignored){/* Still report installed paths. */}
+                    if(current==null && "ready".equals(compatibility))
+                        data.put("adapter",new JSONObject().put("state","loading").put("reason","等待框架配置连接，正在重试"));
+                    else if(saved==null && "ready".equals(compatibility))
+                        data.put("configurationRead","failed");
                     JSONArray features=new JSONArray();
                     for(var item:new TreeMap<>(entries).entrySet()){
                         Entry entry=item.getValue();long valid=entry.paths.values().stream().filter(Boolean::booleanValue).count();
@@ -68,14 +76,14 @@ final class WindowDiagnostics {
                         features.put(feature);
                     }
                     data.put("features",features);JSONObject observations=new JSONObject();
-                    for(String policy:List.of("LAUNCHER","REMEMBER","JUMP","NOTIFICATION")){
+                    if(saved!=null)for(String policy:List.of("LAUNCHER","REMEMBER","JUMP","NOTIFICATION")){
                         String key=switch(policy){case "LAUNCHER"->Config.LAUNCHER;case "REMEMBER"->Config.REMEMBER;case "JUMP"->Config.JUMP;default->Config.NOTIFICATION;};
                         Observation observation=launches.get(policy);
-                        observations.put(policy,new JSONObject().put("enabled",config.getBoolean(key,false))
+                        observations.put(policy,new JSONObject().put("enabled",Boolean.TRUE.equals(saved.get(key)))
                             .put("result",observation==null?"unknown":observation.result())
                             .put("ageMs",observation==null?-1:SystemClock.elapsedRealtime()-observation.at()));
                     }
-                    data.put("launches",observations);
+                    if(saved!=null)data.put("launches",observations);
                     Intent reply=new Intent(REPLY).setPackage(APP).putExtra("request_nonce",token).putExtra("host","android").putExtra("payload",data.toString());
                     if(Build.VERSION.SDK_INT>=34)ctx.sendBroadcast(reply,null,BroadcastOptions.makeBasic().setShareIdentityEnabled(true).toBundle());else ctx.sendBroadcast(reply);
                 }catch(Exception ignored){/* Unknown stays unknown if the framework is unavailable. */}

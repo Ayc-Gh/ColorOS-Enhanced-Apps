@@ -1,11 +1,16 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 package io.github.oshin.windowcapture;
 
+import android.content.pm.ApplicationInfo;
+
 /** Only the audio host may bootstrap this module's leased sound provider. */
 final class SoundStartupPolicy {
     static final String APP="io.github.oshin.windowcapture";
     static final String PROVIDER=APP+".SoundBridgeProvider";
     private SoundStartupPolicy(){}
+    static boolean available(boolean enabled, int flags) {
+        return enabled && (flags & (ApplicationInfo.FLAG_STOPPED | ApplicationInfo.FLAG_SUSPENDED)) == 0;
+    }
     static boolean caller(boolean enabled,int callingUid,int processUid,String process,
                           String caller,String target,String component,int targetUid,boolean stopped){
         return enabled&&!stopped&&callingUid==1000&&processUid==1000&&SoundPolicy.PROCESS.equals(process)

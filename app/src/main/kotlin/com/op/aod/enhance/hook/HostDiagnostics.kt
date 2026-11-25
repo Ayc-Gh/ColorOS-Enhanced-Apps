@@ -38,6 +38,8 @@ internal object HostDiagnostics {
                     if (sentFromUid != runCatching { ctx.packageManager.getPackageUid(RuntimeProtocol.APP, 0) }.getOrNull()) return
                 } else if (nonce != runCatching { prefs?.getString(RuntimeProtocol.NONCE, null) }.getOrNull()) return
                 val data = JSONObject().put("host", host).put("version", BuildConfig.VERSION_NAME).put("code", BuildConfig.VERSION_CODE)
+                    .put("process", android.app.Application.getProcessName()).put("pid", android.os.Process.myPid())
+                    .put("startedAt", android.os.Process.getStartElapsedRealtime()).put("sampledAt", android.os.SystemClock.elapsedRealtime())
                 data.put("adapter",JSONObject().put("state",compatibility).put("reason",compatibilityReason))
                 val features = JSONArray()
                 registry.snapshot().filter { it.name != "Context" }.forEach { s ->

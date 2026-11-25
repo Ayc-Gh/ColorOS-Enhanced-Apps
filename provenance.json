@@ -1,6 +1,6 @@
 {
   "application_id_source": "app/build.gradle.kts",
-  "version": "2.1.8",
+  "version": "2.1.10",
   "device": "PHY110",
   "rom": "PHY110_17.0.0.100(CN01)",
   "android_sdk": 37,
@@ -20,7 +20,7 @@
     "oplus-services.jar": "5a3613f87b766bc5923e4d9d75a0e3b79aa2c22f92d43a984d3cb0823f9e5a90",
     "services.jar": "78be31cdbfda61fdbfd84013c2c0b31812468bec8ffc4a0aa56ab4f4e0937e44"
   },
-  "apk_sha256": "8df92327614c3f2e5815f7f1151583c467fcbc4132784143fc2b5da2400398b6",
+  "apk_sha256": "ff773e3d1062844b4f101755a35191d09494071b5f851ade3dd6563ed39ee8f2",
   "license": "AGPL-3.0-or-later",
   "optional_features_not_exhaustively_tested": true,
   "oem_cast_apks": {
@@ -28,8 +28,8 @@
     "OPSynergy.apk": "a94af8ff5c0425095fbbf921d10afe1608197c0538b12e246f3a2a3a92db05c3",
     "ShareScreen.apk": "83912117bb5906a2e86a6870e05f41e6bde34a8a878b8d3c05688c81bef8e070"
   },
-  "validation": "docs/evidence/camera-filters-2.1.8/validation.json",
-  "version_code": 24,
+  "validation": "docs/evidence/audit-fixes-2.1.10/validation.json",
+  "version_code": 26,
   "app_name": "ColorOS 增强",
   "aod_source": {
     "repository": "NOTICE",
@@ -73,7 +73,9 @@
     "docs/evidence/icons-2.1.4/validation.json",
     "docs/evidence/window-fix-2.1.5/validation.json",
     "docs/evidence/audio-upgrade-2.1.6/validation.json",
-    "docs/evidence/capture-only-2.1.7/validation.json"
+    "docs/evidence/capture-only-2.1.7/validation.json",
+    "docs/evidence/camera-filters-2.1.8/validation.json",
+    "docs/evidence/sound-wechat-2.1.9/validation.json"
   ],
   "historical_confirmed_tests": [
     "Three settings entrances and AOD subpages",
@@ -85,7 +87,7 @@
     "50 AOD unit tests and 17 cast policy checks"
   ],
   "device_tested_this_release": true,
-  "changes": "Add 33 supported rear photo filters and three portrait/common-video film styles through sealed memory LUT resources; verify preview/output, preserve original filters, add status reporting.",
+  "changes": "Validate native MSS String8 replies and restore all tracked packages, journal temporary mounts, reconnect the sound bridge after first unlock, scope network classifiers to settings, verify visible payment evidence, recover parked tasks and framework configuration, and calculate main-display Canvas split bounds for matching standard app tasks.",
   "historical_final_enabled": [
     "unlock_flexible",
     "unlock_split",
@@ -109,7 +111,7 @@
       "versionCode": "17003005"
     }
   },
-  "certificate_sha256": "ac8dd32294627c740e436288919805d7d9403592add3436c1f006df58ab16f37",
+  "certificate_sha256": "98aa09400941e6ab1b5059c75b2ccfe6c150786e0a40be492c2d6b854e825255",
   "independent_edge_count": {
     "preference": "window_capture/edge_count",
     "minimum": 1,
@@ -124,39 +126,10 @@
     "requested_fps": 0,
     "parameters": "native negotiation"
   },
-  "final_enabled": [
-    "aimemory_wechat_bill",
-    "air_gesture_entries",
-    "camera_inspiration_recommendation",
-    "camera_log_video",
-    "camera_missing_filters",
-    "capture",
-    "exclude_system",
-    "force_multi_mode",
-    "foreground",
-    "gallery_ai_retouch",
-    "hide_bottom",
-    "hide_top",
-    "jump",
-    "network_options",
-    "notification",
-    "remember",
-    "sound_mss_apps",
-    "unlock_flexible",
-    "unlock_split"
-  ],
   "validation_scope": {
-    "scope": "Camera filter catalogs, preview/photo/video outputs, off restoration, runtime UI, logs and cleanup",
+    "scope": "Audit fixes on PHY110. Device observations, synthetic regression results and remaining limits are recorded in validation.json.",
     "all_features_retested": false,
-    "final_apk_sha256": "8df92327614c3f2e5815f7f1151583c467fcbc4132784143fc2b5da2400398b6",
-    "limitations": [
-      "Rear photo 1x, rear portrait still life, ordinary 1080p30 SDR video only; no claim for front cameras, HDR/RAW/Log or every lens/resolution.",
-      "Portrait testing verifies filter color, not person segmentation or depth quality.",
-      "Master presets retain native behavior. GR/retro/festival/vibe dedicated modes have additional unverified dependencies and are not unlocked.",
-      "Preview/output consistency is visually inspected, not calibrated colorimetric equivalence with a donor phone.",
-      "Existing native camera diagnostic errors also occur with filter expansion off; this is not a claim that all OS logs are error-free.",
-      "User data, original OEM assets and ordinary system/application diagnostic history are preserved. All task-created test media, trash copies and temporary files are removed."
-    ]
+    "final_apk_sha256": "ff773e3d1062844b4f101755a35191d09494071b5f851ade3dd6563ed39ee8f2"
   },
   "retired_features": {
     "free_ratio": {
@@ -171,6 +144,10 @@
   "publication_status": "published",
   "camera_filter_resources": "docs/CAMERA_FILTER_RESOURCES_2.1.8.json",
   "camera_filter_native_ab_validation": "docs/evidence/filter-native-ab-2.1.8/validation.json",
-  "github_release": "https://github.com/Ayc-Gh/ColorOS-Enhanced-Apps/releases/tag/v2.1.8",
-  "camera_filter_default_strength_validation": "docs/evidence/filter-default-strength-2.1.8/validation.json"
+  "camera_filter_default_strength_validation": "docs/evidence/filter-default-strength-2.1.8/validation.json",
+  "verified_enabled_in_this_run": [
+    "sound_mss_apps",
+    "aimemory_wechat_bill"
+  ],
+  "github_release": "https://github.com/Ayc-Gh/ColorOS-Enhanced-Apps/releases/tag/v2.1.10"
 }

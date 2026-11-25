@@ -26,8 +26,9 @@ class RuntimeStatusActivity:NativeSettingsActivity(){
             val report=client.reports.value[host]
             if(report==null){note("未知：尚未收到该进程回复。首次更新需重启手机，并打开对应系统页面后检查。");continue}
             if(report.optInt("code")!=BuildConfig.VERSION_CODE){note("仍在运行旧版 ${report.optString("version")}，请重启手机一次。");continue}
+            if(host in RuntimeProtocol.hosts && report.optString("process",host)!=host){note("已收到子进程报告，主进程尚未回复。");continue}
             note("已加载 ${report.optString("version")}")
-            report.optJSONObject("adapter")?.let{a->note(when(a.optString("state")){"ready"->"版本与适配接口已校验";"unsupported","failed"->a.optString("reason","适配不可用，保留原生行为");else->"适配接口尚未确认"})}
+            report.optJSONObject("adapter")?.let{a->note(when(a.optString("state")){"ready"->"版本与适配接口已校验";"unsupported","failed"->a.optString("reason","适配不可用，保留原生行为");else->a.optString("reason","适配接口尚未确认")})}
             report.optJSONObject("gesture")?.let{g->note(if(g.optBoolean("enabled"))"额外手势入口已开启" else "额外手势入口已关闭");note("手势识别继续使用系统原生引擎。")}
             report.optJSONObject("gallery")?.let{g->
                 note(if(g.optBoolean("enabled"))"AI 修图师解锁已开启" else "AI 修图师解锁已关闭")

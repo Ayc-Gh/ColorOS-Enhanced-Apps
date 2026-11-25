@@ -6,6 +6,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.util.Log;
 import io.github.libxposed.api.XposedModule;
 import io.github.libxposed.api.XposedModuleInterface;
@@ -72,9 +73,9 @@ public final class AimemoryEntry extends XposedModule {
                 Object replacement=original;
                 try{
                     String scene=(String)read(original,"getScene"),app=(String)read(original,"getAppName"),page=(String)read(original,"getPageControlName"),ext=(String)read(original,"getExt");
-                    if(AimemoryPolicy.repairable(scene,app,page,ext)&&AimemoryPolicy.supported(context.getPackageManager().getPackageInfo(AimemoryPolicy.HOST,0).getLongVersionCode(),context.getPackageManager().getPackageInfo(AimemoryPolicy.WECHAT,0).getLongVersionCode()))
+                    if(AimemoryPolicy.repairable(scene,app,page,ext)&&supportedPage(context,page))
                         replacement=copy.invoke(original,read(original,"getTouchType"),scene,app,read(original,"getPageName"),page,read(original,"getViewId"),read(original,"getType"),AimemoryPolicy.metadata(page),read(original,"getChannel"));
-                }catch(ReflectiveOperationException|android.content.pm.PackageManager.NameNotFoundException error){
+                }catch(ReflectiveOperationException|PackageManager.NameNotFoundException|SecurityException error){
                     log(Log.WARN,TAG,"Rule metadata unavailable; using native rule",error);
                 }
                 if(replacement==original)return chain.proceed();
@@ -112,6 +113,18 @@ public final class AimemoryEntry extends XposedModule {
             });
             runtime.loaded();adapter="ready";log(Log.INFO,TAG,"Installed v"+BuildConfig.VERSION_NAME+" "+AimemoryPolicy.REVISION+"; native per-app switch retained");
         }catch(Throwable error){runtime.failed("记账接口不完整，已保留原生流程");prefs=null;adapter="unavailable";log(Log.ERROR,TAG,"Adapter unavailable; using native behavior",error);}
+    }
+    private static boolean supportedPage(Context context,String page)throws PackageManager.NameNotFoundException{
+        PackageManager packages=context.getPackageManager();
+        long host=packages.getPackageInfo(AimemoryPolicy.HOST,0).getLongVersionCode();
+        long wechat=packages.getPackageInfo(AimemoryPolicy.WECHAT,0).getLongVersionCode();
+        return AimemoryPolicy.supportedPage(host,wechat,page,name->{
+            try{
+                // Payment pages can be private to WeChat. Query component metadata without launching an intent.
+                packages.getActivityInfo(new ComponentName(AimemoryPolicy.WECHAT,name),0);
+                return true;
+            }catch(PackageManager.NameNotFoundException missing){return false;}
+        });
     }
     private static Object read(Object target,String method)throws ReflectiveOperationException{return target.getClass().getMethod(method).invoke(target);}
     private static boolean isWeChat(Object item)throws ReflectiveOperationException{return AimemoryPolicy.WECHAT.equals(read(item,"getPackageName"))&&AimemoryPolicy.SCENE.equals(read(item,"getSceneName"));}

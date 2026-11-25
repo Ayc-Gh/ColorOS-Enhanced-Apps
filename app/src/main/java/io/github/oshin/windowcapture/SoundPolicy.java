@@ -27,6 +27,14 @@ final class SoundPolicy {
         return new Patch(xml.substring(0,a)+body+xml.substring(b),Set.copyOf(expanded),values.size());
     }
     static boolean leaseValid(long now,long stamp,int pid,boolean hostAlive){return pid>0&&hostAlive&&stamp>=0&&now>=stamp&&now-stamp<=LEASE_MS;}
-    static boolean restoredAttribute(String actual,Integer original){if(actual==null||actual.isBlank())return true;try{return original!=null&&Integer.parseInt(actual)==original;}catch(NumberFormatException e){return false;}}
+    static boolean restoredAttribute(String actual,Integer original){
+        if(original==null)return actual==null;
+        try{return actual!=null&&Integer.parseInt(actual)==original;}catch(NumberFormatException e){return false;}
+    }
+    interface Lookup {String get(String pkg)throws Exception;}
+    static void verify(Map<String,Integer> expected,Collection<String> packages,Lookup lookup)throws Exception{
+        for(String pkg:packages)if(!restoredAttribute(lookup.get(pkg),expected.get(pkg)))
+            throw new java.io.IOException("Audio attribute differs: "+pkg);
+    }
     private SoundPolicy(){}
 }

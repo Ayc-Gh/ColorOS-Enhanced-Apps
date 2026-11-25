@@ -34,7 +34,7 @@ internal class RuntimeStatusClient(context: Context,private val hosts:List<Strin
             val data = runCatching { JSONObject(intent.getStringExtra("payload") ?: "") }.getOrNull() ?: return
             if (data.optString("host") != host) return
             val identity = RuntimeReportIndex.Identity(host, data.optString("process", host), data.optInt("pid", 0), data.optLong("startedAt", 0), data.optLong("sampledAt", 0), data.optInt("code", 0))
-            val selected = processReports.accept(identity, data, BuildConfig.VERSION_CODE)
+            val selected = processReports.accept(identity, data, BuildConfig.VERSION_CODE, host.takeIf { it in RuntimeProtocol.hosts })
             // Copy before adding aggregate metadata; individual process snapshots remain intact.
             val aggregate = JSONObject(selected.toString()).put("respondingProcesses", processReports.processCount(host))
             mutableReports.value = mutableReports.value + (host to aggregate)

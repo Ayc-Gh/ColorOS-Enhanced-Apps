@@ -2,7 +2,7 @@
 package io.github.oshin.windowcapture;
 
 import android.content.*;
-import android.os.SystemClock;
+import java.lang.ref.WeakReference;
 import io.github.libxposed.api.XposedModule;
 import java.lang.reflect.*;
 import java.util.*;
@@ -13,6 +13,8 @@ import java.util.function.Predicate;
 /** Binds verification to the originating native coroutine and its visible WeChat page. */
 final class WechatOcrAdapter {
     private record Session(long generation,ComponentName component,boolean owned){}
+    private record VerifiedReceipt(Session session,PaymentEvidence.Proof proof){}
+    private record ObservedIdentity(WeakReference<Object> nativeIdentity,PaymentEvidence.Proof proof){}
     private final XposedModule module;
     private final ClassLoader loader;
     private final BooleanSupplier enabled;
@@ -21,15 +23,19 @@ final class WechatOcrAdapter {
     private final AtomicLong generation=new AtomicLong();
     private final ThreadLocal<Session> scope=new ThreadLocal<>();
     private final Map<Object,Session> coroutines=Collections.synchronizedMap(new WeakHashMap<>());
-    private final Map<Object,PaymentEvidence.Proof> identities=Collections.synchronizedMap(new WeakHashMap<>());
+    private final ArrayDeque<ObservedIdentity> identities=new ArrayDeque<>();
     private volatile Session active;
-    private volatile PaymentEvidence.Proof acceptedEvidence;
-    private volatile long acceptedAt;
+    private volatile VerifiedReceipt receipt;
     private Method visible;
     private Constructor<?> failedResult;
     private Object failure;
     WechatOcrAdapter(XposedModule module,ClassLoader loader,BooleanSupplier enabled,Predicate<Object> owned,AimemoryTrace trace){this.module=module;this.loader=loader;this.enabled=enabled;this.owned=owned;this.trace=trace;}
-    void invalidate(){generation.incrementAndGet();acceptedEvidence=null;identities.clear();}
+    void invalidate(){generation.incrementAndGet();receipt=null;synchronized(identities){identities.clear();}}
+    private PaymentEvidence.Proof exactProof(Object nativeIdentity){
+        if(nativeIdentity!=null)for(ObservedIdentity item:identities)
+            if(item.nativeIdentity().get()==nativeIdentity)return item.proof();
+        return null;
+    }
     private Class<?> cls(String name)throws ClassNotFoundException{return Class.forName(name,false,loader);}
     private static Object call(Object value,String method)throws ReflectiveOperationException{return value.getClass().getMethod(method).invoke(value);}
     private boolean current(Session session){
@@ -54,8 +60,8 @@ final class WechatOcrAdapter {
         for(Method method:new Method[]{start,stop,parse,invoke,compare,makeIdentity}){method.setAccessible(true);module.deoptimize(method);}
         for(Method method:ocr.getDeclaredMethods())if(method.getName().equals("a"))module.deoptimize(method);
         module.deoptimize(ctor);
-        module.hook(start).intercept(chain->{Object rule=chain.getArg(1);String pkg=(String)call(rule,"getPackageName"),page=(String)call(rule,"getActivityName");long token=generation.incrementAndGet();active=AimemoryPolicy.WECHAT.equals(pkg)?new Session(token,new ComponentName(pkg,page),owned.test(rule)):null;return chain.proceed();});
-        module.hook(stop).intercept(chain->{generation.incrementAndGet();active=null;return chain.proceed();});
+        module.hook(start).intercept(chain->{Object rule=chain.getArg(1);String pkg=(String)call(rule,"getPackageName"),page=(String)call(rule,"getActivityName");long token=generation.incrementAndGet();receipt=null;active=AimemoryPolicy.WECHAT.equals(pkg)?new Session(token,new ComponentName(pkg,page),owned.test(rule)):null;return chain.proceed();});
+        module.hook(stop).intercept(chain->{generation.incrementAndGet();active=null;receipt=null;return chain.proceed();});
         for(Method method:collector.getDeclaredMethods())if(method.getName().equals("k")&&method.getParameterCount()==1){
             module.deoptimize(method);module.hook(method).intercept(chain->{Session before=scope.get(),session=active;ComponentName target=(ComponentName)component.get(chain.getThisObject());
                 if(session!=null&&wechat(target)&&session.component().equals(target)&&(enabled.getAsBoolean()||session.owned()))scope.set(session);else scope.remove();
@@ -75,26 +81,39 @@ final class WechatOcrAdapter {
         });
         module.hook(parse).intercept(chain->{Object original=chain.proceed();Session session=scope.get();if(session==null||!(original instanceof Map<?,?> map))return original;
             if(!current(session)){trace.validation("PAGE_NO_LONGER_ACTIVE",false);return Map.of();}
-            PaymentEvidence.Result result=PaymentEvidence.verify((String)chain.getArg(0),map);trace.validation(result.state(),result.corrected());return result.values();
+            PaymentEvidence.Result result=PaymentEvidence.verify((String)chain.getArg(0),map);
+            receipt=result.proof()==null?null:new VerifiedReceipt(session,result.proof());
+            trace.validation(result.state(),result.corrected());return result.values();
         });
-        module.hook(makeIdentity).intercept(chain->{Object result=chain.proceed();String page=(String)chain.getArg(1);if(enabled.getAsBoolean()&&AimemoryPolicy.paymentPage(page))identities.put(result,PaymentEvidence.proof((Map<?,?>)chain.getArg(0)));return result;});
+        module.hook(makeIdentity).intercept(chain->{
+            Object result=chain.proceed();String page=(String)chain.getArg(1);
+            VerifiedReceipt seen=receipt;
+            boolean matches=result!=null&&seen!=null&&seen.session()==active&&seen.session().generation()==generation.get()
+                    &&seen.session().component().getClassName().equals(page)&&enabled.getAsBoolean()
+                    &&seen.proof().matches((Map<?,?>)chain.getArg(0));
+            synchronized(identities){
+                identities.removeIf(item->{Object previous=item.nativeIdentity().get();return previous==null||previous==result;});
+                if(matches){
+                    if(identities.size()>=32)identities.removeFirst();
+                    identities.addLast(new ObservedIdentity(new WeakReference<>(result),seen.proof()));
+                }
+            }
+            return result;
+        });
         module.hook(compare).intercept(chain->{Object nativeResult=chain.proceed();if(!enabled.getAsBoolean())return nativeResult;
-            PaymentEvidence.Proof fresh=identities.get(chain.getThisObject()),old=identities.get(chain.getArg(0));
+            PaymentEvidence.Proof fresh,old;
+            synchronized(identities){fresh=exactProof(chain.getThisObject());old=exactProof(chain.getArg(0));}
             PaymentEvidence.Proof.Relation relation=fresh==null?PaymentEvidence.Proof.Relation.UNKNOWN:fresh.compare(old);
             if(relation==PaymentEvidence.Proof.Relation.DIFFERENT&&Boolean.TRUE.equals(nativeResult)){trace.preciseDedup();return false;}
             if(relation==PaymentEvidence.Proof.Relation.SAME)return true;
             if(Boolean.TRUE.equals(nativeResult)&&fresh!=null)trace.duplicate();return nativeResult;
         });
-        Method billGate=cls(base+"BillDeduplicationHelper").getDeclaredMethod("k",String.class,Map.class);module.deoptimize(billGate);
-        module.hook(billGate).intercept(chain->{Object result=chain.proceed();if(enabled.getAsBoolean()&&Boolean.TRUE.equals(result)&&AimemoryPolicy.WECHAT.equals(chain.getArg(0))&&SystemClock.elapsedRealtime()-acceptedAt<900000){
-            PaymentEvidence.Proof fresh=PaymentEvidence.proof((Map<?,?>)chain.getArg(1));if(fresh.compare(acceptedEvidence)==PaymentEvidence.Proof.Relation.DIFFERENT){trace.preciseDedup();return false;}}
-            return result;
-        });
+        // The archive-wide duplicate check does not identify its matching record. Preserve that native result.
         Class<?> engine=cls("com.oplus.gleanerservice.flashnotes.runtime.engine.FlashNotesEngine");
         for(Method method:engine.getDeclaredMethods())if(method.getName().equals("R")&&method.getParameterCount()==3){
             module.hook(method).intercept(chain->{Object trigger=chain.getArg(1);Object extras=call(trigger,"getExtras");boolean target=extras instanceof Map<?,?> data&&AimemoryPolicy.WECHAT.equals(data.get("packageName"))&&"AUTO_PAYMENT".equals(String.valueOf(call(trigger,"getType")));
                 Session session=active;if(target&&session!=null&&session.owned()&&!enabled.getAsBoolean())return false;
-                Object result=chain.proceed();if(target&&enabled.getAsBoolean()&&Boolean.TRUE.equals(result)){acceptedEvidence=PaymentEvidence.proof((Map<?,?>)extras);acceptedAt=SystemClock.elapsedRealtime();}return result;
+                return chain.proceed();
             });
         }
     }
