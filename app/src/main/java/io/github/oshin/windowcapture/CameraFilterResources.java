@@ -2,7 +2,7 @@
 package io.github.oshin.windowcapture;
 
 /** Exact resources from the documented firmware. No writable external LUT directory. */
-final class CameraFilterResources {
+public final class CameraFilterResources {
     private CameraFilterResources() {}
     static final java.util.Map<String,String> SHA256=java.util.Map.ofEntries(
         java.util.Map.entry("blackandwhite_HC_hdr_master.bin","4f9221120bfbe0376a9c1adb54f29783d17e939c821ec5f1b496cb38f7813bc6"),
@@ -35,8 +35,12 @@ final class CameraFilterResources {
         java.util.Map.entry("positive_normal.bin","5536277c9da520318c018d72aa988746e8bc4a7d989ead8a6b462897168ab759"),
         java.util.Map.entry("positive_sdr_gen_a_1.bin","3ec700733c1e9f500b8edd1bdb0934460130bc9919bda18d8ced81951ab9b3d0"),
         java.util.Map.entry("positive_sdr_gen_d_1.bin","5e46c0e9a00289dea179fda17a9f0857a6e39bd7df5dc8eac81be6f5fd9d2281"));
-    static boolean matches(String name,byte[] bytes)throws java.security.NoSuchAlgorithmException{
+    public static boolean matches(String name,byte[] bytes)throws java.security.NoSuchAlgorithmException{
         String expected=SHA256.get(name);if(expected==null||bytes.length==0||bytes.length>2_000_000)return false;
+        return hasSha256(bytes, expected);
+    }
+
+    public static boolean hasSha256(byte[] bytes, String expected) throws java.security.NoSuchAlgorithmException {
         byte[] digest=java.security.MessageDigest.getInstance("SHA-256").digest(bytes);
         StringBuilder hex=new StringBuilder(64);for(byte b:digest){hex.append(Character.forDigit((b>>>4)&15,16));hex.append(Character.forDigit(b&15,16));}
         return expected.contentEquals(hex);

@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-26",
+  "device": "Find X7 Ultra PHY110",
+  "firmware": "PHY110_17.0.0.100(CN01)",
+  "apk": {
+    "version_name": "2.1.11-camera-merge.6",
+    "version_code": 32,
+    "sha256": "7b69d190b1ee2ac6f96fbe9d813da1e6cf9c90a0588b6d87463d7b8ebeef8ef1",
+    "upgraded_from": "2.1.11-camera-merge.3 (29)",
+    "installed_hash_verified": true,
+    "reboot_and_first_unlock": "passed",
+    "left_installed": true
+  },
+  "aod": {
+    "systemui_module_version_code": 32,
+    "target_ms": 60000,
+    "deadline_elapsed_ms": 60018,
+    "session_end_elapsed_ms": 60026,
+    "display_states_observed": ["DOZE", "DOZE_SUSPEND", "OFF"],
+    "first_attempt": "The stock casting service woke the screen before the deadline. The repeat completed."
+  },
+  "sound_split": {
+    "was_enabled": false,
+    "active_status_version_code": 32,
+    "lease_version_code": 32,
+    "lease_renewal_interval_sample_ms": 6916,
+    "original_native_scope_restored": true
+  },
+  "camera": {
+    "enabled_before_smoke": true,
+    "enhanced_menu": ["1080p", "24fps", "30fps", "4K", "Log", "SDR", "片门全开"],
+    "menu_after_disabling_enhancement_and_restarting_camera": ["1080p", "30fps", "4K", "Log", "SDR"],
+    "initial_enhancement_switch_restored": true
+  }
+}

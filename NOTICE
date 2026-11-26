@@ -31,3 +31,10 @@ Camera LUT assets (2.1.8):
   These OEM data assets retain their original ownership and are not licensed
   by this project under AGPL. Exact sources and hashes are documented in
   docs/CAMERA_FILTER_RESOURCES_2.1.8.json. No OEM executable libraries are bundled.
+
+Log monitor LUT assets (2.1.11-camera-merge.6):
+  User-supplied Find X9 Ultra PMA110_17.0.1.200(CN01) ODM image,
+  /etc/camera/filters_lut/log_video_sdr_3dlut.cube and log_video_hdr_3dlut.cube.
+  The Find X10 Pro Max PMX110_17.0.1.204(CN01) ODM image contains matching
+  copies of both assets. These OEM data files retain their original ownership
+  and are not licensed by this project under AGPL.

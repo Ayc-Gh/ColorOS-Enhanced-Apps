@@ -5,4 +5,5 @@ io.github.oshin.windowcapture.NetworkEntry
 io.github.oshin.windowcapture.AimemoryEntry
 io.github.oshin.windowcapture.GalleryEntry
 io.github.oshin.windowcapture.CameraInspirationEntry
+io.github.oshin.x7ucamera.CameraModule
 io.github.oshin.windowcapture.SoundEntry

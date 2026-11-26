@@ -5,7 +5,10 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import io.github.libxposed.api.XposedModule;
 import io.github.libxposed.api.XposedModuleInterface;
+import io.github.oshin.x7ucamera.CameraModule;
 import java.lang.reflect.Method;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /** Restores the tested cloud inspiration recommendation entry in Camera 7.006.191. */
 public final class CameraInspirationEntry extends XposedModule {
@@ -25,7 +28,7 @@ public final class CameraInspirationEntry extends XposedModule {
         }
     };
     private boolean value(String key){try{return prefs!=null&&prefs.getBoolean(key,false);}catch(Throwable ignored){return false;}}
-    private boolean requested(){return value(CameraInspirationPolicy.KEY)||value(Config.CAMERA_LOG)||value(Config.CAMERA_FILTERS);}
+    private boolean requested(){return value(CameraInspirationPolicy.KEY)||value(Config.CAMERA_LOG)||value(Config.CAMERA_FILTERS)||value(Config.CAMERA_X7U_ENHANCEMENTS);}
     private boolean enabled(){return runtime.ready()&&value(CameraInspirationPolicy.KEY);}
     private boolean logEnabled(){return runtime.ready()&&value(Config.CAMERA_LOG);}
     @Override public void onModuleLoaded(XposedModuleInterface.ModuleLoadedParam p){processName=p.getProcessName();}
@@ -33,7 +36,7 @@ public final class CameraInspirationEntry extends XposedModule {
     @Override public void onPackageReady(XposedModuleInterface.PackageReadyParam p){install(p.getPackageName(),p.getClassLoader());}
     private synchronized void install(String pkg,ClassLoader loader){
         if(installed||!CameraInspirationPolicy.HOST.equals(pkg)||!CameraInspirationPolicy.HOST.equals(processName))return;
-        runtime.arm(this,this::requested,data->data.put("camera",new org.json.JSONObject().put("enabled",enabled()).put("expanded",enabled()&&expanded).put("logEnabled",logEnabled()).put("logExpanded",logExpanded).put("filtersRequested",value(Config.CAMERA_FILTERS)).put("filters",filterAdapter==null?org.json.JSONObject.NULL:filterAdapter.diagnostics())));
+        runtime.arm(this,this::requested,this::reportCameraStatus);
         if(!runtime.check(this)){installed=true;return;}
         try{
             Class<?> config=Class.forName("com.oplus.camera.configure.CameraConfig",false,loader),aps=Class.forName("com.oplus.ocs.camera.consumer.apsAdapter.adapter.ApsUtils",false,loader),configure=Class.forName("com.oplus.ocs.camera.configure.CameraConfigure",false,loader),table=Class.forName("com.oplus.ocs.camera.configure.ProtobufFeatureConfig$FeatureTable",false,loader);
@@ -60,6 +63,17 @@ public final class CameraInspirationEntry extends XposedModule {
             hook(registry).intercept(c->{Object original=c.getArg(0),patched=original;if(enabled())try{Object next=CameraInspirationRegistryPatch.apply(patched,loader);expanded|=next!=patched;patched=next;runtime.hit();}catch(Throwable error){log(Log.WARN,"ColorOSEnhance-Camera","Inspiration registry unavailable; preserving native rows",error);}if(logEnabled())try{Object next=CameraLogRegistryPatch.apply(patched,loader);logExpanded|=next!=patched;patched=next;runtime.hit();}catch(Throwable error){log(Log.WARN,"ColorOSEnhance-Camera","Log registry unavailable; preserving native rows",error);}return patched==original?c.proceed():c.proceed(new Object[]{patched});});runtime.path();
             runtime.loaded();log(Log.INFO,"ColorOSEnhance-Camera","Cloud recommendation and native Log registry adapter loaded");
         }catch(Throwable error){runtime.failed("相机灵感推荐接口不可用，已保留原生行为");log(Log.ERROR,"ColorOSEnhance-Camera","Camera inspiration adapter unavailable",error);}
+    }
+    private void reportCameraStatus(JSONObject report) throws JSONException {
+        report.put("camera", new JSONObject()
+                .put("enabled", enabled()).put("expanded", enabled() && expanded)
+                .put("logEnabled", logEnabled()).put("logExpanded", logExpanded)
+                .put("filtersRequested", value(Config.CAMERA_FILTERS))
+                .put("filters", filterAdapter == null ? JSONObject.NULL : filterAdapter.diagnostics())
+                .put("x7uRequested", value(Config.CAMERA_X7U_ENHANCEMENTS))
+                .put("x7uStartup", CameraModule.startupState())
+                .put("x7uLutMonitorInstalled", CameraModule.lutMonitorInstalled())
+                .put("x7uGpu", CameraModule.gpuState()));
     }
     private void restoreLogSelection(ClassLoader loader){if(!logExpanded)return;try{
         Class<?> manager=Class.forName("com.oplus.camera.data.DataManager",true,loader),keyClass=Class.forName("com.oplus.camera.data.DataKey",false,loader),keys=Class.forName("za.a",true,loader);Object instance=manager.getMethod("getInstance").invoke(null);

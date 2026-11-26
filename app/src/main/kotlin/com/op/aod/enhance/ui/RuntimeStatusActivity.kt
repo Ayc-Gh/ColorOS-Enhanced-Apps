@@ -24,8 +24,15 @@ class RuntimeStatusActivity:NativeSettingsActivity(){
         for(host in hosts){
             section(when(host){"android"->"系统框架";"com.android.systemui"->"系统界面";"com.oplus.trafficmonitor"->"流量管理";"com.oplus.gleanerservice"->"小布记忆";"com.oplus.gesture"->"手势体感";"com.coloros.gallery3d"->"相册";"com.oplus.camera"->"相机";else->"系统息屏设置"})
             val report=client.reports.value[host]
-            if(report==null){note("未知：尚未收到该进程回复。首次更新需重启手机，并打开对应系统页面后检查。");continue}
-            if(report.optInt("code")!=BuildConfig.VERSION_CODE){note("仍在运行旧版 ${report.optString("version")}，请重启手机一次。");continue}
+            if(report==null){
+                note(if(host=="com.oplus.camera") "尚未收到相机回复。请打开系统相机，再回到本页刷新。" else "未知：尚未收到该进程回复。首次更新需重启手机，并打开对应系统页面后检查。")
+                continue
+            }
+            if(report.optInt("code")!=BuildConfig.VERSION_CODE){
+                val restart=if(host=="com.oplus.camera") "请强行停止并重新打开相机。首次更新后若仍显示旧版，请重启手机。" else "请重启手机一次。"
+                note("仍在运行旧版 ${report.optString("version")}。$restart")
+                continue
+            }
             if(host in RuntimeProtocol.hosts && report.optString("process",host)!=host){note("已收到子进程报告，主进程尚未回复。");continue}
             note("已加载 ${report.optString("version")}")
             report.optJSONObject("adapter")?.let{a->note(when(a.optString("state")){"ready"->"版本与适配接口已校验";"unsupported","failed"->a.optString("reason","适配不可用，保留原生行为");else->a.optString("reason","适配接口尚未确认")})}
@@ -37,6 +44,31 @@ class RuntimeStatusActivity:NativeSettingsActivity(){
             }
             report.optJSONObject("camera")?.let{c->note(if(c.optBoolean("enabled"))"云端灵感推荐解锁已开启" else "云端灵感推荐解锁已关闭");note(if(c.optBoolean("expanded"))"已恢复相机灵感推荐入口" else "尚未触发相机入口");note(when{c.optBoolean("logEnabled")&&c.optBoolean("logExpanded")->"Log 功能表已补齐，录制由原生相机处理";c.optBoolean("logEnabled")->"Log 解锁已开启，等待重启相机进程";c.optBoolean("logExpanded")->"Log 解锁已关闭，重启相机进程后恢复原生功能表";else->"Log 解锁已关闭"});note("推荐图片、网络请求和参考／跟拍引导由相机及云端服务处理；本地实时灵感构图未加入。")}
             report.optJSONObject("camera")?.let{c->
+                val x7uRequested=c.optBoolean("x7uRequested")
+                val x7uStartup=c.optString("x7uStartup")
+                note(when(x7uStartup){
+                    "off"->if(x7uRequested) "X7 Ultra 相机增强已开启，等待重启相机进程" else "X7 Ultra 相机增强已关闭"
+                    "ready"->if(x7uRequested) "X7 Ultra 相机增强接口已加载，成片效果以实拍为准" else "X7 Ultra 相机增强已关闭，重启相机进程后恢复"
+                    "partial"->if(x7uRequested) "X7 Ultra 相机增强仅部分加载，详见 LSPosed 日志" else "X7 Ultra 相机增强已关闭，重启相机进程后恢复"
+                    "unsupported_firmware"->"X7 Ultra 相机增强未加载，当前固件超出适配范围"
+                    "unsupported_camera"->"X7 Ultra 相机增强未加载，原厂相机 APK 摘要与适配基线不符"
+                    "failed"->"X7 Ultra 相机增强初始化失败，详见 LSPosed 日志"
+                    else->"X7 Ultra 相机增强尚未报告加载状态"
+                })
+                if(x7uRequested && x7uStartup in setOf("ready", "partial", "failed")) {
+                    if(c.optBoolean("x7uLutMonitorInstalled")) {
+                        note("自定义 LUT 导入与监看接口已加载。录制时是否写入 LUT 取决于 GPU 直出。")
+                        note(when(c.optString("x7uGpu")) {
+                            "ineligible"->"GPU 直出尚未满足条件。请选择后摄 1080p、30 帧 Log 并选中自定义 LUT。"
+                            "eligible"->"GPU 直出最近检测到符合条件的录像配置，选中自定义 LUT 后可尝试。"
+                            "routed"->"最近检测到相机已接入 GPU 录像输入，成片效果请查看实际录像。"
+                            "runtime_failed"->"GPU 直出在本次相机进程已停用。若录像中断，请检查已保存的片段。重启相机后可重试。"
+                            else->"GPU 直出接口未加载，仍可使用 LUT 监看。"
+                        })
+                    } else {
+                        note("自定义 LUT 导入、监看和 GPU 直出接口未加载。")
+                    }
+                }
                 c.optJSONObject("filters")?.let{f->
                     note(when{
                         !f.optBoolean("installed")->"滤镜适配不可用，保留原生列表"

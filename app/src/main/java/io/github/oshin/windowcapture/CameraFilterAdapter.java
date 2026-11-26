@@ -106,7 +106,9 @@ final class CameraFilterAdapter {
                 descriptors.add(descriptor);paths.put(name,"/proc/self/fd/"+descriptor.getFd());
             }
             if(paths.size()!=CameraFilterResources.SHA256.size())throw new IllegalStateException("Incomplete resources");
-            prepared=true;note("Anonymous LUT resources ready: "+paths.size());return true;
+            note("Anonymous LUT resources ready: " + paths.size());
+            prepared = true;
+            return true;
         }catch(Throwable error){preparationFailed=true;for(var descriptor:descriptors)try{descriptor.close();}catch(Exception ignored){}descriptors.clear();paths.clear();module.log(Log.ERROR,TAG,"Cannot prepare filter resources",error);return false;}
     }
     private String remap(String value,boolean relative){
@@ -161,10 +163,14 @@ final class CameraFilterAdapter {
         var enableIntp=paramType.getField("intpFactorEnable");var intp=paramType.getField("intpFactor");
         var second=paramType.getField("secondLutFilePath");
         if(intensity.getType()!=float.class||intp.getType()!=float.class||enableIntp.getType()!=boolean.class)throw new NoSuchFieldException("Filter parameter types changed");
-        for(Method method:effect.getDeclaredMethods())if(method.getName().startsWith("RenderEffectWith")&&method.getParameterTypes()[0]==paramType){
+        for (Method method : effect.getDeclaredMethods()) {
+            if (!method.getName().startsWith("RenderEffectWith") || method.getParameterCount() == 0
+                    || method.getParameterTypes()[0] != paramType) {
+                continue;
+            }
             module.hook(method).intercept(chain->{
                 Object param=chain.getArg(0);
-                if(param==null||!enabled())return chain.proceed();
+                if (param == null || !enabled() || !prepared) return chain.proceed();
                 String path=(String)lut.get(param), name=null;
                 for(var entry:paths.entrySet())if(entry.getValue().equals(path)){name=entry.getKey();break;}
                 String pair=contrastPair(name,Math.round(intensity.getFloat(param)),false);

@@ -7,10 +7,11 @@ val signingProperties = Properties().apply {
 android {
     namespace = "io.github.oshin.windowcapture"
     compileSdk = 37
+    buildToolsVersion = "37.0.0"
     defaultConfig {
         applicationId = "io.github.oshin.windowcapture"
         minSdk = 33; targetSdk = 37
-        versionCode = 26; versionName = "2.1.10"
+        versionCode = 32; versionName = "2.1.11-camera-merge.6"
         ndk { abiFilters += "arm64-v8a" }
     }
     if(signingProperties.isNotEmpty()) signingConfigs.create("personal") {

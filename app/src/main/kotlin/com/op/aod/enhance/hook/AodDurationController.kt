@@ -1,5 +1,6 @@
 package com.op.aod.enhance.hook
 
+import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
@@ -299,11 +300,7 @@ internal object AodDurationController {
                     PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
                 )
                 alarmIntent = operation
-                alarm.setExactAndAllowWhileIdle(
-                    AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                    triggerAt,
-                    operation,
-                )
+                scheduleHostAlarm(alarm, triggerAt, operation)
             }.onFailure {
                 AodLog.w("AOD_DEADLINE_SCHEDULE", "exact alarm failed; using handler fallback", it)
             }.isSuccess
@@ -326,6 +323,13 @@ internal object AodDurationController {
             "AOD_DEADLINE_SCHEDULE",
             "session=$expectedSession source=handler-fallback remainingMs=$remainingMs",
         )
+    }
+
+    // The permission belongs to the injected SystemUI host, so check it at runtime.
+    @SuppressLint("MissingPermission")
+    private fun scheduleHostAlarm(alarm: AlarmManager, triggerAt: Long, operation: PendingIntent) {
+        if (!alarm.canScheduleExactAlarms()) throw SecurityException("Exact alarm scheduling is unavailable for this host")
+        alarm.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAt, operation)
     }
 
     private fun replayNativeOff(expectedSession: Long, source: String) {

@@ -1,0 +1,97 @@
+{
+  "test_date": "2026-11-26",
+  "model": "PHY110",
+  "firmware": "PHY110_17.0.0.100(CN01)",
+  "camera_version": "7.006.191",
+  "camera_apk_sha256": "9eed439a83d6f4e9e666619626cd5371cc31da7db31a05138f35745cc8c2aa97",
+  "build": {
+    "release": "2.1.11-camera-merge.6 (32)",
+    "release_apk_sha256": "7b69d190b1ee2ac6f96fbe9d813da1e6cf9c90a0588b6d87463d7b8ebeef8ef1",
+    "diagnostic": "2.1.11-camera-merge.6-qa (29)",
+    "diagnostic_apk_sha256": "b0a64318be3bc6f7c17d8d1ac8c41e4770bf89551a32c950e3482d7e28fdb685",
+    "certificate_sha256": "98aa09400941e6ab1b5059c75b2ccfe6c150786e0a40be492c2d6b854e825255",
+    "lint_errors": 0,
+    "lint_warnings": 28,
+    "junit_tests_passed": 185
+  },
+  "assets": {
+    "stock": "Both exact files absent from the connected phone's /odm/etc/camera/filters_lut/",
+    "donor": "Find X9 Ultra PMA110_17.0.1.200(CN01), ODM /etc/camera/filters_lut/",
+    "matching_donor": "Find X10 Pro Max PMX110_17.0.1.204(CN01), ODM /etc/camera/filters_lut/",
+    "sdr": {
+      "name": "log_video_sdr_3dlut.cube",
+      "size_bytes": 661823,
+      "cube_edge": 33,
+      "sha256": "6678b3cc7a1a44c705d8c5ce962cdc6fcc7ba64acd055ba02dcd475505fb890b",
+      "donor_intent": "O-Log2 to BT.709, Gamma 2.4"
+    },
+    "hdr": {
+      "name": "log_video_hdr_3dlut.cube",
+      "size_bytes": 926896,
+      "cube_edge": 33,
+      "sha256": "82b5309912522b9c17d2105ab074bf53023b352ae37acc0819b9fbcbf17615fa",
+      "donor_intent": "O-Log2 to BT.2020 HLG"
+    }
+  },
+  "monitor": {
+    "capture_format": "Rear professional video 1080p30 Log, same stationary view",
+    "checked_labels": ["无", "SDR (Rec.709)", "HDR (HLG)", "无"],
+    "display_upload_trace": ["SDR", "HDR"],
+    "preview_samples_per_state": 2,
+    "preview_roi_normalized_ltrb": [0.37, 0.24, 0.63, 0.72],
+    "preview_mean_abs_rgb_difference_out_of_255": {
+      "initial_none_vs_sdr": [17.3, 18.9],
+      "initial_none_vs_hdr": [8.5, 9.8],
+      "sdr_vs_hdr": [10.2, 10.5],
+      "initial_none_vs_returned_none": [3.8, 5.1]
+    },
+    "recording_format": {
+      "codec": "HEVC",
+      "profile": "Main 10",
+      "pixel_format": "yuv420p10le",
+      "resolution": "1920x1080",
+      "color_range": "limited",
+      "color_space_transfer_primaries": ["bt709", "bt709", "bt709"],
+      "container_rotation_deg": -90,
+      "frame_counts_in_order": [102, 102, 110]
+    },
+    "colorimetry": "The screenshot comparison measures application of the LUT. Calibration against the X7U Log input and measurement of panel HDR output were outside this run."
+  },
+  "custom_regression": {
+    "imported_fixture": "CEA-AV-Sync-Contrast.cube",
+    "monitor_only": {
+      "profile": "HEVC Main 10",
+      "pixel_format": "yuv420p10le",
+      "frames": 103
+    },
+    "gpu_burn": {
+      "profile": "HEVC Main",
+      "pixel_format": "yuv420p",
+      "frames": 132
+    },
+    "gpu_vs_monitor_mean_abs_y_cb_cr_on_common_10bit_grid": [77.36, 41.86, 54.79],
+    "hdr_reselection": {
+      "checked": "HDR (HLG)",
+      "display_upload_observed": true,
+      "gpu_switch_visible": false,
+      "first_attempt": "The HDR LUT uploaded. The selector had reopened with SDR selected before the recording helper armed, so the helper stopped this sample.",
+      "repeat_gpu_clip_profile": "HEVC Main",
+      "repeat_gpu_frames_in_file": 100,
+      "repeat_gpu_frames_submitted": 110,
+      "repeat_gpu_timestamp_gaps_over_50_ms": 0,
+      "repeat_gpu_render_failed": false,
+      "repeat_gpu_route_released_before_hdr_display_upload": true,
+      "repeat_hdr_clip_profile": "HEVC Main 10",
+      "repeat_hdr_clip_pixel_format": "yuv420p10le",
+      "repeat_hdr_clip_color_space_transfer_primaries": ["bt709", "bt709", "bt709"],
+      "repeat_hdr_frames_in_file": 102
+    }
+  },
+  "phone_restored": {
+    "version": "2.1.11-camera-merge.3 (29)",
+    "apk_sha256": "09b1bd4923c2ba5c9949ba3b4d8f3ccd7bb9f49e3f13712a423ec22f6c276d8a",
+    "screen_off_timeout_ms": 30000,
+    "user_rotation": "lock 0",
+    "fixed_to_user_rotation": "default"
+  }
+}

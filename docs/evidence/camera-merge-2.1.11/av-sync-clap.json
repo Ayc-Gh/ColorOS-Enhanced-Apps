@@ -1,0 +1,135 @@
+{
+  "firmware": "PHY110_17.0.0.100(CN01)",
+  "module": "2.1.11-camera-merge.3 (29)",
+  "method": "Broad-band AAC attack on edited audio PTS compared to the two decoded frame PTS bracketing observed hand closure. Positive means sound follows image. 30 fps camera, one clip per encoding path. These bounds capture frame sampling, not exposure or measurement system uncertainty.",
+  "native": {
+    "mode": "native",
+    "test_file": "clap-native-1.mp4",
+    "sha256": "aea18088a39aa2ea87bfda28d6ee5e14453e191a5652fa8cc8c90aba6e0126e0",
+    "video_codec": "hevc",
+    "video_profile": "Main 10",
+    "pixel_format": "yuv420p10le",
+    "coded_width": 1920,
+    "coded_height": 1080,
+    "display_rotation_deg": 0,
+    "video_frame_interval_ms": 33.322,
+    "video_container_duration_s": 31.5855,
+    "audio_container_duration_s": 31.658667,
+    "audio_minus_video_container_end_ms": 73.167,
+    "audio_minus_video_decoded_end_ms": 73.321,
+    "matched_claps": [
+      {
+        "sound_onset_s": 13.749000333333333,
+        "last_separated_frame_0base": 410,
+        "first_touch_frame_0base": 411,
+        "last_separated_video_pts_s": 13.660333,
+        "first_touch_video_pts_s": 13.693644,
+        "signed_audio_minus_video_bounds_ms": [
+          55.356,
+          88.667
+        ],
+        "signed_audio_minus_video_midpoint_ms": 72.012
+      },
+      {
+        "sound_onset_s": 14.842000333333333,
+        "last_separated_frame_0base": 443,
+        "first_touch_frame_0base": 444,
+        "last_separated_video_pts_s": 14.759822,
+        "first_touch_video_pts_s": 14.793144,
+        "signed_audio_minus_video_bounds_ms": [
+          48.856,
+          82.178
+        ],
+        "signed_audio_minus_video_midpoint_ms": 65.517
+      },
+      {
+        "sound_onset_s": 16.015,
+        "last_separated_frame_0base": 478,
+        "first_touch_frame_0base": 479,
+        "last_separated_video_pts_s": 15.925944,
+        "first_touch_video_pts_s": 15.959267,
+        "signed_audio_minus_video_bounds_ms": [
+          55.733,
+          89.056
+        ],
+        "signed_audio_minus_video_midpoint_ms": 72.395
+      }
+    ],
+    "median_midpoint_ms": 72.012,
+    "median_frame_bounds_ms": [
+      55.356,
+      88.667
+    ],
+    "display_rotation_degrees": 0
+  },
+  "gpu": {
+    "mode": "gpu",
+    "test_file": "clap-gpu-1.mp4",
+    "sha256": "3f0945cb87015ccbd8ebaa99bb82ed6105028b8af11d6ff4fdff257fb8793b87",
+    "video_codec": "hevc",
+    "video_profile": "Main",
+    "pixel_format": "yuv420p",
+    "coded_width": 1920,
+    "coded_height": 1080,
+    "display_rotation_deg": -90,
+    "video_frame_interval_ms": 33.322,
+    "video_container_duration_s": 33.3849,
+    "audio_container_duration_s": 33.642667,
+    "audio_minus_video_container_end_ms": 257.767,
+    "audio_minus_video_decoded_end_ms": 258.155,
+    "matched_claps": [
+      {
+        "sound_onset_s": 12.49,
+        "last_separated_frame_0base": 372,
+        "first_touch_frame_0base": 373,
+        "last_separated_video_pts_s": 12.394244,
+        "first_touch_video_pts_s": 12.427567,
+        "signed_audio_minus_video_bounds_ms": [
+          62.433,
+          95.756
+        ],
+        "signed_audio_minus_video_midpoint_ms": 79.095
+      },
+      {
+        "sound_onset_s": 14.332000333333333,
+        "last_separated_frame_0base": 427,
+        "first_touch_frame_0base": 428,
+        "last_separated_video_pts_s": 14.226733,
+        "first_touch_video_pts_s": 14.260056,
+        "signed_audio_minus_video_bounds_ms": [
+          71.944,
+          105.267
+        ],
+        "signed_audio_minus_video_midpoint_ms": 88.606
+      },
+      {
+        "sound_onset_s": 16.559000333333334,
+        "last_separated_frame_0base": 494,
+        "first_touch_frame_0base": 495,
+        "last_separated_video_pts_s": 16.459033,
+        "first_touch_video_pts_s": 16.492344,
+        "signed_audio_minus_video_bounds_ms": [
+          66.656,
+          99.967
+        ],
+        "signed_audio_minus_video_midpoint_ms": 83.312
+      }
+    ],
+    "median_midpoint_ms": 83.312,
+    "median_frame_bounds_ms": [
+      66.656,
+      99.967
+    ],
+    "display_rotation_degrees": -90,
+    "encoder_submitted_frames": 1012,
+    "encoder_frames_over_50ms_gap": 0
+  },
+  "gpu_minus_native_median_midpoint_ms": 11.3,
+  "gpu_minus_native_median_frame_sampling_bounds_ms": [
+    -22.011,
+    44.611
+  ],
+  "test_date": "2026-11-26",
+  "physical_clap_capture_camera_pid_consistent": true,
+  "computer_stimulus_disposition": "Pilot excluded. The phone recorded all six optical pulses, but no corresponding acoustic test tone was detected."
+}

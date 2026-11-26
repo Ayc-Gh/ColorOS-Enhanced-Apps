@@ -1,0 +1,96 @@
+{
+  "test_date": "2026-11-26",
+  "device": "Find X7 Ultra (PHY110)",
+  "firmware": "PHY110_17.0.0.100(CN01)",
+  "diagnostic_version": "2.1.11-camera-merge.5-qa-stop (29)",
+  "released_apk_tested_exactly": false,
+  "restored_version": "2.1.11-camera-merge.3 (29)",
+  "condition": "Physical upright portrait and physical inverted portrait with the system display layout fixed at 0 degrees; both rear 1080p30 professional Log paths in one camera process.",
+  "samples": [
+    {
+      "label": "upright-native",
+      "path": "native",
+      "sensor_degrees": 0,
+      "system_display_rotation_degrees": 0,
+      "native_recorder_orientation_hint": 90,
+      "mp4_display_rotation_degrees": -90,
+      "coded_dimensions": [
+        1920,
+        1080
+      ],
+      "duration_seconds": 4.430567,
+      "profile": "Main 10",
+      "video_container_frames": 133,
+      "audio_codec": "aac"
+    },
+    {
+      "label": "upright-gpu",
+      "path": "gpu",
+      "sensor_degrees": 0,
+      "system_display_rotation_degrees": 0,
+      "native_recorder_orientation_hint": 90,
+      "mp4_display_rotation_degrees": -90,
+      "coded_dimensions": [
+        1920,
+        1080
+      ],
+      "duration_seconds": 4.397856,
+      "profile": "Main",
+      "video_container_frames": 132,
+      "audio_codec": "aac"
+    },
+    {
+      "label": "inverted-native",
+      "path": "native",
+      "sensor_degrees": 180,
+      "system_display_rotation_degrees": 0,
+      "native_recorder_orientation_hint": 270,
+      "mp4_display_rotation_degrees": 90,
+      "coded_dimensions": [
+        1920,
+        1080
+      ],
+      "duration_seconds": 4.430567,
+      "profile": "Main 10",
+      "video_container_frames": 133,
+      "audio_codec": "aac"
+    },
+    {
+      "label": "inverted-gpu",
+      "path": "gpu",
+      "sensor_degrees": 180,
+      "system_display_rotation_degrees": 0,
+      "native_recorder_orientation_hint": 270,
+      "mp4_display_rotation_degrees": 90,
+      "coded_dimensions": [
+        1920,
+        1080
+      ],
+      "duration_seconds": 4.3654,
+      "profile": "Main",
+      "video_container_frames": 132,
+      "audio_codec": "aac"
+    }
+  ],
+  "playback": {
+    "display_dimensions": [
+      1080,
+      1920
+    ],
+    "all_four_visually_upright": true,
+    "all_sampled_video_pts_gaps_over_50ms": 0,
+    "same_pose_display_content_angle_gpu_minus_native_degrees": {
+      "upright": [
+        -2.853,
+        -0.846,
+        1.768
+      ],
+      "inverted": [
+        -0.076,
+        0.11,
+        0.087
+      ]
+    },
+    "note": "User reframed between takes, especially when turning the phone over. Verify displayed direction using same-pose matching and visual scene/text review. No precision claim for cross-pose image registration."
+  }
+}

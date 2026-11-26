@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">ColorOS 增强</string>
     <string name="module_description">适配 Find X7 Ultra ColorOS 17：分屏与小窗、截图与录屏、AOD、隔空手势、联网管理、小布记忆、相册 AI 修图师与灵感推荐</string>
+    <string name="x7u_gpu_record_title">GPU 录制效果直出</string>
+    <string name="x7u_gpu_record_detail">后摄 1080p · 30fps，输出 8 位 HEVC</string>
 </resources>
